@@ -1,0 +1,922 @@
+/3.2
+(ODB.1
+	FirstRootClassName:	"Legend"
+	Roots:	2
+	Version:	32
+)
+
+(Legend.2
+	SymType:	0x02
+	LegType:	0x08
+	ClassType:	0x03
+	FieldNames:	3
+	Symbols:	4
+	Class:	119
+	Class:	120
+	Class:	121
+	Class:	122
+	Class:	123
+	Class:	124
+	Class:	125
+	Class:	126
+	Class:	127
+	Class:	128
+	Class:	129
+	Class:	130
+	Class:	131
+	Class:	132
+	Class:	133
+	Class:	134
+	Class:	135
+	Class:	136
+	Class:	137
+	Class:	138
+	Class:	139
+	Class:	140
+	Class:	141
+	StdDevs:	1.00000000000000
+	NullSym:	142
+	NullValues:	146
+	StatValues:	147
+	Precision:	-3
+)
+
+(AVStr.3
+	S:	"Subregion"
+)
+
+(SymList.4
+	Child:	5
+	Child:	10
+	Child:	15
+	Child:	20
+	Child:	25
+	Child:	30
+	Child:	35
+	Child:	40
+	Child:	45
+	Child:	50
+	Child:	55
+	Child:	60
+	Child:	65
+	Child:	70
+	Child:	75
+	Child:	80
+	Child:	85
+	Child:	90
+	Child:	95
+	Child:	100
+	Child:	105
+	Child:	110
+	Child:	115
+)
+
+(BShSym.5
+	Color:	6
+	Outline:	1
+	OutlineColor:	7
+	OutlineWidth:	1.00000000000000
+	BgColor:	8
+	Style:	0x03
+	Stipple:	9
+)
+
+(TClr.6
+	Red:	0x59af
+	Green:	0xffff
+)
+
+(TClr.7
+)
+
+(TClr.8
+	Name:	"Transparent"
+)
+
+(Stipple.9
+	Columns:	8
+	Rows:	8
+	Bits:	40432418 1824c202 
+)
+
+(BShSym.10
+	Color:	11
+	Outline:	1
+	OutlineColor:	12
+	OutlineWidth:	1.00000000000000
+	BgColor:	13
+	Style:	0x03
+	Stipple:	14
+)
+
+(TClr.11
+	Red:	0x9f7a
+	Green:	0xffff
+)
+
+(TClr.12
+)
+
+(TClr.13
+	Name:	"Transparent"
+)
+
+(Stipple.14
+	Columns:	8
+	Rows:	8
+	Bits:	0f87c3e1 f0783c1e 
+)
+
+(BShSym.15
+	Color:	16
+	Outline:	1
+	OutlineColor:	17
+	OutlineWidth:	1.00000000000000
+	BgColor:	18
+	Style:	0x03
+	Stipple:	19
+)
+
+(TClr.16
+	Red:	0xe544
+	Green:	0xffff
+)
+
+(TClr.17
+)
+
+(TClr.18
+	Name:	"Transparent"
+)
+
+(Stipple.19
+	Columns:	8
+	Rows:	8
+	Bits:	001f1818 1818f800 
+)
+
+(BShSym.20
+	Color:	21
+	Outline:	1
+	OutlineColor:	22
+	OutlineWidth:	1.00000000000000
+	BgColor:	23
+	Style:	0x03
+	Stipple:	24
+)
+
+(TClr.21
+	Green:	0x2b5a
+	Blue:	0xffff
+)
+
+(TClr.22
+)
+
+(TClr.23
+	Name:	"Transparent"
+)
+
+(Stipple.24
+	Columns:	8
+	Rows:	8
+	Bits:	02aa5020 20aa0502 
+)
+
+(BShSym.25
+	Color:	26
+	Outline:	1
+	OutlineColor:	27
+	OutlineWidth:	1.00000000000000
+	BgColor:	28
+	Style:	0x03
+	Stipple:	29
+)
+
+(TClr.26
+	Red:	0xffff
+	Green:	0xd4ef
+)
+
+(TClr.27
+)
+
+(TClr.28
+	Name:	"Transparent"
+)
+
+(Stipple.29
+	Columns:	8
+	Rows:	8
+	Bits:	33333300 00cccccc 
+)
+
+(BShSym.30
+	Color:	31
+	Outline:	1
+	OutlineColor:	32
+	OutlineWidth:	1.00000000000000
+	BgColor:	33
+	Style:	0x03
+	Stipple:	34
+)
+
+(TClr.31
+	Green:	0xffff
+	Blue:	0x77af
+)
+
+(TClr.32
+)
+
+(TClr.33
+	Name:	"Transparent"
+)
+
+(Stipple.34
+	Columns:	8
+	Rows:	8
+	Bits:	11204408 11024480 
+)
+
+(BShSym.35
+	Color:	36
+	Outline:	1
+	OutlineColor:	37
+	OutlineWidth:	1.00000000000000
+	BgColor:	38
+	Style:	0x03
+	Stipple:	39
+)
+
+(TClr.36
+	Red:	0xffff
+	Green:	0x495a
+)
+
+(TClr.37
+)
+
+(TClr.38
+	Name:	"Transparent"
+)
+
+(Stipple.39
+	Columns:	8
+	Rows:	8
+	Bits:	00550055 00550055 
+)
+
+(BShSym.40
+	Color:	41
+	Outline:	1
+	OutlineColor:	42
+	OutlineWidth:	1.00000000000000
+	BgColor:	43
+	Style:	0x03
+	Stipple:	44
+)
+
+(TClr.41
+	Green:	0xffff
+	Blue:	0x31e4
+)
+
+(TClr.42
+)
+
+(TClr.43
+	Name:	"Transparent"
+)
+
+(Stipple.44
+	Columns:	8
+	Rows:	8
+	Bits:	0738c10e 70831ce0 
+)
+
+(BShSym.45
+	Color:	46
+	Outline:	1
+	OutlineColor:	47
+	OutlineWidth:	1.00000000000000
+	BgColor:	48
+	Style:	0x03
+	Stipple:	49
+)
+
+(TClr.46
+	Red:	0x13e5
+	Green:	0xffff
+)
+
+(TClr.47
+)
+
+(TClr.48
+	Name:	"Transparent"
+)
+
+(Stipple.49
+	Columns:	8
+	Rows:	8
+	Bits:	000f0f00 00f0f000 
+)
+
+(BShSym.50
+	Color:	51
+	Outline:	1
+	OutlineColor:	52
+	OutlineWidth:	1.00000000000000
+	BgColor:	53
+	Style:	0x03
+	Stipple:	54
+)
+
+(TClr.51
+	Red:	0xebce
+	Blue:	0xffff
+)
+
+(TClr.52
+)
+
+(TClr.53
+	Name:	"Transparent"
+)
+
+(Stipple.54
+	Columns:	8
+	Rows:	8
+	Bits:	c0300c03 c0300c03 
+)
+
+(BShSym.55
+	Color:	56
+	Outline:	1
+	OutlineColor:	57
+	OutlineWidth:	1.00000000000000
+	BgColor:	58
+	Style:	0x03
+	Stipple:	59
+)
+
+(TClr.56
+	Green:	0xffff
+	Blue:	0xbd79
+)
+
+(TClr.57
+)
+
+(TClr.58
+	Name:	"Transparent"
+)
+
+(Stipple.59
+	Columns:	8
+	Rows:	8
+	Bits:	22228888 22228888 
+)
+
+(BShSym.60
+	Color:	61
+	Outline:	1
+	OutlineColor:	62
+	OutlineWidth:	1.00000000000000
+	BgColor:	63
+	Style:	0x03
+	Stipple:	64
+)
+
+(TClr.61
+	Green:	0x7125
+	Blue:	0xffff
+)
+
+(TClr.62
+)
+
+(TClr.63
+	Name:	"Transparent"
+)
+
+(Stipple.64
+	Columns:	8
+	Rows:	8
+	Bits:	745bae75 4bb25eab 
+)
+
+(BShSym.65
+	Color:	66
+	Outline:	1
+	OutlineColor:	67
+	OutlineWidth:	1.00000000000000
+	BgColor:	68
+	Style:	0x03
+	Stipple:	69
+)
+
+(TClr.66
+	Green:	0xfcba
+	Blue:	0xffff
+)
+
+(TClr.67
+)
+
+(TClr.68
+	Name:	"Transparent"
+)
+
+(Stipple.69
+	Columns:	8
+	Rows:	8
+	Bits:	00000010 3870e0c0 
+)
+
+(BShSym.70
+	Color:	71
+	Outline:	1
+	OutlineColor:	72
+	OutlineWidth:	1.00000000000000
+	BgColor:	73
+	Style:	0x03
+	Stipple:	74
+)
+
+(TClr.71
+	Green:	0xb6ef
+	Blue:	0xffff
+)
+
+(TClr.72
+)
+
+(TClr.73
+	Name:	"Transparent"
+)
+
+(Stipple.74
+	Columns:	8
+	Rows:	8
+	Bits:	01020408 10204080 
+)
+
+(BShSym.75
+	Color:	76
+	Outline:	1
+	OutlineColor:	77
+	OutlineWidth:	1.00000000000000
+	BgColor:	78
+	Style:	0x03
+	Stipple:	79
+)
+
+(TClr.76
+	Red:	0xffff
+	Blue:	0xce65
+)
+
+(TClr.77
+)
+
+(TClr.78
+	Name:	"Transparent"
+)
+
+(Stipple.79
+	Columns:	8
+	Rows:	8
+	Bits:	830e3ce1 071c70c1 
+)
+
+(BShSym.80
+	Color:	81
+	Outline:	1
+	OutlineColor:	82
+	OutlineWidth:	1.00000000000000
+	BgColor:	83
+	Style:	0x03
+	Stipple:	84
+)
+
+(TClr.81
+	Red:	0xffff
+	Blue:	0x889a
+)
+
+(TClr.82
+)
+
+(TClr.83
+	Name:	"Transparent"
+)
+
+(Stipple.84
+	Columns:	8
+	Rows:	8
+	Bits:	2402a014 02904a01 
+)
+
+(BShSym.85
+	Color:	86
+	Outline:	1
+	OutlineColor:	87
+	OutlineWidth:	1.00000000000000
+	BgColor:	88
+	Style:	0x03
+	Stipple:	89
+)
+
+(TClr.86
+	Red:	0x1a6f
+	Blue:	0xffff
+)
+
+(TClr.87
+)
+
+(TClr.88
+	Name:	"Transparent"
+)
+
+(Stipple.89
+	Columns:	8
+	Rows:	8
+	Bits:	88112244 88112244 
+)
+
+(BShSym.90
+	Color:	91
+	Outline:	1
+	OutlineColor:	92
+	OutlineWidth:	1.00000000000000
+	BgColor:	93
+	Style:	0x03
+	Stipple:	94
+)
+
+(TClr.91
+	Red:	0xa604
+	Blue:	0xffff
+)
+
+(TClr.92
+)
+
+(TClr.93
+	Name:	"Transparent"
+)
+
+(Stipple.94
+	Columns:	8
+	Rows:	8
+	Bits:	00080402 40201000 
+)
+
+(BShSym.95
+	Color:	96
+	Outline:	1
+	OutlineColor:	97
+	OutlineWidth:	1.00000000000000
+	BgColor:	98
+	Style:	0x03
+	Stipple:	99
+)
+
+(TClr.96
+	Red:	0xffff
+	Blue:	0x42d0
+)
+
+(TClr.97
+)
+
+(TClr.98
+	Name:	"Transparent"
+)
+
+(Stipple.99
+	Columns:	8
+	Rows:	8
+	Bits:	00666600 00666600 
+)
+
+(BShSym.100
+	Color:	101
+	Outline:	1
+	OutlineColor:	102
+	OutlineWidth:	1.00000000000000
+	BgColor:	103
+	Style:	0x03
+	Stipple:	104
+)
+
+(TClr.101
+	Red:	0xffff
+	Green:	0x8f24
+)
+
+(TClr.102
+)
+
+(TClr.103
+	Name:	"Transparent"
+)
+
+(Stipple.104
+	Columns:	8
+	Rows:	8
+	Bits:	0044a011 0a440055 
+)
+
+(BShSym.105
+	Color:	106
+	Outline:	1
+	OutlineColor:	107
+	OutlineWidth:	1.00000000000000
+	BgColor:	108
+	Style:	0x03
+	Stipple:	109
+)
+
+(TClr.106
+	Red:	0x6039
+	Blue:	0xffff
+)
+
+(TClr.107
+)
+
+(TClr.108
+	Name:	"Transparent"
+)
+
+(Stipple.109
+	Columns:	8
+	Rows:	8
+	Bits:	3333cccc 3333cccc 
+)
+
+(BShSym.110
+	Color:	111
+	Outline:	1
+	OutlineColor:	112
+	OutlineWidth:	1.00000000000000
+	BgColor:	113
+	Style:	0x03
+	Stipple:	114
+)
+
+(TClr.111
+	Red:	0xffff
+	Green:	0x317
+)
+
+(TClr.112
+)
+
+(TClr.113
+	Name:	"Transparent"
+)
+
+(Stipple.114
+	Columns:	8
+	Rows:	8
+	Bits:	11112222 44448888 
+)
+
+(BShSym.115
+	Color:	116
+	Outline:	1
+	OutlineColor:	117
+	OutlineWidth:	0.10000000000000
+	BgColor:	118
+)
+
+(TClr.116
+	Name:	"Transparent"
+)
+
+(TClr.117
+	Name:	"Transparent"
+)
+
+(TClr.118
+	Red:	0xffff
+	Green:	0xffff
+	Blue:	0xffff
+)
+
+(LClass.119
+	IsText:	1
+	Label:	"Altiplano Boyacense"
+	MinStr:	"Altiplano Boyacense"
+	MaxStr:	"Altiplano Boyacense"
+	Precision:	-3
+)
+
+(LClass.120
+	IsText:	1
+	Label:	"Bogotá y la Sabana"
+	MinStr:	"Bogotá y la Sabana"
+	MaxStr:	"Bogotá y la Sabana"
+	Precision:	-3
+)
+
+(LClass.121
+	IsText:	1
+	Label:	"Ciudades de la costa cen"
+	MinStr:	"Ciudades de la costa cen"
+	MaxStr:	"Ciudades de la costa cen"
+	Precision:	-3
+)
+
+(LClass.122
+	IsText:	1
+	Label:	"Costa del Pac{ifico"
+	MinStr:	"Costa del Pac{ifico"
+	MaxStr:	"Costa del Pac{ifico"
+	Precision:	-3
+)
+
+(LClass.123
+	IsText:	1
+	Label:	"Cuenca alta Rio Magdalen"
+	MinStr:	"Cuenca alta Rio Magdalen"
+	MaxStr:	"Cuenca alta Rio Magdalen"
+	Precision:	-3
+)
+
+(LClass.124
+	IsText:	1
+	Label:	"Cuenca del atrato"
+	MinStr:	"Cuenca del atrato"
+	MaxStr:	"Cuenca del atrato"
+	Precision:	-3
+)
+
+(LClass.125
+	IsText:	1
+	Label:	"Depresión Momposina"
+	MinStr:	"Depresión Momposina"
+	MaxStr:	"Depresión Momposina"
+	Precision:	-3
+)
+
+(LClass.126
+	IsText:	1
+	Label:	"Guajira"
+	MinStr:	"Guajira"
+	MaxStr:	"Guajira"
+	Precision:	-3
+)
+
+(LClass.127
+	IsText:	1
+	Label:	"Islas del Caribe"
+	MinStr:	"Islas del Caribe"
+	MaxStr:	"Islas del Caribe"
+	Precision:	-3
+)
+
+(LClass.128
+	IsText:	1
+	Label:	"Macizos Antioqueños"
+	MinStr:	"Macizos Antioqueños"
+	MaxStr:	"Macizos Antioqueños"
+	Precision:	-3
+)
+
+(LClass.129
+	IsText:	1
+	Label:	"Macizos del Nororiente"
+	MinStr:	"Macizos del Nororiente"
+	MaxStr:	"Macizos del Nororiente"
+	Precision:	-3
+)
+
+(LClass.130
+	IsText:	1
+	Label:	"Macizos del sur"
+	MinStr:	"Macizos del sur"
+	MaxStr:	"Macizos del sur"
+	Precision:	-3
+)
+
+(LClass.131
+	IsText:	1
+	Label:	"Magdalena Meddio"
+	MinStr:	"Magdalena Meddio"
+	MaxStr:	"Magdalena Meddio"
+	Precision:	-3
+)
+
+(LClass.132
+	IsText:	1
+	Label:	"Occidente cafetero"
+	MinStr:	"Occidente cafetero"
+	MaxStr:	"Occidente cafetero"
+	Precision:	-3
+)
+
+(LClass.133
+	IsText:	1
+	Label:	"Orinoquía mal drenada"
+	MinStr:	"Orinoquía mal drenada"
+	MaxStr:	"Orinoquía mal drenada"
+	Precision:	-3
+)
+
+(LClass.134
+	IsText:	1
+	Label:	"Piedemonte"
+	MinStr:	"Piedemonte"
+	MaxStr:	"Piedemonte"
+	Precision:	-3
+)
+
+(LClass.135
+	IsText:	1
+	Label:	"Piedemonte Amazónico"
+	MinStr:	"Piedemonte Amazónico"
+	MaxStr:	"Piedemonte Amazónico"
+	Precision:	-3
+)
+
+(LClass.136
+	IsText:	1
+	Label:	"Sabanas bien drenadas"
+	MinStr:	"Sabanas bien drenadas"
+	MaxStr:	"Sabanas bien drenadas"
+	Precision:	-3
+)
+
+(LClass.137
+	IsText:	1
+	Label:	"Selva Amaz{onica"
+	MinStr:	"Selva Amaz{onica"
+	MaxStr:	"Selva Amaz{onica"
+	Precision:	-3
+)
+
+(LClass.138
+	IsText:	1
+	Label:	"Sierra Nevada de Santa M"
+	MinStr:	"Sierra Nevada de Santa M"
+	MaxStr:	"Sierra Nevada de Santa M"
+	Precision:	-3
+)
+
+(LClass.139
+	IsText:	1
+	Label:	"Valle del alto cauca"
+	MinStr:	"Valle del alto cauca"
+	MaxStr:	"Valle del alto cauca"
+	Precision:	-3
+)
+
+(LClass.140
+	IsText:	1
+	Label:	"Valle del Sinu"
+	MinStr:	"Valle del Sinu"
+	MaxStr:	"Valle del Sinu"
+	Precision:	-3
+)
+
+(LClass.141
+	IsNoData:	1
+	IsText:	1
+	Label:	"No Data"
+	Precision:	-3
+)
+
+(BShSym.142
+	Color:	143
+	Outline:	1
+	OutlineColor:	144
+	OutlineWidth:	0.10000000000000
+	BgColor:	145
+)
+
+(TClr.143
+	Name:	"Transparent"
+)
+
+(TClr.144
+	Name:	"Transparent"
+)
+
+(TClr.145
+	Red:	0xffff
+	Green:	0xffff
+	Blue:	0xffff
+)
+
+(NameDict.146
+)
+
+(NameDict.147
+)
+

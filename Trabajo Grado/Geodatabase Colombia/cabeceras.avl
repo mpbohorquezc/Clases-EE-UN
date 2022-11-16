@@ -1,0 +1,252 @@
+/3.2
+(ODB.1
+	FirstRootClassName:	"Legend"
+	Roots:	2
+	Version:	32
+)
+
+(Legend.2
+	LegType:	0x08
+	ClassType:	0x03
+	FieldNames:	3
+	Symbols:	4
+	Class:	33
+	Class:	34
+	Class:	35
+	Class:	36
+	StdDevs:	1.00000000000000
+	NullSym:	37
+	NullValues:	44
+	StatValues:	45
+	Precision:	-3
+)
+
+(AVStr.3
+	S:	"Simbolo"
+)
+
+(SymList.4
+	Child:	5
+	Child:	12
+	Child:	19
+	Child:	26
+)
+
+(BMkSym.5
+	Color:	6
+	BgColor:	7
+	Font:	8
+	Size:	14.00000000000000
+	Pattern:	37
+	Angle:	360.00000000000000
+)
+
+(TClr.6
+)
+
+(TClr.7
+	Name:	"Transparent"
+)
+
+(NFont.8
+	Family:	9
+	Name:	10
+	Style:	11
+	Weight:	1
+	Wideness:	1
+)
+
+(AVStr.9
+	S:	"ESRI Geometric Symbols"
+)
+
+(AVStr.10
+	S:	"ESRI Geometric Symbols"
+)
+
+(AVStr.11
+	S:	"Normal"
+)
+
+(BMkSym.12
+	Color:	13
+	BgColor:	14
+	Font:	15
+	Size:	8.00000000000000
+	Pattern:	35
+	Angle:	360.00000000000000
+)
+
+(TClr.13
+)
+
+(TClr.14
+	Name:	"Transparent"
+)
+
+(NFont.15
+	Family:	16
+	Name:	17
+	Style:	18
+	Weight:	1
+	Wideness:	1
+)
+
+(AVStr.16
+	S:	"ESRI Geometric Symbols"
+)
+
+(AVStr.17
+	S:	"ESRI Geometric Symbols"
+)
+
+(AVStr.18
+	S:	"Normal"
+)
+
+(BMkSym.19
+	Color:	20
+	BgColor:	21
+	Font:	22
+	Size:	6.00000000000000
+	Pattern:	37
+	Angle:	360.00000000000000
+)
+
+(TClr.20
+)
+
+(TClr.21
+)
+
+(NFont.22
+	Family:	23
+	Name:	24
+	Style:	25
+	Weight:	1
+	Wideness:	1
+)
+
+(AVStr.23
+	S:	"ESRI Geometric Symbols"
+)
+
+(AVStr.24
+	S:	"ESRI Geometric Symbols"
+)
+
+(AVStr.25
+	S:	"Normal"
+)
+
+(BMkSym.26
+	Color:	27
+	BgColor:	28
+	Font:	29
+	Size:	8.00000000000000
+	Pattern:	35
+	Angle:	360.00000000000000
+)
+
+(TClr.27
+	Name:	"Transparent"
+)
+
+(TClr.28
+	Name:	"Transparent"
+)
+
+(NFont.29
+	Family:	30
+	Name:	31
+	Style:	32
+	Weight:	1
+	Wideness:	1
+)
+
+(AVStr.30
+	S:	"ESRI Geometric Symbols"
+)
+
+(AVStr.31
+	S:	"ESRI Geometric Symbols"
+)
+
+(AVStr.32
+	S:	"Normal"
+)
+
+(LClass.33
+	IsText:	1
+	Label:	"Capital Departamental"
+	MinStr:	"CAP"
+	MaxStr:	"CAP"
+	Precision:	-3
+)
+
+(LClass.34
+	IsText:	1
+	Label:	"Cabecera Municipal"
+	MinStr:	"CABECE"
+	MaxStr:	"CABECE"
+	Precision:	-3
+)
+
+(LClass.35
+	IsText:	1
+	Label:	"Corregimiento Departamental"
+	MinStr:	"CORDEP"
+	MaxStr:	"CORDEP"
+	Precision:	-3
+)
+
+(LClass.36
+	IsNoData:	1
+	IsText:	1
+	Label:	"No Data"
+	Precision:	-3
+)
+
+(BMkSym.37
+	Color:	38
+	BgColor:	39
+	Font:	40
+	Size:	8.00000000000000
+	Pattern:	35
+	Angle:	360.00000000000000
+)
+
+(TClr.38
+	Name:	"Transparent"
+)
+
+(TClr.39
+	Name:	"Transparent"
+)
+
+(NFont.40
+	Family:	41
+	Name:	42
+	Style:	43
+	Weight:	1
+	Wideness:	1
+)
+
+(AVStr.41
+	S:	"ESRI Geometric Symbols"
+)
+
+(AVStr.42
+	S:	"ESRI Geometric Symbols"
+)
+
+(AVStr.43
+	S:	"Normal"
+)
+
+(NameDict.44
+)
+
+(NameDict.45
+)
+

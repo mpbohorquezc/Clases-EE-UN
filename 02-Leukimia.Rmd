@@ -1,0 +1,445 @@
+---
+title: "Spatial modeling of incidence and mortality childhood leukemia based on Colombian armed conflict and poverty for children born during the years 2002-2013"
+date: "`r Sys.Date()`"
+output: html_document
+subtitle: Pilar Montilla, Martha Bohorquez and Rafael Rentería
+---
+
+# Spatial modeling leukemia
+
+## **Mortality**
+
+Spatial modeling of incidence and mortality childhood leukemia based on Colombian armed conflict and poverty for children born during the years 2002-2013
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### *Packages Mortality*
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+rm(list=ls())
+require(rgdal)
+require(pscl)
+require(sf)
+require(spdep)
+require(spatialreg) #test.W, scores.listw
+require(stringr)
+require(performance)
+require(AER)
+require(ggplot2)
+require(vcdExtra)
+require(dbscan)
+```
+
+### *Code Mortality*
+
+- **Reading the shapefile of 1124 Colombian municipalities, defining the Coordinate Reference System and centroid and building some variables**
+
+```{r}
+#Reading the shapefile of 1124 Colombian municipalities
+muncol <- rgdal::readOGR(dsn="Armed_Conflict_Vs_Leukemia/muncol.shp")
+muncol=spTransform(muncol,CRS("+init=epsg:21897"))
+(l <- length(muncol))
+
+#Representative coordinate (centroid)
+options(warn = -1)
+xy0=data.frame(x=muncol$x,y=muncol$y)
+coordinates(xy0) <- c('x','y')
+proj4string(xy0) <- CRS("+init=epsg:4326")
+xy0=spTransform(xy0,CRS("+init=epsg:21897"))
+
+###Loops for avoiding NA 
+r <- sum(muncol$Ndeaths)/sum(muncol$NPop)
+for (i in 1:l){ 
+   if(muncol$NPop[i]==0){
+      muncol$EsperadosDeNCancer[i] <- 1
+   }
+   else{
+      muncol$EsperadosDeNCancer[i] <- muncol$NPop[i]*r
+   }
+}
+
+muncol$IICA_Cat=muncol$IICA_Ca
+muncol$IICA_Cat=str_replace_all(muncol$IICA_Cat,"Bajo", "Low")
+muncol$IICA_Cat=str_replace_all(muncol$IICA_Cat,"Medio", "Medium")
+muncol$IICA_CatLow=ifelse(muncol$IICA_Cat=="Low",1,0)
+muncol$IICA_CatMed=ifelse(muncol$IICA_Cat=="Medium",1,0)
+muncol$IICA_High=as.character(1-(muncol$IICA_CatLow+muncol$IICA_CatMed))
+muncol$UBN=muncol$NBI
+```
+
+- **Modeling leukemia Mortality Rate (LR) in terms of Colombian armed conflict index, poverty, rurality and health coverage. First, the usual Poisson regression model with mortality rate as response variable is estimated.**
+
+```{r}
+glmbaseLMR<-glm(Ndeaths ~IICA_High+UBN+Per_Rur+Cobertura+offset(log(EsperadosDeNCancer)), family = poisson,data = muncol)
+anova(glmbaseLMR)
+muncol$residLMR=residuals(glmbaseLMR)
+summary(glmbaseLMR)
+```
+
+- ***Rurality and conflict armed index are not statistically significant in this first auxiliar model. However, we maintain these variables in the rest of the analysis and review its significance in the final model.***
+
+- ***Checking excess zeros by comparison between the number of zeros predicted by the model with the observed number of zeros. Also checking overdispersion.***
+
+```{r}
+mu_LMR <- predict(glmbaseLMR, type = "response")  # predict expected mean count
+expLMR <- sum(dpois(x = 0, lambda = mu_LMR))      # sum the probabilities of a zero count for each mean
+round(expLMR)                                    #predicted number of zeros
+sum(muncol$Ndeaths < 1)                          #observed number of zeros
+zero.test(muncol$Ndeaths)                        #score test (van den Broek, 1995)
+
+##Checking overdispersion
+dispersiontest(glmbaseLMR)             #Cameron & Trivedi (1990)
+```
+
+- ***The observed frequency of zeroes in data exceeds the predicted in the Leukemia mortality rate (LMR) model. Also, overdispersion is detected.***
+
+- ***Now, to validate the independence assumption,  first, it is necessary to define spatial weighting possible matrices.***
+
+```{r}
+rook_nb_b=nb2listw(poly2nb(muncol,queen=FALSE), style="B",zero.policy = TRUE)
+rook_nb_w=nb2listw(poly2nb(muncol,queen=FALSE), style="W",zero.policy = TRUE)
+
+queen_nb_b=nb2listw(poly2nb(muncol,queen=TRUE), style="B",zero.policy = TRUE)
+queen_nb_w=nb2listw(poly2nb(muncol,queen=TRUE), style="W",zero.policy = TRUE)
+
+#Graphs neighbours
+trinb=tri2nb(xy0)
+options(warn = -1)
+tri_nb_b=nb2listw(tri2nb(xy0), style="B",zero.policy = TRUE)
+tri_nb_w=nb2listw(tri2nb(xy0), style="W",zero.policy = TRUE)
+
+soi_nb_b=nb2listw(graph2nb(soi.graph(trinb,xy0)), style="B",zero.policy = TRUE)
+soi_nb_w=nb2listw(graph2nb(soi.graph(trinb,xy0)), style="W",zero.policy = TRUE)
+
+relative_nb_b=nb2listw(graph2nb(relativeneigh(xy0), sym=TRUE), style="B",zero.policy = TRUE)
+relative_nb_w=nb2listw(graph2nb(relativeneigh(xy0), sym=TRUE), style="W",zero.policy = TRUE)
+
+gabriel_nb_b=nb2listw(graph2nb(gabrielneigh(xy0), sym=TRUE), style="B",zero.policy = TRUE)
+gabriel_nb_w=nb2listw(graph2nb(gabrielneigh(xy0), sym=TRUE), style="W",zero.policy = TRUE)
+
+#Distance neighbours
+
+knn1_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 1)), style="B",zero.policy = TRUE)
+knn1_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 1)), style="W",zero.policy = TRUE)
+knn2_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 2)), style="B",zero.policy = TRUE)
+knn2_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 2)), style="W",zero.policy = TRUE)
+knn3_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 3)), style="B",zero.policy = TRUE)
+knn3_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 3)), style="W",zero.policy = TRUE)
+knn4_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 4)), style="B",zero.policy = TRUE)
+knn4_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 4)), style="W",zero.policy = TRUE)
+
+mat=list(rook_nb_b,rook_nb_w,
+         queen_nb_b,queen_nb_w,
+         tri_nb_b,tri_nb_w,
+         soi_nb_b,soi_nb_w,
+         gabriel_nb_b,gabriel_nb_w,
+         relative_nb_b,relative_nb_w,
+         knn1_nb_b,knn1_nb_w,
+         knn2_nb_b,knn2_nb_w,
+         knn3_nb_b,knn3_nb_w,
+         knn4_nb_b,knn4_nb_w)
+```
+
+- ***Testing spatial autocorrelation using Moran index test based on weighting matrices built in the last step. Note that with all weighting matrices we obtain a significant spatial autocorrelation.***
+
+```{r}
+aux=numeric(0)
+options(warn = -1)
+{
+for(i in 1:length(mat))
+aux[i]=moran.test(muncol$residLMR,mat[[i]],alternative="two.sided")$"statistic"
+aux
+} 
+which.max(aux)
+moran.test(muncol$residLMR, mat[[which.max(aux)]], alternative="two.sided")
+```
+
+- ***First, Poisson Hurdle model is estimated without consider spatial autocorrelation.***
+
+```{r}
+mod.hurdleLMR <- hurdle(Ndeaths ~IICA_High+UBN+Per_Rur+Cobertura+offset(log(EsperadosDeNCancer))|IICA_High+UBN+Per_Rur+Cobertura+offset(log(EsperadosDeNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+resid_Pois_Hurdle=residuals(mod.hurdleLMR,"response")
+summary(mod.hurdleLMR)
+pR2(mod.hurdleLMR)
+moran.test(resid_Pois_Hurdle, mat[[which.max(aux)]], alternative="two.sided")
+```
+
+- ***Only Conflict armed index predictor is significant but model residuals are significantly spatially autocorrelated. So, we use spatial filtering and check significance again. Below we find Moran Eigenvectors.***  
+
+```{r}
+MEpoisLMR <- spatialreg::ME(Ndeaths ~ IICA_High+UBN+Per_Rur+Cobertura+offset(log(EsperadosDeNCancer)),data=muncol,family="poisson",listw=knn4_nb_b, alpha=0.02, verbose=TRUE)
+MoranEigenVLMR=data.frame(fitted(MEpoisLMR))
+#summary(MoranEigenVLMR)
+```
+
+- ***Now, we used Poisson Hurdle model to manage the overdispersion due to zero excess and  Moran eigenfunctions are included as additional explanatory variables, so that spatial autocorrelation is considered.***
+
+```{r}
+mod.hurdleLMR <- hurdle(Ndeaths ~IICA_High+UBN+Per_Rur+Cobertura+fitted(MEpoisLMR)+offset(log(EsperadosDeNCancer))|IICA_High+UBN+Per_Rur+Cobertura+offset(log(EsperadosDeNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+resid_Pois_Hurdle=residuals(mod.hurdleLMR,"response")
+summary(mod.hurdleLMR)
+pR2(mod.hurdleLMR)
+moran.test(resid_Pois_Hurdle, mat[[which.max(aux)]], alternative="two.sided")
+```
+
+- ***Rurality and health coverage are not statistically significant for counto model. So, those predictors are excluded of the spatial filtering and model.***
+
+```{r}
+MEpoisLMR <- spatialreg::ME(Ndeaths ~ IICA_High+UBN+offset(log(EsperadosDeNCancer)),data=muncol,family="poisson",listw=knn4_nb_b, alpha=0.02, verbose=TRUE)
+MoranEigenVLMR=data.frame(fitted(MEpoisLMR))
+#summary(MoranEigenVLMR)
+```
+
+```{r}
+mod.hurdleLMR <- hurdle(Ndeaths ~IICA_High+UBN+fitted(MEpoisLMR)+offset(log(EsperadosDeNCancer))|UBN+Cobertura+offset(log(EsperadosDeNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+summary(mod.hurdleLMR)
+pR2(mod.hurdleLMR)
+moran.test(resid_Pois_Hurdle, mat[[which.max(aux)]], alternative="two.sided")
+```
+
+- ***Now, Poisson-Hurdle model residuals are not significant spatially autocorrelated. The LMR's positive values depend only on the Index of armed conflict (IICA) and on the unsatisfied basic needs index (UBN) and LMR's zero values depend on the UBN and health coverage. Note that the model shows good performance, according to pseudo R2 and the comparison between observed and predicted frequencies.***
+
+```{r}
+mf <- model.frame(mod.hurdleLMR)
+y <- model.response(mf)
+w <- model.weights(mf)
+if(is.null(w)) w <- rep(1, NROW(y))
+max0 <- 20L
+obs <- as.vector(xtabs(w ~ factor(y, levels = 0L:max0)))
+exp <- colSums(predict(mod.hurdleLMR, type = "prob", at = 0L:max0) * w)
+
+fitted_vs_observed <- data.frame(Expected = exp,
+                                 Observed = obs)
+data <- reshape2::melt(fitted_vs_observed)
+data <- data.frame(data, x =  0:20)
+data1 <- data[1:21, ]
+data2 <- data[22:42, ]
+pMortality <- ggplot() +
+  geom_line(data1, mapping = aes(x = x, y = value, group = variable
+                          , color = variable)) +
+  geom_point(data1, mapping = aes(x = x, y = value, group = variable,
+                           color = variable)) +
+  geom_col(data2, mapping = aes(x = x, y = value, group = variable),
+           alpha = 0.7) +
+  theme_light() +
+  labs(x = "Number of deaths",
+       y = "Frecuencies")
+pMortality
+```
+
+## Incidence
+
+Spatial modeling of incidence and mortality childhood leukemia based on Colombian armed conflict and poverty for children born during the years 2002-2013
+
+### **Packages Incidence**
+
+```{r warning=FALSE, results='hide',message=FALSE}
+rm(list=ls())
+require(rgdal)
+require(pscl)
+require(sf)
+require(spdep)
+require(spatialreg) #test.W, scores.listw
+require(stringr)
+require(performance)
+require(AER)
+require(ggplot2)
+require(vcdExtra)
+```
+
+### *Code Incidence*
+
+- **Reading the shapefile of 1124 Colombian municipalities, defining the Coordinate Reference System and centroid and building some variables**
+
+```{r}
+#Reading the shapefile of 1124 Colombian municipalities
+muncol <- rgdal::readOGR(dsn="Armed_Conflict_Vs_Leukemia/muncol.shp")
+muncol=spTransform(muncol,CRS("+init=epsg:21897"))
+(l <- length(muncol))
+
+#Representative coordinate (centroid)
+xy0=data.frame(x=muncol$x,y=muncol$y)
+coordinates(xy0) <- c('x','y')
+proj4string(xy0) <- CRS("+init=epsg:4326")
+xy0=spTransform(xy0,CRS("+init=epsg:21897"))
+
+###Loops for avoiding NA 
+r <- sum(muncol$NCases)/sum(muncol$NPop)
+for (i in 1:l){ 
+   if(muncol$NPop[i]==0){
+      muncol$EsperadosNCancer[i] <- 1
+   }
+   else{
+      muncol$EsperadosNCancer[i] <- muncol$NPop[i]*r
+   }
+}
+
+muncol$IICA_Cat=muncol$IICA_Ca
+muncol$IICA_Cat=str_replace_all(muncol$IICA_Cat,"Bajo", "Low")
+muncol$IICA_Cat=str_replace_all(muncol$IICA_Cat,"Medio", "Medium")
+muncol$IICA_CatLow=ifelse(muncol$IICA_Cat=="Low",1,0)
+muncol$IICA_CatMed=ifelse(muncol$IICA_Cat=="Medium",1,0)
+muncol$IICA_High=as.character(1-(muncol$IICA_CatLow+muncol$IICA_CatMed))
+muncol$UBN=muncol$NBI
+```
+
+- **Modeling leukemia Incidence Rate (LR) in terms of Colombian armed conflict index, poverty and rurality. First, the usual Poisson regression model with incidence rate as response variable is estimated.**
+
+```{r}
+glmbaseLR<-glm(NCases ~IICA_High+UBN+Per_Rur+offset(log(EsperadosNCancer)), family = poisson,data = muncol)
+anova(glmbaseLR)
+summary(glmbaseLR)
+muncol$residLR=residuals(glmbaseLR)
+```
+
+- ***Rurality is not statistically significant in this first auxiliar model. However, we maintain this variable in the rest of the analysis and review its significance in the final model.***
+
+- ***Checking excess zeros by comparison between the number of zeros predicted by the model with the observed number of zeros. Also checking overdispersion.***
+
+```{r}
+mu_LR <- predict(glmbaseLR, type = "response")  # predict expected mean count
+expLR <- sum(dpois(x = 0, lambda = mu_LR))      # sum the probabilities of a zero count for each mean
+round(expLR)                                    #predicted number of zeros
+sum(muncol$NCases < 1)                          #observed number of zeros
+zero.test(muncol$NCases)                        #score test (van den Broek, 1995)
+
+##Checking overdispersion
+dispersiontest(glmbaseLR)             #Cameron & Trivedi (1990)
+check_overdispersion(glmbaseLR)       #Gelman and Hill (2007)
+```
+
+- ***The observed frequency of zeroes in data exceeds the predicted in the Leukemia incidence rate (LR) model. Also, overdispersion is detected.***
+
+- ***Now, to validate the independence assumption,  first, it is necessary to define spatial weighting possible matrices.***
+
+```{r}
+rook_nb_b=nb2listw(poly2nb(muncol,queen=FALSE), style="B",zero.policy = TRUE)
+rook_nb_w=nb2listw(poly2nb(muncol,queen=FALSE), style="W",zero.policy = TRUE)
+
+queen_nb_b=nb2listw(poly2nb(muncol,queen=TRUE), style="B",zero.policy = TRUE)
+queen_nb_w=nb2listw(poly2nb(muncol,queen=TRUE), style="W",zero.policy = TRUE)
+
+#Graphs neighbours
+trinb=tri2nb(xy0)
+options(warn = -1)
+tri_nb_b=nb2listw(tri2nb(xy0), style="B",zero.policy = TRUE)
+tri_nb_w=nb2listw(tri2nb(xy0), style="W",zero.policy = TRUE)
+
+soi_nb_b=nb2listw(graph2nb(soi.graph(trinb,xy0)), style="B",zero.policy = TRUE)
+soi_nb_w=nb2listw(graph2nb(soi.graph(trinb,xy0)), style="W",zero.policy = TRUE)
+
+relative_nb_b=nb2listw(graph2nb(relativeneigh(xy0), sym=TRUE), style="B",zero.policy = TRUE)
+relative_nb_w=nb2listw(graph2nb(relativeneigh(xy0), sym=TRUE), style="W",zero.policy = TRUE)
+
+gabriel_nb_b=nb2listw(graph2nb(gabrielneigh(xy0), sym=TRUE), style="B",zero.policy = TRUE)
+gabriel_nb_w=nb2listw(graph2nb(gabrielneigh(xy0), sym=TRUE), style="W",zero.policy = TRUE)
+
+#Distance neighbours
+
+knn1_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 1)), style="B",zero.policy = TRUE)
+knn1_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 1)), style="W",zero.policy = TRUE)
+knn2_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 2)), style="B",zero.policy = TRUE)
+knn2_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 2)), style="W",zero.policy = TRUE)
+knn3_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 3)), style="B",zero.policy = TRUE)
+knn3_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 3)), style="W",zero.policy = TRUE)
+knn4_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 4)), style="B",zero.policy = TRUE)
+knn4_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 4)), style="W",zero.policy = TRUE)
+knn6_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 6)), style="B",zero.policy = TRUE)
+knn6_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 6)), style="W",zero.policy = TRUE)
+
+mat=list(rook_nb_b,rook_nb_w,
+         queen_nb_b,queen_nb_w,
+         tri_nb_b,tri_nb_w,
+         soi_nb_b,soi_nb_w,
+         gabriel_nb_b,gabriel_nb_w,
+         relative_nb_b,relative_nb_w,
+         knn1_nb_b,knn1_nb_w,
+         knn2_nb_b,knn2_nb_w,
+         knn3_nb_b,knn3_nb_w,
+         knn4_nb_b,knn4_nb_w,
+         knn6_nb_b,knn6_nb_w)
+```
+
+- ***Testing spatial autocorrelation using Moran index test based on weighting matrices built in the last step. Note that with all weighting matrices we obtain a significant spatial autocorrelation.***
+
+```{r}
+aux=numeric(0)
+options(warn = -1)
+{
+for(i in 1:length(mat))
+aux[i]=moran.test(muncol$residLR,mat[[i]],alternative="two.sided")$"p"
+} 
+aux
+moran.test(muncol$residLR, mat[[which.max(aux)]], alternative="two.sided")
+```
+
+- ***First, Poisson Hurdle model is estimated without consider spatial autocorrelation.***
+
+```{r}
+mod.hurdleLR <- hurdle(NCases ~IICA_High+UBN+Per_Rur+offset(log(EsperadosNCancer))|IICA_High+UBN+Per_Rur+offset(log(EsperadosNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+resid_Pois_Hurdle=residuals(mod.hurdleLR,"response")
+summary(mod.hurdleLR)
+pR2(mod.hurdleLR)
+moran.test(resid_Pois_Hurdle, mat[[which.max(aux)]], alternative="two.sided")
+```
+
+- ***Thus, residuals are significantly spatially autocorrelated. So, we are going tu use spatial filtering. Below we find Moran Eigenvectors.***  
+
+```{r}
+MEpoisLR <- spatialreg::ME(NCases ~ IICA_High+UBN+Per_Rur+offset(log(EsperadosNCancer)),data=muncol,family="poisson",listw=mat[[3]], alpha=0.02, verbose=TRUE)
+MoranEigenVLR=data.frame(fitted(MEpoisLR))
+```
+
+- ***Now, we used Poisson Hurdle model to manage the overdispersion due to zero excess and Moran eigenfunctions are included as additional explanatory variables, so that spatial autocorrelation is considered.***
+
+```{r}
+mod.hurdleLR <- hurdle(NCases ~IICA_High+UBN+Per_Rur+fitted(MEpoisLR)+offset(log(EsperadosNCancer))|Per_Rur+offset(log(EsperadosNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+resid_Pois_Hurdle=residuals(mod.hurdleLR,"response")
+moran.test(resid_Pois_Hurdle, mat[[3]], alternative="two.sided")
+summary(mod.hurdleLR)
+pR2(mod.hurdleLR)
+```
+
+- ***Rurality is not statistically significant to explain the Leukemia incidence rate. The only predictor statistically significant for zeroes model is rurality. In addition, the Spatial filtering results are the same without this variable.***
+
+```{r}
+MEpoisLR <- spatialreg::ME(NCases ~ IICA_High+UBN+offset(log(EsperadosNCancer)),data=muncol,family="poisson",listw=mat[[3]], alpha=0.02, verbose=TRUE)
+MoranEigenVLR=data.frame(fitted(MEpoisLR))
+mod.hurdleLR <- hurdle(NCases ~IICA_High+UBN+fitted(MEpoisLR)+offset(log(EsperadosNCancer))|Per_Rur+offset(log(EsperadosNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+resid_Pois_Hurdle=residuals(mod.hurdleLR,"response")
+moran.test(resid_Pois_Hurdle, mat[[3]], alternative="two.sided")
+summary(mod.hurdleLR)
+pR2(mod.hurdleLR)
+```
+
+- ***Hence, Poisson-Hurdle model residuals are not significant spatially autocorrelated. The LR's positive values depend only on the Index of armed conflict (IICA) and on the unsatisfied basic needs index (UBN) and its zero values depend on the rurality. Note that the model shows good performance, according to pseudo R2 and the comparison between observed and predicted frequencies.***
+
+```{r}
+mf <- model.frame(mod.hurdleLR)
+y <- model.response(mf)
+w <- model.weights(mf)
+if(is.null(w)) w <- rep(1, NROW(y))
+max0 <- 20L
+obs <- as.vector(xtabs(w ~ factor(y, levels = 0L:max0)))
+exp <- colSums(predict(mod.hurdleLR, type = "prob", at = 0L:max0) * w)
+
+fitted_vs_observed <- data.frame(Expected = exp,
+                                 Observed = obs)
+data <- reshape2::melt(fitted_vs_observed)
+data <- data.frame(data, x =  0:20)
+data1 <- data[1:21, ]
+data2 <- data[22:42, ]
+pl1 <- ggplot() +
+  geom_line(data1, mapping = aes(x = x, y = value, group = variable
+                          , color = variable)) +
+  geom_point(data1, mapping = aes(x = x, y = value, group = variable,
+                           color = variable)) +
+  geom_col(data2, mapping = aes(x = x, y = value, group = variable),
+           alpha = 0.7) +
+  theme_light() +
+  labs(x = "Number of cases",
+       y = "Frecuencies")
+pl1
+```
