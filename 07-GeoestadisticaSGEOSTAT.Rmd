@@ -1,0 +1,307 @@
+---
+title: "Geoestadística con sgeostat"
+output: html_document
+date: "2022-09-18"
+---
+
+# Geoestadística con sgeostat
+
+## Data Load
+
+```{r}
+aquifer=read.table("data/aquifer.txt",head=T,dec=",")
+head(aquifer)
+```
+
+## Libraries
+
+```{r}
+library(scatterplot3d)
+library(ggplot2)
+library(cowplot)
+library(sgeostat)
+```
+
+## Including Plots
+
+```{r}
+g1=ggplot(aquifer, aes(Profundidad, Este)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Este") + 
+  ylab("Profundidad")
+
+g2=ggplot(aquifer, aes(Profundidad, Norte)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Norte") + 
+  ylab("Profundidad")
+
+g3=ggplot(aquifer, aes(Profundidad, Este*Norte)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Interacción este,norte") + 
+  ylab("Profundidad")
+plot_grid(g1,g2,g3)
+```
+
+```{r}
+cor(aquifer)
+```
+
+```{r}
+scatterplot3d(aquifer, highlight.3d=TRUE, col.axis="blue",
+col.grid="lightblue", main="Tendencia de Profundidad", pch=20)
+```
+
+```{r}
+reg1 <- lm(Profundidad ~ Este + Norte, data = aquifer)
+residuales1  <-  residuals(reg1)
+summary(reg1)
+```
+
+```{r}
+anova(reg1)
+```
+
+```{r}
+reg2 <- lm(Profundidad ~ Este*Norte, data = aquifer)
+residuales2  <-  residuals(reg2)
+summary(reg2)
+```
+
+```{r}
+anova(reg2)
+```
+
+```{r}
+reg3 <- lm(Profundidad ~ Este*Norte+I(Este^2)*I(Norte^2), data = aquifer)
+residuales3  <-  residuals(reg3)
+summary(reg3)
+```
+
+```{r}
+anova(reg3)
+```
+
+```{r}
+aquifer=data.frame(aquifer,resi=residuales2)
+aquifer_points=point(aquifer, x="Este", y="Norte")
+aquifer_pair=pair(aquifer_points,num.lags=10)
+```
+
+```{r}
+aquifer_pair$bins
+```
+
+```{r}
+aquifer_pair$dist
+```
+
+```{r}
+aquifer_pair$from
+```
+
+```{r}
+aquifer_pair$lags
+```
+
+```{r}
+aquifer_pair$to
+```
+
+```{r}
+aquifer.v<-est.variogram(aquifer_points,aquifer_pair,'resi')
+```
+
+```{r}
+g4=ggplot(aquifer, aes(resi, Este)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Este") + 
+  ylab("residuales2")
+
+g5=ggplot(aquifer, aes(resi, Norte)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Norte") + 
+  ylab("residuales2")
+
+plot_grid(g4,g5)
+```
+
+```{r}
+aquifer_points=point(aquifer, x="Este", y="Norte")
+fit.trend(aquifer_points,at="Profundidad", np=2, plot.it=TRUE)
+```
+
+```{r}
+g6=ggplot(aquifer.v, aes(resi, Norte)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Norte") + 
+  ylab("residuales2")
+
+g6=ggplot(aquifer.v, aes(bins, classic)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Rezago espacial, h") + 
+  ylab("Estimador clásico del variograma")
+
+g7=ggplot(aquifer.v, aes(bins, robust)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Rezago espacial, h") + 
+  ylab("Estimador robusto 1 del variograma")
+
+g8=ggplot(aquifer.v, aes(bins, med)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Rezago espacial, h") + 
+  ylab("Estimador robusto 2 del variograma")
+
+plot_grid(g6,g7,g8,nrow=1,ncol=3)
+```
+
+```{r}
+#par(mfrow=c(1,3))
+print(aquifer.v)
+```
+
+```{r}
+plot(aquifer.v$robust)
+```
+
+```{r}
+plot(aquifer.v$med)
+```
+
+```{r}
+#points(aquifer.v$robust,col="red")
+#points(aquifer.v$med,"blue")
+aquifer.vmodExp<-fit.exponential(aquifer.v,c0=0,ce=40000,ae=20,plot.it=TRUE,iterations=30)
+```
+
+```{r}
+aquifer.vmodGau<-fit.gaussian(aquifer.v,c0=0,cg=50000,ag=50,plot.it=TRUE,iterations=30)
+```
+
+```{r}
+aquifer.vmodWave<-fit.wave(aquifer.v,c0=0,cw=40000,aw=10,plot.it=TRUE,iterations=30,weighted=T)
+```
+
+```{r}
+curve(65000*(1-(14/x)*sin(x/14)),0,300,ylim=c(0,200000))
+points(aquifer.v$bins,aquifer.v$classic,col=3)
+text(aquifer.v$bins,aquifer.v$classic,aquifer.v$n,col=2)
+```
+
+```{r}
+curve(200000*(1-exp(-x/170)),0,300)
+points(aquifer.v$bins,aquifer.v$classic,col=2)
+```
+
+```{r}
+curve(65000*(1-(14/x)*sin(x/14)),0,300,ylim=c(0,200000))
+points(aquifer.v$bins,aquifer.v$classic,col=3)
+text(aquifer.v$bins,aquifer.v$classic,aquifer.v$n,col=2)
+```
+
+```{r}
+aquifer.vmodExp<-fit.exponential(aquifer.v,c0=0,ce=200000,ae=170,plot.it=TRUE,iterations=30,weighted=T)
+```
+
+```{r}
+aquifer.vmodwave<-fit.wave(aquifer.v,c0=4000,cw=30000,aw=15,plot.it=TRUE,iterations=0,weighted=T)
+```
+
+```{r}
+aquifer.vmodExp_0<-fit.exponential(aquifer.v,c0=0,ce=200000,ae=170,plot.it=TRUE,iterations=0,weighted=T)
+```
+
+```{r}
+aquifer.vmodwave_0<-fit.wave(aquifer.v,c0=4000,cw=30000,aw=15,plot.it=TRUE,iterations=0,weighted=T)
+```
+
+```{r}
+aquifer.spherical<-fit.spherical(aquifer.v,c0=0,cs=35000,as=70,plot.it=TRUE,iterations=0,weighted=T)
+```
+
+```{r}
+ggplot(aquifer.v, aes(bins, classic)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Rezago espacial, h") + 
+  ylab("Estimador clásico del variograma")+
+  xlim(0, 300) +
+  geom_function(aes(color = "Exponencial"),
+    fun =~4000+150000*(1-exp(-.x/100)) 
+    ) +
+  geom_function(aes(color = "Seno cardinal"),
+    fun =~4000+30000*(1-((15/.x)*sin(.x/15)))             
+    ) + xlab("Rezago espacial") + ylab("Modelos teóricos de semivariogramas") 
+```
+
+```{r}
+Kriging_aquifer <- point(data.frame(list(x=10,y=80)))
+Kriging_aquifer <- krige(Kriging_aquifer, aquifer_points, 'resi', aquifer.vmodExp_0)
+```
+
+```{r}
+Kriging_aquifer
+```
+
+```{r}
+Kriging_aquifer$sigma2hat
+```
+
+```{r}
+Kriging_aquifer <- point(data.frame(list(x=10,y=80)))
+Kriging_aquifer <- krige(Kriging_aquifer, aquifer_points, 'resi', aquifer.vmodwave_0)
+```
+
+```{r}
+Kriging_aquifer
+```
+
+```{r}
+Kriging_aquifer$zhat
+```
+
+```{r}
+Kriging_aquifer$sigma2hat
+```
+
+```{r}
+grid <- list(x=seq(min(aquifer$Este),max(aquifer$Este),by=20),y=seq(min(aquifer$Norte),max(aquifer$Norte),by=10))
+grid$xr <- range(grid$x)
+grid$xs <- grid$xr[2] - grid$xr[1]
+grid$yr <- range(grid$y)
+grid$ys <- grid$yr[2] - grid$yr[1]
+grid$max <- max(grid$xs, grid$ys)
+grid$xy <- data.frame(cbind(c(matrix(grid$x, length(grid$x), length(grid$y))),
+c(matrix(grid$y, length(grid$x), length(grid$y), byrow=TRUE))))
+colnames(grid$xy) <- c("x", "y")
+grid$point <- point(grid$xy)
+grid$krige <- krige(grid$point,aquifer_points,'resi',aquifer.vmodwave_0,maxdist=180,extrap=FALSE)
+```
+
+```{r}
+op <- par(no.readonly = TRUE)
+par(pty="s")
+plot(grid$xy, type="n", xlim=c(grid$xr[1], grid$xr[1]+grid$max),ylim=c(grid$yr[1], grid$yr[1]+grid$max))
+image(grid$x,grid$y,matrix(grid$krige$zhat,length(grid$x),length(grid$y)),add=TRUE)
+contour(grid$x,grid$y,matrix(grid$krige$zhat,length(grid$x),length(grid$y)),add=TRUE)
+```
+
+```{r}
+x11()
+op <- par(no.readonly = TRUE)
+par(pty="s")
+plot(grid$xy, type="n", xlim=c(grid$xr[1], grid$xr[1]+grid$max),ylim=c(grid$yr[1], grid$yr[1]+grid$max))
+image(grid$x,grid$y,matrix(grid$krige$sigma2hat,length(grid$x),length(grid$y)), add=TRUE)
+contour(grid$x,grid$y,matrix(grid$krige$sigma2hat,length(grid$x),length(grid$y)),add=TRUE)
+```
+
+
+

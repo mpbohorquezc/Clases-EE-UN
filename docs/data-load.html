@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Data load | Geoestadística con sgeostat</title>
+  <meta name="description" content="Chapter 7 Data load | Geoestadística con sgeostat" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Data load | Geoestadística con sgeostat" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Data load | Geoestadística con sgeostat" />
+  
+  
+  
+
+<meta name="author" content="…." />
+
+
+<meta name="date" content="2022-09-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introducción-proceso-espacial-bivariado.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Cuadernos R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Simulación Proceso Espacio Temporal</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#funciones"><i class="fa fa-check"></i><b>1.1</b> Funciones</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#ch-1-no-separable"><i class="fa fa-check"></i><b>1.2</b> CH 1 no separable</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#ch3-no-separable"><i class="fa fa-check"></i><b>1.3</b> CH3 no separable</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#ch-4"><i class="fa fa-check"></i><b>1.4</b> CH 4</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html"><i class="fa fa-check"></i><b>2</b> Spatial modeling leukemia</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#mortality"><i class="fa fa-check"></i><b>2.1</b> <strong>Mortality</strong></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#packages-mortality"><i class="fa fa-check"></i><b>2.1.1</b> <em>Packages Mortality</em></a></li>
+<li class="chapter" data-level="2.1.2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#code-mortality"><i class="fa fa-check"></i><b>2.1.2</b> <em>Code Mortality</em></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#incidence"><i class="fa fa-check"></i><b>2.2</b> Incidence</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#packages-incidence"><i class="fa fa-check"></i><b>2.2.1</b> <strong>Packages Incidence</strong></a></li>
+<li class="chapter" data-level="2.2.2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#code-incidence"><i class="fa fa-check"></i><b>2.2.2</b> <em>Code Incidence</em></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="estudio-de-mercadeo-espacial-bac.html"><a href="estudio-de-mercadeo-espacial-bac.html"><i class="fa fa-check"></i><b>3</b> Estudio de Mercadeo Espacial BAC</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="estudio-de-mercadeo-espacial-bac.html"><a href="estudio-de-mercadeo-espacial-bac.html#paquetes"><i class="fa fa-check"></i><b>3.1</b> Paquetes</a></li>
+<li class="chapter" data-level="3.2" data-path="estudio-de-mercadeo-espacial-bac.html"><a href="estudio-de-mercadeo-espacial-bac.html#lectura-de-datos"><i class="fa fa-check"></i><b>3.2</b> Lectura de Datos</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="estudio-de-mercadeo-espacial-bac.html"><a href="estudio-de-mercadeo-espacial-bac.html#cruce-de-información-y-arreglo-de-coordenadas"><i class="fa fa-check"></i><b>3.2.1</b> Cruce de información y arreglo de coordenadas</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="estudio-de-mercadeo-espacial-bac.html"><a href="estudio-de-mercadeo-espacial-bac.html#matriz-de-vecindades"><i class="fa fa-check"></i><b>3.3</b> Matriz de vecindades</a></li>
+<li class="chapter" data-level="3.4" data-path="estudio-de-mercadeo-espacial-bac.html"><a href="estudio-de-mercadeo-espacial-bac.html#mapa-de-valores-observados"><i class="fa fa-check"></i><b>3.4</b> Mapa de valores observados</a></li>
+<li class="chapter" data-level="3.5" data-path="estudio-de-mercadeo-espacial-bac.html"><a href="estudio-de-mercadeo-espacial-bac.html#pruebas-de-autocorrelación"><i class="fa fa-check"></i><b>3.5</b> Pruebas de Autocorrelación</a></li>
+<li class="chapter" data-level="3.6" data-path="estudio-de-mercadeo-espacial-bac.html"><a href="estudio-de-mercadeo-espacial-bac.html#mapas"><i class="fa fa-check"></i><b>3.6</b> Mapas</a></li>
+<li class="chapter" data-level="3.7" data-path="estudio-de-mercadeo-espacial-bac.html"><a href="estudio-de-mercadeo-espacial-bac.html#resumen-de-modelos"><i class="fa fa-check"></i><b>3.7</b> Resumen de modelos</a></li>
+<li class="chapter" data-level="3.8" data-path="estudio-de-mercadeo-espacial-bac.html"><a href="estudio-de-mercadeo-espacial-bac.html#calculo-de-varibles-significativas"><i class="fa fa-check"></i><b>3.8</b> Calculo de varibles significativas</a></li>
+<li class="chapter" data-level="3.9" data-path="estudio-de-mercadeo-espacial-bac.html"><a href="estudio-de-mercadeo-espacial-bac.html#mapa-estimado"><i class="fa fa-check"></i><b>3.9</b> Mapa Estimado</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ilustración-del-kriging-simple-espacio-tiempo.html"><a href="ilustración-del-kriging-simple-espacio-tiempo.html"><i class="fa fa-check"></i><b>4</b> Ilustración del kriging simple espacio tiempo</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ilustración-del-kriging-simple-espacio-tiempo.html"><a href="ilustración-del-kriging-simple-espacio-tiempo.html#librerías"><i class="fa fa-check"></i><b>4.1</b> librerías</a></li>
+<li class="chapter" data-level="4.2" data-path="ilustración-del-kriging-simple-espacio-tiempo.html"><a href="ilustración-del-kriging-simple-espacio-tiempo.html#simulación-no-condicional-de-una-realización-de-un-campo-aleatorio-espacio-temporal-no-separable-usando-el-modelo-de-covarianza-cressie1"><i class="fa fa-check"></i><b>4.2</b> <strong>Simulación no condicional de una realización de un campo aleatorio espacio temporal no separable usando el modelo de covarianza cressie1</strong></a></li>
+<li class="chapter" data-level="4.3" data-path="ilustración-del-kriging-simple-espacio-tiempo.html"><a href="ilustración-del-kriging-simple-espacio-tiempo.html#algunas-funciones-de-covarianza-espacio-temporal-no-separables"><i class="fa fa-check"></i><b>4.3</b> <strong>Algunas funciones de covarianza espacio temporal no separables</strong></a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="ilustración-del-kriging-simple-espacio-tiempo.html"><a href="ilustración-del-kriging-simple-espacio-tiempo.html#c-r-e-s-s-i-e---h-u-a-n-g-1999"><i class="fa fa-check"></i><b>4.3.1</b> C R E S S I E - H U A N G (1999)</a></li>
+<li class="chapter" data-level="4.3.2" data-path="ilustración-del-kriging-simple-espacio-tiempo.html"><a href="ilustración-del-kriging-simple-espacio-tiempo.html#gneiting-2002-combina-fun1-fun2-y-psi-en-gneiting"><i class="fa fa-check"></i><b>4.3.2</b> Gneiting (2002), combina fun1, fun2 y psi en Gneiting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html"><i class="fa fa-check"></i><b>5</b> Pulimiento de medianas</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#simulación-de-un-campo-aleatorio."><i class="fa fa-check"></i><b>5.1</b> Simulación de un campo aleatorio.</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#cargar-librerias"><i class="fa fa-check"></i><b>5.1.1</b> Cargar librerias</a></li>
+<li class="chapter" data-level="5.1.2" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#grilla-de-las-ubicaciones-espaciales."><i class="fa fa-check"></i><b>5.1.2</b> Grilla de las ubicaciones espaciales.</a></li>
+<li class="chapter" data-level="5.1.3" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#definición-de-objeto-vgm"><i class="fa fa-check"></i><b>5.1.3</b> Definición de objeto VGM</a></li>
+<li class="chapter" data-level="5.1.4" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#matriz-de-varianza-dadas-coordenadas."><i class="fa fa-check"></i><b>5.1.4</b> Matriz de varianza dadas coordenadas.</a></li>
+<li class="chapter" data-level="5.1.5" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#simulación."><i class="fa fa-check"></i><b>5.1.5</b> Simulación.</a></li>
+<li class="chapter" data-level="5.1.6" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#pulimiento-de-medianas-1"><i class="fa fa-check"></i><b>5.1.6</b> Pulimiento de medianas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="introducción-proceso-espacial-bivariado.html"><a href="introducción-proceso-espacial-bivariado.html"><i class="fa fa-check"></i><b>6</b> Introducción proceso espacial bivariado</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="introducción-proceso-espacial-bivariado.html"><a href="introducción-proceso-espacial-bivariado.html#librerías-1"><i class="fa fa-check"></i><b>6.1</b> Librerías</a></li>
+<li class="chapter" data-level="6.2" data-path="introducción-proceso-espacial-bivariado.html"><a href="introducción-proceso-espacial-bivariado.html#ubicaciones-en-este-caso-se-supone-que-ambos-procesos-están-observados-en-los-mismos-lugares"><i class="fa fa-check"></i><b>6.2</b> Ubicaciones: En este caso se supone que ambos procesos están observados en los mismos lugares</a></li>
+<li class="chapter" data-level="6.3" data-path="introducción-proceso-espacial-bivariado.html"><a href="introducción-proceso-espacial-bivariado.html#modelo-lineal-de-coregionalización"><i class="fa fa-check"></i><b>6.3</b> Modelo lineal de coregionalización</a></li>
+<li class="chapter" data-level="6.4" data-path="introducción-proceso-espacial-bivariado.html"><a href="introducción-proceso-espacial-bivariado.html#simulación-de-un-proceso-espacial-gaussiano-bivariado"><i class="fa fa-check"></i><b>6.4</b> Simulación de un proceso espacial Gaussiano bivariado</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-load.html"><a href="data-load.html"><i class="fa fa-check"></i><b>7</b> Data load</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="data-load.html"><a href="data-load.html#libraries"><i class="fa fa-check"></i><b>7.1</b> Libraries</a></li>
+<li class="chapter" data-level="7.2" data-path="data-load.html"><a href="data-load.html#including-plots"><i class="fa fa-check"></i><b>7.2</b> Including Plots</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Geoestadística con sgeostat</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-load" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Data load<a href="data-load.html#data-load" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="data-load.html#cb288-1" aria-hidden="true" tabindex="-1"></a>aquifer<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">&quot;data/aquifer.txt&quot;</span>,<span class="at">head=</span>T,<span class="at">dec=</span><span class="st">&quot;,&quot;</span>)</span>
+<span id="cb288-2"><a href="data-load.html#cb288-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aquifer)</span></code></pre></div>
+<pre><code>##        Este     Norte Profundidad
+## 1  42.78275 127.62282        1464
+## 2 -27.39691  90.78732        2553
+## 3  -1.16289  84.89600        2158
+## 4 -18.61823  76.45199        2455
+## 5  96.46549  64.58058        1756
+## 6 108.56243  82.92325        1702</code></pre>
+<div id="libraries" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Libraries<a href="data-load.html#libraries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="data-load.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scatterplot3d)</span>
+<span id="cb290-2"><a href="data-load.html#cb290-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb290-3"><a href="data-load.html#cb290-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb290-4"><a href="data-load.html#cb290-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sgeostat)</span></code></pre></div>
+</div>
+<div id="including-plots" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Including Plots<a href="data-load.html#including-plots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="data-load.html#cb291-1" aria-hidden="true" tabindex="-1"></a>g1<span class="ot">=</span><span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(Profundidad, Este)) <span class="sc">+</span> </span>
+<span id="cb291-2"><a href="data-load.html#cb291-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb291-3"><a href="data-load.html#cb291-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb291-4"><a href="data-load.html#cb291-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Este&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb291-5"><a href="data-load.html#cb291-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Profundidad&quot;</span>)</span>
+<span id="cb291-6"><a href="data-load.html#cb291-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb291-7"><a href="data-load.html#cb291-7" aria-hidden="true" tabindex="-1"></a>g2<span class="ot">=</span><span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(Profundidad, Norte)) <span class="sc">+</span> </span>
+<span id="cb291-8"><a href="data-load.html#cb291-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb291-9"><a href="data-load.html#cb291-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb291-10"><a href="data-load.html#cb291-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Norte&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb291-11"><a href="data-load.html#cb291-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Profundidad&quot;</span>)</span>
+<span id="cb291-12"><a href="data-load.html#cb291-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb291-13"><a href="data-load.html#cb291-13" aria-hidden="true" tabindex="-1"></a>g3<span class="ot">=</span><span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(Profundidad, Este<span class="sc">*</span>Norte)) <span class="sc">+</span> </span>
+<span id="cb291-14"><a href="data-load.html#cb291-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb291-15"><a href="data-load.html#cb291-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb291-16"><a href="data-load.html#cb291-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Interacción este,norte&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb291-17"><a href="data-load.html#cb291-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Profundidad&quot;</span>)</span>
+<span id="cb291-18"><a href="data-load.html#cb291-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g1,g2,g3)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-169-1.png" width="672" /></p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="data-load.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(aquifer)</span></code></pre></div>
+<pre><code>##                   Este      Norte Profundidad
+## Este         1.0000000  0.1147565  -0.7788885
+## Norte        0.1147565  1.0000000  -0.6200923
+## Profundidad -0.7788885 -0.6200923   1.0000000</code></pre>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="data-load.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterplot3d</span>(aquifer, <span class="at">highlight.3d=</span><span class="cn">TRUE</span>, <span class="at">col.axis=</span><span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb294-2"><a href="data-load.html#cb294-2" aria-hidden="true" tabindex="-1"></a><span class="at">col.grid=</span><span class="st">&quot;lightblue&quot;</span>, <span class="at">main=</span><span class="st">&quot;Tendencia de Profundidad&quot;</span>, <span class="at">pch=</span><span class="dv">20</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="data-load.html#cb295-1" aria-hidden="true" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este <span class="sc">+</span> Norte, <span class="at">data =</span> aquifer)</span>
+<span id="cb295-2"><a href="data-load.html#cb295-2" aria-hidden="true" tabindex="-1"></a>residuales1  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg1)</span>
+<span id="cb295-3"><a href="data-load.html#cb295-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Profundidad ~ Este + Norte, data = aquifer)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -366.96 -161.53  -30.71  148.15  651.20 
+## 
+## Coefficients:
+##              Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept) 2591.4302    38.9599   66.52 &lt;0.0000000000000002 ***
+## Este          -6.7514     0.3438  -19.64 &lt;0.0000000000000002 ***
+## Norte         -5.9872     0.4066  -14.73 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 203.3 on 82 degrees of freedom
+## Multiple R-squared:  0.8921, Adjusted R-squared:  0.8894 
+## F-statistic: 338.9 on 2 and 82 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="data-load.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Profundidad
+##           Df   Sum Sq  Mean Sq F value                Pr(&gt;F)    
+## Este       1 19045642 19045642  460.95 &lt; 0.00000000000000022 ***
+## Norte      1  8960172  8960172  216.86 &lt; 0.00000000000000022 ***
+## Residuals 82  3388069    41318                                  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="data-load.html#cb299-1" aria-hidden="true" tabindex="-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este<span class="sc">*</span>Norte, <span class="at">data =</span> aquifer)</span>
+<span id="cb299-2"><a href="data-load.html#cb299-2" aria-hidden="true" tabindex="-1"></a>residuales2  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg2)</span>
+<span id="cb299-3"><a href="data-load.html#cb299-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Profundidad ~ Este * Norte, data = aquifer)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -406.30 -138.88  -13.04  129.36  722.48 
+## 
+## Coefficients:
+##                Estimate  Std. Error t value             Pr(&gt;|t|)    
+## (Intercept) 2627.069474   38.325720  68.546 &lt; 0.0000000000000002 ***
+## Este          -8.287218    0.565845 -14.646 &lt; 0.0000000000000002 ***
+## Norte         -6.648559    0.432667 -15.366 &lt; 0.0000000000000002 ***
+## Este:Norte     0.024524    0.007401   3.314              0.00138 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 191.9 on 81 degrees of freedom
+## Multiple R-squared:  0.905,  Adjusted R-squared:  0.9014 
+## F-statistic: 257.1 on 3 and 81 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="data-load.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg2)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Profundidad
+##            Df   Sum Sq  Mean Sq F value                Pr(&gt;F)    
+## Este        1 19045642 19045642  517.06 &lt; 0.00000000000000022 ***
+## Norte       1  8960172  8960172  243.25 &lt; 0.00000000000000022 ***
+## Este:Norte  1   404448   404448   10.98              0.001379 ** 
+## Residuals  81  2983621    36835                                  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="data-load.html#cb303-1" aria-hidden="true" tabindex="-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este<span class="sc">*</span>Norte<span class="sc">+</span><span class="fu">I</span>(Este<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span><span class="fu">I</span>(Norte<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> aquifer)</span>
+<span id="cb303-2"><a href="data-load.html#cb303-2" aria-hidden="true" tabindex="-1"></a>residuales3  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg3)</span>
+<span id="cb303-3"><a href="data-load.html#cb303-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg3)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Profundidad ~ Este * Norte + I(Este^2) * I(Norte^2), 
+##     data = aquifer)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -372.7 -133.6  -20.3  129.9  505.1 
+## 
+## Coefficients:
+##                             Estimate      Std. Error t value            Pr(&gt;|t|)    
+## (Intercept)          2537.5624340948   70.3799189709  36.055 &lt;0.0000000000000002 ***
+## Este                   -7.7283066535    0.6027554102 -12.822 &lt;0.0000000000000002 ***
+## Norte                  -3.0747325957    1.7697466886  -1.737              0.0863 .  
+## I(Este^2)              -0.0067922127    0.0059674654  -1.138              0.2585    
+## I(Norte^2)             -0.0237215094    0.0090487081  -2.622              0.0105 *  
+## Este:Norte              0.0115491188    0.0096804349   1.193              0.2365    
+## I(Este^2):I(Norte^2)    0.0000022515    0.0000009541   2.360              0.0208 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 180.7 on 78 degrees of freedom
+## Multiple R-squared:  0.9189, Adjusted R-squared:  0.9126 
+## F-statistic: 147.2 on 6 and 78 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="data-load.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg3)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Profundidad
+##                      Df   Sum Sq  Mean Sq  F value                Pr(&gt;F)    
+## Este                  1 19045642 19045642 583.2335 &lt; 0.00000000000000022 ***
+## Norte                 1  8960172  8960172 274.3868 &lt; 0.00000000000000022 ***
+## I(Este^2)             1    55368    55368   1.6955             0.1967061    
+## I(Norte^2)            1   152170   152170   4.6599             0.0339500 *  
+## Este:Norte            1   451567   451567  13.8283             0.0003755 ***
+## I(Este^2):I(Norte^2)  1   181854   181854   5.5689             0.0207829 *  
+## Residuals            78  2547110    32655                                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="data-load.html#cb307-1" aria-hidden="true" tabindex="-1"></a>aquifer<span class="ot">=</span><span class="fu">data.frame</span>(aquifer,<span class="at">resi=</span>residuales2)</span>
+<span id="cb307-2"><a href="data-load.html#cb307-2" aria-hidden="true" tabindex="-1"></a>aquifer_points<span class="ot">=</span><span class="fu">point</span>(aquifer, <span class="at">x=</span><span class="st">&quot;Este&quot;</span>, <span class="at">y=</span><span class="st">&quot;Norte&quot;</span>)</span>
+<span id="cb307-3"><a href="data-load.html#cb307-3" aria-hidden="true" tabindex="-1"></a>aquifer_pair<span class="ot">=</span><span class="fu">pair</span>(aquifer_points,,<span class="at">num.lags=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## ....................................................................................</code></pre>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="data-load.html#cb309-1" aria-hidden="true" tabindex="-1"></a>aquifer_pair<span class="sc">$</span>bins</span></code></pre></div>
+<pre><code>##  [1]  13.55308  40.65923  67.76539  94.87154 121.97770 149.08385 176.19001 203.29616 230.40231 257.50847</code></pre>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="data-load.html#cb311-1" aria-hidden="true" tabindex="-1"></a>aquifer_pair<span class="sc">$</span>dist</span></code></pre></div>
+<pre><code>##    [1]  79.259313  61.292744  79.928307  82.801936  79.529981  84.514408 100.208558 107.152008  89.978304 104.178541  99.251058
+##   [12]  88.899718  87.945051  70.165987 101.674210 112.872165 120.961308 119.047906  32.754634  46.156920  27.689647  74.010375
+##   [23]  65.729277 107.885946  23.229828  87.355532  98.880862 107.581460 104.100879 104.150438  52.285133  71.583372  76.011219
+##   [34]  87.033342  51.194751 129.805262 135.555137 122.851465 125.340545  49.219772 119.707807 119.905108 123.155773 112.001822
+##   [45] 114.916408 115.460198 103.829256 104.179897 113.250471  96.543519  97.566287  96.700258  82.781495  63.156546  64.218322
+##   [56]  65.835477  24.567616  35.106924  54.832521  45.809186  40.330280  56.110555  43.935695  46.519216  45.713177  50.431563
+##   [67]  50.801512  61.124807  55.902846  44.604704  62.449544 185.852432 212.770561 123.323713 143.256052 141.135610 169.641608
+##   [78] 148.183229 143.187705 166.176744 149.417056 150.251941 166.077707 163.208576  26.887385  16.809727 126.604452 136.186584
+##   [89] 120.744768 128.246553 133.677383 129.683492 130.511843 129.585165 130.769649  94.037999  23.325651 105.307950 123.522448
+##  [100] 133.049760 131.853495  97.723076 103.926618  93.928059  79.959358  72.440973 147.319592  99.601194  54.101819  55.632916
+##  [111]  65.873035  62.225650  62.421578  91.321524  85.948043  81.564157  68.656804 129.954829  75.968082  81.463104  69.079720
+##  [122]  74.315712 101.967004 145.128267 145.470767 148.443085  60.943426  61.309844  61.953184  55.477879  53.875066  81.957351
+##  [133] 106.216568 112.476289 109.958325  60.835750  47.647137  41.488835  46.622184  68.602648  50.302378  25.536379 116.404782
+##  [144] 113.601262 129.467598 121.021665 123.665659 117.773861 122.244383 123.329873  35.035312  47.569309 123.256491 138.745457
+##  [155] 109.244082 133.512160  46.681150  67.213847  63.044705  93.401359  69.021050  65.844134  87.119306  71.711292  71.623479
+##  [166]  87.607834  85.955074  19.390467  99.719691 109.743053  93.935947 101.986099 107.639797 102.835886 104.438025 103.169612
+##  [177] 103.891523 102.463199  38.358960  81.664216  99.316764 108.881593 107.535211  73.645102  78.352029  70.404750  54.443063
+##  [188]  46.299248 120.568893  83.851048  37.288803  44.569863  54.995234  51.090048  51.224206  64.612945  90.728452  88.827991
+##  [199]  82.592611 112.322576  72.855185  78.735670  65.600016  69.384909  95.432264 119.389544 119.721763 122.770574  55.218671
+##  [210]  57.286526  57.902693  47.558372  47.088151  67.393203  81.542159  87.260250  84.885977  74.954007  55.993465  51.066520
+##  [221]  56.378090  58.765641  42.864537  23.977824 103.963732  99.820726 115.962930 105.087557 107.699134 104.691742 109.393102
+##  [232] 110.147836   8.935570  20.810342 102.759122 116.226434 124.934060 154.892599  72.895198  93.334966  88.068221 119.167718
+##  [243]  90.187266  82.934575 107.549563  89.306141  91.020385 106.441436 102.684866 115.694395 127.345190 108.834938 114.849692
+##  [254] 119.917484 117.966887 116.818490 116.460383 119.367633 108.451356  38.352281  89.833391 108.237636 117.699999 116.595192
+##  [265]  92.896467  97.006166  89.746654  66.086035  59.478867 135.007450 102.002272  37.463975  38.972587  49.341747  45.626279
+##  [276]  45.816907  81.899220  98.972448  95.465680  84.467758 131.106894  61.508958  67.219814  54.379847  59.229277 109.962937
+##  [287] 130.949665 131.302206 134.179409  45.391386  46.273339  46.922209  39.289389  37.894974  65.177065  91.335167  97.965398
+##  [298]  95.345994  76.615804  61.339143  55.438231  60.800160  74.339658  56.837840  32.970465 121.092218 117.412471 133.534215
+##  [309] 123.397383 126.028178 122.060727 126.701758 127.579674  24.388090  36.877600 122.044937 135.607864 105.937898 135.563755
+##  [320]  56.560643  76.542772  70.232074 101.732211  70.933202  63.620474  88.187946  69.968883  71.632746  87.060671  83.467540
+##  [331]  21.972471  11.475671  26.124366  31.693577   8.380367  30.070646  23.161115   6.209140 170.214009 132.147156  55.124664
+##  [342]  51.353913  54.430899  52.534299  51.273236  37.275273  55.886912  54.189985  57.445879  25.084164  93.328281  91.783938
+##  [353] 103.143550 104.608208 103.503813 103.379914  36.435484 154.009131 157.641397 164.508297  95.468867 128.230331 132.100422
+##  [364] 124.079663 122.594467 129.038237  41.839840  41.896069  44.757880 115.677434 119.651450 119.827187 109.589713 111.574801
+##  [375]  96.407188  47.008541  40.863332  42.707944 158.664674 137.180819 135.610055 139.227500 106.066768 108.434174 113.351195
+##  [386] 113.851492 106.757833 115.974365 100.119280 101.167428 111.758515 115.045274 114.135715  91.989485  79.260339  76.004414
+##  [397]  67.998656 205.317510 244.451025 172.056190 192.215708 185.711843 217.327924 182.775827 170.615069 197.830933 176.903637
+##  [408] 181.060655 194.223065 187.354360  33.296292  47.430350  52.185586  28.807239  51.092135  44.174139  25.438238 167.220517
+##  [419] 138.182432  76.668261  73.234460  75.787614  73.948195  46.856865  34.717604  51.958332  71.453225  72.567163  37.615554
+##  [430]  84.619353 108.114937 120.142473 122.822502 121.306658 121.204583  45.467260 150.802242 155.528833 165.428365  80.320112
+##  [441] 146.986778 151.198855 142.329620 141.366327 121.195938  60.430921  60.398169  62.804566 133.290441 137.236403 137.475098
+##  [452] 126.631757 128.429927 116.236335  68.515181  62.705490  64.425905 160.345766 139.365571 138.762856 141.704715 103.997489
+##  [463] 110.021801 119.507637 102.435955  95.493903 102.297808  87.028525  87.607833  99.959743 102.615712 101.446172 103.006820
+##  [474]  90.484265  61.319896  49.232130 222.282477 259.668863 182.625380 203.078010 197.510015 228.831590 196.671699 185.675987
+##  [485] 212.538787 192.069019 195.672024 209.541462 203.291640  17.277015  23.884135   9.249078  21.491573  15.286287  11.450345
+##  [496] 170.601656 128.115646  43.656904  40.577200  44.579014  42.618833  54.909465  41.310805  59.001264  45.056489  49.596766
+##  [507]  26.763715  97.524043  82.632041  93.555096  94.402263  93.505930  93.371758  34.104112 154.626514 157.659004 162.890952
+##  [518] 102.794662 117.698059 121.410792 113.788513 112.068493 132.291092  35.751337  35.899705  39.065343 105.718715 109.690766
+##  [529] 109.835396  99.942823 102.011910  85.478726  35.550970  29.422107  31.233687 156.692064 135.130369 133.066026 137.003184
+##  [540] 106.655003 107.065422 109.472270 119.095243 112.012274 122.341800 106.370848 107.637851 117.219991 120.789057 120.020800
+##  [551]  85.776560  73.175783  83.406457  77.404167 195.448896 235.323777 165.387896 185.318152 178.367342 210.034299 174.400625
+##  [562] 161.707476 189.023901 167.928111 172.341580 185.133379 177.987519   6.945246  18.627690   4.217605   3.538855  22.028562
+##  [573] 184.915166 138.122730  35.972138  26.539157  28.379003  26.522030  71.721980  58.352871  75.597715  48.804976  55.807481
+##  [584]  23.615308 114.306908  84.398831  93.853821  92.744883  92.563786  92.399438  48.358436 169.178814 171.715192 175.409523
+##  [595] 120.055674 114.439679 117.461202 111.484551 108.914153 148.583251  19.577446  19.802596  23.079974 104.658509 108.556755
+##  [606] 108.600018  99.936292 102.205596  81.027208  29.044437  21.176438  23.920446 168.876200 147.370281 144.793973 149.046410
+##  [617] 121.438341 120.220201 119.884679 136.150136 129.078555 139.589827 123.613920 124.899192 134.327696 137.950333 137.207183
+##  [628]  93.339495  81.293693 100.653031  93.983902 193.807825 235.546757 171.115952 190.506699 182.770249 214.358016 176.713433
+##  [639] 162.878229 190.250686 168.884755 173.883827 185.690539 177.870735  23.640710   3.249805   8.715944  26.852987 191.730323
+##  [650] 144.155298  37.413293  24.624456  24.175644  22.529215  78.578576  65.132166  82.495350  53.853789  61.349535  23.267715
+##  [661] 121.179386  88.369829  97.255209  95.455133  95.537495  95.363629  55.259820 176.026920 178.498974 181.936556 126.455290
+##  [672] 116.380751 119.107648 113.815178 110.930536 155.519893  12.710986  12.956907  16.235144 107.498375 111.344344 111.350044
+##  [683] 103.186085 105.509780  82.764284  31.481660  23.605644  26.465080 175.342914 153.863801 151.190009 155.500722 128.323224
+##  [694] 126.896457 126.040052 142.935659 135.857963 146.206996 130.241022 131.487347 141.084371 144.669825 143.904762  98.908472
+##  [705]  87.058888 107.020532  99.686568 196.099877 238.462396 175.954479 195.150446 187.183444 218.698358 180.459255 166.266684
+##  [716] 193.596657 172.183164 177.373721 188.809522 180.764665  22.317307  15.382003   3.437885 176.959530 136.512223  50.739946
+##  [727]  44.747769  46.981630  45.141200  58.988399  45.024607  63.463361  54.279827  58.812042  18.601119 101.287465  91.823868
+##  [738] 102.650552 103.264654 102.464397 102.326113  41.492546 160.841422 164.218445 170.301015 103.849203 126.338500 129.922261
+##  [749] 122.587236 120.718604 136.781063  33.464363  33.518140  36.378738 114.682791 118.651173 118.782931 109.017740 111.108731
+##  [760]  93.795803  42.831179  35.926540  38.124541 164.265416 142.723612 140.877989 144.677025 112.840201 114.303436 117.796530
+##  [771] 122.044237 114.948290 124.313903 108.443027 109.511456 119.985773 123.315227 122.423677  94.769551  82.123940  84.384682
+##  [782]  76.119913 204.411257 244.485784 174.506369 194.475190 187.576824 219.241618 183.645520 170.911432 198.236771 177.122156
+##  [793] 181.564891 194.307478 187.107556   6.942381  25.654823 188.575925 140.914886  35.323977  23.914020  24.740560  22.954554
+##  [804]  75.888428  62.552259  79.731237  50.738832  58.155614  24.520786 118.459733  85.529379  94.584042  93.003840  92.999789
+##  [815]  92.828912  52.191595 172.894451 175.328466 178.699841 124.259511 114.206793 117.043094 111.501589 108.727169 152.644482
+##  [826]  15.884071  16.143270  19.414825 105.009557 108.874274 108.892461 100.564082 102.871753  80.646317  29.016717  21.088973
+##  [837]  23.935007 172.100123 150.623739 147.942845 152.257147 125.225080 123.689040 122.792585 140.344062 133.274448 143.807146
+##  [848] 127.831019 129.116781 138.529324 142.159045 141.418952  95.717823  83.841033 104.851824  98.020618 193.818136 235.971588
+##  [859] 172.910544 192.153605 184.243655 215.779715 177.703173 163.616639 190.963245 169.562023 174.693966 186.247541 178.275056
+##  [870]  18.737051 184.535191 138.925018  39.216710  30.064439  31.620790  29.801376  70.151597  56.595621  74.169502  50.567171
+##  [881]  57.179151  20.604436 112.768411  86.670382  96.366737  95.519959  95.245282  95.084623  47.801433 168.708384 171.418563
+##  [892] 175.590062 117.739658 117.436853 120.536078 114.368016 111.893482 147.355589  20.552740  20.723073  23.940959 107.376679
+##  [903] 111.290272 111.346714 102.504082 104.749293  84.106386  32.092436  24.308347  26.988269 169.147431 147.612011 145.172641
+##  [914] 149.343494 120.858841 120.175116 120.569480 134.381034 127.297535 137.532933 121.572330 122.803384 132.500100 136.053707
+##  [925] 135.273216  94.604171  82.410214  98.304595  91.143963 196.670144 238.185162 172.840403 192.342218 184.740028 216.357921
+##  [936] 179.021894 165.349018 192.729750 171.390538 176.307314 188.262664 180.531009 176.192874 137.037872  53.955044  48.185639
+##  [947]  50.355542  48.525718  57.472319  43.474935  62.067580  56.366583  60.478997  19.039807  99.532881  93.984024 104.983203
+##  [958] 105.841536 104.956089 104.821782  41.580905 160.015183 163.559936 170.109685 101.285284 129.071761 132.728396 125.214583
+##  [969] 123.445490 135.244117  36.207850  36.239004  38.998722 117.169036 121.141050 121.285302 111.378079 113.438740  96.688492
+##  [980]  45.996146  39.207933  41.352716 164.178558 142.663354 140.961999 144.666976 112.045807 114.055945 118.276990 119.992693
+##  [991] 112.900891 121.970751 106.145670 107.156985 117.879619 121.132970 120.205821  95.955338  83.263654  81.831468
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 2570 entries ]</code></pre>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="data-load.html#cb313-1" aria-hidden="true" tabindex="-1"></a>aquifer_pair<span class="sc">$</span>from</span></code></pre></div>
+<pre><code>##    [1]  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+##   [43]  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+##   [85]  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2
+##  [127]  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  3
+##  [169]  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3
+##  [211]  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  4  4  4
+##  [253]  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4
+##  [295]  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  5  5  5  5  5  5
+##  [337]  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5
+##  [379]  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  5  6  6  6  6  6  6  6  6  6  6
+##  [421]  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6
+##  [463]  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  6  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7
+##  [505]  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7
+##  [547]  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  7  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8
+##  [589]  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8
+##  [631]  8  8  8  8  8  8  8  8  8  8  8  8  8  8  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9
+##  [673]  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9
+##  [715]  9  9  9  9  9  9 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10
+##  [757] 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 11 11 11
+##  [799] 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11
+##  [841] 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 12 12 12 12 12 12 12 12 12 12 12 12 12
+##  [883] 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12
+##  [925] 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13
+##  [967] 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 2570 entries ]</code></pre>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="data-load.html#cb315-1" aria-hidden="true" tabindex="-1"></a>aquifer_pair<span class="sc">$</span>lags</span></code></pre></div>
+<pre><code>##    [1] 3  3  3  4  3  4  4  4  4  4  4  4  4  3  4  5  5  5  2  2  2  3  3  4  1  4  4  4  4  4  2  3  3  4  2  5  6  5  5  2  5  5 
+##   [43] 5  5  5  5  4  4  5  4  4  4  4  3  3  3  1  2  3  2  2  3  2  2  2  2  2  3  3  2  3  7  8  5  6  6  7  6  6  7  6  6  7  7 
+##   [85] 1  1  5  6  5  5  5  5  5  5  5  4  1  4  5  5  5  4  4  4  3  3  6  4  2  3  3  3  3  4  4  4  3  5  3  4  3  3  4  6  6  6 
+##  [127] 3  3  3  3  2  4  4  5  5  3  2  2  2  3  2  1  5  5  5  5  5  5  5  5  2  2  5  6  5  5  2  3  3  4  3  3  4  3  3  4  4  1 
+##  [169] 4  5  4  4  4  4  4  4  4  4  2  4  4  5  4  3  3  3  3  2  5  4  2  2  3  2  2  3  4  4  4  5  3  3  3  3  4  5  5  5  3  3 
+##  [211] 3  2  2  3  4  4  4  3  3  2  3  3  2  1  4  4  5  4  4  4  5  5  1  1  4  5  5  6  3  4  4  5  4  4  4  4  4  4  4  5  5  5 
+##  [253] 5  5  5  5  5  5  5  2  4  4  5  5  4  4  4  3  3  5  4  2  2  2  2  2  4  4  4  4  5  3  3  3  3  5  5  5  5  2  2  2  2  2 
+##  [295] 3  4  4  4  3  3  3  3  3  3  2  5  5  5  5  5  5  5  5  1  2  5  6  4  6  3  3  3  4  3  3  4  3  3  4  4  1  1  1  2  1  2 
+##  [337] 1  1  7  5  3  2  3  2  2  2  3  2  3  1  4  4  4  4  4  4  2  6  6  7  4  5  5  5  5  5  2  2  2  5  5  5  5  5  4  2  2  2 
+##  [379] 6  6  6  6  4  5  5  5  4  5  4  4  5  5  5  4  3  3  3  8  10 7  8  7  9  7  7  8  7  7  8  7  2  2  2  2  2  2  1  7  6  3 
+##  [421] 3  3  3  2  2  2  3  3  2  4  4  5  5  5  5  2  6  6  7  3  6  6  6  6  5  3  3  3  5  6  6  5  5  5  3  3  3  6  6  6  6  4 
+##  [463] 5  5  4  4  4  4  4  4  4  4  4  4  3  2  9  10 7  8  8  9  8  7  8  8  8  8  8  1  1  1  1  1  1  7  5  2  2  2  2  3  2  3 
+##  [505] 2  2  1  4  4  4  4  4  4  2  6  6  7  4  5  5  5  5  5  2  2  2  4  5  5  4  4  4  2  2  2  6  5  5  6  4  4  5  5  5  5  4 
+##  [547] 4  5  5  5  4  3  4  3  8  9  7  7  7  8  7  6  7  7  7  7  7  1  1  1  1  1  7  6  2  1  2  1  3  3  3  2  3  1  5  4  4  4 
+##  [589] 4  4  2  7  7  7  5  5  5  5  5  6  1  1  1  4  5  5  4  4  3  2  1  1  7  6  6  6  5  5  5  6  5  6  5  5  5  6  6  4  3  4 
+##  [631] 4  8  9  7  8  7  8  7  7  8  7  7  7  7  1  1  1  1  8  6  2  1  1  1  3  3  4  2  3  1  5  4  4  4  4  4  3  7  7  7  5  5 
+##  [673] 5  5  5  6  1  1  1  4  5  5  4  4  4  2  1  1  7  6  6  6  5  5  5  6  6  6  5  5  6  6  6  4  4  4  4  8  9  7  8  7  9  7 
+##  [715] 7  8  7  7  7  7  1  1  1  7  6  2  2  2  2  3  2  3  3  3  1  4  4  4  4  4  4  2  6  7  7  4  5  5  5  5  6  2  2  2  5  5 
+##  [757] 5  5  5  4  2  2  2  7  6  6  6  5  5  5  5  5  5  5  5  5  5  5  4  4  4  3  8  10 7  8  7  9  7  7  8  7  7  8  7  1  1  7 
+##  [799] 6  2  1  1  1  3  3  3  2  3  1  5  4  4  4  4  4  2  7  7  7  5  5  5  5  5  6  1  1  1  4  5  5  4  4  3  2  1  1  7  6  6 
+##  [841] 6  5  5  5  6  5  6  5  5  6  6  6  4  4  4  4  8  9  7  8  7  8  7  7  8  7  7  7  7  1  7  6  2  2  2  2  3  3  3  2  3  1 
+##  [883] 5  4  4  4  4  4  2  7  7  7  5  5  5  5  5  6  1  1  1  4  5  5  4  4  4  2  1  1  7  6  6  6  5  5  5  5  5  6  5  5  5  6 
+##  [925] 5  4  4  4  4  8  9  7  8  7  8  7  7  8  7  7  7  7  7  6  2  2  2  2  3  2  3  3  3  1  4  4  4  4  4  4  2  6  7  7  4  5 
+##  [967] 5  5  5  5  2  2  2  5  5  5  5  5  4  2  2  2  7  6  6  6  5  5  5  5  5  5  4  4  5  5  5  4  4  4 
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 2570 entries ]
+## Levels: 1 2 3 4 5 6 7 8 9 10</code></pre>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="data-load.html#cb317-1" aria-hidden="true" tabindex="-1"></a>aquifer_pair<span class="sc">$</span>to</span></code></pre></div>
+<pre><code>##    [1]  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43
+##   [43] 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85
+##   [85]  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44
+##  [127] 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85  4
+##  [169]  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46
+##  [211] 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85  5  6  7
+##  [253]  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49
+##  [295] 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85  6  7  8  9 10 11
+##  [337] 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53
+##  [379] 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85  7  8  9 10 11 12 13 14 15 16
+##  [421] 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58
+##  [463] 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22
+##  [505] 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64
+##  [547] 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+##  [589] 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+##  [631] 72 73 74 75 76 77 78 79 80 81 82 83 84 85 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37
+##  [673] 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79
+##  [715] 80 81 82 83 84 85 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46
+##  [757] 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 12 13 14
+##  [799] 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56
+##  [841] 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 13 14 15 16 17 18 19 20 21 22 23 24 25
+##  [883] 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67
+##  [925] 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37
+##  [967] 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 2570 entries ]</code></pre>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="data-load.html#cb319-1" aria-hidden="true" tabindex="-1"></a>aquifer.v<span class="ot">&lt;-</span><span class="fu">est.variogram</span>(aquifer_points,aquifer_pair,<span class="st">&#39;resi&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="data-load.html#cb320-1" aria-hidden="true" tabindex="-1"></a>g4<span class="ot">=</span><span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(resi, Este)) <span class="sc">+</span> </span>
+<span id="cb320-2"><a href="data-load.html#cb320-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb320-3"><a href="data-load.html#cb320-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb320-4"><a href="data-load.html#cb320-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Este&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb320-5"><a href="data-load.html#cb320-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;residuales2&quot;</span>)</span>
+<span id="cb320-6"><a href="data-load.html#cb320-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb320-7"><a href="data-load.html#cb320-7" aria-hidden="true" tabindex="-1"></a>g5<span class="ot">=</span><span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(resi, Norte)) <span class="sc">+</span> </span>
+<span id="cb320-8"><a href="data-load.html#cb320-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb320-9"><a href="data-load.html#cb320-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb320-10"><a href="data-load.html#cb320-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Norte&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb320-11"><a href="data-load.html#cb320-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;residuales2&quot;</span>)</span>
+<span id="cb320-12"><a href="data-load.html#cb320-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb320-13"><a href="data-load.html#cb320-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g4,g5)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-185-1.png" width="672" /></p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="data-load.html#cb321-1" aria-hidden="true" tabindex="-1"></a>aquifer_points<span class="ot">=</span><span class="fu">point</span>(aquifer, <span class="at">x=</span><span class="st">&quot;Este&quot;</span>, <span class="at">y=</span><span class="st">&quot;Norte&quot;</span>)</span>
+<span id="cb321-2"><a href="data-load.html#cb321-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fit.trend</span>(aquifer_points,<span class="at">at=</span><span class="st">&quot;Profundidad&quot;</span>, <span class="at">np=</span><span class="dv">2</span>, <span class="at">plot.it=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-186-1.png" width="672" /></p>
+<pre><code>## $beta
+##        x^0 y^0        x^1 y^0        x^2 y^0        x^0 y^1        x^1 y^1        x^0 y^2 
+## 2481.430108574   -8.373707821    0.001416675   -2.043419339    0.026800556   -0.024643707 
+## 
+## $R
+##        x^0 y^0   x^1 y^0    x^2 y^0    x^0 y^1    x^1 y^1   x^0 y^2
+## [1,] -9.219544 -155.6739 -41051.636 -731.67314 -16082.944 -85540.31
+## [2,]  0.000000  595.1832   3500.219   57.75539  38829.771  12491.66
+## [3,]  0.000000    0.0000  39397.313 -117.36878   1909.315 -23722.80
+## [4,]  0.000000    0.0000      0.000  485.98967  14332.040  91118.22
+## [5,]  0.000000    0.0000      0.000    0.00000  25401.055   3240.90
+## [6,]  0.000000    0.0000      0.000    0.00000      0.000  19989.20
+## 
+## $np
+## [1] 2
+## 
+## $x
+##  [1]   42.78275  -27.39691   -1.16289  -18.61823   96.46549  108.56243   88.36356   90.04213   93.17269   97.61099   90.62946
+## [12]   92.55262   99.48996  -24.06744  -26.06285   56.27842   73.03881   80.26679   80.23009   68.83845   76.39921   64.46148
+## [23]   43.39657   39.07769  112.80450   54.25899    6.13202   -3.80469   -2.23054   -2.36177   -2.18890   63.22428  -10.77860
+## [34]  -18.98889  -38.57884   83.14496  -21.80248  -23.56457  -20.11299  -16.62654   29.90748  100.91568  101.29544  103.26625
+## [45]  -14.31073  -18.13447  -18.12151   -9.88796  -12.16336   11.65754   61.69122   69.57896   66.72205  -36.65446  -19.55102
+## [56]  -21.29791  -22.36166   21.14719    7.68461   -8.33227   56.70724   59.00052   68.96893   70.90225   73.00243   59.66237
+## [67]   61.87249   63.70810    5.62706   18.24739   85.68824  105.07646 -101.64278 -145.23654  -73.99313  -94.48182  -88.84983
+## [78] -120.25898  -86.02454  -72.79097 -100.17372  -78.83539  -83.69063  -95.61661  -87.55480
+## 
+## $y
+##  [1] 127.62282  90.78732  84.89600  76.45199  64.58058  82.92325  56.45348  39.25820  33.05852  56.27887  35.08169  41.75238
+## [13]  59.15785 184.76636 114.07479  26.84826  18.88140  12.61593  14.61795 107.77423  95.99380 110.39641  53.61499  61.99805
+## [25]  45.54766 147.81987  48.32772  40.40450  29.91113  33.82002  33.68207  79.49924 175.11346 171.91695 158.52742 159.11559
+## [37]  15.02551   9.41441  22.09269  17.25621 175.12875  22.97808  22.96385  20.34239  31.26545  30.18118  29.53241  38.14483
+## [49]  39.11081  18.73347  32.94906  33.80841  33.93264 150.91457 137.78404 131.82542 137.13680 139.26199 126.83751 107.77691
+## [61] 171.26443 164.54863 177.24820 161.38136 162.98959 170.10544 174.30177 173.91454  79.08730  77.39191 139.81702 132.03181
+## [73]  10.65106  28.02333  87.97270  86.62606  76.70991  80.76485  54.36334  43.09215  42.89881  40.82141  46.50482  35.82183
+## [85]  29.39267
+## 
+## $z
+##  [1] 1464 2553 2158 2455 1756 1702 1805 1797 1714 1466 1729 1638 1736 1476 2200 1999 1680 1806 1682 1306 1722 1437 1828 2118 1725
+## [26] 1606 2648 2560 2544 2386 2400 1757 1402 1364 1735 1376 2729 2766 2736 2432 1024 1611 1548 1591 2540 2352 2528 2575 2468 2646
+## [51] 1739 1674 1868 1865 1777 1579 1771 1408 1527 2003 1386 1089 1384 1030 1092 1161 1415 1231 2300 2238 1038 1332 3510 3490 2594
+## [76] 2650 2533 3571 2811 2728 3136 2553 2798 2691 2946
+## 
+## $residuals
+##  [1] -145.932017  296.391955   20.569629  155.586776  136.944207  210.578982  112.643763   81.535500   12.407325 -165.733666
+## [11]   11.643984  -55.843867  123.038140  130.250727  132.838620   16.473072 -186.973641   -9.864104 -133.020821 -298.072286
+## [21]   98.737035 -175.328351 -174.667016  118.113364  176.632628  200.333264  366.232978  173.604750  128.842139  -15.778284
+## [31]   -1.005758  -17.176812   -5.743382 -109.803640   35.578021  175.509274  109.375693  113.827801  154.658230 -138.758151
+## [41] -234.947039  -41.999962 -102.169175  -45.349545   38.415648 -182.959426   -9.456222  134.544149   14.873572  303.070200
+## [51] -191.631118 -197.446346  -23.989926   92.632496  -47.092725 -308.538280  -72.511843 -213.402614 -260.643390  -17.741523
+## [61]  187.380986 -159.999448  282.152142 -199.908135 -116.838018  -37.190026  262.093246   81.109636  169.467368  176.796541
+## [71] -289.932780   42.387375  216.381585  -51.786437   30.159248  -53.946573 -219.188525  648.160187  -92.004756 -152.583829
+## [81]   49.711612 -386.649271 -141.519561 -407.429504 -129.126052
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;trend.surface&quot;</code></pre>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="data-load.html#cb323-1" aria-hidden="true" tabindex="-1"></a>g6<span class="ot">=</span><span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(resi, Norte)) <span class="sc">+</span> </span>
+<span id="cb323-2"><a href="data-load.html#cb323-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb323-3"><a href="data-load.html#cb323-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb323-4"><a href="data-load.html#cb323-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Norte&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb323-5"><a href="data-load.html#cb323-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;residuales2&quot;</span>)</span>
+<span id="cb323-6"><a href="data-load.html#cb323-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb323-7"><a href="data-load.html#cb323-7" aria-hidden="true" tabindex="-1"></a>g6<span class="ot">=</span><span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(bins, classic)) <span class="sc">+</span> </span>
+<span id="cb323-8"><a href="data-load.html#cb323-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb323-9"><a href="data-load.html#cb323-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb323-10"><a href="data-load.html#cb323-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Rezago espacial, h&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb323-11"><a href="data-load.html#cb323-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Estimador clásico del variograma&quot;</span>)</span>
+<span id="cb323-12"><a href="data-load.html#cb323-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb323-13"><a href="data-load.html#cb323-13" aria-hidden="true" tabindex="-1"></a>g7<span class="ot">=</span><span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(bins, robust)) <span class="sc">+</span> </span>
+<span id="cb323-14"><a href="data-load.html#cb323-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb323-15"><a href="data-load.html#cb323-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb323-16"><a href="data-load.html#cb323-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Rezago espacial, h&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb323-17"><a href="data-load.html#cb323-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Estimador robusto 1 del variograma&quot;</span>)</span>
+<span id="cb323-18"><a href="data-load.html#cb323-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb323-19"><a href="data-load.html#cb323-19" aria-hidden="true" tabindex="-1"></a>g8<span class="ot">=</span><span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(bins, med)) <span class="sc">+</span> </span>
+<span id="cb323-20"><a href="data-load.html#cb323-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb323-21"><a href="data-load.html#cb323-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb323-22"><a href="data-load.html#cb323-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Rezago espacial, h&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb323-23"><a href="data-load.html#cb323-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Estimador robusto 2 del variograma&quot;</span>)</span>
+<span id="cb323-24"><a href="data-load.html#cb323-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb323-25"><a href="data-load.html#cb323-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g6,g7,g8,<span class="at">nrow=</span><span class="dv">1</span>,<span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-187-1.png" width="672" /></p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="data-load.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mfrow=c(1,3))</span></span>
+<span id="cb324-2"><a href="data-load.html#cb324-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquifer.v)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-188-1.png" width="672" /></p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="data-load.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquifer.v<span class="sc">$</span>robust)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-189-1.png" width="672" /></p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="data-load.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquifer.v<span class="sc">$</span>med)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-190-1.png" width="672" /></p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="data-load.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="co">#points(aquifer.v$robust,col=&quot;red&quot;)</span></span>
+<span id="cb327-2"><a href="data-load.html#cb327-2" aria-hidden="true" tabindex="-1"></a><span class="co">#points(aquifer.v$med,&quot;blue&quot;)</span></span>
+<span id="cb327-3"><a href="data-load.html#cb327-3" aria-hidden="true" tabindex="-1"></a>aquifer.vmodExp<span class="ot">&lt;-</span><span class="fu">fit.exponential</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">ce=</span><span class="dv">40000</span>,<span class="at">ae=</span><span class="dv">20</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>)</span></code></pre></div>
+<pre><code>## Initial parameter estimates:  0 40000 20</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-1.png" width="672" /></p>
+<pre><code>## Iteration: 1 
+## Gradient vector:  -4432.441 977.0988 -8.943538 
+## New parameter estimates:  0.000001 40977.1 11.05646 
+## 
+## rse.dif =  3232643827 (rse = 3232643827 )  ;  parm.dist =  977.1397</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-2.png" width="672" /></p>
+<pre><code>## Iteration: 2 
+## Gradient vector:  -26700.7 22493.46 -2.800242 
+## New parameter estimates:  0.000001 63470.56 8.256219 
+## 
+## rse.dif =  -17644208 (rse = 3214999619 )  ;  parm.dist =  22493.46</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-3.png" width="672" /></p>
+<pre><code>## Iteration: 3 
+## Gradient vector:  -11057.27 -15597.73 2.315183 
+## New parameter estimates:  0.000001 47872.83 10.5714 
+## 
+## rse.dif =  -3772568 (rse = 3211227051 )  ;  parm.dist =  15597.73</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-4.png" width="672" /></p>
+<pre><code>## Iteration: 4 
+## Gradient vector:  -27525.12 16431.58 -1.824505 
+## New parameter estimates:  0.000001 64304.41 8.746897 
+## 
+## rse.dif =  3032851 (rse = 3214259902 )  ;  parm.dist =  16431.58</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-5.png" width="672" /></p>
+<pre><code>## Iteration: 5 
+## Gradient vector:  -20442.22 -7053.019 1.144197 
+## New parameter estimates:  0.000001 57251.39 9.891094 
+## 
+## rse.dif =  -2468665 (rse = 3211791237 )  ;  parm.dist =  7053.019</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-6.png" width="672" /></p>
+<pre><code>## Iteration: 6 
+## Gradient vector:  -27557.41 7097.539 -0.7122805 
+## New parameter estimates:  0.000001 64348.93 9.178813 
+## 
+## rse.dif =  1486180 (rse = 3213277417 )  ;  parm.dist =  7097.539</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-7.png" width="672" /></p>
+<pre><code>## Iteration: 7 
+## Gradient vector:  -24787.06 -2758.919 0.3605893 
+## New parameter estimates:  0.000001 61590.01 9.539403 
+## 
+## rse.dif =  -951749.7 (rse = 3212325667 )  ;  parm.dist =  2758.919</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-8.png" width="672" /></p>
+<pre><code>## Iteration: 8 
+## Gradient vector:  -26691.4 1898.737 -0.1885371 
+## New parameter estimates:  0.000001 63488.75 9.350866 
+## 
+## rse.dif =  471370.4 (rse = 3212797038 )  ;  parm.dist =  1898.737</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-9.png" width="672" /></p>
+<pre><code>## Iteration: 9 
+## Gradient vector:  -25850.35 -838.0686 0.09276125 
+## New parameter estimates:  0.000001 62650.68 9.443627 
+## 
+## rse.dif =  -249219.6 (rse = 3212547818 )  ;  parm.dist =  838.0686</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-10.png" width="672" /></p>
+<pre><code>## Iteration: 10 
+## Gradient vector:  -26302.53 450.7265 -0.04631475 
+## New parameter estimates:  0.000001 63101.41 9.397312 
+## 
+## rse.dif =  121873.4 (rse = 3212669692 )  ;  parm.dist =  450.7265</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-11.png" width="672" /></p>
+<pre><code>## Iteration: 11 
+## Gradient vector:  -26086.54 -215.2624 0.02285916 
+## New parameter estimates:  0.000001 62886.14 9.420171 
+## 
+## rse.dif =  -61031.79 (rse = 3212608660 )  ;  parm.dist =  215.2624</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-12.png" width="672" /></p>
+<pre><code>## Iteration: 12 
+## Gradient vector:  -26195.52 108.6221 -0.01133309 
+## New parameter estimates:  0.000001 62994.77 9.408838 
+## 
+## rse.dif =  30077.83 (rse = 3212638738 )  ;  parm.dist =  108.6221</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-13.png" width="672" /></p>
+<pre><code>## Iteration: 13 
+## Gradient vector:  -26142.08 -53.26613 0.005604603 
+## New parameter estimates:  0.000001 62941.5 9.414443 
+## 
+## rse.dif =  -14922.96 (rse = 3212623815 )  ;  parm.dist =  53.26613</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-14.png" width="672" /></p>
+<pre><code>## Iteration: 14 
+## Gradient vector:  -26168.65 26.48517 -0.002774911 
+## New parameter estimates:  0.000001 62967.99 9.411668 
+## 
+## rse.dif =  7377.216 (rse = 3212631192 )  ;  parm.dist =  26.48517</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-15.png" width="672" /></p>
+<pre><code>## Iteration: 15 
+## Gradient vector:  -26155.53 -13.07801 0.001373075 
+## New parameter estimates:  0.000001 62954.91 9.413041 
+## 
+## rse.dif =  -3653.216 (rse = 3212627539 )  ;  parm.dist =  13.07801</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-16.png" width="672" /></p>
+<pre><code>## Iteration: 16 
+## Gradient vector:  -26162.03 6.479831 -0.0006796194 
+## New parameter estimates:  0.000001 62961.39 9.412361 
+## 
+## rse.dif =  1807.514 (rse = 3212629346 )  ;  parm.dist =  6.479831</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-17.png" width="672" /></p>
+<pre><code>## Iteration: 17 
+## Gradient vector:  -26158.82 -3.20516 0.0003363367 
+## New parameter estimates:  0.000001 62958.18 9.412698 
+## 
+## rse.dif =  -894.6895 (rse = 3212628451 )  ;  parm.dist =  3.20516</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-18.png" width="672" /></p>
+<pre><code>## Iteration: 18 
+## Gradient vector:  -26160.41 1.586717 -0.0001664615 
+## New parameter estimates:  0.000001 62959.77 9.412531 
+## 
+## rse.dif =  442.763 (rse = 3212628894 )  ;  parm.dist =  1.586717</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-19.png" width="672" /></p>
+<pre><code>## Iteration: 19 
+## Gradient vector:  -26159.62 -0.7851797 0.00008238305 
+## New parameter estimates:  0.000001 62958.98 9.412613 
+## 
+## rse.dif =  -219.1369 (rse = 3212628675 )  ;  parm.dist =  0.7851797</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-20.png" width="672" /></p>
+<pre><code>## Iteration: 20 
+## Gradient vector:  -26160.01 0.3886224 -0.00004077271 
+## New parameter estimates:  0.000001 62959.37 9.412573 
+## 
+## rse.dif =  108.4519 (rse = 3212628784 )  ;  parm.dist =  0.3886224</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-21.png" width="672" /></p>
+<pre><code>## Iteration: 21 
+## Gradient vector:  -26159.82 -0.192328 0.00002017891 
+## New parameter estimates:  0.000001 62959.18 9.412593 
+## 
+## rse.dif =  -53.67477 (rse = 3212628730 )  ;  parm.dist =  0.192328</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-22.png" width="672" /></p>
+<pre><code>## Iteration: 22 
+## Gradient vector:  -26159.91 0.09518727 -0.000009986825 
+## New parameter estimates:  0.000001 62959.28 9.412583 
+## 
+## rse.dif =  26.56425 (rse = 3212628756 )  ;  parm.dist =  0.09518727</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-23.png" width="672" /></p>
+<pre><code>## Iteration: 23 
+## Gradient vector:  -26159.86 -0.04710907 0.00000494261 
+## New parameter estimates:  0.000001 62959.23 9.412588 
+## 
+## rse.dif =  -13.14703 (rse = 3212628743 )  ;  parm.dist =  0.04710907</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-24.png" width="672" /></p>
+<pre><code>## Iteration: 24 
+## Gradient vector:  -26159.89 0.023315 -0.000002446165 
+## New parameter estimates:  0.000001 62959.25 9.412585 
+## 
+## rse.dif =  6.506635 (rse = 3212628750 )  ;  parm.dist =  0.023315</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-25.png" width="672" /></p>
+<pre><code>## Iteration: 25 
+## Gradient vector:  -26159.88 -0.01153889 0.00000121064 
+## New parameter estimates:  0.000001 62959.24 9.412587 
+## 
+## rse.dif =  -3.220221 (rse = 3212628747 )  ;  parm.dist =  0.01153889</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-26.png" width="672" /></p>
+<pre><code>## Iteration: 26 
+## Gradient vector:  -26159.88 0.00571076 -0.0000005991624 
+## New parameter estimates:  0.000001 62959.25 9.412586 
+## 
+## rse.dif =  1.59373 (rse = 3212628748 )  ;  parm.dist =  0.00571076</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-27.png" width="672" /></p>
+<pre><code>## Iteration: 27 
+## Gradient vector:  -26159.88 -0.002826338 0.0000002965343 
+## New parameter estimates:  0.000001 62959.24 9.412586 
+## 
+## rse.dif =  -0.7887597 (rse = 3212628747 )  ;  parm.dist =  0.002826338</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-28.png" width="672" /></p>
+<pre><code>## Iteration: 28 
+## Gradient vector:  -26159.88 0.001398796 -0.0000001467592 
+## New parameter estimates:  0.000001 62959.24 9.412586 
+## 
+## rse.dif =  0.390367 (rse = 3212628748 )  ;  parm.dist =  0.001398796</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-29.png" width="672" /></p>
+<pre><code>## Iteration: 29 
+## Gradient vector:  -26159.88 -0.0006922856 0.00000007263334 
+## New parameter estimates:  0.000001 62959.24 9.412586 
+## 
+## rse.dif =  -0.1931996 (rse = 3212628748 )  ;  parm.dist =  0.0006922856</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-30.png" width="672" /></p>
+<pre><code>## Iteration: 30 
+## Gradient vector:  -26159.88 0.0003426254 -0.00000003594764 
+## New parameter estimates:  0.000001 62959.24 9.412586 
+## 
+## rse.dif =  0.09561968 (rse = 3212628748 )  ;  parm.dist =  0.0003426254</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-191-31.png" width="672" /></p>
+<pre><code>## Convergence not achieved!</code></pre>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="data-load.html#cb360-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodGau<span class="ot">&lt;-</span><span class="fu">fit.gaussian</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">cg=</span><span class="dv">50000</span>,<span class="at">ag=</span><span class="dv">50</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>)</span></code></pre></div>
+<pre><code>## Initial parameter estimates:  0 50000 50</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-1.png" width="672" /></p>
+<pre><code>## Iteration: 1 
+## Gradient vector:  19162.34 -33401.14 -11.41191 
+## New parameter estimates:  19162.34 16598.86 38.58809 
+## 
+## rse.dif =  3299750048 (rse = 3299750048 )  ;  parm.dist =  38507.55</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-2.png" width="672" /></p>
+<pre><code>## Iteration: 2 
+## Gradient vector:  -1294.927 2010.017 -18.77473 
+## New parameter estimates:  17867.41 18608.87 19.81336 
+## 
+## rse.dif =  -66430135 (rse = 3233319913 )  ;  parm.dist =  2391.1</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-3.png" width="672" /></p>
+<pre><code>## Iteration: 3 
+## Gradient vector:  3201.043 -2835.169 9.216254 
+## New parameter estimates:  21068.46 15773.71 29.02961 
+## 
+## rse.dif =  -24694350 (rse = 3208625564 )  ;  parm.dist =  4276.09</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-4.png" width="672" /></p>
+<pre><code>## Iteration: 4 
+## Gradient vector:  -4345.272 4292.413 -6.361973 
+## New parameter estimates:  16723.18 20066.12 22.66764 
+## 
+## rse.dif =  4004881 (rse = 3212630445 )  ;  parm.dist =  6107.884</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-5.png" width="672" /></p>
+<pre><code>## Iteration: 5 
+## Gradient vector:  53.88685 -4.270081 2.074271 
+## New parameter estimates:  16777.07 20061.85 24.74191 
+## 
+## rse.dif =  -3703977 (rse = 3208926468 )  ;  parm.dist =  54.09555</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-6.png" width="672" /></p>
+<pre><code>## Iteration: 6 
+## Gradient vector:  -391.4471 384.4526 -0.5571294 
+## New parameter estimates:  16385.62 20446.3 24.18478 
+## 
+## rse.dif =  588163 (rse = 3209514631 )  ;  parm.dist =  548.6666</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-7.png" width="672" /></p>
+<pre><code>## Iteration: 7 
+## Gradient vector:  29.55911 -27.0943 0.07968918 
+## New parameter estimates:  16415.18 20419.21 24.26447 
+## 
+## rse.dif =  -201438.9 (rse = 3209313192 )  ;  parm.dist =  40.09799</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-8.png" width="672" /></p>
+<pre><code>## Iteration: 8 
+## Gradient vector:  -6.581211 6.259206 -0.01207028 
+## New parameter estimates:  16408.6 20425.47 24.2524 
+## 
+## rse.dif =  26607.8 (rse = 3209339800 )  ;  parm.dist =  9.082408</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-9.png" width="672" /></p>
+<pre><code>## Iteration: 9 
+## Gradient vector:  0.9423146 -0.8928955 0.001794561 
+## New parameter estimates:  16409.54 20424.57 24.25419 
+## 
+## rse.dif =  -4077.43 (rse = 3209335722 )  ;  parm.dist =  1.298161</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-10.png" width="672" /></p>
+<pre><code>## Iteration: 10 
+## Gradient vector:  -0.1413215 0.1339887 -0.0002673761 
+## New parameter estimates:  16409.4 20424.71 24.25393 
+## 
+## rse.dif =  605.1536 (rse = 3209336327 )  ;  parm.dist =  0.194743</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-11.png" width="672" /></p>
+<pre><code>## Iteration: 11 
+## Gradient vector:  0.02102884 -0.01993597 0.00003982407 
+## New parameter estimates:  16409.42 20424.69 24.25397 
+## 
+## rse.dif =  -90.18701 (rse = 3209336237 )  ;  parm.dist =  0.02897682</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-12.png" width="672" /></p>
+<pre><code>## Iteration: 12 
+## Gradient vector:  -0.003132718 0.00296995 -0.000005931842 
+## New parameter estimates:  16409.42 20424.69 24.25396 
+## 
+## rse.dif =  13.43229 (rse = 3209336251 )  ;  parm.dist =  0.004316777</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-13.png" width="672" /></p>
+<pre><code>## Iteration: 13 
+## Gradient vector:  0.0004666088 -0.0004423641 0.0000008835486 
+## New parameter estimates:  16409.42 20424.69 24.25396 
+## 
+## rse.dif =  -2.000768 (rse = 3209336249 )  ;  parm.dist =  0.0006429701</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-14.png" width="672" /></p>
+<pre><code>## Iteration: 14 
+## Gradient vector:  -0.00006950172 0.00006589047 -0.0000001316048 
+## New parameter estimates:  16409.42 20424.69 24.25396 
+## 
+## rse.dif =  0.2980151 (rse = 3209336249 )  ;  parm.dist =  0.00009577088</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-15.png" width="672" /></p>
+<pre><code>## Iteration: 15 
+## Gradient vector:  0.00001035228 -0.00000981439 0.00000001960255 
+## New parameter estimates:  16409.42 20424.69 24.25396 
+## 
+## rse.dif =  -0.04438925 (rse = 3209336249 )  ;  parm.dist =  0.00001426508</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-16.png" width="672" /></p>
+<pre><code>## Iteration: 16 
+## Gradient vector:  -0.000001541975 0.000001461856 -0.000000002919804 
+## New parameter estimates:  16409.42 20424.69 24.25396 
+## 
+## rse.dif =  0.006612301 (rse = 3209336249 )  ;  parm.dist =  0.000002124787</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-17.png" width="672" /></p>
+<pre><code>## Iteration: 17 
+## Gradient vector:  0.0000002296693 -0.000000217734 0.0000000004348922 
+## New parameter estimates:  16409.42 20424.69 24.25396 
+## 
+## rse.dif =  -0.0009851456 (rse = 3209336249 )  ;  parm.dist =  0.000000316474</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-18.png" width="672" /></p>
+<pre><code>## Iteration: 18 
+## Gradient vector:  -0.00000003420397 0.00000003242585 -0.00000000006476836 
+## New parameter estimates:  16409.42 20424.69 24.25396 
+## 
+## rse.dif =  0.000146389 (rse = 3209336249 )  ;  parm.dist =  0.00000004713106</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-19.png" width="672" /></p>
+<pre><code>## Iteration: 19 
+## Gradient vector:  0.000000005093371 -0.00000000482871 0.00000000000964091 
+## New parameter estimates:  16409.42 20424.69 24.25396 
+## 
+## rse.dif =  -0.00002098083 (rse = 3209336249 )  ;  parm.dist =  0.000000007017562</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-20.png" width="672" /></p>
+<pre><code>## Iteration: 20 
+## Gradient vector:  -0.0000000007373076 0.0000000007001616 -0.000000000001395163 
+## New parameter estimates:  16409.42 20424.69 24.25396 
+## 
+## rse.dif =  0.000002384186 (rse = 3209336249 )  ;  parm.dist =  0.000000001016508</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-21.png" width="672" /></p>
+<pre><code>## Iteration: 21 
+## Gradient vector:  0.00000000009237102 -0.00000000008310645 0.0000000000001693244 
+## New parameter estimates:  16409.42 20424.69 24.25396 
+## 
+## rse.dif =  -0.0000004768372 (rse = 3209336249 )  ;  parm.dist =  0.0000000001235844 
+## 
+## Convergence achieved by sums of squares.</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-192-22.png" width="672" /></p>
+<pre><code>## Final parameter estimates:  16409.42 20424.69 24.25396</code></pre>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="data-load.html#cb384-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodWave<span class="ot">&lt;-</span><span class="fu">fit.wave</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">cw=</span><span class="dv">40000</span>,<span class="at">aw=</span><span class="dv">10</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>,<span class="at">weighted=</span>T)</span></code></pre></div>
+<pre><code>## Initial parameter estimates:  0 40000 10</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-1.png" width="672" /></p>
+<pre><code>## Iteration: 1 
+## Gradient vector:  18650.32 -21981.27 -0.7942028 
+## New parameter estimates:  18650.32 18018.73 9.205797 
+## 
+## rse.dif =  3409704989 (rse = 3409704989 )  ;  parm.dist =  28827.26</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-2.png" width="672" /></p>
+<pre><code>## Iteration: 2 
+## Gradient vector:  812.9227 -1109.399 -1.187299 
+## New parameter estimates:  19463.25 16909.33 8.018498 
+## 
+## rse.dif =  -289093760 (rse = 3120611230 )  ;  parm.dist =  1375.358</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-3.png" width="672" /></p>
+<pre><code>## Iteration: 3 
+## Gradient vector:  -6990.158 6973.566 0.9858099 
+## New parameter estimates:  12473.09 23882.9 9.004308 
+## 
+## rse.dif =  24044562 (rse = 3144655792 )  ;  parm.dist =  9873.851</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-4.png" width="672" /></p>
+<pre><code>## Iteration: 4 
+## Gradient vector:  7025.438 -6960.473 -1.260353 
+## New parameter estimates:  19498.53 16922.43 7.743955 
+## 
+## rse.dif =  -56767551 (rse = 3087888241 )  ;  parm.dist =  9889.639</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-5.png" width="672" /></p>
+<pre><code>## Iteration: 5 
+## Gradient vector:  -9210.154 9213.61 1.066674 
+## New parameter estimates:  10288.37 26136.04 8.810629 
+## 
+## rse.dif =  175986924 (rse = 3263875165 )  ;  parm.dist =  13027.57</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-6.png" width="672" /></p>
+<pre><code>## Iteration: 6 
+## Gradient vector:  11994.7 -11983.26 -2.255679 
+## New parameter estimates:  22283.07 14152.77 6.55495 
+## 
+## rse.dif =  -196728543 (rse = 3067146622 )  ;  parm.dist =  16954.98</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-7.png" width="672" /></p>
+<pre><code>## Iteration: 7 
+## Gradient vector:  -14060.45 14195.04 -1.578095 
+## New parameter estimates:  8222.625 28347.81 4.976855 
+## 
+## rse.dif =  147278852 (rse = 3214425474 )  ;  parm.dist =  19979.87</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-8.png" width="672" /></p>
+<pre><code>## Iteration: 8 
+## Gradient vector:  -15826.64 16212.91 0.3854677 
+## New parameter estimates:  0.000001 44560.72 5.362323 
+## 
+## rse.dif =  -46983778 (rse = 3167441696 )  ;  parm.dist =  18178.84</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-9.png" width="672" /></p>
+<pre><code>## Iteration: 9 
+## Gradient vector:  13145.08 -21444.98 -0.8756698 
+## New parameter estimates:  13145.08 23115.75 4.486653 
+## 
+## rse.dif =  -757940879 (rse = 2409500817 )  ;  parm.dist =  25153.13</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-10.png" width="672" /></p>
+<pre><code>## Iteration: 10 
+## Gradient vector:  -9434763 9682459 25.73116 
+## New parameter estimates:  0.000001 9705575 30.21781 
+## 
+## rse.dif =  1636307005 (rse = 4045807822 )  ;  parm.dist =  9682468</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-11.png" width="672" /></p>
+<pre><code>## Iteration: 11 
+## Gradient vector:  20962.2 -9688482 0.02156687 
+## New parameter estimates:  20962.2 17093.21 30.23938 
+## 
+## rse.dif =  83628063 (rse = 4129435885 )  ;  parm.dist =  9688504</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-12.png" width="672" /></p>
+<pre><code>## Iteration: 12 
+## Gradient vector:  7173.136 -8587.116 1.22582 
+## New parameter estimates:  28135.34 8506.099 31.4652 
+## 
+## rse.dif =  -628497359 (rse = 3500938526 )  ;  parm.dist =  11188.94</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-13.png" width="672" /></p>
+<pre><code>## Iteration: 13 
+## Gradient vector:  2974.651 -2890.861 -4.19572 
+## New parameter estimates:  31109.99 5615.237 27.26947 
+## 
+## rse.dif =  -192443198 (rse = 3308495328 )  ;  parm.dist =  4147.969</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-14.png" width="672" /></p>
+<pre><code>## Iteration: 14 
+## Gradient vector:  -2399.351 1443.698 15.69929 
+## New parameter estimates:  28710.64 7058.936 42.96876 
+## 
+## rse.dif =  147479203 (rse = 3455974531 )  ;  parm.dist =  2800.25</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-15.png" width="672" /></p>
+<pre><code>## Iteration: 15 
+## Gradient vector:  4786.661 2165.107 -43.14322 
+## New parameter estimates:  33497.3 9224.042 0.000001 
+## 
+## rse.dif =  -686128326 (rse = 2769846205 )  ;  parm.dist =  5253.728</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-16.png" width="672" /></p>
+<pre><code>## Iteration: 16 
+## Gradient vector:  -7188.308 -0.0000005926894 0 
+## New parameter estimates:  26308.99 9224.042 0.000001 
+## 
+## rse.dif =  686457466 (rse = 3456303671 )  ;  parm.dist =  7188.308</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-17.png" width="672" /></p>
+<pre><code>## Iteration: 17 
+## Gradient vector:  -0.000005339326 -0.0000005926894 0 
+## New parameter estimates:  26308.99 9224.042 0.000001 
+## 
+## rse.dif =  0.4889345 (rse = 3456303672 )  ;  parm.dist =  0.000005372122</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-18.png" width="672" /></p>
+<pre><code>## Iteration: 18 
+## Gradient vector:  0.0000005926903 -0.0000005926894 0 
+## New parameter estimates:  26308.99 9224.042 0.000001 
+## 
+## rse.dif =  0.000001430511 (rse = 3456303672 )  ;  parm.dist =  0.0000008381882</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-19.png" width="672" /></p>
+<pre><code>## Iteration: 19 
+## Gradient vector:  0.0000005926903 -0.0000005926894 0 
+## New parameter estimates:  26308.99 9224.042 0.000001 
+## 
+## rse.dif =  0 (rse = 3456303672 )  ;  parm.dist =  0.0000008381882 
+## 
+## Convergence achieved by sums of squares.</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-193-20.png" width="672" /></p>
+<pre><code>## Final parameter estimates:  26308.99 9224.042 0.000001</code></pre>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="data-load.html#cb406-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">65000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="dv">14</span><span class="sc">/</span>x)<span class="sc">*</span><span class="fu">sin</span>(x<span class="sc">/</span><span class="dv">14</span>)),<span class="dv">0</span>,<span class="dv">300</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">200000</span>))</span>
+<span id="cb406-2"><a href="data-load.html#cb406-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,<span class="at">col=</span><span class="dv">3</span>)</span>
+<span id="cb406-3"><a href="data-load.html#cb406-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,aquifer.v<span class="sc">$</span>n,<span class="at">col=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-194-1.png" width="672" /></p>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="data-load.html#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">200000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span>x<span class="sc">/</span><span class="dv">170</span>)),<span class="dv">0</span>,<span class="dv">300</span>)</span>
+<span id="cb407-2"><a href="data-load.html#cb407-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,<span class="at">col=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-195-1.png" width="672" /></p>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="data-load.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">65000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="dv">14</span><span class="sc">/</span>x)<span class="sc">*</span><span class="fu">sin</span>(x<span class="sc">/</span><span class="dv">14</span>)),<span class="dv">0</span>,<span class="dv">300</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">200000</span>))</span>
+<span id="cb408-2"><a href="data-load.html#cb408-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,<span class="at">col=</span><span class="dv">3</span>)</span>
+<span id="cb408-3"><a href="data-load.html#cb408-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,aquifer.v<span class="sc">$</span>n,<span class="at">col=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-196-1.png" width="672" /></p>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="data-load.html#cb409-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodExp<span class="ot">&lt;-</span><span class="fu">fit.exponential</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">ce=</span><span class="dv">200000</span>,<span class="at">ae=</span><span class="dv">170</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>,<span class="at">weighted=</span>T)</span></code></pre></div>
+<pre><code>## Initial parameter estimates:  0 200000 170</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-197-1.png" width="672" /></p>
+<pre><code>## Iteration: 1 
+## Gradient vector:  16365.66 -238859.4 -103.7436 
+## New parameter estimates:  16365.66 0.000001 66.25643 
+## 
+## rse.dif =  3826411368 (rse = 3826411368 )  ;  parm.dist =  200668.5</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-197-2.png" width="672" /></p>
+<pre><code>## Iteration: 2 
+## Gradient vector:  7737.246 16547.95 166070861252 
+## New parameter estimates:  24102.91 16547.95 166070861318 
+## 
+## rse.dif =  -767474321 (rse = 3058937047 )  ;  parm.dist =  166070861252</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-197-3.png" width="672" /></p>
+<pre><code>## Iteration: 3 
+## Gradient vector:  3355.03 12424786768746 0 
+## New parameter estimates:  27457.94 12424786785294 166070861318 
+## 
+## rse.dif =  -120011141 (rse = 2938925906 )  ;  parm.dist =  12424786768746</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-197-4.png" width="672" /></p>
+<pre><code>## Iteration: 4 
+## Gradient vector:  423.3165 -663474885968 0 
+## New parameter estimates:  27881.25 11761311899326 166070861318 
+## 
+## rse.dif =  11801483 (rse = 2950727388 )  ;  parm.dist =  663474885968</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-197-5.png" width="672" /></p>
+<pre><code>## Iteration: 5 
+## Gradient vector:  3.873181 -6320523090 0 
+## New parameter estimates:  27885.12 11754991376237 166070861318 
+## 
+## rse.dif =  128956.4 (rse = 2950856345 )  ;  parm.dist =  6320523090</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-197-6.png" width="672" /></p>
+<pre><code>## Iteration: 6 
+## Gradient vector:  0.02266712 -36921321 0 
+## New parameter estimates:  27885.15 11754954454916 166070861318 
+## 
+## rse.dif =  752.3639 (rse = 2950857097 )  ;  parm.dist =  36921321</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-197-7.png" width="672" /></p>
+<pre><code>## Iteration: 7 
+## Gradient vector:  0.0001316946 -214507.3 0 
+## New parameter estimates:  27885.15 11754954240408 166070861318 
+## 
+## rse.dif =  4.371066 (rse = 2950857102 )  ;  parm.dist =  214507.3</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-197-8.png" width="672" /></p>
+<pre><code>## Iteration: 8 
+## Gradient vector:  0.0000007651031 -1246.215 0 
+## New parameter estimates:  27885.15 11754954239162 166070861318 
+## 
+## rse.dif =  0.02539492 (rse = 2950857102 )  ;  parm.dist =  1246.215</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-197-9.png" width="672" /></p>
+<pre><code>## Iteration: 9 
+## Gradient vector:  0.000000004444268 -7.241979 0 
+## New parameter estimates:  27885.15 11754954239155 166070861318 
+## 
+## rse.dif =  0.0001473427 (rse = 2950857102 )  ;  parm.dist =  7.242188</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-197-10.png" width="672" /></p>
+<pre><code>## Iteration: 10 
+## Gradient vector:  0.00000000001914536 -0.03484448 0 
+## New parameter estimates:  27885.15 11754954239155 166070861318 
+## 
+## rse.dif =  0.0000009536743 (rse = 2950857102 )  ;  parm.dist =  0.03515625 
+## 
+## Convergence achieved by sums of squares.</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-197-11.png" width="672" /></p>
+<pre><code>## Final parameter estimates:  27885.15 11754954239155 166070861318</code></pre>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="data-load.html#cb422-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodwave<span class="ot">&lt;-</span><span class="fu">fit.wave</span>(aquifer.v,<span class="at">c0=</span><span class="dv">4000</span>,<span class="at">cw=</span><span class="dv">30000</span>,<span class="at">aw=</span><span class="dv">15</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-198-1.png" width="672" /></p>
+<pre><code>## Convergence not achieved!</code></pre>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="data-load.html#cb424-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodExp_0<span class="ot">&lt;-</span><span class="fu">fit.exponential</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">ce=</span><span class="dv">200000</span>,<span class="at">ae=</span><span class="dv">170</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-199-1.png" width="672" /></p>
+<pre><code>## Convergence not achieved!</code></pre>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="data-load.html#cb426-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodwave_0<span class="ot">&lt;-</span><span class="fu">fit.wave</span>(aquifer.v,<span class="at">c0=</span><span class="dv">4000</span>,<span class="at">cw=</span><span class="dv">30000</span>,<span class="at">aw=</span><span class="dv">15</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-200-1.png" width="672" /></p>
+<pre><code>## Convergence not achieved!</code></pre>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="data-load.html#cb428-1" aria-hidden="true" tabindex="-1"></a>aquifer.spherical<span class="ot">&lt;-</span><span class="fu">fit.spherical</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">cs=</span><span class="dv">35000</span>,<span class="at">as=</span><span class="dv">70</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-201-1.png" width="672" /></p>
+<pre><code>## Convergence not achieved!</code></pre>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="data-load.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(bins, classic)) <span class="sc">+</span> </span>
+<span id="cb430-2"><a href="data-load.html#cb430-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb430-3"><a href="data-load.html#cb430-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb430-4"><a href="data-load.html#cb430-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Rezago espacial, h&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb430-5"><a href="data-load.html#cb430-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Estimador clásico del variograma&quot;</span>)<span class="sc">+</span></span>
+<span id="cb430-6"><a href="data-load.html#cb430-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">300</span>) <span class="sc">+</span></span>
+<span id="cb430-7"><a href="data-load.html#cb430-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;Exponencial&quot;</span>),</span>
+<span id="cb430-8"><a href="data-load.html#cb430-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span><span class="sc">~</span><span class="dv">4000</span><span class="sc">+</span><span class="dv">150000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span>.x<span class="sc">/</span><span class="dv">100</span>)) </span>
+<span id="cb430-9"><a href="data-load.html#cb430-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb430-10"><a href="data-load.html#cb430-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;Seno cardinal&quot;</span>),</span>
+<span id="cb430-11"><a href="data-load.html#cb430-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span><span class="sc">~</span><span class="dv">4000</span><span class="sc">+</span><span class="dv">30000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>((<span class="dv">15</span><span class="sc">/</span>.x)<span class="sc">*</span><span class="fu">sin</span>(.x<span class="sc">/</span><span class="dv">15</span>)))             </span>
+<span id="cb430-12"><a href="data-load.html#cb430-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Rezago espacial&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Modelos teóricos de semivariogramas&quot;</span>) </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-202-1.png" width="672" /></p>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="data-load.html#cb431-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer <span class="ot">&lt;-</span> <span class="fu">point</span>(<span class="fu">data.frame</span>(<span class="fu">list</span>(<span class="at">x=</span><span class="dv">10</span>,<span class="at">y=</span><span class="dv">80</span>)))</span>
+<span id="cb431-2"><a href="data-load.html#cb431-2" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer <span class="ot">&lt;-</span> <span class="fu">krige</span>(Kriging_aquifer, aquifer_points, <span class="st">&#39;resi&#39;</span>, aquifer.vmodExp_0)</span></code></pre></div>
+<pre><code>## 
+## Using all points.
+##   Preparing the kriging system matrix...
+##   Inverting the matrix...
+##   Predicting.</code></pre>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="data-load.html#cb433-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer</span></code></pre></div>
+<pre><code>## 
+## Point object: x 
+## 
+##    Locations: 1
+## 
+##    Attributes:
+##       x
+##       y
+##       do
+##       zhat
+##       sigma2hat</code></pre>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="data-load.html#cb435-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer<span class="sc">$</span>sigma2hat</span></code></pre></div>
+<pre><code>## [1] 7010.452</code></pre>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="data-load.html#cb437-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer <span class="ot">&lt;-</span> <span class="fu">point</span>(<span class="fu">data.frame</span>(<span class="fu">list</span>(<span class="at">x=</span><span class="dv">10</span>,<span class="at">y=</span><span class="dv">80</span>)))</span>
+<span id="cb437-2"><a href="data-load.html#cb437-2" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer <span class="ot">&lt;-</span> <span class="fu">krige</span>(Kriging_aquifer, aquifer_points, <span class="st">&#39;resi&#39;</span>, aquifer.vmodwave_0)</span></code></pre></div>
+<pre><code>## 
+## Using all points.
+##   Preparing the kriging system matrix...
+##   Inverting the matrix...
+##   Predicting.</code></pre>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="data-load.html#cb439-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer</span></code></pre></div>
+<pre><code>## 
+## Point object: x 
+## 
+##    Locations: 1
+## 
+##    Attributes:
+##       x
+##       y
+##       do
+##       zhat
+##       sigma2hat</code></pre>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="data-load.html#cb441-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer<span class="sc">$</span>zhat</span></code></pre></div>
+<pre><code>## [1] 196.2781</code></pre>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="data-load.html#cb443-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer<span class="sc">$</span>sigma2hat</span></code></pre></div>
+<pre><code>## [1] 5169.927</code></pre>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="data-load.html#cb445-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="fu">min</span>(aquifer<span class="sc">$</span>Este),<span class="fu">max</span>(aquifer<span class="sc">$</span>Este),<span class="at">by=</span><span class="dv">20</span>),<span class="at">y=</span><span class="fu">seq</span>(<span class="fu">min</span>(aquifer<span class="sc">$</span>Norte),<span class="fu">max</span>(aquifer<span class="sc">$</span>Norte),<span class="at">by=</span><span class="dv">10</span>))</span>
+<span id="cb445-2"><a href="data-load.html#cb445-2" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>xr <span class="ot">&lt;-</span> <span class="fu">range</span>(grid<span class="sc">$</span>x)</span>
+<span id="cb445-3"><a href="data-load.html#cb445-3" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>xs <span class="ot">&lt;-</span> grid<span class="sc">$</span>xr[<span class="dv">2</span>] <span class="sc">-</span> grid<span class="sc">$</span>xr[<span class="dv">1</span>]</span>
+<span id="cb445-4"><a href="data-load.html#cb445-4" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>yr <span class="ot">&lt;-</span> <span class="fu">range</span>(grid<span class="sc">$</span>y)</span>
+<span id="cb445-5"><a href="data-load.html#cb445-5" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>ys <span class="ot">&lt;-</span> grid<span class="sc">$</span>yr[<span class="dv">2</span>] <span class="sc">-</span> grid<span class="sc">$</span>yr[<span class="dv">1</span>]</span>
+<span id="cb445-6"><a href="data-load.html#cb445-6" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>max <span class="ot">&lt;-</span> <span class="fu">max</span>(grid<span class="sc">$</span>xs, grid<span class="sc">$</span>ys)</span>
+<span id="cb445-7"><a href="data-load.html#cb445-7" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>xy <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="fu">matrix</span>(grid<span class="sc">$</span>x, <span class="fu">length</span>(grid<span class="sc">$</span>x), <span class="fu">length</span>(grid<span class="sc">$</span>y))),</span>
+<span id="cb445-8"><a href="data-load.html#cb445-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">matrix</span>(grid<span class="sc">$</span>y, <span class="fu">length</span>(grid<span class="sc">$</span>x), <span class="fu">length</span>(grid<span class="sc">$</span>y), <span class="at">byrow=</span><span class="cn">TRUE</span>))))</span>
+<span id="cb445-9"><a href="data-load.html#cb445-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(grid<span class="sc">$</span>xy) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>)</span>
+<span id="cb445-10"><a href="data-load.html#cb445-10" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>point <span class="ot">&lt;-</span> <span class="fu">point</span>(grid<span class="sc">$</span>xy)</span>
+<span id="cb445-11"><a href="data-load.html#cb445-11" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>krige <span class="ot">&lt;-</span> <span class="fu">krige</span>(grid<span class="sc">$</span>point,aquifer_points,<span class="st">&#39;resi&#39;</span>,aquifer.vmodwave_0,<span class="at">maxdist=</span><span class="dv">180</span>,<span class="at">extrap=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## 
+## Using points within 180 units of prediction points.
+##   Predicting..........................................................................................................................................................................................................................................</code></pre>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="data-load.html#cb447-1" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb447-2"><a href="data-load.html#cb447-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty=</span><span class="st">&quot;s&quot;</span>)</span>
+<span id="cb447-3"><a href="data-load.html#cb447-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid<span class="sc">$</span>xy, <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">xlim=</span><span class="fu">c</span>(grid<span class="sc">$</span>xr[<span class="dv">1</span>], grid<span class="sc">$</span>xr[<span class="dv">1</span>]<span class="sc">+</span>grid<span class="sc">$</span>max),<span class="at">ylim=</span><span class="fu">c</span>(grid<span class="sc">$</span>yr[<span class="dv">1</span>], grid<span class="sc">$</span>yr[<span class="dv">1</span>]<span class="sc">+</span>grid<span class="sc">$</span>max))</span>
+<span id="cb447-4"><a href="data-load.html#cb447-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(grid<span class="sc">$</span>x,grid<span class="sc">$</span>y,<span class="fu">matrix</span>(grid<span class="sc">$</span>krige<span class="sc">$</span>zhat,<span class="fu">length</span>(grid<span class="sc">$</span>x),<span class="fu">length</span>(grid<span class="sc">$</span>y)),<span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb447-5"><a href="data-load.html#cb447-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(grid<span class="sc">$</span>x,grid<span class="sc">$</span>y,<span class="fu">matrix</span>(grid<span class="sc">$</span>krige<span class="sc">$</span>zhat,<span class="fu">length</span>(grid<span class="sc">$</span>x),<span class="fu">length</span>(grid<span class="sc">$</span>y)),<span class="at">add=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-211-1.png" width="672" /></p>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="data-load.html#cb448-1" aria-hidden="true" tabindex="-1"></a><span class="fu">x11</span>()</span>
+<span id="cb448-2"><a href="data-load.html#cb448-2" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb448-3"><a href="data-load.html#cb448-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty=</span><span class="st">&quot;s&quot;</span>)</span>
+<span id="cb448-4"><a href="data-load.html#cb448-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid<span class="sc">$</span>xy, <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">xlim=</span><span class="fu">c</span>(grid<span class="sc">$</span>xr[<span class="dv">1</span>], grid<span class="sc">$</span>xr[<span class="dv">1</span>]<span class="sc">+</span>grid<span class="sc">$</span>max),<span class="at">ylim=</span><span class="fu">c</span>(grid<span class="sc">$</span>yr[<span class="dv">1</span>], grid<span class="sc">$</span>yr[<span class="dv">1</span>]<span class="sc">+</span>grid<span class="sc">$</span>max))</span>
+<span id="cb448-5"><a href="data-load.html#cb448-5" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(grid<span class="sc">$</span>x,grid<span class="sc">$</span>y,<span class="fu">matrix</span>(grid<span class="sc">$</span>krige<span class="sc">$</span>sigma2hat,<span class="fu">length</span>(grid<span class="sc">$</span>x),<span class="fu">length</span>(grid<span class="sc">$</span>y)), <span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb448-6"><a href="data-load.html#cb448-6" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(grid<span class="sc">$</span>x,grid<span class="sc">$</span>y,<span class="fu">matrix</span>(grid<span class="sc">$</span>krige<span class="sc">$</span>sigma2hat,<span class="fu">length</span>(grid<span class="sc">$</span>x),<span class="fu">length</span>(grid<span class="sc">$</span>y)),<span class="at">add=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-212-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introducción-proceso-espacial-bivariado.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/jocastrocUnal/Cuadernos/edit/master/07-GeoestadisticaSGEOSTAT.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/jocastrocUnal/Cuadernos/blob/master/07-GeoestadisticaSGEOSTAT.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
