@@ -38,6 +38,7 @@ Colombia = readOGR(dsn = "Trabajo Grado/Geodatabase Colombia", layer = "departam
 ```
 
 ### Cruce de información y arreglo de coordenadas
+# Pre-procesamiento de datos
 
 ```{r}
 #Cruce de información con el shape cargado
