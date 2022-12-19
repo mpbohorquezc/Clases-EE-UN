@@ -1,0 +1,1954 @@
+--- 
+title: "Cuaderno EE"
+author: '....'
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+---
+
+# Simulación Proceso Espacio Temporal
+
+## Funciones
+
+```{r}
+##Funciones de covarianza espacio temporal
+exp_esp_temp=function(h,u,p){((p[1])^2)*exp(-h/p[2]-u/p[3])}
+gauss_esp_temp=function(h,u,p){(p[1]^2)*exp(-(h/p[2])^2-(u/p[3])^2)}
+cressie1=function(h,u,p){(p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+Gneiting1=function(h,u,p){p[1]^2/((p[2]*u^(2*p[3])+1)^(p[4]))*exp(-(p[6]*h^(2*p[5]))/((p[2]*u^(2*p[3])+1)^(p[4]*p[5])))}
+#Gneiting2=function(h,u,sigma,p){p[1]^2/((2^(p[3]-1))*p[7](p[3])*(p[2]*u^(2*p[3])+1)^(p[4]+p[5]))*(((p[6]*h)/((p[2]*u^(2*[3])+1)^(p[5]/2)))^p[3])*besselK(((p[6]*h)/((p[2]*u^(2*[3])+1)^(p[5]/2))),p[3])}
+Iaco_Cesare=function(h,u,a,b,c){(1+h^p[1]+u^p[2])^(-p[3])}
+```
+
+```{r}
+#separables mas comunes: gaussiano y exponencial   p=(sigma,a,b)
+Gaussiano=function(p,h,u){p[1]^2*exp(-p[2]^2*u^2-p[3]^2*h^2)}
+Exponencial=function(p,h,u){p[1]^2*exp(-p[2]^2*u-p[3]^2*h)}
+```
+
+```{r}
+#C R E S S I E - H U A N G (1999)
+#sigma:desviacion estandar, a es el par?metros de escala del tiempo, b es el par?metros de escala del espacio, d es la dimensi?n espacial; a,b positivos
+CH_1=function(h,u,p,d){(p[1]^2/((p[2]^2*u^2+1)^(d/2)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+CH_2=function(h,u,p,d){(p[1]^2/((p[2]*abs(u)+1)^(d/2)))*exp(-(p[3]^2*h^2)/(p[2]*abs(u)+1))}
+CH_3=function(h,u,p,d){p[1]^2*((p[2]^2)*(u^2)+1)/(((p[2]^2)*(u^2)+1)^2+(p[3]^2)*h^2)^((d+1)/2)}
+CH_4=function(h,u,p,d){p[1]^2*(p[2]*abs(u)+1)/((p[2]*abs(u)+1)^2+(p[3]^2)*h^2)^((d+1)/2)}
+```
+
+```{r}
+#el caso mas general de C R E S S I E - H U A N G (1999) es cuando d=2, entonces queda
+CH_1=function(h,u,p){(p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+CH_2=function(h,u,p){(p[1]^2/((p[2]*abs(u)+1)))*exp(-(p[3]^2*h^2)/(p[2]*abs(u)+1))}
+CH_3=function(h,u,p){p[1]^2*((p[2]^2)*(u^2)+1)/(((p[2]^2)*(u^2)+1)^2+(p[3]^2)*h^2)^((3)/2)}
+CH_4=function(h,u,p){p[1]^2*(p[2]*abs(u)+1)/((p[2]*abs(u)+1)^2+(p[3]^2)*h^2)^((3)/2)}
+```
+
+```{r}
+####Gneiting (2002), combina fun1, fun2 y psi en Gneiting#####
+#fun1
+phi1=function(r,c,gama,v){v*exp(-c*r^gama)}                                            #c>0, 0<gama<=1, siempre v=1
+phi2=function(r,c,gama,v){((2^(v-1))*gamma(v))^(-1)*(c*r^0.5)^v*besselK(c*r^0.5,v)}    #c>0, v>0
+phi3=function(r,c,gama,v){(1+c*r^gama)^(-v)}                                           #c>0, 0<gama<=1, v>0
+phi4=function(r,c,gama,v){gama*(2^v)*(exp(c*r^0.5)+exp(-c*r^0.5))^(-v)}                #c>0, v>0, siempre gama=1
+```
+
+```{r}
+#fun2
+psi1=function(r,a,alpha,beta){(a*r^alpha+1)^beta}                                      #a>0, 0<alpha<=1, 0<=beta<=1
+psi2=function(r,a,alpha,beta){log(a*r^alpha+beta)/log(beta)}                           #a>0, beta>1,  0<alpha<=1
+psi3=function(r,a,alpha,beta){(a*r^alpha+beta)/(beta*(a*r^alpha+1))}                   #a>0, 0<beta<=1   0<alpha<=1  
+```
+
+```{r}
+#Cualquier combinaci?n genera una funci?n de covarianza v?lida
+Gneiting=function(h,u,sigma,d,a,alpha,beta,c,gama,v,psi,phi){(sigma^2/(psi((abs(u)^2),a,alpha,beta))^(d/2))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
+```
+
+```{r}
+#el caso mas general de Gneiting (2002) es cuando d=2, entonces queda
+Gneiting=function(h,u,sigma,a,alpha,beta,c,gama,v,psi,phi){(sigma^2/(psi((abs(u)^2),a,alpha,beta)))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
+```
+
+```{r}
+####IACO_CESSARE
+C_IACO_CESSARE=function(h,u,sigma,a,b,alpha,beta,gama){(1 + (h/a)^alpha + (u/b)^beta)^(-gama)}
+```
+
+```{r}
+#(Porcu, 2007) Basado en la funci?n de supervivencia de Dagum 
+#funci?n de Dagum
+Dagum=function(r,lambda,theta,epsilon){1-1/(1+lambda*r^(-theta))^epsilon}                                                                                     #lamdba, theta in (0,7), epsilon in (0,7)
+Dagumm=function(r,lambda,theta,epsilon){ifelse(r==0,1,Dagum(r,lambda,theta,epsilon))}
+
+Porcu_sep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u){Dagumm(h,lambda_h,theta_h,epsilon_h)*Dagumm(u,lambda_u,theta_u,epsilon_u)}      
+Porcu_Nsep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u,vartheta){vartheta*Dagumm(h,lambda_h,theta_h,epsilon_h)+(1-vartheta)*Dagumm(u,lambda_u,theta_u,epsilon_u)}
+```
+
+## CH 1 no separable
+
+```{r}
+###CH 1 no separable
+library(mvtnorm)
+```
+
+```{r}
+#generar la grilla espacio temporal
+x1 <- seq(0,30,by = 5)
+x2 <- seq(10,60,by = 7)
+t <- seq(1,20,len=10) 
+grillaSpT=expand.grid(x1,x2,t)
+matDistSp=as.matrix(dist(grillaSpT[,1:2]))
+matDistT=as.matrix(dist(grillaSpT[,3:3]))
+```
+
+```{r}
+##parameters p, mu, que en este caso son p=c(7,2,1) y mu=120
+sigma=cressie1(matDistSp,matDistT,p=c(7,2,1))
+sim1=rmvnorm(1,mean=rep(120,nrow(grillaSpT)), sigma=sigma)
+datos1=cbind(grillaSpT,t(sim1))
+```
+
+```{r}
+names(datos1)=c("x","y","t","z((x,y),t)")
+#View(datos1)
+grillaSp=expand.grid(x1,x2)
+colnames(grillaSp)=c("x","y")
+rownames(grillaSp)=paste("S",1:nrow(grillaSp))
+datos1_ord=datos1[order(datos1$x, datos1$y, datos1$t),]
+dataSim1=matrix(c(datos1_ord[,4]),nrow=length(t),ncol=nrow(grillaSp),byrow=F)
+colnames(dataSim1)=rownames(grillaSp)
+rownames(dataSim1)=t
+write.table(dataSim1,"dataSim1.txt")
+```
+
+"" CH 2 no sepaarable
+
+```{r}
+#CH 2 no separable
+library(mvtnorm)
+```
+
+```{r}
+#generar la grilla espacio temporal 
+x1 <- seq(0,30,by = 6)
+x2 <- seq(10,60,by = 8)
+t <- seq(1,20,len=10) 
+grillaSpT=expand.grid(x1,x2,t)
+matDistSp=as.matrix(dist(grillaSpT[,1:2]))
+matDistT=as.matrix(dist(grillaSpT[,3:3]))
+```
+
+```{r}
+##parameters p, mu, que en este caso son p=c(7,2,1) y mu=120
+sigma=CH_2(matDistSp,matDistT,p=c(10,3,4))
+sim2=rmvnorm(1,mean=rep(34,nrow(grillaSpT)), sigma=sigma)
+datos2=cbind(grillaSpT,t(sim2))
+names(datos2)=c("x","y","t","zz((x,y),t)")
+#View(datos2)
+grillaSp=expand.grid(x1,x2)
+colnames(grillaSp)=c("x","y")
+rownames(grillaSp)=paste("S",1:nrow(grillaSp))
+datos2_ord=datos2[order(datos2$x, datos2$y, datos2$t),]
+dataSim2=matrix(c(datos2_ord[,4]),nrow=length(t),ncol=nrow(grillaSp),byrow=F)
+colnames(dataSim2)=rownames(grillaSp)
+rownames(dataSim2)=t
+write.table(dataSim2,"dataSim2.txt")
+class(dataSim2)
+```
+
+## CH3 no separable
+```{r}
+#CH 3 no separable
+x1 <- seq(0,30,by = 5)
+x2 <- seq(10,60,by = 7)
+grillaSp=expand.grid(x1,x2)
+colnames(grillaSp)=c("x","y")
+rownames(grillaSp)=paste("S",1:nrow(grillaSp))
+t <- seq(1,20,len=10) 
+grillaSpT=expand.grid(x1,x2,t)
+matDistSp=as.matrix(dist(grillaSpT[,1:2]))
+matDistT=as.matrix(dist(grillaSpT[,3:3]))
+```
+
+```{r}
+##parameters p, mu, que en este caso son p=c(7,2,1) y mu=120
+sigma=CH_3(matDistSp,matDistT,p=c(6,2.5,3.2))
+sim3=rmvnorm(1,mean=rep(34,nrow(grillaSpT)), sigma=sigma)
+datos2=cbind(grillaSpT,t(sim3))
+names(datos2)=c("x","y","t","zz((x,y),t)")
+```
+
+```{r}
+#View(datos2)
+datos3 = datos2
+datos3_ord=datos3[order(datos3$x, datos3$y, datos3$t),]
+dataSim3=matrix(c(datos3_ord[,4]),nrow=length(t),ncol=nrow(grillaSp),byrow=F)
+colnames(dataSim3)=rownames(grillaSp)
+rownames(dataSim3)=t
+```
+
+## CH 4
+```{r}
+#caso 4
+library(mvtnorm)
+```
+
+```{r}
+#generar la grilla espacio temporal
+x1 <- seq(1,35,by = 7)
+x2 <- seq(10,60,by = 10)
+grillaSp=expand.grid(x1,x2)
+colnames(grillaSp)=c("x","y")
+rownames(grillaSp)=paste("S",1:nrow(grillaSp))
+t <- seq(1,20,len=10) 
+grillaSpT=expand.grid(x1,x2,t)
+matDistSp=as.matrix(dist(grillaSpT[,1:2]))
+matDistT=as.matrix(dist(grillaSpT[,3:3]))
+```
+
+```{r}
+##parameters p, mu, que en este caso son p=c(7,2,1) y mu=120
+sigma=CH_3(matDistSp,matDistT,p=c(6,2.5,3.2))
+sim4=rmvnorm(1,mean=rep(34,nrow(grillaSpT)), sigma=sigma)
+datos4=cbind(grillaSpT,t(sim4))
+names(datos4)=c("x","y","t","zz((x,y),t)")
+```
+
+```{r}
+#View(datos4)
+datos4_ord=datos4[order(datos4$x, datos4$y, datos4$t),]
+dataSim4=matrix(c(datos4_ord[,4]),nrow=length(t),ncol=nrow(grillaSp),byrow=F)
+colnames(dataSim4)=rownames(grillaSp)
+rownames(dataSim4)=t
+```
+
+
+
+
+<!--chapter:end:index.Rmd-->
+
+---
+title: "Spatial modeling of incidence and mortality childhood leukemia based on Colombian armed conflict and poverty for children born during the years 2002-2013"
+date: "`r Sys.Date()`"
+output: html_document
+subtitle: Pilar Montilla, Martha Bohorquez and Rafael Rentería
+---
+
+# Spatial modeling leukemia
+
+## **Mortality**
+
+Spatial modeling of incidence and mortality childhood leukemia based on Colombian armed conflict and poverty for children born during the years 2002-2013
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### *Packages Mortality*
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+rm(list=ls())
+require(rgdal)
+require(pscl)
+require(sf)
+require(spdep)
+require(spatialreg) #test.W, scores.listw
+require(stringr)
+require(performance)
+require(AER)
+require(ggplot2)
+require(vcdExtra)
+require(dbscan)
+```
+
+### *Code Mortality*
+
+-   **Reading the shapefile of 1124 Colombian municipalities, defining the Coordinate Reference System and centroid and building some variables**
+
+```{r}
+#Reading the shapefile of 1124 Colombian municipalities
+muncol <- rgdal::readOGR(dsn="Armed_Conflict_Vs_Leukemia/muncol.shp")
+muncol=spTransform(muncol,CRS("+init=epsg:21897"))
+(l <- length(muncol))
+
+#Representative coordinate (centroid)
+options(warn = -1)
+xy0=data.frame(x=muncol$x,y=muncol$y)
+coordinates(xy0) <- c('x','y')
+proj4string(xy0) <- CRS("+init=epsg:4326")
+xy0=spTransform(xy0,CRS("+init=epsg:21897"))
+
+###Loops for avoiding NA 
+r <- sum(muncol$Ndeaths)/sum(muncol$NPop)
+for (i in 1:l){ 
+   if(muncol$NPop[i]==0){
+      muncol$EsperadosDeNCancer[i] <- 1
+   }
+   else{
+      muncol$EsperadosDeNCancer[i] <- muncol$NPop[i]*r
+   }
+}
+
+muncol$IICA_Cat=muncol$IICA_Ca
+muncol$IICA_Cat=str_replace_all(muncol$IICA_Cat,"Bajo", "Low")
+muncol$IICA_Cat=str_replace_all(muncol$IICA_Cat,"Medio", "Medium")
+muncol$IICA_CatLow=ifelse(muncol$IICA_Cat=="Low",1,0)
+muncol$IICA_CatMed=ifelse(muncol$IICA_Cat=="Medium",1,0)
+muncol$IICA_High=as.character(1-(muncol$IICA_CatLow+muncol$IICA_CatMed))
+muncol$UBN=muncol$NBI
+```
+
+-   **Modeling leukemia Mortality Rate (LR) in terms of Colombian armed conflict index, poverty, rurality and health coverage. First, the usual Poisson regression model with mortality rate as response variable is estimated.**
+
+```{r}
+glmbaseLMR<-glm(Ndeaths ~IICA_High+UBN+Per_Rur+Cobertura+offset(log(EsperadosDeNCancer)), family = poisson,data = muncol)
+anova(glmbaseLMR)
+muncol$residLMR=residuals(glmbaseLMR)
+summary(glmbaseLMR)
+```
+
+-   ***Rurality and conflict armed index are not statistically significant in this first auxiliar model. However, we maintain these variables in the rest of the analysis and review its significance in the final model.***
+
+-   ***Checking excess zeros by comparison between the number of zeros predicted by the model with the observed number of zeros. Also checking overdispersion.***
+
+```{r}
+mu_LMR <- predict(glmbaseLMR, type = "response")  # predict expected mean count
+expLMR <- sum(dpois(x = 0, lambda = mu_LMR))      # sum the probabilities of a zero count for each mean
+round(expLMR)                                    #predicted number of zeros
+sum(muncol$Ndeaths < 1)                          #observed number of zeros
+zero.test(muncol$Ndeaths)                        #score test (van den Broek, 1995)
+
+##Checking overdispersion
+dispersiontest(glmbaseLMR)             #Cameron & Trivedi (1990)
+```
+
+-   ***The observed frequency of zeroes in data exceeds the predicted in the Leukemia mortality rate (LMR) model. Also, overdispersion is detected.***
+
+-   ***Now, to validate the independence assumption, first, it is necessary to define spatial weighting possible matrices.***
+
+```{r}
+rook_nb_b=nb2listw(poly2nb(muncol,queen=FALSE), style="B",zero.policy = TRUE)
+rook_nb_w=nb2listw(poly2nb(muncol,queen=FALSE), style="W",zero.policy = TRUE)
+
+queen_nb_b=nb2listw(poly2nb(muncol,queen=TRUE), style="B",zero.policy = TRUE)
+queen_nb_w=nb2listw(poly2nb(muncol,queen=TRUE), style="W",zero.policy = TRUE)
+
+#Graphs neighbours
+trinb=tri2nb(xy0)
+options(warn = -1)
+tri_nb_b=nb2listw(tri2nb(xy0), style="B",zero.policy = TRUE)
+tri_nb_w=nb2listw(tri2nb(xy0), style="W",zero.policy = TRUE)
+
+soi_nb_b=nb2listw(graph2nb(soi.graph(trinb,xy0)), style="B",zero.policy = TRUE)
+soi_nb_w=nb2listw(graph2nb(soi.graph(trinb,xy0)), style="W",zero.policy = TRUE)
+
+relative_nb_b=nb2listw(graph2nb(relativeneigh(xy0), sym=TRUE), style="B",zero.policy = TRUE)
+relative_nb_w=nb2listw(graph2nb(relativeneigh(xy0), sym=TRUE), style="W",zero.policy = TRUE)
+
+gabriel_nb_b=nb2listw(graph2nb(gabrielneigh(xy0), sym=TRUE), style="B",zero.policy = TRUE)
+gabriel_nb_w=nb2listw(graph2nb(gabrielneigh(xy0), sym=TRUE), style="W",zero.policy = TRUE)
+
+#Distance neighbours
+
+knn1_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 1)), style="B",zero.policy = TRUE)
+knn1_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 1)), style="W",zero.policy = TRUE)
+knn2_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 2)), style="B",zero.policy = TRUE)
+knn2_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 2)), style="W",zero.policy = TRUE)
+knn3_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 3)), style="B",zero.policy = TRUE)
+knn3_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 3)), style="W",zero.policy = TRUE)
+knn4_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 4)), style="B",zero.policy = TRUE)
+knn4_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 4)), style="W",zero.policy = TRUE)
+
+mat=list(rook_nb_b,rook_nb_w,
+         queen_nb_b,queen_nb_w,
+         tri_nb_b,tri_nb_w,
+         soi_nb_b,soi_nb_w,
+         gabriel_nb_b,gabriel_nb_w,
+         relative_nb_b,relative_nb_w,
+         knn1_nb_b,knn1_nb_w,
+         knn2_nb_b,knn2_nb_w,
+         knn3_nb_b,knn3_nb_w,
+         knn4_nb_b,knn4_nb_w)
+```
+
+-   ***Testing spatial autocorrelation using Moran index test based on weighting matrices built in the last step. Note that with all weighting matrices we obtain a significant spatial autocorrelation.***
+
+```{r}
+aux=numeric(0)
+options(warn = -1)
+{
+for(i in 1:length(mat))
+aux[i]=moran.test(muncol$residLMR,mat[[i]],alternative="two.sided")$"statistic"
+aux
+} 
+which.max(aux)
+moran.test(muncol$residLMR, mat[[which.max(aux)]], alternative="two.sided")
+```
+
+-   ***First, Poisson Hurdle model is estimated without consider spatial autocorrelation.***
+
+```{r}
+mod.hurdleLMR <- hurdle(Ndeaths ~IICA_High+UBN+Per_Rur+Cobertura+offset(log(EsperadosDeNCancer))|IICA_High+UBN+Per_Rur+Cobertura+offset(log(EsperadosDeNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+resid_Pois_Hurdle=residuals(mod.hurdleLMR,"response")
+summary(mod.hurdleLMR)
+pR2(mod.hurdleLMR)
+moran.test(resid_Pois_Hurdle, mat[[which.max(aux)]], alternative="two.sided")
+```
+
+-   ***Only Conflict armed index predictor is significant but model residuals are significantly spatially autocorrelated. So, we use spatial filtering and check significance again. Below we find Moran Eigenvectors.***
+
+```{r}
+MEpoisLMR <- spatialreg::ME(Ndeaths ~ IICA_High+UBN+Per_Rur+Cobertura+offset(log(EsperadosDeNCancer)),data=muncol,family="poisson",listw=knn4_nb_b, alpha=0.02, verbose=TRUE)
+MoranEigenVLMR=data.frame(fitted(MEpoisLMR))
+#summary(MoranEigenVLMR)
+```
+
+-   ***Now, we used Poisson Hurdle model to manage the overdispersion due to zero excess and Moran eigenfunctions are included as additional explanatory variables, so that spatial autocorrelation is considered.***
+
+```{r}
+mod.hurdleLMR <- hurdle(Ndeaths ~IICA_High+UBN+Per_Rur+Cobertura+fitted(MEpoisLMR)+offset(log(EsperadosDeNCancer))|IICA_High+UBN+Per_Rur+Cobertura+offset(log(EsperadosDeNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+resid_Pois_Hurdle=residuals(mod.hurdleLMR,"response")
+summary(mod.hurdleLMR)
+pR2(mod.hurdleLMR)
+moran.test(resid_Pois_Hurdle, mat[[which.max(aux)]], alternative="two.sided")
+```
+
+-   ***Rurality and health coverage are not statistically significant for counto model. So, those predictors are excluded of the spatial filtering and model.***
+
+```{r}
+MEpoisLMR <- spatialreg::ME(Ndeaths ~ IICA_High+UBN+offset(log(EsperadosDeNCancer)),data=muncol,family="poisson",listw=knn4_nb_b, alpha=0.02, verbose=TRUE)
+MoranEigenVLMR=data.frame(fitted(MEpoisLMR))
+#summary(MoranEigenVLMR)
+```
+
+```{r}
+mod.hurdleLMR <- hurdle(Ndeaths ~IICA_High+UBN+fitted(MEpoisLMR)+offset(log(EsperadosDeNCancer))|UBN+Cobertura+offset(log(EsperadosDeNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+summary(mod.hurdleLMR)
+pR2(mod.hurdleLMR)
+moran.test(resid_Pois_Hurdle, mat[[which.max(aux)]], alternative="two.sided")
+```
+
+-   ***Now, Poisson-Hurdle model residuals are not significant spatially autocorrelated. The LMR's positive values depend only on the Index of armed conflict (IICA) and on the unsatisfied basic needs index (UBN) and LMR's zero values depend on the UBN and health coverage. Note that the model shows good performance, according to pseudo R2 and the comparison between observed and predicted frequencies.***
+
+```{r}
+mf <- model.frame(mod.hurdleLMR)
+y <- model.response(mf)
+w <- model.weights(mf)
+if(is.null(w)) w <- rep(1, NROW(y))
+max0 <- 20L
+obs <- as.vector(xtabs(w ~ factor(y, levels = 0L:max0)))
+exp <- colSums(predict(mod.hurdleLMR, type = "prob", at = 0L:max0) * w)
+
+fitted_vs_observed <- data.frame(Expected = exp,
+                                 Observed = obs)
+data <- reshape2::melt(fitted_vs_observed)
+data <- data.frame(data, x =  0:20)
+data1 <- data[1:21, ]
+data2 <- data[22:42, ]
+pMortality <- ggplot() +
+  geom_line(data1, mapping = aes(x = x, y = value, group = variable
+                          , color = variable)) +
+  geom_point(data1, mapping = aes(x = x, y = value, group = variable,
+                           color = variable)) +
+  geom_col(data2, mapping = aes(x = x, y = value, group = variable),
+           alpha = 0.7) +
+  theme_light() +
+  labs(x = "Number of deaths",
+       y = "Frecuencies")
+pMortality
+```
+
+## Incidence
+
+Spatial modeling of incidence and mortality childhood leukemia based on Colombian armed conflict and poverty for children born during the years 2002-2013
+
+### **Packages Incidence**
+
+```{r warning=FALSE, results='hide',message=FALSE}
+rm(list=ls())
+require(rgdal)
+require(pscl)
+require(sf)
+require(spdep)
+require(spatialreg) #test.W, scores.listw
+require(stringr)
+require(performance)
+require(AER)
+require(ggplot2)
+require(vcdExtra)
+```
+
+### *Code Incidence*
+
+-   **Reading the shapefile of 1124 Colombian municipalities, defining the Coordinate Reference System and centroid and building some variables**
+
+```{r}
+#Reading the shapefile of 1124 Colombian municipalities
+muncol <- rgdal::readOGR(dsn="Armed_Conflict_Vs_Leukemia/muncol.shp")
+muncol=spTransform(muncol,CRS("+init=epsg:21897"))
+(l <- length(muncol))
+
+#Representative coordinate (centroid)
+xy0=data.frame(x=muncol$x,y=muncol$y)
+coordinates(xy0) <- c('x','y')
+proj4string(xy0) <- CRS("+init=epsg:4326")
+xy0=spTransform(xy0,CRS("+init=epsg:21897"))
+
+###Loops for avoiding NA 
+r <- sum(muncol$NCases)/sum(muncol$NPop)
+for (i in 1:l){ 
+   if(muncol$NPop[i]==0){
+      muncol$EsperadosNCancer[i] <- 1
+   }
+   else{
+      muncol$EsperadosNCancer[i] <- muncol$NPop[i]*r
+   }
+}
+
+muncol$IICA_Cat=muncol$IICA_Ca
+muncol$IICA_Cat=str_replace_all(muncol$IICA_Cat,"Bajo", "Low")
+muncol$IICA_Cat=str_replace_all(muncol$IICA_Cat,"Medio", "Medium")
+muncol$IICA_CatLow=ifelse(muncol$IICA_Cat=="Low",1,0)
+muncol$IICA_CatMed=ifelse(muncol$IICA_Cat=="Medium",1,0)
+muncol$IICA_High=as.character(1-(muncol$IICA_CatLow+muncol$IICA_CatMed))
+muncol$UBN=muncol$NBI
+```
+
+-   **Modeling leukemia Incidence Rate (LR) in terms of Colombian armed conflict index, poverty and rurality. First, the usual Poisson regression model with incidence rate as response variable is estimated.**
+
+```{r}
+glmbaseLR<-glm(NCases ~IICA_High+UBN+Per_Rur+offset(log(EsperadosNCancer)), family = poisson,data = muncol)
+anova(glmbaseLR)
+summary(glmbaseLR)
+muncol$residLR=residuals(glmbaseLR)
+```
+
+-   ***Rurality is not statistically significant in this first auxiliar model. However, we maintain this variable in the rest of the analysis and review its significance in the final model.***
+
+-   ***Checking excess zeros by comparison between the number of zeros predicted by the model with the observed number of zeros. Also checking overdispersion.***
+
+```{r}
+mu_LR <- predict(glmbaseLR, type = "response")  # predict expected mean count
+expLR <- sum(dpois(x = 0, lambda = mu_LR))      # sum the probabilities of a zero count for each mean
+round(expLR)                                    #predicted number of zeros
+sum(muncol$NCases < 1)                          #observed number of zeros
+zero.test(muncol$NCases)                        #score test (van den Broek, 1995)
+
+##Checking overdispersion
+dispersiontest(glmbaseLR)             #Cameron & Trivedi (1990)
+check_overdispersion(glmbaseLR)       #Gelman and Hill (2007)
+```
+
+-   ***The observed frequency of zeroes in data exceeds the predicted in the Leukemia incidence rate (LR) model. Also, overdispersion is detected.***
+
+-   ***Now, to validate the independence assumption, first, it is necessary to define spatial weighting possible matrices.***
+
+```{r}
+rook_nb_b=nb2listw(poly2nb(muncol,queen=FALSE), style="B",zero.policy = TRUE)
+rook_nb_w=nb2listw(poly2nb(muncol,queen=FALSE), style="W",zero.policy = TRUE)
+
+queen_nb_b=nb2listw(poly2nb(muncol,queen=TRUE), style="B",zero.policy = TRUE)
+queen_nb_w=nb2listw(poly2nb(muncol,queen=TRUE), style="W",zero.policy = TRUE)
+
+#Graphs neighbours
+trinb=tri2nb(xy0)
+options(warn = -1)
+tri_nb_b=nb2listw(tri2nb(xy0), style="B",zero.policy = TRUE)
+tri_nb_w=nb2listw(tri2nb(xy0), style="W",zero.policy = TRUE)
+
+soi_nb_b=nb2listw(graph2nb(soi.graph(trinb,xy0)), style="B",zero.policy = TRUE)
+soi_nb_w=nb2listw(graph2nb(soi.graph(trinb,xy0)), style="W",zero.policy = TRUE)
+
+relative_nb_b=nb2listw(graph2nb(relativeneigh(xy0), sym=TRUE), style="B",zero.policy = TRUE)
+relative_nb_w=nb2listw(graph2nb(relativeneigh(xy0), sym=TRUE), style="W",zero.policy = TRUE)
+
+gabriel_nb_b=nb2listw(graph2nb(gabrielneigh(xy0), sym=TRUE), style="B",zero.policy = TRUE)
+gabriel_nb_w=nb2listw(graph2nb(gabrielneigh(xy0), sym=TRUE), style="W",zero.policy = TRUE)
+
+#Distance neighbours
+
+knn1_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 1)), style="B",zero.policy = TRUE)
+knn1_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 1)), style="W",zero.policy = TRUE)
+knn2_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 2)), style="B",zero.policy = TRUE)
+knn2_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 2)), style="W",zero.policy = TRUE)
+knn3_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 3)), style="B",zero.policy = TRUE)
+knn3_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 3)), style="W",zero.policy = TRUE)
+knn4_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 4)), style="B",zero.policy = TRUE)
+knn4_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 4)), style="W",zero.policy = TRUE)
+knn6_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 6)), style="B",zero.policy = TRUE)
+knn6_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 6)), style="W",zero.policy = TRUE)
+
+mat=list(rook_nb_b,rook_nb_w,
+         queen_nb_b,queen_nb_w,
+         tri_nb_b,tri_nb_w,
+         soi_nb_b,soi_nb_w,
+         gabriel_nb_b,gabriel_nb_w,
+         relative_nb_b,relative_nb_w,
+         knn1_nb_b,knn1_nb_w,
+         knn2_nb_b,knn2_nb_w,
+         knn3_nb_b,knn3_nb_w,
+         knn4_nb_b,knn4_nb_w,
+         knn6_nb_b,knn6_nb_w)
+```
+
+-   ***Testing spatial autocorrelation using Moran index test based on weighting matrices built in the last step. Note that with all weighting matrices we obtain a significant spatial autocorrelation.***
+
+```{r}
+aux=numeric(0)
+options(warn = -1)
+{
+for(i in 1:length(mat))
+aux[i]=moran.test(muncol$residLR,mat[[i]],alternative="two.sided")$"p"
+} 
+aux
+moran.test(muncol$residLR, mat[[which.max(aux)]], alternative="two.sided")
+```
+
+-   ***First, Poisson Hurdle model is estimated without consider spatial autocorrelation.***
+
+```{r}
+mod.hurdleLR <- hurdle(NCases ~IICA_High+UBN+Per_Rur+offset(log(EsperadosNCancer))|IICA_High+UBN+Per_Rur+offset(log(EsperadosNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+resid_Pois_Hurdle=residuals(mod.hurdleLR,"response")
+summary(mod.hurdleLR)
+pR2(mod.hurdleLR)
+moran.test(resid_Pois_Hurdle, mat[[which.max(aux)]], alternative="two.sided")
+```
+
+-   ***Thus, residuals are significantly spatially autocorrelated. So, we are going tu use spatial filtering. Below we find Moran Eigenvectors.***
+
+```{r}
+MEpoisLR <- spatialreg::ME(NCases ~ IICA_High+UBN+Per_Rur+offset(log(EsperadosNCancer)),data=muncol,family="poisson",listw=mat[[3]], alpha=0.02, verbose=TRUE)
+MoranEigenVLR=data.frame(fitted(MEpoisLR))
+```
+
+-   ***Now, we used Poisson Hurdle model to manage the overdispersion due to zero excess and Moran eigenfunctions are included as additional explanatory variables, so that spatial autocorrelation is considered.***
+
+```{r}
+mod.hurdleLR <- hurdle(NCases ~IICA_High+UBN+Per_Rur+fitted(MEpoisLR)+offset(log(EsperadosNCancer))|Per_Rur+offset(log(EsperadosNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+resid_Pois_Hurdle=residuals(mod.hurdleLR,"response")
+moran.test(resid_Pois_Hurdle, mat[[3]], alternative="two.sided")
+summary(mod.hurdleLR)
+pR2(mod.hurdleLR)
+```
+
+-   ***Rurality is not statistically significant to explain the Leukemia incidence rate. The only predictor statistically significant for zeroes model is rurality. In addition, the Spatial filtering results are the same without this variable.***
+
+```{r}
+MEpoisLR <- spatialreg::ME(NCases ~ IICA_High+UBN+offset(log(EsperadosNCancer)),data=muncol,family="poisson",listw=mat[[3]], alpha=0.02, verbose=TRUE)
+MoranEigenVLR=data.frame(fitted(MEpoisLR))
+mod.hurdleLR <- hurdle(NCases ~IICA_High+UBN+fitted(MEpoisLR)+offset(log(EsperadosNCancer))|Per_Rur+offset(log(EsperadosNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+resid_Pois_Hurdle=residuals(mod.hurdleLR,"response")
+moran.test(resid_Pois_Hurdle, mat[[3]], alternative="two.sided")
+summary(mod.hurdleLR)
+pR2(mod.hurdleLR)
+```
+
+-   ***Hence, Poisson-Hurdle model residuals are not significant spatially autocorrelated. The LR's positive values depend only on the Index of armed conflict (IICA) and on the unsatisfied basic needs index (UBN) and its zero values depend on the rurality. Note that the model shows good performance, according to pseudo R2 and the comparison between observed and predicted frequencies.***
+
+```{r}
+mf <- model.frame(mod.hurdleLR)
+y <- model.response(mf)
+w <- model.weights(mf)
+if(is.null(w)) w <- rep(1, NROW(y))
+max0 <- 20L
+obs <- as.vector(xtabs(w ~ factor(y, levels = 0L:max0)))
+exp <- colSums(predict(mod.hurdleLR, type = "prob", at = 0L:max0) * w)
+
+fitted_vs_observed <- data.frame(Expected = exp,
+                                 Observed = obs)
+data <- reshape2::melt(fitted_vs_observed)
+data <- data.frame(data, x =  0:20)
+data1 <- data[1:21, ]
+data2 <- data[22:42, ]
+pl1 <- ggplot() +
+  geom_line(data1, mapping = aes(x = x, y = value, group = variable
+                          , color = variable)) +
+  geom_point(data1, mapping = aes(x = x, y = value, group = variable,
+                           color = variable)) +
+  geom_col(data2, mapping = aes(x = x, y = value, group = variable),
+           alpha = 0.7) +
+  theme_light() +
+  labs(x = "Number of cases",
+       y = "Frecuencies")
+pl1
+```
+
+<!--chapter:end:02-Leukimia.Rmd-->
+
+---
+title: "Modelos de regresión espacial"
+subtitle: "Estudio de Mercadeo"
+output: html_document
+date: "2023-01-31"
+---
+
+# Modelos de regresión espacial
+## Estudio de Mercadeo
+Se comparan varios tipos de modelos de regresión espacial para ver con cual se obtiene el mejor ajuste. Se consideran modelos autoregresivos y de medias móvviles así como su combinación.
+
+## Paquetes
+
+```{r}
+rm(list=ls())
+library(openxlsx)
+library(dplyr)
+library(rgdal)
+library(maptools)
+library(GISTools)
+library(spdep)
+library(readr)
+library(car)
+library(readxl)
+library(psych)
+library(rgdal)
+library(FactoClass)
+library(spdep)
+require("GWmodel")
+library("mapsRinteractive")
+options(scipen = 999)
+```
+
+## Lectura de Datos
+
+```{r}
+# Lectura de Datos
+BASE <- read_excel("Trabajo Grado/BASE.xlsx")
+# Lectura del Shape de Colombia por Departamentos
+Colombia = readOGR(dsn = "Trabajo Grado/Geodatabase Colombia", layer = "departamentos")
+```
+
+### Cruce de información y arreglo de coordenadas
+# Pre-procesamiento de datos
+
+```{r}
+#Cruce de información con el shape cargado
+Insumo = merge(Colombia, BASE, by.x="COD_DANE", by.y="Cod")
+Insumo = subset(Insumo[c(1:31,33),])
+# Conversión a Coordenadas UTM
+Crs.geo = CRS("+proj=tmerc +lat_0=4.599047222222222 +lon_0=-74.08091666666667 +k=1 +x_0=1000000 +y_0=1000000 +ellps=intl +towgs84=307,304,-318,0,0,0,0 +units=m +no_defs")  
+proj4string(Insumo) <- Crs.geo 
+Insumo.utm = spTransform(Insumo, CRS("+init=epsg:3724 +units=km"))
+```
+
+## Matriz de vecindades 
+
+```{r}
+#---
+# MATRIZ DE VECINDADES (W)
+#---
+## Centroides de las Áreas
+Centros = getSpPPolygonsLabptSlots(Insumo.utm)
+Centroids <- SpatialPointsDataFrame(coords = Centros, data=Insumo.utm@data, 
+                                    proj4string=CRS("+init=epsg:3724 +units=km"))
+# Matriz de Distancias entre los Centriodes
+Wdist = dist(Centros, up=T)
+# Matriz W de vecindades
+library(pgirmess)
+library(HistogramTools)
+library(strucchange)
+library(spdep)
+Insumo.nb = poly2nb(Insumo.utm, queen=T)
+#n <- max(sapply(Insumo.nb, length))
+#ll <- lapply(Insumo.nb, function(X) {
+#  c(as.numeric(X), rep(0, times = n - length(X)))
+#})
+#out <- do.call(cbind, ll)
+#Departamentos<-Insumo$Departamento
+#MatW<-matrix(NA,32,32)
+#for (i in 1:8) {
+#  for (j in 1:32) {
+#    if (out[i,j]!=0) {
+#      MatW[out[i,j],j]<-1
+#    } else{MatW[out[i,j],j]<-0}
+#  }
+#}
+#for (i in 1:32) {
+#  for (j in 1:32) {
+#    if (is.na(MatW[i,j])) {
+#      MatW[i,j]<-0
+#    }
+#  }
+#}
+#colnames(MatW)<-Departamentos
+#rownames(MatW)<-Departamentos
+#MatW1<-MatW[,1:16]
+#MatW2<-MatW[,17:32]
+# Martiz W (Estilos)
+Insumo.lw = nb2listw(Insumo.nb)
+Insumo.lwb = nb2listw(Insumo.nb, style="B")
+Insumo.lwc = nb2listw(Insumo.nb, style="C")
+Insumo.lwu = nb2listw(Insumo.nb, style="U")
+Insumo.lww = nb2listw(Insumo.nb, style="W")
+```
+
+## Mapa de valores observados
+
+```{r}
+#  Mapa de Valores Observados
+#dev.new() #windows()
+choropleth(Insumo, Insumo$CAP_BAC)
+shad = auto.shading(Insumo$CAP_BAC, n=5, cols=(brewer.pal(5,"Reds")), cutter = quantileCuts)
+choro.legend(1555874,535165.5, shad, fmt="%1.1f", title = "Valores Locales", cex=0.7, under = "Menos de", between = "a", over = "Mas de")
+title("Valores Observados para las captaciones del banco agrario 
+       en Colombia, cuarto trimestre 2020", cex.main=1)
+map.scale(755874,335165.5, 250000, "km", 2, 50, sfcol='brown')
+
+```
+
+## Pruebas de Autocorrelación
+
+```{r}
+#----------------------------
+#  PRUEBAS DE AUTOCORRELACION
+#----------------------------
+
+# Moran
+moran.test(Insumo$CAP_BAC, Insumo.lw)
+# Dispersograma de Moran
+#dev.new() #windows()
+moran.plot(Insumo$CAP_BAC, Insumo.lw, labels=as.character(Insumo$Departamento), xlab="Captaciones BAC", ylab="Captaciones BAC rezagado", las=1, pch=16, cex=0.5)
+legend("bottomright", legend=c("I de Moran: 0.1530", "Valor P:      0.02262"), cex=1,bg='lightgreen')
+title("Dispersograma de Moran para las captaciones del banco agrario en 
+los Departamentos de Colombia, cuarto trimestre 2020", cex.main=1)
+# Local G
+nearng = dnearneigh(coordinates(Insumo.utm), 0, 550)
+Insumo.lw.g = nb2listw(nearng, style="B")
+
+localG = localG(Insumo$CAP_BAC, Insumo.lw.g); localG
+
+
+# Simulaci?n montecarlo
+sim.G = matrix(0,1000,32)
+for(i in 1:1000) sim.G[i,] = localG(sample(Insumo$CAP_BAC),Insumo.lw.g)
+mc.pvalor.G = (colSums(sweep(sim.G,2,localG,">="))+1)/(nrow(sim.G)+1)
+mc.pvalor.G
+
+```
+
+## Mapas
+
+```{r}
+# Mapas
+par(mfrow=c(1,2), mar=c(1,1,8,1)/2)
+shadeg = auto.shading(localG, n=5, cols=(brewer.pal(5,"Purples")), cutter=quantileCuts)
+#dev.new() #windows()
+choropleth(Insumo, localG, shading=shadeg)
+choro.legend(1555874,535165.5, shadeg, fmt="%1.2f", title = "G", cex=0.7, under = "Menos de", between = "a", over = "Mas de")
+title("G Getis Ord Local para las captaciones del banco agrario 
+       en Colombia, cuarto trimestre 2020", cex.main=1)
+map.scale(755874,335165.5, 250000, "km", 2, 50, sfcol='brown')
+```
+
+```{r}
+# Mapa de P-values
+#dev.new() #windows()
+shadegp = shading(c(0.01,0.05,0.1), cols = (brewer.pal(4,"Spectral")))
+choropleth(Insumo, mc.pvalor.G, shading=shadegp)
+choro.legend(1555874,535165.5, shadegp, fmt="%1.2f", title = "P-valor de G", cex=0.7, under = "Menos de", between = "a", over = "Mas de")
+title("P- Valor de G Getis Ord Local para las captaciones del banco agrario 
+       en Colombia, cuarto trimestre 2020", cex.main=1)
+map.scale(755874,335165.5, 250000, "km", 2, 50, sfcol='brown')
+
+```
+
+##Modelos SDEM, SDM, Manski, SARAR
+
+```{r}
+####Modelos SDEM, SDM, Manski, SARAR########
+#reg.eq1=CAP_BAC ~ PIB + NBI + CAP_BOG + CAP_BC + CAP_OCC + CAP_CS + Población + IPM
+reg.eq1=CAP_BAC ~ PIB + NBI + CAP_BOG+CAP_BC + CAP_OCC + CAP_CS+ Población
+reg1=lm(reg.eq1,data=Insumo)                                     #OLS            y=XB+e,    
+reg2=lmSLX(reg.eq1,data=Insumo, Insumo.lw)                       #SLX            y=XB+WxT+e
+reg3=lagsarlm(reg.eq1,data= Insumo, Insumo.lw)                   #Lag Y          y=XB+WxT+u,   u=LWu+e
+reg4=errorsarlm(reg.eq1,data=Insumo, Insumo.lw)                  #Spatial Error  y=pWy+XB+e   
+reg5=errorsarlm(reg.eq1, data=Insumo, Insumo.lw, etype="emixed") #SDEM Spatial Durbin Error Model y=XB+WxT+u,   u=LWu+e
+reg6=lagsarlm(reg.eq1, data=Insumo,Insumo.lw, type="mixed")      #SDM Spatial Durbin Model (add lag X to SAR) y=pWy+XB+WXT+e 
+reg7=sacsarlm(reg.eq1,data=Insumo, Insumo.lw, type="sacmixed")   #Manski Model: y=pWy+XB+WXT+u,   u=LWu+e (no recomendado)
+reg8=sacsarlm(reg.eq1,data=Insumo,Insumo.lw, type="sac")         #SARAR o Kelejian-Prucha, Cliff-Ord, o SAC If all T=0,y=pWy+XB+u, u=LWu+e
+```
+
+## Resumen de modelos
+
+```{r}
+
+#Resumen de modelos
+s=summary
+s(reg1)#OLS
+s(reg2)#SLX
+s(reg3)#Lag Y
+s(reg4)#Lag Error (SEM)
+s(reg5)#Durbin Error (SDEM)
+s(reg6)#Durbin (SDM)
+s(reg7)#Manski
+s(reg8)#SARAR lag Y and lag e (SAC)
+
+```
+
+## Calculo de varibles significativas
+
+```{r}
+#Calculo de variables signid¿ficativas
+reg.eq2=CAP_BAC ~ PIB + CAP_BOG+CAP_BC + CAP_OCC + CAP_CS+ Población
+reg4=errorsarlm(reg.eq2,data=Insumo, Insumo.lw)
+s(reg4)#Lag Error (SEM)
+reg.eq3=CAP_BAC ~ PIB + CAP_BOG + CAP_OCC + CAP_CS+ Población
+reg4=errorsarlm(reg.eq3,data=Insumo, Insumo.lw)
+s(reg4)#Lag Error (SEM)
+reg.eq4=CAP_BAC ~ PIB + CAP_OCC + CAP_CS+ Población
+reg4=errorsarlm(reg.eq4,data=Insumo, Insumo.lw)
+s(reg4)#Lag Error (SEM)
+reg.eq5=CAP_BAC ~ PIB + CAP_OCC + CAP_CS
+reg4=errorsarlm(reg.eq5,data=Insumo, Insumo.lw)
+s(reg4)#Lag Error (SEM)
+```
+
+## Mapa Estimado
+
+```{r}
+###Mapa estimado
+fit = reg4$fitted.values
+#dev.new() #windows()
+shade.fit = shading(c(100,130,200,400), cols=(brewer.pal(5,"Reds")))
+choropleth(Insumo, fit, shading=shade.fit)
+choro.legend(1555874,535165.5, shade.fit, fmt="%1.2f", title = "Estimaciones", cex=0.7, under = "Menos de", between = "a", over = "Mas de")
+title("Valores ajustados mediante el modelo SEM para las captaciones del banco agrario 
+       en Colombia, cuarto trimestre 2020", cex.main=1)
+map.scale(755874,335165.5, 250000, "km", 2, 50, sfcol='brown')
+###R^2 Nagelkerke
+# summary.sarlm(reg4,Nagelkerke = TRUE) TO-DO
+###Test de moran residuales modelo SEM
+moran.test(reg4$residuals, Insumo.lw)
+```
+
+
+
+```{r}
+#Municipal
+ColombiaM = readOGR(dsn = "Trabajo Grado/Geodatabase Colombia", layer = "municipios")
+```
+
+
+<!--chapter:end:03-EstudioMercadeoEspacial.Rmd-->
+
+---
+title: "04-Ilustrcion del krigin simple espacio tiempo"
+output: html_document
+date: "16-05-2022"
+---
+
+# Ilustración del kriging simple espacio tiempo
+
+Martha Bohorquez
+
+16/5/2022
+
+## librerías 
+
+
+
+```{r}
+library(mvtnorm)
+```
+
+## **Simulación no condicional de una realización de un campo aleatorio espacio temporal no separable usando el modelo de covarianza cressie1**
+
+En primer lugar, se generar la grilla espacio temporal. Aquí suponemos n=6 ubicaciones espaciales y T=4 momentos en el tiempo, así en total son 24 ubicaciones espacio-tiempo. Se llevará a cabo la simulación y posteriormente se usará el predictor kriging con su respectiva estimación de varianza del error de predicción, en un punto no “observado”. Se asume conocida la función de covarianza. En la práctica esta matriz se puede estimar por métodos como maxima veorsimilitud, pseudoverosimilitud y métodos basados en mínimos cuadrados.
+
+```{r}
+x1 <- seq(0,3,len = 3)
+x2 <- seq(1,6,len = 2)
+t <- 1:4
+grillaSpT=expand.grid(x1,x2,t)
+#matriz de distancias (rezagos) espaciales
+matDistSp=as.matrix(dist(grillaSpT[,1:2]))
+#matriz de distancias (rezagos) temporales
+matDistT=as.matrix(dist(grillaSpT[,3:3]))
+cressie1=function(h,u,p){(p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+##parámetros p, mu, que en este caso son p=c(0.4,1.7,1.9) y mu=0
+sigma=cressie1(matDistSp,matDistT,p=c(0.15,1.7,1.9))
+sim1=rmvnorm(1,mean=rep(0,nrow(grillaSpT)), sigma=sigma)
+datos1=cbind(grillaSpT,t(sim1))
+names(datos1)=c("x","y","t","z((x,y),t)")
+matDistSp
+```
+
+```{r}
+matDistT
+```
+
+```{r}
+sigma
+```
+
+```{r}
+datos1
+```
+
+- Se requiere predecir predecir en el tiempo $t=2.3$ y en el lugar $s_0=(1.5,2.7)$. Nótese que tanto el dominio espacial como el dominio temporal con continuos y fijos. A continuación se presenta el procedimiento para llevar a cabo Kriging simple con su respectiva varianza de error de predicción estimada
+
+```{r}
+grillaSpT0=rbind(expand.grid(x1,x2,t),c(1.5,2.7,2.3))
+matDistSp0=as.matrix(dist(grillaSpT0[,1:2]))
+matDistT0=as.matrix(dist(grillaSpT0[,3:3]))
+sigma0=cressie1(matDistSp0,matDistT0,p=c(0.15,1.7,1.9))
+#vector de covarianzas entre la coordenada a predecir y las observadas
+sigma0
+```
+
+```{r}
+lambda=solve(sigma)%*%sigma0[25,-25]
+lambda
+```
+
+```{r}
+z_pred0=t(lambda)%*%datos1[,4]
+z_pred0
+```
+
+```{r}
+VarErropred0=sigma[1,1]-t(sigma0[25,-25])%*%solve(sigma)%*%sigma0[25,-25]
+VarErropred0
+```
+
+## **Algunas funciones de covarianza espacio temporal no separables**
+
+```{r}
+##Funciones de covarianza espacio temporal p vector de parámetros para cada modelo
+exp_esp_temp=function(h,u,p){((p[1])^2)*exp(-h/p[2]-u/p[3])}
+gauss_esp_temp=function(h,u,p){(p[1]^2)*exp(-(h/p[2])^2-(u/p[3])^2)}
+cressie1=function(h,u,p){(p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+Gneiting1=function(h,u,p){p[1]^2/((p[2]*u^(2*p[3])+1)^(p[4]))*exp(-(p[6]*h^(2*p[5]))/((p[2]*u^(2*p[3])+1)^(p[4]*p[5])))}
+Gneiting2=function(h,u,sigma,p)
+{p[1]^2/((2^(p[3]-1))*p[7](p[3])*(p[2]*u^(2*p[3])+1)^(p[4]+p[5]))*
+(((p[6]*h)/((p[2]*u^(2*p[3])+1)^(p[5]/2)))^p[3])*
+besselK(((p[6]*h)/((p[2]*u^(2*p[3])+1)^(p[5]/2))),p[3])}
+Iaco_Cesare=function(h,u,a,b,c){(1+h^p[1]+u^p[2])^(-p[3])}
+```
+
+### C R E S S I E - H U A N G (1999)
+
+```{r}
+#sigma:desviacion estandar, a es el parámetros de escala del tiempo, b es el parámetros de escala del espacio, d es la dimensión espacial; a,b positivos
+CH_1=function(h,u,p,d){(p[1]^2/((p[2]^2*u^2+1)^(d/2)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+CH_2=function(h,u,p,d){(p[1]^2/((p[2]*abs(u)+1)^(d/2)))*exp(-(p[3]^2*h^2)/(p[2]*abs(u)+1))}
+CH_3=function(h,u,p,d){p[1]^2*((p[2]^2)*(u^2)+1)/(((p[2]^2)*(u^2)+1)^2+(p[3]^2)*h^2)^((d+1)/2)}
+CH_4=function(h,u,p,d){p[1]^2*(p[2]*abs(u)+1)/((p[2]*abs(u)+1)^2+(p[3]^2)*h^2)^((d+1)/2)}
+
+#el caso mas general de C R E S S I E - H U A N G (1999) es cuando d=2, entonces queda
+CH_1=function(h,u,p){(p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+CH_2=function(h,u,p){(p[1]^2/((p[2]*abs(u)+1)))*exp(-(p[3]^2*h^2)/(p[2]*abs(u)+1))}
+CH_3=function(h,u,p){p[1]^2*((p[2]^2)*(u^2)+1)/(((p[2]^2)*(u^2)+1)^2+(p[3]^2)*h^2)^((3)/2)}
+CH_4=function(h,u,p){p[1]^2*(p[2]*abs(u)+1)/((p[2]*abs(u)+1)^2+(p[3]^2)*h^2)^((3)/2)}
+```
+
+### Gneiting (2002), combina fun1, fun2 y psi en Gneiting
+
+```{r}
+#fun1
+phi1=function(r,c,gama,v){v*exp(-c*r^gama)}                                            #c>0, 0<gama<=1, siempre v=1
+phi2=function(r,c,gama,v){((2^(v-1))*gamma(v))^(-1)*(c*r^0.5)^v*besselK(c*r^0.5,v)}    #c>0, v>0
+phi3=function(r,c,gama,v){(1+c*r^gama)^(-v)}                                           #c>0, 0<gama<=1, v>0
+phi4=function(r,c,gama,v){gama*(2^v)*(exp(c*r^0.5)+exp(-c*r^0.5))^(-v)}                #c>0, v>0, siempre gama=1
+
+#fun2
+psi1=function(r,a,alpha,beta){(a*r^alpha+1)^beta}                                      #a>0, 0<alpha<=1, 0<=beta<=1
+psi2=function(r,a,alpha,beta){log(a*r^alpha+beta)/log(beta)}                           #a>0, beta>1,  0<alpha<=1
+psi3=function(r,a,alpha,beta){(a*r^alpha+beta)/(beta*(a*r^alpha+1))}                   #a>0, 0<beta<=1   0<alpha<=1  
+
+#Cualquier combinación genera una función de covarianza válida
+Gneiting=function(h,u,sigma,d,a,alpha,beta,c,gama,v,psi,phi){(sigma^2/(psi((abs(u)^2),a,alpha,beta))^(d/2))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
+
+#el caso mas general de Gneiting (2002) es cuando d=2, entonces queda
+Gneiting=function(h,u,sigma,a,alpha,beta,c,gama,v,psi,phi){(sigma^2/(psi((abs(u)^2),a,alpha,beta)))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
+```
+
+```{r}
+####IACO_CESSARE
+C_IACO_CESSARE=function(h,u,sigma,a,b,alpha,beta,gama){(1 + (h/a)^alpha + (u/b)^beta)^(-gama)}
+```
+
+```{r}
+#(Porcu, 2007) Basado en la función de supervivencia de Dagum 
+#función de Dagum
+Dagum=function(r,lambda,theta,epsilon){1-1/(1+lambda*r^(-theta))^epsilon}                                                                                     #lamdba, theta in (0,7), epsilon in (0,7)
+Dagumm=function(r,lambda,theta,epsilon){ifelse(r==0,1,Dagum(r,lambda,theta,epsilon))}
+
+Porcu_sep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u){Dagumm(h,lambda_h,theta_h,epsilon_h)*Dagumm(u,lambda_u,theta_u,epsilon_u)}      
+Porcu_Nsep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u,vartheta){vartheta*Dagumm(h,lambda_h,theta_h,epsilon_h)+(1-vartheta)*Dagumm(u,lambda_u,theta_u,epsilon_u)}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--chapter:end:04-KrigingSimple.Rmd-->
+
+---
+title: "Pulimiento de medianas"
+output: html_document
+date: "2022-11-22"
+---
+
+# Pulimiento de medianas
+Esta es una alternativa al modelamiento de la media cuando los modelos de regresión polinómicos usuales no logran el objetivo de eliminar la tendencia ya sea porque el tipo de tendencia corresponde mas a unas ventanas móviles o porque hay presentes datos atípicos.
+
+## Cargar librerias
+
+Lista de librerías con link a la documentación.
+
+```{r}
+library(gstat)
+library(sp)
+library(mvtnorm)
+```
+
+- [gstat](https://cran.r-project.org/web/packages/gstat/gstat.pdf)
+- [sp](https://cran.r-project.org/web/packages/sp/sp.pdf)
+
+## Grilla de las ubicaciones espaciales.
+
+```{r}
+n_x <- 4
+n_y <- 6
+x <- seq(0, 1, len = n_x)
+y <- seq(0, 1, len = n_y)
+coordenadas <- as.data.frame(expand.grid(x, y))
+names(coordenadas) <- c("X", "Y")
+```
+
+Encabezado coordenadas
+
+| X |	Y |
+| --- | --- |
+| 0.0000000 |	0.0 |
+| 0.3333333 |	0.0 |
+| 0.6666667 |	0.0 |
+| 1.0000000 |	0.0 |
+| 0.0000000	| 0.2 |
+| 0.3333333	| 0.2 |
+
+## Definición de objeto VGM
+
+Esto define un objeto vgm que es el tipo de objeto que usa el paquete gstat para los modelos teóricos de variograma. Con este objeto se pueden definir modelos anidados.
+
+- [vgm](https://cran.r-project.org/web/packages/gstat/gstat.pdf#page=73)
+
+```{r}
+vario <- vgm(10, # Punto de silla
+             "Exp", # Modelo, ver documentación
+             0.5)  # Rango
+print(vario)
+```
+
+## Matriz de varianza dadas coordenadas.
+- [vgmArea](https://cran.r-project.org/web/packages/gstat/gstat.pdf#page=78)
+- [coordinates](https://cran.r-project.org/web/packages/sp/sp.pdf#page=16)
+
+```{r}
+coordinates(coordenadas) <- ~X + Y
+class(coordenadas) # Cambio de objedto dataframe a sp
+```
+
+```{r}
+cov_mat <- vgmArea(coordenadas, # Matriz de ubiaciones SP
+        vgm = vario) # VGM object
+
+print(dim(cov_mat))
+```
+
+## Simulación.
+
+Simulación dada la media y la matriz de varianza
+
+```{r}
+mu  <- rep(0, n_x * n_y) # Media del proceso
+simu <- rmvnorm(1,
+                mean = mu,
+                sigma = cov_mat)
+print(simu[1:5])
+```
+
+## Pulimiento de medianas
+
+Unir las coordenadas con la columna de simulación
+
+```{r}
+data <- as.data.frame(cbind(coordenadas@coords,
+                            Simula = t(simu)))
+names(data) <- c("X", "Y", "Var")
+print(head(data))
+```
+
+Reshape para matriz, esto transforma la tabla de datos en matriz
+
+```{r}
+tabla <- reshape2::dcast(data,
+                         X ~ Y,
+                         value.var = "Var")
+rownames(tabla) <- tabla[, 1]
+tabla <- tabla[, c(-1)]
+print(tabla)
+```
+
+Pulimiento de medianas de la tabla
+
+```{r}
+med <- medpolish(tabla)
+```
+
+```{r}
+geo_data <- reshape2::melt(med$residuals)
+print(med)
+```
+
+Reshape de los datos, con efecto de la fila y la columna
+
+```{r}
+tabla_residuales <- as.data.frame(med$residuals)
+names(tabla_residuales) <- med$col
+rownames(tabla_residuales) <- med$row
+geo_data <- reshape2::melt(as.matrix(tabla_residuales))
+
+geo_data <- cbind(data,
+                  geo_data,
+                  med$overall)
+names(geo_data) <- c("X",
+                     "Y",
+                     "Var",
+                     "Efecto fila",
+                     "Efecto columa",
+                     "Residual",
+                     "Efecto Global")
+print(geo_data)
+```
+
+Validación de la descomposición
+
+```{r}
+valida <- cbind(geo_data$Var,
+                geo_data[["Efecto fila"]] +
+                geo_data[["Efecto columa"]] +
+                geo_data[["Residual"]] +
+                geo_data[["Efecto Global"]])
+valida <- as.data.frame(valida)
+names(valida) <- c("datos", "suma")
+print(valida)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--chapter:end:05-PulimientoMedianas.Rmd-->
+
+---
+title: "Introducción proceso espacial bivariado"
+output: html_document
+date: "2022-11-22"
+---
+
+# Introducción proceso espacial bivariado
+
+Martha Bohorquez
+
+19/5/2022
+
+## Librerías
+
+```{r}
+library(geoR)
+library(mvtnorm)
+```
+
+## Ubicaciones: En este caso se supone que ambos procesos están observados en los mismos lugares
+
+```{r}
+x=seq(0,1,len=3)
+y=seq(0,1,len=4)
+coordenadas=expand.grid(x,y)
+Mat_dist=as.matrix(dist(coordenadas))
+```
+
+## Modelo lineal de coregionalización
+
+```{r}
+Cova1=function(h,a){exp(-h/a)}
+Cova2=function(h,a){ifelse(h <= a, 1-1.5*(h/a)+0.5*(h/a)^3, 0)}
+B1=matrix(c(26.3,0.3,0.3,2.1),nrow=2,byrow=T)
+B2=matrix(c(2.1,1.3,1.3,17.5),nrow=2,byrow=T)
+Mat_Cov_bloque11=B1[1,1]*Cova1(Mat_dist,1)+B2[1,1]*Cova2(Mat_dist,0.5)
+Mat_Cov_bloque22=B1[2,2]*Cova1(Mat_dist,1)+B2[2,2]*Cova2(Mat_dist,0.5)
+Mat_Cov_bloque12=B1[1,2]*Cova1(Mat_dist,1)+B2[1,2]*Cova2(Mat_dist,0.5)
+Mat_Cov_bloque21=B1[2,1]*Cova1(Mat_dist,1)+B2[2,1]*Cova2(Mat_dist,0.5)
+MAT_COV=rbind(cbind(Mat_Cov_bloque11,Mat_Cov_bloque12),cbind(Mat_Cov_bloque21,Mat_Cov_bloque22))
+dim(MAT_COV)
+```
+
+```{r}
+det(MAT_COV)
+```
+
+
+## Simulación de un proceso espacial Gaussiano bivariado
+
+```{r}
+sim1=rmvnorm(1,mean=rep(0,2*nrow(coordenadas)), sigma=MAT_COV)
+datos=cbind(coordenadas,z1=sim1[1:12],z2=sim1[13:24])
+```
+
+
+
+
+
+
+<!--chapter:end:06-IntroProcesoEspacialBivariado.Rmd-->
+
+---
+title: "Geoestadística con sgeostat"
+output: html_document
+date: "2022-09-18"
+---
+
+# Geoestadística con sgeostat
+
+## Data Load
+
+```{r}
+aquifer=read.table("data/aquifer.txt",head=T,dec=",")
+head(aquifer)
+```
+
+## Libraries
+
+```{r}
+library(scatterplot3d)
+library(ggplot2)
+library(cowplot)
+library(sgeostat)
+```
+
+## Including Plots
+
+```{r}
+g1=ggplot(aquifer, aes(Profundidad, Este)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Este") + 
+  ylab("Profundidad")
+
+g2=ggplot(aquifer, aes(Profundidad, Norte)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Norte") + 
+  ylab("Profundidad")
+
+g3=ggplot(aquifer, aes(Profundidad, Este*Norte)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Interacción este,norte") + 
+  ylab("Profundidad")
+plot_grid(g1,g2,g3)
+```
+
+```{r}
+cor(aquifer)
+```
+
+```{r}
+scatterplot3d(aquifer, highlight.3d=TRUE, col.axis="blue",
+col.grid="lightblue", main="Tendencia de Profundidad", pch=20)
+```
+
+```{r}
+reg1 <- lm(Profundidad ~ Este + Norte, data = aquifer)
+residuales1  <-  residuals(reg1)
+summary(reg1)
+```
+
+```{r}
+anova(reg1)
+```
+
+```{r}
+reg2 <- lm(Profundidad ~ Este*Norte, data = aquifer)
+residuales2  <-  residuals(reg2)
+summary(reg2)
+```
+
+```{r}
+anova(reg2)
+```
+
+```{r}
+reg3 <- lm(Profundidad ~ Este*Norte+I(Este^2)*I(Norte^2), data = aquifer)
+residuales3  <-  residuals(reg3)
+summary(reg3)
+```
+
+```{r}
+anova(reg3)
+```
+
+```{r}
+aquifer=data.frame(aquifer,resi=residuales2)
+aquifer_points=point(aquifer, x="Este", y="Norte")
+aquifer_pair=pair(aquifer_points,num.lags=10)
+```
+
+```{r}
+aquifer_pair$bins
+```
+
+```{r}
+aquifer_pair$dist
+```
+
+```{r}
+aquifer_pair$from
+```
+
+```{r}
+aquifer_pair$lags
+```
+
+```{r}
+aquifer_pair$to
+```
+
+```{r}
+aquifer.v<-est.variogram(aquifer_points,aquifer_pair,'resi')
+```
+
+```{r}
+g4=ggplot(aquifer, aes(resi, Este)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Este") + 
+  ylab("residuales2")
+
+g5=ggplot(aquifer, aes(resi, Norte)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Norte") + 
+  ylab("residuales2")
+
+plot_grid(g4,g5)
+```
+
+```{r}
+aquifer_points=point(aquifer, x="Este", y="Norte")
+fit.trend(aquifer_points,at="Profundidad", np=2, plot.it=TRUE)
+```
+
+```{r}
+g6=ggplot(aquifer.v, aes(resi, Norte)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Norte") + 
+  ylab("residuales2")
+
+g6=ggplot(aquifer.v, aes(bins, classic)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Rezago espacial, h") + 
+  ylab("Estimador clásico del variograma")
+
+g7=ggplot(aquifer.v, aes(bins, robust)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Rezago espacial, h") + 
+  ylab("Estimador robusto 1 del variograma")
+
+g8=ggplot(aquifer.v, aes(bins, med)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Rezago espacial, h") + 
+  ylab("Estimador robusto 2 del variograma")
+
+plot_grid(g6,g7,g8,nrow=1,ncol=3)
+```
+
+```{r}
+#par(mfrow=c(1,3))
+print(aquifer.v)
+```
+
+```{r}
+plot(aquifer.v$robust)
+```
+
+```{r}
+plot(aquifer.v$med)
+```
+
+```{r}
+#points(aquifer.v$robust,col="red")
+#points(aquifer.v$med,"blue")
+aquifer.vmodExp<-fit.exponential(aquifer.v,c0=0,ce=40000,ae=20,plot.it=TRUE,iterations=30)
+```
+
+```{r}
+aquifer.vmodGau<-fit.gaussian(aquifer.v,c0=0,cg=50000,ag=50,plot.it=TRUE,iterations=30)
+```
+
+```{r}
+aquifer.vmodWave<-fit.wave(aquifer.v,c0=0,cw=40000,aw=10,plot.it=TRUE,iterations=30,weighted=T)
+```
+
+```{r}
+curve(65000*(1-(14/x)*sin(x/14)),0,300,ylim=c(0,200000))
+points(aquifer.v$bins,aquifer.v$classic,col=3)
+text(aquifer.v$bins,aquifer.v$classic,aquifer.v$n,col=2)
+```
+
+```{r}
+curve(200000*(1-exp(-x/170)),0,300)
+points(aquifer.v$bins,aquifer.v$classic,col=2)
+```
+
+```{r}
+curve(65000*(1-(14/x)*sin(x/14)),0,300,ylim=c(0,200000))
+points(aquifer.v$bins,aquifer.v$classic,col=3)
+text(aquifer.v$bins,aquifer.v$classic,aquifer.v$n,col=2)
+```
+
+```{r}
+aquifer.vmodExp<-fit.exponential(aquifer.v,c0=0,ce=200000,ae=170,plot.it=TRUE,iterations=30,weighted=T)
+```
+
+```{r}
+aquifer.vmodwave<-fit.wave(aquifer.v,c0=4000,cw=30000,aw=15,plot.it=TRUE,iterations=0,weighted=T)
+```
+
+```{r}
+aquifer.vmodExp_0<-fit.exponential(aquifer.v,c0=0,ce=200000,ae=170,plot.it=TRUE,iterations=0,weighted=T)
+```
+
+```{r}
+aquifer.vmodwave_0<-fit.wave(aquifer.v,c0=4000,cw=30000,aw=15,plot.it=TRUE,iterations=0,weighted=T)
+```
+
+```{r}
+aquifer.spherical<-fit.spherical(aquifer.v,c0=0,cs=35000,as=70,plot.it=TRUE,iterations=0,weighted=T)
+```
+
+```{r}
+ggplot(aquifer.v, aes(bins, classic)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Rezago espacial, h") + 
+  ylab("Estimador clásico del variograma")+
+  xlim(0, 300) +
+  geom_function(aes(color = "Exponencial"),
+    fun =~4000+150000*(1-exp(-.x/100)) 
+    ) +
+  geom_function(aes(color = "Seno cardinal"),
+    fun =~4000+30000*(1-((15/.x)*sin(.x/15)))             
+    ) + xlab("Rezago espacial") + ylab("Modelos teóricos de semivariogramas") 
+```
+
+```{r}
+Kriging_aquifer <- point(data.frame(list(x=10,y=80)))
+Kriging_aquifer <- krige(Kriging_aquifer, aquifer_points, 'resi', aquifer.vmodExp_0)
+```
+
+```{r}
+Kriging_aquifer
+```
+
+```{r}
+Kriging_aquifer$sigma2hat
+```
+
+```{r}
+Kriging_aquifer <- point(data.frame(list(x=10,y=80)))
+Kriging_aquifer <- krige(Kriging_aquifer, aquifer_points, 'resi', aquifer.vmodwave_0)
+```
+
+```{r}
+Kriging_aquifer
+```
+
+```{r}
+Kriging_aquifer$zhat
+```
+
+```{r}
+Kriging_aquifer$sigma2hat
+```
+
+```{r}
+grid <- list(x=seq(min(aquifer$Este),max(aquifer$Este),by=20),y=seq(min(aquifer$Norte),max(aquifer$Norte),by=10))
+grid$xr <- range(grid$x)
+grid$xs <- grid$xr[2] - grid$xr[1]
+grid$yr <- range(grid$y)
+grid$ys <- grid$yr[2] - grid$yr[1]
+grid$max <- max(grid$xs, grid$ys)
+grid$xy <- data.frame(cbind(c(matrix(grid$x, length(grid$x), length(grid$y))),
+c(matrix(grid$y, length(grid$x), length(grid$y), byrow=TRUE))))
+colnames(grid$xy) <- c("x", "y")
+grid$point <- point(grid$xy)
+grid$krige <- krige(grid$point,aquifer_points,'resi',aquifer.vmodwave_0,maxdist=180,extrap=FALSE)
+```
+
+```{r}
+op <- par(no.readonly = TRUE)
+par(pty="s")
+plot(grid$xy, type="n", xlim=c(grid$xr[1], grid$xr[1]+grid$max),ylim=c(grid$yr[1], grid$yr[1]+grid$max))
+image(grid$x,grid$y,matrix(grid$krige$zhat,length(grid$x),length(grid$y)),add=TRUE)
+contour(grid$x,grid$y,matrix(grid$krige$zhat,length(grid$x),length(grid$y)),add=TRUE)
+```
+
+```{r}
+x11()
+op <- par(no.readonly = TRUE)
+par(pty="s")
+plot(grid$xy, type="n", xlim=c(grid$xr[1], grid$xr[1]+grid$max),ylim=c(grid$yr[1], grid$yr[1]+grid$max))
+image(grid$x,grid$y,matrix(grid$krige$sigma2hat,length(grid$x),length(grid$y)), add=TRUE)
+contour(grid$x,grid$y,matrix(grid$krige$sigma2hat,length(grid$x),length(grid$y)),add=TRUE)
+```
+
+
+
+
+<!--chapter:end:07-GeoestadisticaSGEOSTAT.Rmd-->
+
+---
+title: "Cokriging"
+output: html_document
+date: "2022-11-22"
+---
+
+# Cokriging
+
+## Librerías
+
+```{r}
+library(sp)
+library(gstat)
+library(sf)
+library(rgdal)
+library(ggplot2)
+library(plotly)
+library(Matrix)
+```
+
+## Descripción de los datos
+
+Cokriging para las variables $NO2$, $O3$, y $NOX$. La variable de principal riesgo es ozono ($O3$), así que se usan las otras dos como covariables espaciales. Día 2020/01/16 A las 17 horas.
+
+```{r}
+datos <- read.csv("2_COK_G_stat/Air_polution_cdmx_2020_01_16_17h.csv")
+datos <- datos[c("Estacion",
+               "X",
+               "Y",
+               "NO2",
+               "O3",
+               "NOX")]
+
+pander::pander((datos))
+```
+
+
+## Matrices de coregionalización.
+
+### Matriz definida positiva para el modelo Esférico.
+
+```{r}
+mat1 <- cbind(c(30, 30, 30),
+              c(30, 50, 30),
+              c(30, 30, 35))
+#matriz definida positiva "cercana"
+mat1 <- data.frame(as.matrix(nearPD(mat1)$mat))
+names(mat1) <- c("NO2", "O3", "NOX")
+row.names(mat1) <- c("NO2", "O3", "NOX")
+pander::pander(mat1)
+```
+
+### Matriz definida positiva para el modelo efecto Hueco.
+
+```{r}
+mat2 <- cbind(c(13.02, 24.5, 18.739),
+              c(24.58, 46.4, 35.36),
+              c(18.73, 35.36, 26.95))
+mat2 <- data.frame(as.matrix(nearPD(mat2)$mat))
+names(mat2) <- c("NO2", "O3", "NOX")
+row.names(mat2) <- c("NO2", "O3", "NOX")
+pander::pander(mat2)
+```
+
+## Definición de objeto en gstat
+
+### Semivariogramas univariados
+
+```{r}
+vgmno2 <- vgm(psill = mat1[1, 1],
+            model = "Sph",
+            range = 6096,
+            add.to = vgm(psill = mat2[1, 1],
+                         model = "Hol",
+                         range = 2294))
+
+vgmo3 <- vgm(psill = mat1[2, 2],
+            model = "Sph",
+            range = 6096,
+            add.to = vgm(psill = mat2[2, 2],
+                         model = "Hol",
+                         range = 2294))
+
+vgmnox <- vgm(psill = mat1[3, 3],
+            model = "Sph",
+            range = 6096,
+            add.to = vgm(psill = mat2[3, 3],
+                         model = "Hol",
+                         range = 2294))
+
+```
+
+
+### Semivarogramas cruzados (Bivariados)
+
+```{r}
+vgmno2_o3 <- vgm(psill = mat1[1, 2], model = "Sph",
+            range = 6096,
+            add.to = vgm(psill = mat2[1, 2],
+                         model = "Hol",
+                         range = 2294))
+
+vgmno2_nox <- vgm(psill = mat1[1, 3],
+            model = "Sph",
+            range = 6096,
+            add.to = vgm(psill = mat2[1, 3],
+                         model = "Hol",
+                         range = 2294))
+
+vgmno3_nox <- vgm(psill = mat1[2, 3],
+                  model = "Sph",
+                  range = 6096,
+                  add.to = vgm(psill = mat2[2, 3],
+                               model = "Hol",
+                               range = 2294))
+```
+
+
+### gstat
+
+```{r}
+remove_na <- function(frame, vari_) {
+
+    # Remove na from sp object
+
+    datos1 <- frame
+
+    bool <- !is.na(datos1@data[vari_])
+    datos1@data <- datos1@data[bool, ]
+    datos1@coords <- datos1@coords[bool, ]
+
+    return(datos1)
+
+}
+
+coordinates(datos) <- ~ X + Y
+
+g_st <- gstat(NULL,
+              id = "NO2",
+              formula = NO2 ~ X + Y,
+              model = vgmno2,
+              data = remove_na(datos, "NO2"))
+
+g_st <- gstat(g_st,
+              id = "O3",
+              formula = O3 ~ Y,
+              model = vgmo3,
+              data = remove_na(datos, "O3"))
+
+g_st <- gstat(g_st,
+              id = "NOX",
+              formula = NOX ~ Y,
+              model = vgmnox,
+              data = remove_na(datos, "NOX"))
+#Cruzados
+
+
+g_st <- gstat(g_st,
+              id = c("NO2", "O3"),
+              model = vgmno2_o3)
+
+g_st <- gstat(g_st,
+              id = c("NO2", "NOX"),
+              model = vgmno2_nox)
+
+g_st <- gstat(g_st,
+              id = c("O3", "NOX"),
+              model = vgmno3_nox)
+
+
+pander::pander(do.call(rbind, g_st$model)[, 1:3])
+```
+
+
+### Estimación del semivariograma
+
+```{r}
+plot(variogram(g_st),
+     model = g_st$model,
+     pl = T,
+     xlab = "Distancias",
+     ylab = "Semivarianza")
+```
+
+### Mapas de predicción de O3 con las covariables espaciales NO2 y NOX
+
+```{r}
+prediction_plot <- function(g_object, variable, map_path) {
+
+    map <- readOGR(map_path)
+    new <- sp::spsample(map, n = 100000, type = "regular")
+    coordinates(new) ~ x1 + x2
+    colnames(new@coords) <- c("X", "Y")
+
+    predic <- predict(g_object, newdata = new)
+
+    prediction <- data.frame(predic)
+
+    pred <- paste(variable, ".pred", sep = "")
+
+    plot <- ggplot(prediction, aes_string("X", "Y", fill = pred)) +
+            geom_tile() +
+            scale_fill_viridis_c() +
+            theme_void()
+
+    return(plot)
+
+}
+
+
+variance_plot <- function(g_object, variable, map_path) {
+
+    map <- readOGR(map_path)
+    new <- sp::spsample(map, n = 10000, type = "regular")
+    coordinates(new) ~ x1 + x2
+    colnames(new@coords) <- c("X", "Y")
+
+    predic <- predict(g_object, newdata = new)
+
+    prediction <- data.frame(predic)
+
+    var <- paste(variable, ".var", sep = "")
+
+    plot <- ggplot(prediction, aes_string("X", "Y", fill = var)) +
+            geom_tile() +
+            scale_fill_viridis_c(option = "inferno",
+                                 direction = -1) +
+            theme_void()
+
+    return(plot)
+
+}
+
+cv_plot <- function(g_object, variable, map_path) {
+
+    map <- readOGR(map_path)
+    new <- sp::spsample(map, n = 10000, type = "regular")
+    coordinates(new) ~ x1 + x2
+    colnames(new@coords) <- c("X", "Y")
+
+    predic <- predict(g_object, newdata = new)
+
+    prediction <- data.frame(predic)
+    pred <- paste(variable, ".pred", sep = "")
+    var <- paste(variable, ".var", sep = "")
+    aux <- abs(sqrt(prediction[var]) / abs(prediction[pred]))
+    aux[aux > 1] <- 1
+    prediction["cv"] <- aux
+
+    plot <- ggplot(prediction, aes_string("X", "Y", fill = "cv")) +
+            geom_tile() +
+            scale_fill_viridis_c(option = "magma",
+                                 direction = -1) +
+            theme_void()
+
+    return(plot)
+}
+
+
+pl1 <- prediction_plot(g_st, "O3",
+                       "2_COK_G_stat/SP/mpiosutm.shp")
+```
+
+```{r}
+pl2 <- variance_plot(g_st, "O3",
+                     "2_COK_G_stat/SP/mpiosutm.shp")
+```
+
+```{r}
+pl3 <- cv_plot(g_st, "O3",
+               "2_COK_G_stat/SP/mpiosutm.shp")
+```
+
+```{r}
+ggplotly(pl1)
+```
+
+```{r}
+ggplotly(pl2)
+```
+
+```{r}
+ggplotly(pl3)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--chapter:end:08-Cokriging.Rmd-->
+

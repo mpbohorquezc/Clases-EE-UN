@@ -14,6 +14,7 @@ estudio-de-mercadeo-espacial-bac
 paquetes
 lectura-de-datos
 cruce-de-información-y-arreglo-de-coordenadas
+pre-procesamiento-de-datos
 matriz-de-vecindades
 mapa-de-valores-observados
 pruebas-de-autocorrelación
@@ -56,3 +57,5 @@ semivarogramas-cruzados-bivariados
 gstat
 estimación-del-semivariograma
 mapas-de-predicción-de-o3-con-las-covariables-espaciales-no2-y-nox
+modelos-de-regresión-espacial
+estudio-de-mercadeo

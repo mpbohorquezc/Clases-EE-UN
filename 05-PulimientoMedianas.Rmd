@@ -5,10 +5,9 @@ date: "2022-11-22"
 ---
 
 # Pulimiento de medianas
+Esta es una alternativa al modelamiento de la media cuando los modelos de regresión polinómicos usuales no logran el objetivo de eliminar la tendencia ya sea porque el tipo de tendencia corresponde mas a unas ventanas móviles o porque hay presentes datos atípicos.
 
-## Simulación de un campo aleatorio.
-
-### Cargar librerias
+## Cargar librerias
 
 Lista de librerías con link a la documentación.
 
@@ -21,7 +20,7 @@ library(mvtnorm)
 - [gstat](https://cran.r-project.org/web/packages/gstat/gstat.pdf)
 - [sp](https://cran.r-project.org/web/packages/sp/sp.pdf)
 
-### Grilla de las ubicaciones espaciales.
+## Grilla de las ubicaciones espaciales.
 
 ```{r}
 n_x <- 4
@@ -43,7 +42,7 @@ Encabezado coordenadas
 | 0.0000000	| 0.2 |
 | 0.3333333	| 0.2 |
 
-### Definición de objeto VGM
+## Definición de objeto VGM
 
 Esto define un objeto vgm que es el tipo de objeto que usa el paquete gstat para los modelos teóricos de variograma. Con este objeto se pueden definir modelos anidados.
 
@@ -56,7 +55,7 @@ vario <- vgm(10, # Punto de silla
 print(vario)
 ```
 
-### Matriz de varianza dadas coordenadas.
+## Matriz de varianza dadas coordenadas.
 - [vgmArea](https://cran.r-project.org/web/packages/gstat/gstat.pdf#page=78)
 - [coordinates](https://cran.r-project.org/web/packages/sp/sp.pdf#page=16)
 
@@ -72,7 +71,7 @@ cov_mat <- vgmArea(coordenadas, # Matriz de ubiaciones SP
 print(dim(cov_mat))
 ```
 
-### Simulación.
+## Simulación.
 
 Simulación dada la media y la matriz de varianza
 
@@ -84,7 +83,7 @@ simu <- rmvnorm(1,
 print(simu[1:5])
 ```
 
-### Pulimiento de medianas
+## Pulimiento de medianas
 
 Unir las coordenadas con la columna de simulación
 

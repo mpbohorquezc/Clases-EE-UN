@@ -1,10 +1,13 @@
 ---
-title: "03-EstudioMercadeoEspacial"
+title: "Modelos de regresión espacial"
+subtitle: "Estudio de Mercadeo"
 output: html_document
-date: "2022-11-16"
+date: "2023-01-31"
 ---
 
-# Estudio de Mercadeo Espacial BAC
+# Modelos de regresión espacial
+## Estudio de Mercadeo
+Se comparan varios tipos de modelos de regresión espacial para ver con cual se obtiene el mejor ajuste. Se consideran modelos autoregresivos y de medias móvviles así como su combinación.
 
 ## Paquetes
 
