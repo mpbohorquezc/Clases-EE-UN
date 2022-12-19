@@ -10,7 +10,8 @@ code-mortality
 incidence
 packages-incidence
 code-incidence
-estudio-de-mercadeo-espacial-bac
+modelos-de-regresión-espacial
+estudio-de-mercadeo
 paquetes
 lectura-de-datos
 cruce-de-información-y-arreglo-de-coordenadas
@@ -29,7 +30,6 @@ algunas-funciones-de-covarianza-espacio-temporal-no-separables
 c-r-e-s-s-i-e---h-u-a-n-g-1999
 gneiting-2002-combina-fun1-fun2-y-psi-en-gneiting
 pulimiento-de-medianas
-simulación-de-un-campo-aleatorio.
 cargar-librerias
 grilla-de-las-ubicaciones-espaciales.
 definición-de-objeto-vgm
@@ -57,5 +57,3 @@ semivarogramas-cruzados-bivariados
 gstat
 estimación-del-semivariograma
 mapas-de-predicción-de-o3-con-las-covariables-espaciales-no2-y-nox
-modelos-de-regresión-espacial
-estudio-de-mercadeo

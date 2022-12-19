@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Pre-procesamiento de datos | Modelos de regresión espacial</title>
-  <meta name="description" content="Chapter 4 Pre-procesamiento de datos | Modelos de regresión espacial" />
+  <title>Chapter 4 Pre-procesamiento de datos | Cokriging</title>
+  <meta name="description" content="Chapter 4 Pre-procesamiento de datos | Cokriging" />
   <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Pre-procesamiento de datos | Modelos de regresión espacial" />
+  <meta property="og:title" content="Chapter 4 Pre-procesamiento de datos | Cokriging" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Pre-procesamiento de datos | Modelos de regresión espacial" />
+  <meta name="twitter:title" content="Chapter 4 Pre-procesamiento de datos | Cokriging" />
   
   
   
@@ -23,7 +23,7 @@
 <meta name="author" content="…." />
 
 
-<meta name="date" content="2023-01-31" />
+<meta name="date" content="2022-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,13 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -187,12 +194,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html"><i class="fa fa-check"></i><b>6</b> Pulimiento de medianas</a>
 <ul>
-<li class="chapter" data-level="6.0.1" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#cargar-librerias"><i class="fa fa-check"></i><b>6.0.1</b> Cargar librerias</a></li>
-<li class="chapter" data-level="6.0.2" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#grilla-de-las-ubicaciones-espaciales."><i class="fa fa-check"></i><b>6.0.2</b> Grilla de las ubicaciones espaciales.</a></li>
-<li class="chapter" data-level="6.0.3" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#definición-de-objeto-vgm"><i class="fa fa-check"></i><b>6.0.3</b> Definición de objeto VGM</a></li>
-<li class="chapter" data-level="6.0.4" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#matriz-de-varianza-dadas-coordenadas."><i class="fa fa-check"></i><b>6.0.4</b> Matriz de varianza dadas coordenadas.</a></li>
-<li class="chapter" data-level="6.0.5" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#simulación."><i class="fa fa-check"></i><b>6.0.5</b> Simulación.</a></li>
-<li class="chapter" data-level="6.0.6" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#pulimiento-de-medianas-1"><i class="fa fa-check"></i><b>6.0.6</b> Pulimiento de medianas</a></li>
+<li class="chapter" data-level="6.1" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#cargar-librerias"><i class="fa fa-check"></i><b>6.1</b> Cargar librerias</a></li>
+<li class="chapter" data-level="6.2" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#grilla-de-las-ubicaciones-espaciales."><i class="fa fa-check"></i><b>6.2</b> Grilla de las ubicaciones espaciales.</a></li>
+<li class="chapter" data-level="6.3" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#definición-de-objeto-vgm"><i class="fa fa-check"></i><b>6.3</b> Definición de objeto VGM</a></li>
+<li class="chapter" data-level="6.4" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#matriz-de-varianza-dadas-coordenadas."><i class="fa fa-check"></i><b>6.4</b> Matriz de varianza dadas coordenadas.</a></li>
+<li class="chapter" data-level="6.5" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#simulación."><i class="fa fa-check"></i><b>6.5</b> Simulación.</a></li>
+<li class="chapter" data-level="6.6" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#pulimiento-de-medianas-1"><i class="fa fa-check"></i><b>6.6</b> Pulimiento de medianas</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="introducción-proceso-espacial-bivariado.html"><a href="introducción-proceso-espacial-bivariado.html"><i class="fa fa-check"></i><b>7</b> Introducción proceso espacial bivariado</a>
 <ul>
@@ -236,7 +243,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelos de regresión espacial</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cokriging</a>
           </h1>
         </div>
 
@@ -246,134 +253,118 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="pre-procesamiento-de-datos" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Pre-procesamiento de datos<a href="pre-procesamiento-de-datos.html#pre-procesamiento-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="pre-procesamiento-de-datos.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cruce de información con el shape cargado</span></span>
-<span id="cb53-2"><a href="pre-procesamiento-de-datos.html#cb53-2" aria-hidden="true" tabindex="-1"></a>Insumo <span class="ot">=</span> <span class="fu">merge</span>(Colombia, BASE, <span class="at">by.x=</span><span class="st">&quot;COD_DANE&quot;</span>, <span class="at">by.y=</span><span class="st">&quot;Cod&quot;</span>)</span>
-<span id="cb53-3"><a href="pre-procesamiento-de-datos.html#cb53-3" aria-hidden="true" tabindex="-1"></a>Insumo <span class="ot">=</span> <span class="fu">subset</span>(Insumo[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">31</span>,<span class="dv">33</span>),])</span>
-<span id="cb53-4"><a href="pre-procesamiento-de-datos.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversión a Coordenadas UTM</span></span>
-<span id="cb53-5"><a href="pre-procesamiento-de-datos.html#cb53-5" aria-hidden="true" tabindex="-1"></a>Crs.geo <span class="ot">=</span> <span class="fu">CRS</span>(<span class="st">&quot;+proj=tmerc +lat_0=4.599047222222222 +lon_0=-74.08091666666667 +k=1 +x_0=1000000 +y_0=1000000 +ellps=intl +towgs84=307,304,-318,0,0,0,0 +units=m +no_defs&quot;</span>)  </span></code></pre></div>
-<pre><code>## Warning in showSRID(uprojargs, format = &quot;PROJ&quot;, multiline = &quot;NO&quot;, prefer_proj =
-## prefer_proj): Discarded datum Unknown based on International 1924 (Hayford 1909,
-## 1910) ellipsoid in Proj4 definition</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="pre-procesamiento-de-datos.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">proj4string</span>(Insumo) <span class="ot">&lt;-</span> Crs.geo </span>
-<span id="cb55-2"><a href="pre-procesamiento-de-datos.html#cb55-2" aria-hidden="true" tabindex="-1"></a>Insumo.utm <span class="ot">=</span> <span class="fu">spTransform</span>(Insumo, <span class="fu">CRS</span>(<span class="st">&quot;+init=epsg:3724 +units=km&quot;</span>))</span></code></pre></div>
-<pre><code>## Warning in showSRID(uprojargs, format = &quot;PROJ&quot;, multiline = &quot;NO&quot;, prefer_proj
-## = prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in Proj4
-## definition</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="pre-procesamiento-de-datos.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cruce de información con el shape cargado</span></span>
+<span id="cb140-2"><a href="pre-procesamiento-de-datos.html#cb140-2" aria-hidden="true" tabindex="-1"></a>Insumo <span class="ot">=</span> <span class="fu">merge</span>(Colombia, BASE, <span class="at">by.x=</span><span class="st">&quot;COD_DANE&quot;</span>, <span class="at">by.y=</span><span class="st">&quot;Cod&quot;</span>)</span>
+<span id="cb140-3"><a href="pre-procesamiento-de-datos.html#cb140-3" aria-hidden="true" tabindex="-1"></a>Insumo <span class="ot">=</span> <span class="fu">subset</span>(Insumo[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">31</span>,<span class="dv">33</span>),])</span>
+<span id="cb140-4"><a href="pre-procesamiento-de-datos.html#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversión a Coordenadas UTM</span></span>
+<span id="cb140-5"><a href="pre-procesamiento-de-datos.html#cb140-5" aria-hidden="true" tabindex="-1"></a>Crs.geo <span class="ot">=</span> <span class="fu">CRS</span>(<span class="st">&quot;+proj=tmerc +lat_0=4.599047222222222 +lon_0=-74.08091666666667 +k=1 +x_0=1000000 +y_0=1000000 +ellps=intl +towgs84=307,304,-318,0,0,0,0 +units=m +no_defs&quot;</span>)  </span>
+<span id="cb140-6"><a href="pre-procesamiento-de-datos.html#cb140-6" aria-hidden="true" tabindex="-1"></a><span class="fu">proj4string</span>(Insumo) <span class="ot">&lt;-</span> Crs.geo </span>
+<span id="cb140-7"><a href="pre-procesamiento-de-datos.html#cb140-7" aria-hidden="true" tabindex="-1"></a>Insumo.utm <span class="ot">=</span> <span class="fu">spTransform</span>(Insumo, <span class="fu">CRS</span>(<span class="st">&quot;+init=epsg:3724 +units=km&quot;</span>))</span></code></pre></div>
 <div id="matriz-de-vecindades" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Matriz de vecindades<a href="pre-procesamiento-de-datos.html#matriz-de-vecindades" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="pre-procesamiento-de-datos.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#---</span></span>
-<span id="cb57-2"><a href="pre-procesamiento-de-datos.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co"># MATRIZ DE VECINDADES (W)</span></span>
-<span id="cb57-3"><a href="pre-procesamiento-de-datos.html#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co">#---</span></span>
-<span id="cb57-4"><a href="pre-procesamiento-de-datos.html#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Centroides de las Áreas</span></span>
-<span id="cb57-5"><a href="pre-procesamiento-de-datos.html#cb57-5" aria-hidden="true" tabindex="-1"></a>Centros <span class="ot">=</span> <span class="fu">getSpPPolygonsLabptSlots</span>(Insumo.utm)</span></code></pre></div>
-<pre><code>## Warning: use coordinates method</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="pre-procesamiento-de-datos.html#cb59-1" aria-hidden="true" tabindex="-1"></a>Centroids <span class="ot">&lt;-</span> <span class="fu">SpatialPointsDataFrame</span>(<span class="at">coords =</span> Centros, <span class="at">data=</span>Insumo.utm<span class="sc">@</span>data, </span>
-<span id="cb59-2"><a href="pre-procesamiento-de-datos.html#cb59-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">proj4string=</span><span class="fu">CRS</span>(<span class="st">&quot;+init=epsg:3724 +units=km&quot;</span>))</span>
-<span id="cb59-3"><a href="pre-procesamiento-de-datos.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de Distancias entre los Centriodes</span></span>
-<span id="cb59-4"><a href="pre-procesamiento-de-datos.html#cb59-4" aria-hidden="true" tabindex="-1"></a>Wdist <span class="ot">=</span> <span class="fu">dist</span>(Centros, <span class="at">up=</span>T)</span>
-<span id="cb59-5"><a href="pre-procesamiento-de-datos.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz W de vecindades</span></span>
-<span id="cb59-6"><a href="pre-procesamiento-de-datos.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pgirmess)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;pgirmess&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:psych&#39;:
-## 
-##     shannon</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="pre-procesamiento-de-datos.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(HistogramTools)</span>
-<span id="cb62-2"><a href="pre-procesamiento-de-datos.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(strucchange)</span></code></pre></div>
-<pre><code>## Loading required package: zoo</code></pre>
-<pre><code>## 
-## Attaching package: &#39;zoo&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     as.Date, as.Date.numeric</code></pre>
-<pre><code>## Loading required package: sandwich</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="pre-procesamiento-de-datos.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
-<span id="cb67-2"><a href="pre-procesamiento-de-datos.html#cb67-2" aria-hidden="true" tabindex="-1"></a>Insumo.nb <span class="ot">=</span> <span class="fu">poly2nb</span>(Insumo.utm, <span class="at">queen=</span>T)</span>
-<span id="cb67-3"><a href="pre-procesamiento-de-datos.html#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="co">#n &lt;- max(sapply(Insumo.nb, length))</span></span>
-<span id="cb67-4"><a href="pre-procesamiento-de-datos.html#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ll &lt;- lapply(Insumo.nb, function(X) {</span></span>
-<span id="cb67-5"><a href="pre-procesamiento-de-datos.html#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  c(as.numeric(X), rep(0, times = n - length(X)))</span></span>
-<span id="cb67-6"><a href="pre-procesamiento-de-datos.html#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="co">#})</span></span>
-<span id="cb67-7"><a href="pre-procesamiento-de-datos.html#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="co">#out &lt;- do.call(cbind, ll)</span></span>
-<span id="cb67-8"><a href="pre-procesamiento-de-datos.html#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Departamentos&lt;-Insumo$Departamento</span></span>
-<span id="cb67-9"><a href="pre-procesamiento-de-datos.html#cb67-9" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW&lt;-matrix(NA,32,32)</span></span>
-<span id="cb67-10"><a href="pre-procesamiento-de-datos.html#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:8) {</span></span>
-<span id="cb67-11"><a href="pre-procesamiento-de-datos.html#cb67-11" aria-hidden="true" tabindex="-1"></a><span class="co">#  for (j in 1:32) {</span></span>
-<span id="cb67-12"><a href="pre-procesamiento-de-datos.html#cb67-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    if (out[i,j]!=0) {</span></span>
-<span id="cb67-13"><a href="pre-procesamiento-de-datos.html#cb67-13" aria-hidden="true" tabindex="-1"></a><span class="co">#      MatW[out[i,j],j]&lt;-1</span></span>
-<span id="cb67-14"><a href="pre-procesamiento-de-datos.html#cb67-14" aria-hidden="true" tabindex="-1"></a><span class="co">#    } else{MatW[out[i,j],j]&lt;-0}</span></span>
-<span id="cb67-15"><a href="pre-procesamiento-de-datos.html#cb67-15" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
-<span id="cb67-16"><a href="pre-procesamiento-de-datos.html#cb67-16" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
-<span id="cb67-17"><a href="pre-procesamiento-de-datos.html#cb67-17" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:32) {</span></span>
-<span id="cb67-18"><a href="pre-procesamiento-de-datos.html#cb67-18" aria-hidden="true" tabindex="-1"></a><span class="co">#  for (j in 1:32) {</span></span>
-<span id="cb67-19"><a href="pre-procesamiento-de-datos.html#cb67-19" aria-hidden="true" tabindex="-1"></a><span class="co">#    if (is.na(MatW[i,j])) {</span></span>
-<span id="cb67-20"><a href="pre-procesamiento-de-datos.html#cb67-20" aria-hidden="true" tabindex="-1"></a><span class="co">#      MatW[i,j]&lt;-0</span></span>
-<span id="cb67-21"><a href="pre-procesamiento-de-datos.html#cb67-21" aria-hidden="true" tabindex="-1"></a><span class="co">#    }</span></span>
-<span id="cb67-22"><a href="pre-procesamiento-de-datos.html#cb67-22" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
-<span id="cb67-23"><a href="pre-procesamiento-de-datos.html#cb67-23" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
-<span id="cb67-24"><a href="pre-procesamiento-de-datos.html#cb67-24" aria-hidden="true" tabindex="-1"></a><span class="co">#colnames(MatW)&lt;-Departamentos</span></span>
-<span id="cb67-25"><a href="pre-procesamiento-de-datos.html#cb67-25" aria-hidden="true" tabindex="-1"></a><span class="co">#rownames(MatW)&lt;-Departamentos</span></span>
-<span id="cb67-26"><a href="pre-procesamiento-de-datos.html#cb67-26" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW1&lt;-MatW[,1:16]</span></span>
-<span id="cb67-27"><a href="pre-procesamiento-de-datos.html#cb67-27" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW2&lt;-MatW[,17:32]</span></span>
-<span id="cb67-28"><a href="pre-procesamiento-de-datos.html#cb67-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Martiz W (Estilos)</span></span>
-<span id="cb67-29"><a href="pre-procesamiento-de-datos.html#cb67-29" aria-hidden="true" tabindex="-1"></a>Insumo.lw <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb)</span>
-<span id="cb67-30"><a href="pre-procesamiento-de-datos.html#cb67-30" aria-hidden="true" tabindex="-1"></a>Insumo.lwb <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;B&quot;</span>)</span>
-<span id="cb67-31"><a href="pre-procesamiento-de-datos.html#cb67-31" aria-hidden="true" tabindex="-1"></a>Insumo.lwc <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;C&quot;</span>)</span>
-<span id="cb67-32"><a href="pre-procesamiento-de-datos.html#cb67-32" aria-hidden="true" tabindex="-1"></a>Insumo.lwu <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;U&quot;</span>)</span>
-<span id="cb67-33"><a href="pre-procesamiento-de-datos.html#cb67-33" aria-hidden="true" tabindex="-1"></a>Insumo.lww <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;W&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="pre-procesamiento-de-datos.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="co">#---</span></span>
+<span id="cb141-2"><a href="pre-procesamiento-de-datos.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="co"># MATRIZ DE VECINDADES (W)</span></span>
+<span id="cb141-3"><a href="pre-procesamiento-de-datos.html#cb141-3" aria-hidden="true" tabindex="-1"></a><span class="co">#---</span></span>
+<span id="cb141-4"><a href="pre-procesamiento-de-datos.html#cb141-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Centroides de las Áreas</span></span>
+<span id="cb141-5"><a href="pre-procesamiento-de-datos.html#cb141-5" aria-hidden="true" tabindex="-1"></a>Centros <span class="ot">=</span> <span class="fu">getSpPPolygonsLabptSlots</span>(Insumo.utm)</span>
+<span id="cb141-6"><a href="pre-procesamiento-de-datos.html#cb141-6" aria-hidden="true" tabindex="-1"></a>Centroids <span class="ot">&lt;-</span> <span class="fu">SpatialPointsDataFrame</span>(<span class="at">coords =</span> Centros, <span class="at">data=</span>Insumo.utm<span class="sc">@</span>data, </span>
+<span id="cb141-7"><a href="pre-procesamiento-de-datos.html#cb141-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">proj4string=</span><span class="fu">CRS</span>(<span class="st">&quot;+init=epsg:3724 +units=km&quot;</span>))</span>
+<span id="cb141-8"><a href="pre-procesamiento-de-datos.html#cb141-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de Distancias entre los Centriodes</span></span>
+<span id="cb141-9"><a href="pre-procesamiento-de-datos.html#cb141-9" aria-hidden="true" tabindex="-1"></a>Wdist <span class="ot">=</span> <span class="fu">dist</span>(Centros, <span class="at">up=</span>T)</span>
+<span id="cb141-10"><a href="pre-procesamiento-de-datos.html#cb141-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz W de vecindades</span></span>
+<span id="cb141-11"><a href="pre-procesamiento-de-datos.html#cb141-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pgirmess)</span>
+<span id="cb141-12"><a href="pre-procesamiento-de-datos.html#cb141-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(HistogramTools)</span>
+<span id="cb141-13"><a href="pre-procesamiento-de-datos.html#cb141-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(strucchange)</span>
+<span id="cb141-14"><a href="pre-procesamiento-de-datos.html#cb141-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
+<span id="cb141-15"><a href="pre-procesamiento-de-datos.html#cb141-15" aria-hidden="true" tabindex="-1"></a>Insumo.nb <span class="ot">=</span> <span class="fu">poly2nb</span>(Insumo.utm, <span class="at">queen=</span>T)</span>
+<span id="cb141-16"><a href="pre-procesamiento-de-datos.html#cb141-16" aria-hidden="true" tabindex="-1"></a><span class="co">#n &lt;- max(sapply(Insumo.nb, length))</span></span>
+<span id="cb141-17"><a href="pre-procesamiento-de-datos.html#cb141-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ll &lt;- lapply(Insumo.nb, function(X) {</span></span>
+<span id="cb141-18"><a href="pre-procesamiento-de-datos.html#cb141-18" aria-hidden="true" tabindex="-1"></a><span class="co">#  c(as.numeric(X), rep(0, times = n - length(X)))</span></span>
+<span id="cb141-19"><a href="pre-procesamiento-de-datos.html#cb141-19" aria-hidden="true" tabindex="-1"></a><span class="co">#})</span></span>
+<span id="cb141-20"><a href="pre-procesamiento-de-datos.html#cb141-20" aria-hidden="true" tabindex="-1"></a><span class="co">#out &lt;- do.call(cbind, ll)</span></span>
+<span id="cb141-21"><a href="pre-procesamiento-de-datos.html#cb141-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Departamentos&lt;-Insumo$Departamento</span></span>
+<span id="cb141-22"><a href="pre-procesamiento-de-datos.html#cb141-22" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW&lt;-matrix(NA,32,32)</span></span>
+<span id="cb141-23"><a href="pre-procesamiento-de-datos.html#cb141-23" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:8) {</span></span>
+<span id="cb141-24"><a href="pre-procesamiento-de-datos.html#cb141-24" aria-hidden="true" tabindex="-1"></a><span class="co">#  for (j in 1:32) {</span></span>
+<span id="cb141-25"><a href="pre-procesamiento-de-datos.html#cb141-25" aria-hidden="true" tabindex="-1"></a><span class="co">#    if (out[i,j]!=0) {</span></span>
+<span id="cb141-26"><a href="pre-procesamiento-de-datos.html#cb141-26" aria-hidden="true" tabindex="-1"></a><span class="co">#      MatW[out[i,j],j]&lt;-1</span></span>
+<span id="cb141-27"><a href="pre-procesamiento-de-datos.html#cb141-27" aria-hidden="true" tabindex="-1"></a><span class="co">#    } else{MatW[out[i,j],j]&lt;-0}</span></span>
+<span id="cb141-28"><a href="pre-procesamiento-de-datos.html#cb141-28" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
+<span id="cb141-29"><a href="pre-procesamiento-de-datos.html#cb141-29" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
+<span id="cb141-30"><a href="pre-procesamiento-de-datos.html#cb141-30" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:32) {</span></span>
+<span id="cb141-31"><a href="pre-procesamiento-de-datos.html#cb141-31" aria-hidden="true" tabindex="-1"></a><span class="co">#  for (j in 1:32) {</span></span>
+<span id="cb141-32"><a href="pre-procesamiento-de-datos.html#cb141-32" aria-hidden="true" tabindex="-1"></a><span class="co">#    if (is.na(MatW[i,j])) {</span></span>
+<span id="cb141-33"><a href="pre-procesamiento-de-datos.html#cb141-33" aria-hidden="true" tabindex="-1"></a><span class="co">#      MatW[i,j]&lt;-0</span></span>
+<span id="cb141-34"><a href="pre-procesamiento-de-datos.html#cb141-34" aria-hidden="true" tabindex="-1"></a><span class="co">#    }</span></span>
+<span id="cb141-35"><a href="pre-procesamiento-de-datos.html#cb141-35" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
+<span id="cb141-36"><a href="pre-procesamiento-de-datos.html#cb141-36" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
+<span id="cb141-37"><a href="pre-procesamiento-de-datos.html#cb141-37" aria-hidden="true" tabindex="-1"></a><span class="co">#colnames(MatW)&lt;-Departamentos</span></span>
+<span id="cb141-38"><a href="pre-procesamiento-de-datos.html#cb141-38" aria-hidden="true" tabindex="-1"></a><span class="co">#rownames(MatW)&lt;-Departamentos</span></span>
+<span id="cb141-39"><a href="pre-procesamiento-de-datos.html#cb141-39" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW1&lt;-MatW[,1:16]</span></span>
+<span id="cb141-40"><a href="pre-procesamiento-de-datos.html#cb141-40" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW2&lt;-MatW[,17:32]</span></span>
+<span id="cb141-41"><a href="pre-procesamiento-de-datos.html#cb141-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Martiz W (Estilos)</span></span>
+<span id="cb141-42"><a href="pre-procesamiento-de-datos.html#cb141-42" aria-hidden="true" tabindex="-1"></a>Insumo.lw <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb)</span>
+<span id="cb141-43"><a href="pre-procesamiento-de-datos.html#cb141-43" aria-hidden="true" tabindex="-1"></a>Insumo.lwb <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;B&quot;</span>)</span>
+<span id="cb141-44"><a href="pre-procesamiento-de-datos.html#cb141-44" aria-hidden="true" tabindex="-1"></a>Insumo.lwc <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;C&quot;</span>)</span>
+<span id="cb141-45"><a href="pre-procesamiento-de-datos.html#cb141-45" aria-hidden="true" tabindex="-1"></a>Insumo.lwu <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;U&quot;</span>)</span>
+<span id="cb141-46"><a href="pre-procesamiento-de-datos.html#cb141-46" aria-hidden="true" tabindex="-1"></a>Insumo.lww <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;W&quot;</span>)</span></code></pre></div>
 </div>
 <div id="mapa-de-valores-observados" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Mapa de valores observados<a href="pre-procesamiento-de-datos.html#mapa-de-valores-observados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="pre-procesamiento-de-datos.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Mapa de Valores Observados</span></span>
-<span id="cb68-2"><a href="pre-procesamiento-de-datos.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb68-3"><a href="pre-procesamiento-de-datos.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, Insumo<span class="sc">$</span>CAP_BAC)</span>
-<span id="cb68-4"><a href="pre-procesamiento-de-datos.html#cb68-4" aria-hidden="true" tabindex="-1"></a>shad <span class="ot">=</span> <span class="fu">auto.shading</span>(Insumo<span class="sc">$</span>CAP_BAC, <span class="at">n=</span><span class="dv">5</span>, <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Reds&quot;</span>)), <span class="at">cutter =</span> quantileCuts)</span>
-<span id="cb68-5"><a href="pre-procesamiento-de-datos.html#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shad, <span class="at">fmt=</span><span class="st">&quot;%1.1f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Valores Locales&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
-<span id="cb68-6"><a href="pre-procesamiento-de-datos.html#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Valores Observados para las captaciones del banco agrario </span></span>
-<span id="cb68-7"><a href="pre-procesamiento-de-datos.html#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
-<span id="cb68-8"><a href="pre-procesamiento-de-datos.html#cb68-8" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="pre-procesamiento-de-datos.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Mapa de Valores Observados</span></span>
+<span id="cb142-2"><a href="pre-procesamiento-de-datos.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb142-3"><a href="pre-procesamiento-de-datos.html#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, Insumo<span class="sc">$</span>CAP_BAC)</span>
+<span id="cb142-4"><a href="pre-procesamiento-de-datos.html#cb142-4" aria-hidden="true" tabindex="-1"></a>shad <span class="ot">=</span> <span class="fu">auto.shading</span>(Insumo<span class="sc">$</span>CAP_BAC, <span class="at">n=</span><span class="dv">5</span>, <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Reds&quot;</span>)), <span class="at">cutter =</span> quantileCuts)</span>
+<span id="cb142-5"><a href="pre-procesamiento-de-datos.html#cb142-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shad, <span class="at">fmt=</span><span class="st">&quot;%1.1f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Valores Locales&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
+<span id="cb142-6"><a href="pre-procesamiento-de-datos.html#cb142-6" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Valores Observados para las captaciones del banco agrario </span></span>
+<span id="cb142-7"><a href="pre-procesamiento-de-datos.html#cb142-7" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb142-8"><a href="pre-procesamiento-de-datos.html#cb142-8" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 </div>
 <div id="pruebas-de-autocorrelación" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Pruebas de Autocorrelación<a href="pre-procesamiento-de-datos.html#pruebas-de-autocorrelación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="pre-procesamiento-de-datos.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co">#----------------------------</span></span>
-<span id="cb69-2"><a href="pre-procesamiento-de-datos.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  PRUEBAS DE AUTOCORRELACION</span></span>
-<span id="cb69-3"><a href="pre-procesamiento-de-datos.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co">#----------------------------</span></span>
-<span id="cb69-4"><a href="pre-procesamiento-de-datos.html#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-5"><a href="pre-procesamiento-de-datos.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Moran</span></span>
-<span id="cb69-6"><a href="pre-procesamiento-de-datos.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="pre-procesamiento-de-datos.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co">#----------------------------</span></span>
+<span id="cb143-2"><a href="pre-procesamiento-de-datos.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  PRUEBAS DE AUTOCORRELACION</span></span>
+<span id="cb143-3"><a href="pre-procesamiento-de-datos.html#cb143-3" aria-hidden="true" tabindex="-1"></a><span class="co">#----------------------------</span></span>
+<span id="cb143-4"><a href="pre-procesamiento-de-datos.html#cb143-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb143-5"><a href="pre-procesamiento-de-datos.html#cb143-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Moran</span></span>
+<span id="cb143-6"><a href="pre-procesamiento-de-datos.html#cb143-6" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw)</span></code></pre></div>
 <pre><code>## 
 ##  Moran I test under randomisation
 ## 
 ## data:  Insumo$CAP_BAC  
 ## weights: Insumo.lw    
 ## 
-## Moran I statistic standard deviate = 2.0024, p-value = 0.02262
+## Moran I statistic standard deviate = 2.0024, p-value
+## = 0.02262
 ## alternative hypothesis: greater
 ## sample estimates:
 ## Moran I statistic       Expectation          Variance 
 ##       0.153081266      -0.032258065       0.008566935</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="pre-procesamiento-de-datos.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dispersograma de Moran</span></span>
-<span id="cb71-2"><a href="pre-procesamiento-de-datos.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb71-3"><a href="pre-procesamiento-de-datos.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.plot</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw, <span class="at">labels=</span><span class="fu">as.character</span>(Insumo<span class="sc">$</span>Departamento), <span class="at">xlab=</span><span class="st">&quot;Captaciones BAC&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Captaciones BAC rezagado&quot;</span>, <span class="at">las=</span><span class="dv">1</span>, <span class="at">pch=</span><span class="dv">16</span>, <span class="at">cex=</span><span class="fl">0.5</span>)</span>
-<span id="cb71-4"><a href="pre-procesamiento-de-datos.html#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;I de Moran: 0.1530&quot;</span>, <span class="st">&quot;Valor P:      0.02262&quot;</span>), <span class="at">cex=</span><span class="dv">1</span>,<span class="at">bg=</span><span class="st">&#39;lightgreen&#39;</span>)</span>
-<span id="cb71-5"><a href="pre-procesamiento-de-datos.html#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Dispersograma de Moran para las captaciones del banco agrario en </span></span>
-<span id="cb71-6"><a href="pre-procesamiento-de-datos.html#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="st">los Departamentos de Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="pre-procesamiento-de-datos.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Local G</span></span>
-<span id="cb72-2"><a href="pre-procesamiento-de-datos.html#cb72-2" aria-hidden="true" tabindex="-1"></a>nearng <span class="ot">=</span> <span class="fu">dnearneigh</span>(<span class="fu">coordinates</span>(Insumo.utm), <span class="dv">0</span>, <span class="dv">550</span>)</span>
-<span id="cb72-3"><a href="pre-procesamiento-de-datos.html#cb72-3" aria-hidden="true" tabindex="-1"></a>Insumo.lw.g <span class="ot">=</span> <span class="fu">nb2listw</span>(nearng, <span class="at">style=</span><span class="st">&quot;B&quot;</span>)</span>
-<span id="cb72-4"><a href="pre-procesamiento-de-datos.html#cb72-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-5"><a href="pre-procesamiento-de-datos.html#cb72-5" aria-hidden="true" tabindex="-1"></a>localG <span class="ot">=</span> <span class="fu">localG</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw.g); localG</span></code></pre></div>
-<pre><code>##  [1]  1.66525050  0.02608278  1.33032949  1.15892050  1.85852161  0.68445519
-##  [7]  1.49486468  0.10163662  1.64717068  1.32714028  2.53361281  2.21899396
-## [13] -0.71311540  0.50952811  1.48899277  0.81676480  0.98434717  2.09087184
-## [19]  2.08725553  1.05493906  1.32486118  2.09147517  2.16305539  1.89323276
-## [25]  1.52155929  0.84992902 -1.19798594 -1.33847805  0.29701426 -1.60300117
-## [31]  1.67015910  1.96543367
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="pre-procesamiento-de-datos.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dispersograma de Moran</span></span>
+<span id="cb145-2"><a href="pre-procesamiento-de-datos.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb145-3"><a href="pre-procesamiento-de-datos.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.plot</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw, <span class="at">labels=</span><span class="fu">as.character</span>(Insumo<span class="sc">$</span>Departamento), <span class="at">xlab=</span><span class="st">&quot;Captaciones BAC&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Captaciones BAC rezagado&quot;</span>, <span class="at">las=</span><span class="dv">1</span>, <span class="at">pch=</span><span class="dv">16</span>, <span class="at">cex=</span><span class="fl">0.5</span>)</span>
+<span id="cb145-4"><a href="pre-procesamiento-de-datos.html#cb145-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;I de Moran: 0.1530&quot;</span>, <span class="st">&quot;Valor P:      0.02262&quot;</span>), <span class="at">cex=</span><span class="dv">1</span>,<span class="at">bg=</span><span class="st">&#39;lightgreen&#39;</span>)</span>
+<span id="cb145-5"><a href="pre-procesamiento-de-datos.html#cb145-5" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Dispersograma de Moran para las captaciones del banco agrario en </span></span>
+<span id="cb145-6"><a href="pre-procesamiento-de-datos.html#cb145-6" aria-hidden="true" tabindex="-1"></a><span class="st">los Departamentos de Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="pre-procesamiento-de-datos.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Local G</span></span>
+<span id="cb146-2"><a href="pre-procesamiento-de-datos.html#cb146-2" aria-hidden="true" tabindex="-1"></a>nearng <span class="ot">=</span> <span class="fu">dnearneigh</span>(<span class="fu">coordinates</span>(Insumo.utm), <span class="dv">0</span>, <span class="dv">550</span>)</span>
+<span id="cb146-3"><a href="pre-procesamiento-de-datos.html#cb146-3" aria-hidden="true" tabindex="-1"></a>Insumo.lw.g <span class="ot">=</span> <span class="fu">nb2listw</span>(nearng, <span class="at">style=</span><span class="st">&quot;B&quot;</span>)</span>
+<span id="cb146-4"><a href="pre-procesamiento-de-datos.html#cb146-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb146-5"><a href="pre-procesamiento-de-datos.html#cb146-5" aria-hidden="true" tabindex="-1"></a>localG <span class="ot">=</span> <span class="fu">localG</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw.g); localG</span></code></pre></div>
+<pre><code>##  [1]  1.66525050  0.02608278  1.33032949  1.15892050
+##  [5]  1.85852161  0.68445519  1.49486468  0.10163662
+##  [9]  1.64717068  1.32714028  2.53361281  2.21899396
+## [13] -0.71311540  0.50952811  1.48899277  0.81676480
+## [17]  0.98434717  2.09087184  2.08725553  1.05493906
+## [21]  1.32486118  2.09147517  2.16305539  1.89323276
+## [25]  1.52155929  0.84992902 -1.19798594 -1.33847805
+## [29]  0.29701426 -1.60300117  1.67015910  1.96543367
 ## attr(,&quot;cluster&quot;)
-##  [1] High Low  Low  High Low  Low  High Low  Low  High Low  High Low  Low  Low 
-## [16] High High Low  Low  High Low  High High Low  Low  Low  Low  Low  Low  Low 
-## [31] Low  High
+##  [1] High Low  Low  High Low  Low  High Low  Low  High Low 
+## [12] High Low  Low  Low  High High Low  Low  High Low  High
+## [23] High Low  Low  Low  Low  Low  Low  Low  Low  High
 ## Levels: Low High
 ## attr(,&quot;gstari&quot;)
 ## [1] FALSE
@@ -381,70 +372,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## localG(x = Insumo$CAP_BAC, listw = Insumo.lw.g)
 ## attr(,&quot;class&quot;)
 ## [1] &quot;localG&quot;</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="pre-procesamiento-de-datos.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulaci?n montecarlo</span></span>
-<span id="cb74-2"><a href="pre-procesamiento-de-datos.html#cb74-2" aria-hidden="true" tabindex="-1"></a>sim.G <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>,<span class="dv">1000</span>,<span class="dv">32</span>)</span>
-<span id="cb74-3"><a href="pre-procesamiento-de-datos.html#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) sim.G[i,] <span class="ot">=</span> <span class="fu">localG</span>(<span class="fu">sample</span>(Insumo<span class="sc">$</span>CAP_BAC),Insumo.lw.g)</span>
-<span id="cb74-4"><a href="pre-procesamiento-de-datos.html#cb74-4" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G <span class="ot">=</span> (<span class="fu">colSums</span>(<span class="fu">sweep</span>(sim.G,<span class="dv">2</span>,localG,<span class="st">&quot;&gt;=&quot;</span>))<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">nrow</span>(sim.G)<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb74-5"><a href="pre-procesamiento-de-datos.html#cb74-5" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G</span></code></pre></div>
-<pre><code>##  [1] 0.010989011 0.421578422 0.086913087 0.097902098 0.000999001 0.321678322
-##  [7] 0.076923077 0.430569431 0.037962038 0.045954046 0.000999001 0.000999001
-## [13] 0.707292707 0.306693307 0.027972028 0.255744256 0.169830170 0.000999001
-## [19] 0.000999001 0.136863137 0.098901099 0.000999001 0.003996004 0.015984016
-## [25] 0.036963037 0.266733267 0.963036963 0.965034965 0.441558442 0.988011988
-## [31] 0.064935065 0.001998002</code></pre>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="pre-procesamiento-de-datos.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulaci?n montecarlo</span></span>
+<span id="cb148-2"><a href="pre-procesamiento-de-datos.html#cb148-2" aria-hidden="true" tabindex="-1"></a>sim.G <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>,<span class="dv">1000</span>,<span class="dv">32</span>)</span>
+<span id="cb148-3"><a href="pre-procesamiento-de-datos.html#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) sim.G[i,] <span class="ot">=</span> <span class="fu">localG</span>(<span class="fu">sample</span>(Insumo<span class="sc">$</span>CAP_BAC),Insumo.lw.g)</span>
+<span id="cb148-4"><a href="pre-procesamiento-de-datos.html#cb148-4" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G <span class="ot">=</span> (<span class="fu">colSums</span>(<span class="fu">sweep</span>(sim.G,<span class="dv">2</span>,localG,<span class="st">&quot;&gt;=&quot;</span>))<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">nrow</span>(sim.G)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb148-5"><a href="pre-procesamiento-de-datos.html#cb148-5" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G</span></code></pre></div>
+<pre><code>##  [1] 0.009990010 0.438561439 0.086913087 0.114885115
+##  [5] 0.001998002 0.288711289 0.067932068 0.442557443
+##  [9] 0.031968032 0.055944056 0.000999001 0.001998002
+## [13] 0.709290709 0.303696304 0.034965035 0.235764236
+## [17] 0.168831169 0.000999001 0.000999001 0.127872128
+## [21] 0.090909091 0.000999001 0.004995005 0.016983017
+## [25] 0.051948052 0.228771229 0.969030969 0.963036963
+## [29] 0.430569431 0.994005994 0.053946054 0.000999001</code></pre>
 </div>
 <div id="mapas" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Mapas<a href="pre-procesamiento-de-datos.html#mapas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="pre-procesamiento-de-datos.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapas</span></span>
-<span id="cb76-2"><a href="pre-procesamiento-de-datos.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb76-3"><a href="pre-procesamiento-de-datos.html#cb76-3" aria-hidden="true" tabindex="-1"></a>shadeg <span class="ot">=</span> <span class="fu">auto.shading</span>(localG, <span class="at">n=</span><span class="dv">5</span>, <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Purples&quot;</span>)), <span class="at">cutter=</span>quantileCuts)</span>
-<span id="cb76-4"><a href="pre-procesamiento-de-datos.html#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb76-5"><a href="pre-procesamiento-de-datos.html#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, localG, <span class="at">shading=</span>shadeg)</span>
-<span id="cb76-6"><a href="pre-procesamiento-de-datos.html#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shadeg, <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;G&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
-<span id="cb76-7"><a href="pre-procesamiento-de-datos.html#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;G Getis Ord Local para las captaciones del banco agrario </span></span>
-<span id="cb76-8"><a href="pre-procesamiento-de-datos.html#cb76-8" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
-<span id="cb76-9"><a href="pre-procesamiento-de-datos.html#cb76-9" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="pre-procesamiento-de-datos.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa de P-values</span></span>
-<span id="cb77-2"><a href="pre-procesamiento-de-datos.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb77-3"><a href="pre-procesamiento-de-datos.html#cb77-3" aria-hidden="true" tabindex="-1"></a>shadegp <span class="ot">=</span> <span class="fu">shading</span>(<span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">cols =</span> (<span class="fu">brewer.pal</span>(<span class="dv">4</span>,<span class="st">&quot;Spectral&quot;</span>)))</span>
-<span id="cb77-4"><a href="pre-procesamiento-de-datos.html#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, mc.pvalor.G, <span class="at">shading=</span>shadegp)</span>
-<span id="cb77-5"><a href="pre-procesamiento-de-datos.html#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shadegp, <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;P-valor de G&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
-<span id="cb77-6"><a href="pre-procesamiento-de-datos.html#cb77-6" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;P- Valor de G Getis Ord Local para las captaciones del banco agrario </span></span>
-<span id="cb77-7"><a href="pre-procesamiento-de-datos.html#cb77-7" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
-<span id="cb77-8"><a href="pre-procesamiento-de-datos.html#cb77-8" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="pre-procesamiento-de-datos.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapas</span></span>
+<span id="cb150-2"><a href="pre-procesamiento-de-datos.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb150-3"><a href="pre-procesamiento-de-datos.html#cb150-3" aria-hidden="true" tabindex="-1"></a>shadeg <span class="ot">=</span> <span class="fu">auto.shading</span>(localG, <span class="at">n=</span><span class="dv">5</span>, <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Purples&quot;</span>)), <span class="at">cutter=</span>quantileCuts)</span>
+<span id="cb150-4"><a href="pre-procesamiento-de-datos.html#cb150-4" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb150-5"><a href="pre-procesamiento-de-datos.html#cb150-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, localG, <span class="at">shading=</span>shadeg)</span>
+<span id="cb150-6"><a href="pre-procesamiento-de-datos.html#cb150-6" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shadeg, <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;G&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
+<span id="cb150-7"><a href="pre-procesamiento-de-datos.html#cb150-7" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;G Getis Ord Local para las captaciones del banco agrario </span></span>
+<span id="cb150-8"><a href="pre-procesamiento-de-datos.html#cb150-8" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb150-9"><a href="pre-procesamiento-de-datos.html#cb150-9" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="pre-procesamiento-de-datos.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa de P-values</span></span>
+<span id="cb151-2"><a href="pre-procesamiento-de-datos.html#cb151-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb151-3"><a href="pre-procesamiento-de-datos.html#cb151-3" aria-hidden="true" tabindex="-1"></a>shadegp <span class="ot">=</span> <span class="fu">shading</span>(<span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">cols =</span> (<span class="fu">brewer.pal</span>(<span class="dv">4</span>,<span class="st">&quot;Spectral&quot;</span>)))</span>
+<span id="cb151-4"><a href="pre-procesamiento-de-datos.html#cb151-4" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, mc.pvalor.G, <span class="at">shading=</span>shadegp)</span>
+<span id="cb151-5"><a href="pre-procesamiento-de-datos.html#cb151-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shadegp, <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;P-valor de G&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
+<span id="cb151-6"><a href="pre-procesamiento-de-datos.html#cb151-6" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;P- Valor de G Getis Ord Local para las captaciones del banco agrario </span></span>
+<span id="cb151-7"><a href="pre-procesamiento-de-datos.html#cb151-7" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb151-8"><a href="pre-procesamiento-de-datos.html#cb151-8" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <p>##Modelos SDEM, SDM, Manski, SARAR</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="pre-procesamiento-de-datos.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="do">####Modelos SDEM, SDM, Manski, SARAR########</span></span>
-<span id="cb78-2"><a href="pre-procesamiento-de-datos.html#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="co">#reg.eq1=CAP_BAC ~ PIB + NBI + CAP_BOG + CAP_BC + CAP_OCC + CAP_CS + Población + IPM</span></span>
-<span id="cb78-3"><a href="pre-procesamiento-de-datos.html#cb78-3" aria-hidden="true" tabindex="-1"></a>reg.eq1<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> NBI <span class="sc">+</span> CAP_BOG<span class="sc">+</span>CAP_BC <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
-<span id="cb78-4"><a href="pre-procesamiento-de-datos.html#cb78-4" aria-hidden="true" tabindex="-1"></a>reg1<span class="ot">=</span><span class="fu">lm</span>(reg.eq1,<span class="at">data=</span>Insumo)                                     <span class="co">#OLS            y=XB+e,    </span></span>
-<span id="cb78-5"><a href="pre-procesamiento-de-datos.html#cb78-5" aria-hidden="true" tabindex="-1"></a>reg2<span class="ot">=</span><span class="fu">lmSLX</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw)                       <span class="co">#SLX            y=XB+WxT+e</span></span>
-<span id="cb78-6"><a href="pre-procesamiento-de-datos.html#cb78-6" aria-hidden="true" tabindex="-1"></a>reg3<span class="ot">=</span><span class="fu">lagsarlm</span>(reg.eq1,<span class="at">data=</span> Insumo, Insumo.lw)                   <span class="co">#Lag Y          y=XB+WxT+u,   u=LWu+e</span></span></code></pre></div>
-<pre><code>## Warning in lagsarlm(reg.eq1, data = Insumo, Insumo.lw): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
-##   número de condición recíproco = 5.81787e-18 - using numerical Hessian.</code></pre>
-<pre><code>## Warning in sqrt(diag(fdHess)[-1]): Se han producido NaNs</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="pre-procesamiento-de-datos.html#cb81-1" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw)                  <span class="co">#Spatial Error  y=pWy+XB+e   </span></span></code></pre></div>
-<pre><code>## Warning in errorsarlm(reg.eq1, data = Insumo, Insumo.lw): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
-##   número de condición recíproco = 9.23672e-18 - using numerical Hessian.</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="pre-procesamiento-de-datos.html#cb83-1" aria-hidden="true" tabindex="-1"></a>reg5<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq1, <span class="at">data=</span>Insumo, Insumo.lw, <span class="at">etype=</span><span class="st">&quot;emixed&quot;</span>) <span class="co">#SDEM Spatial Durbin Error Model y=XB+WxT+u,   u=LWu+e</span></span></code></pre></div>
-<pre><code>## Warning in errorsarlm(reg.eq1, data = Insumo, Insumo.lw, etype = &quot;emixed&quot;): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
-##   número de condición recíproco = 6.96475e-18 - using numerical Hessian.</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="pre-procesamiento-de-datos.html#cb85-1" aria-hidden="true" tabindex="-1"></a>reg6<span class="ot">=</span><span class="fu">lagsarlm</span>(reg.eq1, <span class="at">data=</span>Insumo,Insumo.lw, <span class="at">type=</span><span class="st">&quot;mixed&quot;</span>)      <span class="co">#SDM Spatial Durbin Model (add lag X to SAR) y=pWy+XB+WXT+e </span></span></code></pre></div>
-<pre><code>## Warning in lagsarlm(reg.eq1, data = Insumo, Insumo.lw, type = &quot;mixed&quot;): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
-##   número de condición recíproco = 4.67991e-18 - using numerical Hessian.</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="pre-procesamiento-de-datos.html#cb87-1" aria-hidden="true" tabindex="-1"></a>reg7<span class="ot">=</span><span class="fu">sacsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw, <span class="at">type=</span><span class="st">&quot;sacmixed&quot;</span>)   <span class="co">#Manski Model: y=pWy+XB+WXT+u,   u=LWu+e (no recomendado)</span></span></code></pre></div>
-<pre><code>## Warning in sacsarlm(reg.eq1, data = Insumo, Insumo.lw, type = &quot;sacmixed&quot;): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
-##   número de condición recíproco = 1.95939e-18 - using numerical Hessian.</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="pre-procesamiento-de-datos.html#cb89-1" aria-hidden="true" tabindex="-1"></a>reg8<span class="ot">=</span><span class="fu">sacsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo,Insumo.lw, <span class="at">type=</span><span class="st">&quot;sac&quot;</span>)         <span class="co">#SARAR o Kelejian-Prucha, Cliff-Ord, o SAC If all T=0,y=pWy+XB+u, u=LWu+e</span></span></code></pre></div>
-<pre><code>## Warning in sacsarlm(reg.eq1, data = Insumo, Insumo.lw, type = &quot;sac&quot;): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
-##   número de condición recíproco = 8.69628e-18 - using numerical Hessian.</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="pre-procesamiento-de-datos.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="do">####Modelos SDEM, SDM, Manski, SARAR########</span></span>
+<span id="cb152-2"><a href="pre-procesamiento-de-datos.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="co">#reg.eq1=CAP_BAC ~ PIB + NBI + CAP_BOG + CAP_BC + CAP_OCC + CAP_CS + Población + IPM</span></span>
+<span id="cb152-3"><a href="pre-procesamiento-de-datos.html#cb152-3" aria-hidden="true" tabindex="-1"></a>reg.eq1<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> NBI <span class="sc">+</span> CAP_BOG<span class="sc">+</span>CAP_BC <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
+<span id="cb152-4"><a href="pre-procesamiento-de-datos.html#cb152-4" aria-hidden="true" tabindex="-1"></a>reg1<span class="ot">=</span><span class="fu">lm</span>(reg.eq1,<span class="at">data=</span>Insumo)                                     <span class="co">#OLS            y=XB+e,    </span></span>
+<span id="cb152-5"><a href="pre-procesamiento-de-datos.html#cb152-5" aria-hidden="true" tabindex="-1"></a>reg2<span class="ot">=</span><span class="fu">lmSLX</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw)                       <span class="co">#SLX            y=XB+WxT+e</span></span>
+<span id="cb152-6"><a href="pre-procesamiento-de-datos.html#cb152-6" aria-hidden="true" tabindex="-1"></a>reg3<span class="ot">=</span><span class="fu">lagsarlm</span>(reg.eq1,<span class="at">data=</span> Insumo, Insumo.lw)                   <span class="co">#Lag Y          y=XB+WxT+u,   u=LWu+e</span></span>
+<span id="cb152-7"><a href="pre-procesamiento-de-datos.html#cb152-7" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw)                  <span class="co">#Spatial Error  y=pWy+XB+e   </span></span>
+<span id="cb152-8"><a href="pre-procesamiento-de-datos.html#cb152-8" aria-hidden="true" tabindex="-1"></a>reg5<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq1, <span class="at">data=</span>Insumo, Insumo.lw, <span class="at">etype=</span><span class="st">&quot;emixed&quot;</span>) <span class="co">#SDEM Spatial Durbin Error Model y=XB+WxT+u,   u=LWu+e</span></span>
+<span id="cb152-9"><a href="pre-procesamiento-de-datos.html#cb152-9" aria-hidden="true" tabindex="-1"></a>reg6<span class="ot">=</span><span class="fu">lagsarlm</span>(reg.eq1, <span class="at">data=</span>Insumo,Insumo.lw, <span class="at">type=</span><span class="st">&quot;mixed&quot;</span>)      <span class="co">#SDM Spatial Durbin Model (add lag X to SAR) y=pWy+XB+WXT+e </span></span>
+<span id="cb152-10"><a href="pre-procesamiento-de-datos.html#cb152-10" aria-hidden="true" tabindex="-1"></a>reg7<span class="ot">=</span><span class="fu">sacsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw, <span class="at">type=</span><span class="st">&quot;sacmixed&quot;</span>)   <span class="co">#Manski Model: y=pWy+XB+WXT+u,   u=LWu+e (no recomendado)</span></span>
+<span id="cb152-11"><a href="pre-procesamiento-de-datos.html#cb152-11" aria-hidden="true" tabindex="-1"></a>reg8<span class="ot">=</span><span class="fu">sacsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo,Insumo.lw, <span class="at">type=</span><span class="st">&quot;sac&quot;</span>)         <span class="co">#SARAR o Kelejian-Prucha, Cliff-Ord, o SAC If all T=0,y=pWy+XB+u, u=LWu+e</span></span></code></pre></div>
 </div>
 <div id="resumen-de-modelos" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Resumen de modelos<a href="pre-procesamiento-de-datos.html#resumen-de-modelos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="pre-procesamiento-de-datos.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Resumen de modelos</span></span>
-<span id="cb91-2"><a href="pre-procesamiento-de-datos.html#cb91-2" aria-hidden="true" tabindex="-1"></a>s<span class="ot">=</span>summary</span>
-<span id="cb91-3"><a href="pre-procesamiento-de-datos.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg1)<span class="co">#OLS</span></span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="pre-procesamiento-de-datos.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Resumen de modelos</span></span>
+<span id="cb153-2"><a href="pre-procesamiento-de-datos.html#cb153-2" aria-hidden="true" tabindex="-1"></a>s<span class="ot">=</span>summary</span>
+<span id="cb153-3"><a href="pre-procesamiento-de-datos.html#cb153-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg1)<span class="co">#OLS</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = reg.eq1, data = Insumo)
@@ -464,12 +444,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## CAP_CS        0.47283237   0.31370238   1.507   0.1448  
 ## Población     0.00000137   0.00006700   0.020   0.9839  
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 141.6 on 24 degrees of freedom
 ## Multiple R-squared:  0.8807, Adjusted R-squared:  0.8459 
 ## F-statistic: 25.31 on 7 and 24 DF,  p-value: 0.000000001309</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="pre-procesamiento-de-datos.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg2)<span class="co">#SLX</span></span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="pre-procesamiento-de-datos.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg2)<span class="co">#SLX</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = formula(paste(&quot;y ~ &quot;, paste(colnames(x)[-1], collapse = &quot;+&quot;))), 
@@ -500,9 +481,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 151.6 on 17 degrees of freedom
 ## Multiple R-squared:  0.9031, Adjusted R-squared:  0.8234 
 ## F-statistic: 11.32 on 14 and 17 DF,  p-value: 0.000005467</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="pre-procesamiento-de-datos.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg3)<span class="co">#Lag Y</span></span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="pre-procesamiento-de-datos.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg3)<span class="co">#Lag Y</span></span></code></pre></div>
 <pre><code>## 
-## Call:lagsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw)
+## Call:
+## lagsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
@@ -511,28 +493,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: lag 
 ## Coefficients: (numerical Hessian approximate standard errors) 
 ##                   Estimate     Std. Error z value Pr(&gt;|z|)
-## (Intercept) 77.75432625602 74.13824272639  1.0488  0.29428
-## PIB          0.00330780487  0.00154950186  2.1348  0.03278
-## NBI         -0.77863475842  1.48303860081 -0.5250  0.59956
-## CAP_BOG     -0.05466121971  0.04370291461 -1.2507  0.21103
-## CAP_BC       0.00533211187  0.00465919676  1.1444  0.25245
-## CAP_OCC     -0.03421667856  0.01732472090 -1.9750  0.04827
-## CAP_CS       0.40699817385  0.26095067242  1.5597  0.11884
+## (Intercept) 77.75431737089 74.33304193262  1.0460  0.29555
+## PIB          0.00330780479  0.00157831647  2.0958  0.03610
+## NBI         -0.77863469452  1.48478285166 -0.5244  0.59999
+## CAP_BOG     -0.05466121822  0.04352388108 -1.2559  0.20916
+## CAP_BC       0.00533211204  0.00466472729  1.1431  0.25301
+## CAP_OCC     -0.03421667740  0.01731007390 -1.9767  0.04808
+## CAP_CS       0.40699816555  0.26036918467  1.5632  0.11802
 ## Población    0.00000091508            NaN     NaN      NaN
 ## 
 ## Rho: 0.22884, LR test value: 2.096, p-value: 0.14768
-## Approximate (numerical Hessian) standard error: 0.15337
-##     z-value: 1.4921, p-value: 0.13567
-## Wald statistic: 2.2264, p-value: 0.13567
+## Approximate (numerical Hessian) standard error: 0.15346
+##     z-value: 1.4912, p-value: 0.1359
+## Wald statistic: 2.2237, p-value: 0.1359
 ## 
 ## Log likelihood: -198.251 for lag model
 ## ML residual variance (sigma squared): 13916, (sigma: 117.97)
 ## Number of observations: 32 
 ## Number of parameters estimated: 10 
 ## AIC: 416.5, (AIC for lm: 416.6)</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="pre-procesamiento-de-datos.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="pre-procesamiento-de-datos.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
-## Call:errorsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw)
+## Call:
+## errorsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw)
 ## 
 ## Residuals:
 ##       Min        1Q    Median        3Q       Max 
@@ -541,28 +524,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: error 
 ## Coefficients: (asymptotic standard errors) 
 ##                 Estimate   Std. Error z value Pr(&gt;|z|)
-## (Intercept) 94.500058146 73.097741334  1.2928  0.19608
+## (Intercept) 94.500067067 73.097738551  1.2928  0.19608
 ## PIB          0.003656790  0.002619923  1.3958  0.16279
-## NBI         -0.334674235  1.408551009 -0.2376  0.81219
-## CAP_BOG     -0.032484038  0.049990129 -0.6498  0.51582
-## CAP_BC       0.001202332  0.005555428  0.2164  0.82866
-## CAP_OCC     -0.048739699  0.019538015 -2.4946  0.01261
-## CAP_CS       0.285572460  0.287233647  0.9942  0.32012
+## NBI         -0.334674368  1.408551018 -0.2376  0.81219
+## CAP_BOG     -0.032484044  0.049990128 -0.6498  0.51582
+## CAP_BC       0.001202333  0.005555428  0.2164  0.82866
+## CAP_OCC     -0.048739698  0.019538015 -2.4946  0.01261
+## CAP_CS       0.285572491  0.287233643  0.9942  0.32012
 ## Población    0.000040164  0.000066648  0.6026  0.54676
 ## 
 ## Lambda: 0.50692, LR test value: 3.8031, p-value: 0.051158
-## Approximate (numerical Hessian) standard error: 0.21433
-##     z-value: 2.3651, p-value: 0.018023
-## Wald statistic: 5.5939, p-value: 0.018023
+## Approximate (numerical Hessian) standard error: 0.21479
+##     z-value: 2.3601, p-value: 0.018271
+## Wald statistic: 5.57, p-value: 0.018271
 ## 
 ## Log likelihood: -197.3975 for error model
 ## ML residual variance (sigma squared): 12495, (sigma: 111.78)
 ## Number of observations: 32 
 ## Number of parameters estimated: 10 
 ## AIC: 414.79, (AIC for lm: 416.6)</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="pre-procesamiento-de-datos.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg5)<span class="co">#Durbin Error (SDEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="pre-procesamiento-de-datos.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg5)<span class="co">#Durbin Error (SDEM)</span></span></code></pre></div>
 <pre><code>## 
-## Call:errorsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw, 
+## Call:
+## errorsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw, 
 ##     etype = &quot;emixed&quot;)
 ## 
 ## Residuals:
@@ -572,35 +556,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: error 
 ## Coefficients: (asymptotic standard errors) 
 ##                    Estimate    Std. Error z value Pr(&gt;|z|)
-## (Intercept)   248.934516925 220.997183247  1.1264  0.25999
+## (Intercept)   248.934497490 220.997185179  1.1264  0.25999
 ## PIB             0.004499050   0.002763860  1.6278  0.10356
-## NBI            -0.058410961   1.767448324 -0.0330  0.97364
-## CAP_BOG        -0.026724641   0.054644416 -0.4891  0.62480
+## NBI            -0.058410888   1.767448320 -0.0330  0.97364
+## CAP_BOG        -0.026724643   0.054644416 -0.4891  0.62480
 ## CAP_BC         -0.000183348   0.007104434 -0.0258  0.97941
-## CAP_OCC        -0.051006012   0.024157938 -2.1114  0.03474
-## CAP_CS          0.227498796   0.309055947  0.7361  0.46166
+## CAP_OCC        -0.051006011   0.024157938 -2.1114  0.03474
+## CAP_CS          0.227498808   0.309055946  0.7361  0.46166
 ## Población       0.000035177   0.000084525  0.4162  0.67729
 ## lag.PIB         0.003069904   0.007273446  0.4221  0.67297
-## lag.NBI        -4.397301569   4.370216210 -1.0062  0.31432
-## lag.CAP_BOG    -0.078935305   0.133353632 -0.5919  0.55390
-## lag.CAP_BC      0.000970531   0.011031859  0.0880  0.92990
-## lag.CAP_OCC    -0.013417108   0.040319110 -0.3328  0.73931
-## lag.CAP_CS      0.374124927   0.777502429  0.4812  0.63038
+## lag.NBI        -4.397301264   4.370216212 -1.0062  0.31432
+## lag.CAP_BOG    -0.078935306   0.133353632 -0.5919  0.55390
+## lag.CAP_BC      0.000970530   0.011031859  0.0880  0.92990
+## lag.CAP_OCC    -0.013417109   0.040319110 -0.3328  0.73931
+## lag.CAP_CS      0.374124929   0.777502427  0.4812  0.63038
 ## lag.Población  -0.000103911   0.000125213 -0.8299  0.40661
 ## 
 ## Lambda: 0.28217, LR test value: 0.34013, p-value: 0.55976
-## Approximate (numerical Hessian) standard error: 0.44217
-##     z-value: 0.63816, p-value: 0.52337
-## Wald statistic: 0.40725, p-value: 0.52337
+## Approximate (numerical Hessian) standard error: 0.43008
+##     z-value: 0.6561, p-value: 0.51176
+## Wald statistic: 0.43047, p-value: 0.51176
 ## 
 ## Log likelihood: -195.7931 for error model
 ## ML residual variance (sigma squared): 11856, (sigma: 108.89)
 ## Number of observations: 32 
 ## Number of parameters estimated: 17 
 ## AIC: 425.59, (AIC for lm: 423.93)</code></pre>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="pre-procesamiento-de-datos.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg6)<span class="co">#Durbin (SDM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="pre-procesamiento-de-datos.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg6)<span class="co">#Durbin (SDM)</span></span></code></pre></div>
 <pre><code>## 
-## Call:lagsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw, 
+## Call:
+## lagsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw, 
 ##     type = &quot;mixed&quot;)
 ## 
 ## Residuals:
@@ -610,35 +595,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: mixed 
 ## Coefficients: (numerical Hessian approximate standard errors) 
 ##                    Estimate    Std. Error z value Pr(&gt;|z|)
-## (Intercept)   259.002894474 230.382993480  1.1242   0.2609
-## PIB             0.004292096   0.002714283  1.5813   0.1138
-## NBI            -0.068020271   1.710275759 -0.0398   0.9683
-## CAP_BOG        -0.013498835   0.054518405 -0.2476   0.8044
-## CAP_BC         -0.000674466   0.006770812 -0.0996   0.9207
-## CAP_OCC        -0.052995708   0.023561390 -2.2493   0.0245
-## CAP_CS          0.159111968   0.309035195  0.5149   0.6066
-## Población       0.000046528   0.000083906  0.5545   0.5792
-## lag.PIB         0.001006279   0.006780986  0.1484   0.8820
-## lag.NBI        -5.022145872   4.535178903 -1.1074   0.2681
-## lag.CAP_BOG    -0.060141056   0.132732758 -0.4531   0.6505
-## lag.CAP_BC      0.003372687   0.010962466  0.3077   0.7583
-## lag.CAP_OCC     0.001941496   0.042403180  0.0458   0.9635
-## lag.CAP_CS      0.265435960   0.776929763  0.3416   0.7326
-## lag.Población  -0.000120261   0.000128733 -0.9342   0.3502
+## (Intercept)   259.002911178 230.104789400  1.1256   0.2603
+## PIB             0.004292096   0.002709485  1.5841   0.1132
+## NBI            -0.068020334   1.599249655 -0.0425   0.9661
+## CAP_BOG        -0.013498834   0.053646345 -0.2516   0.8013
+## CAP_BC         -0.000674466   0.006747917 -0.1000   0.9204
+## CAP_OCC        -0.052995708   0.023276623 -2.2768   0.0228
+## CAP_CS          0.159111963   0.305216541  0.5213   0.6022
+## Población       0.000046528   0.000083888  0.5546   0.5791
+## lag.PIB         0.001006280   0.006950379  0.1448   0.8849
+## lag.NBI        -5.022146095   4.504322175 -1.1150   0.2649
+## lag.CAP_BOG    -0.060141057   0.129919351 -0.4629   0.6434
+## lag.CAP_BC      0.003372687   0.010806814  0.3121   0.7550
+## lag.CAP_OCC     0.001941495   0.030122408  0.0645   0.9486
+## lag.CAP_CS      0.265435969   0.754778096  0.3517   0.7251
+## lag.Población  -0.000120261   0.000126709 -0.9491   0.3426
 ## 
 ## Rho: 0.28321, LR test value: 0.99104, p-value: 0.31949
-## Approximate (numerical Hessian) standard error: 0.26687
-##     z-value: 1.0612, p-value: 0.28859
-## Wald statistic: 1.1262, p-value: 0.28859
+## Approximate (numerical Hessian) standard error: 0.26808
+##     z-value: 1.0564, p-value: 0.29077
+## Wald statistic: 1.116, p-value: 0.29077
 ## 
 ## Log likelihood: -195.4676 for mixed model
 ## ML residual variance (sigma squared): 11616, (sigma: 107.78)
 ## Number of observations: 32 
 ## Number of parameters estimated: 17 
 ## AIC: 424.94, (AIC for lm: 423.93)</code></pre>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="pre-procesamiento-de-datos.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg7)<span class="co">#Manski</span></span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="pre-procesamiento-de-datos.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg7)<span class="co">#Manski</span></span></code></pre></div>
 <pre><code>## 
-## Call:sacsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw, 
+## Call:
+## sacsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw, 
 ##     type = &quot;sacmixed&quot;)
 ## 
 ## Residuals:
@@ -648,28 +634,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: sacmixed 
 ## Coefficients: (numerical Hessian approximate standard errors) 
 ##                    Estimate    Std. Error z value Pr(&gt;|z|)
-## (Intercept)   307.899524809 270.000325683  1.1404  0.25413
-## PIB             0.004070842   0.002857282  1.4247  0.15424
-## NBI            -0.195254185   1.916535480 -0.1019  0.91885
-## CAP_BOG         0.002531850   0.079286796  0.0319  0.97453
-## CAP_BC         -0.001838769   0.008822553 -0.2084  0.83490
-## CAP_OCC        -0.056119738   0.027560008 -2.0363  0.04172
-## CAP_CS          0.071595235   0.444567265  0.1610  0.87206
-## Población       0.000065749   0.000115533  0.5691  0.56929
-## lag.PIB         0.000817609   0.007389061  0.1107  0.91189
-## lag.NBI        -6.096432792   5.615702909 -1.0856  0.27765
-## lag.CAP_BOG    -0.052377434   0.144898807 -0.3615  0.71774
-## lag.CAP_BC      0.006801659   0.015621303  0.4354  0.66327
-## lag.CAP_OCC     0.008763485   0.044306294  0.1978  0.84321
-## lag.CAP_CS      0.219189297   0.852485921  0.2571  0.79709
-## lag.Población  -0.000162608   0.000198700 -0.8184  0.41315
+## (Intercept)   307.899524851 284.687742330  1.0815  0.27946
+## PIB             0.004070842   0.002887831  1.4097  0.15864
+## NBI            -0.195254185   2.070147473 -0.0943  0.92486
+## CAP_BOG         0.002531850   0.093292487  0.0271  0.97835
+## CAP_BC         -0.001838769   0.009686163 -0.1898  0.84944
+## CAP_OCC        -0.056119738   0.028995161 -1.9355  0.05293
+## CAP_CS          0.071595235   0.518838438  0.1380  0.89025
+## Población       0.000065749   0.000127955  0.5138  0.60736
+## lag.PIB         0.000817609   0.006904128  0.1184  0.90573
+## lag.NBI        -6.096432794   5.600016244 -1.0886  0.27631
+## lag.CAP_BOG    -0.052377434   0.137793679 -0.3801  0.70386
+## lag.CAP_BC      0.006801659   0.017044912  0.3990  0.68986
+## lag.CAP_OCC     0.008763485   0.047596659  0.1841  0.85392
+## lag.CAP_CS      0.219189297   0.801371640  0.2735  0.78446
+## lag.Población  -0.000162608   0.000228334 -0.7122  0.47637
 ## 
 ## Rho: 0.38485
-## Approximate (numerical Hessian) standard error: 0.37639
-##     z-value: 1.0225, p-value: 0.30655
+## Approximate (numerical Hessian) standard error: 0.37355
+##     z-value: 1.0303, p-value: 0.30289
 ## Lambda: -0.26343
-## Approximate (numerical Hessian) standard error: 0.79092
-##     z-value: -0.33306, p-value: 0.73909
+## Approximate (numerical Hessian) standard error: 0.83838
+##     z-value: -0.31421, p-value: 0.75336
 ## 
 ## LR test value: 7.7816, p-value: 0.5563
 ## 
@@ -678,9 +664,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of observations: 32 
 ## Number of parameters estimated: 18 
 ## AIC: 426.82, (AIC for lm: 416.6)</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="pre-procesamiento-de-datos.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg8)<span class="co">#SARAR lag Y and lag e (SAC)</span></span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="pre-procesamiento-de-datos.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg8)<span class="co">#SARAR lag Y and lag e (SAC)</span></span></code></pre></div>
 <pre><code>## 
-## Call:sacsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw, 
+## Call:
+## sacsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw, 
 ##     type = &quot;sac&quot;)
 ## 
 ## Residuals:
@@ -690,21 +677,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: sac 
 ## Coefficients: (numerical Hessian approximate standard errors) 
 ##                 Estimate   Std. Error z value Pr(&gt;|z|)
-## (Intercept) 73.149386020 83.091372888  0.8803  0.37867
-## PIB          0.003487952  0.002649674  1.3164  0.18805
-## NBI         -0.337466937  1.434901439 -0.2352  0.81407
-## CAP_BOG     -0.038888663  0.051127328 -0.7606  0.44688
-## CAP_BC       0.002799262  0.006065900  0.4615  0.64446
-## CAP_OCC     -0.043084476  0.021569014 -1.9975  0.04577
-## CAP_CS       0.320438586  0.293328203  1.0924  0.27465
-## Población    0.000028476  0.000067581  0.4214  0.67349
+## (Intercept) 73.149386015 83.375351447  0.8774  0.38030
+## PIB          0.003487952  0.002657617  1.3124  0.18937
+## NBI         -0.337466937  1.455345658 -0.2319  0.81663
+## CAP_BOG     -0.038888663  0.051472319 -0.7555  0.44993
+## CAP_BC       0.002799262  0.006135570  0.4562  0.64822
+## CAP_OCC     -0.043084476  0.021726659 -1.9830  0.04736
+## CAP_CS       0.320438586  0.295160199  1.0856  0.27764
+## Población    0.000028476  0.000068297  0.4170  0.67671
 ## 
 ## Rho: 0.1104
-## Approximate (numerical Hessian) standard error: 0.1901
-##     z-value: 0.58077, p-value: 0.5614
+## Approximate (numerical Hessian) standard error: 0.19096
+##     z-value: 0.57817, p-value: 0.56315
 ## Lambda: 0.41973
-## Approximate (numerical Hessian) standard error: 0.27205
-##     z-value: 1.5429, p-value: 0.12287
+## Approximate (numerical Hessian) standard error: 0.27372
+##     z-value: 1.5334, p-value: 0.12517
 ## 
 ## LR test value: 4.1193, p-value: 0.1275
 ## 
@@ -716,14 +703,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="calculo-de-varibles-significativas" class="section level2 hasAnchor" number="4.6">
 <h2><span class="header-section-number">4.6</span> Calculo de varibles significativas<a href="pre-procesamiento-de-datos.html#calculo-de-varibles-significativas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="pre-procesamiento-de-datos.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculo de variables signid¿ficativas</span></span>
-<span id="cb107-2"><a href="pre-procesamiento-de-datos.html#cb107-2" aria-hidden="true" tabindex="-1"></a>reg.eq2<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_BOG<span class="sc">+</span>CAP_BC <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
-<span id="cb107-3"><a href="pre-procesamiento-de-datos.html#cb107-3" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq2,<span class="at">data=</span>Insumo, Insumo.lw)</span></code></pre></div>
-<pre><code>## Warning in errorsarlm(reg.eq2, data = Insumo, Insumo.lw): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
-##   número de condición recíproco = 9.29353e-18 - using numerical Hessian.</code></pre>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="pre-procesamiento-de-datos.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="pre-procesamiento-de-datos.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculo de variables signid¿ficativas</span></span>
+<span id="cb169-2"><a href="pre-procesamiento-de-datos.html#cb169-2" aria-hidden="true" tabindex="-1"></a>reg.eq2<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_BOG<span class="sc">+</span>CAP_BC <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
+<span id="cb169-3"><a href="pre-procesamiento-de-datos.html#cb169-3" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq2,<span class="at">data=</span>Insumo, Insumo.lw)</span>
+<span id="cb169-4"><a href="pre-procesamiento-de-datos.html#cb169-4" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
-## Call:errorsarlm(formula = reg.eq2, data = Insumo, listw = Insumo.lw)
+## Call:
+## errorsarlm(formula = reg.eq2, data = Insumo, listw = Insumo.lw)
 ## 
 ## Residuals:
 ##       Min        1Q    Median        3Q       Max 
@@ -732,31 +718,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: error 
 ## Coefficients: (asymptotic standard errors) 
 ##                 Estimate   Std. Error z value Pr(&gt;|z|)
-## (Intercept) 82.780383662 57.200029705  1.4472  0.14784
+## (Intercept) 82.780380448 57.200033358  1.4472  0.14784
 ## PIB          0.003786089  0.002550194  1.4846  0.13764
-## CAP_BOG     -0.033655765  0.049317358 -0.6824  0.49497
-## CAP_BC       0.001072562  0.005563108  0.1928  0.84712
+## CAP_BOG     -0.033655761  0.049317358 -0.6824  0.49497
+## CAP_BC       0.001072561  0.005563108  0.1928  0.84712
 ## CAP_OCC     -0.049110630  0.019547548 -2.5124  0.01199
-## CAP_CS       0.290079788  0.285013018  1.0178  0.30878
+## CAP_CS       0.290079762  0.285013021  1.0178  0.30878
 ## Población    0.000039933  0.000066827  0.5976  0.55013
 ## 
 ## Lambda: 0.51895, LR test value: 4.4697, p-value: 0.0345
-## Approximate (numerical Hessian) standard error: 0.20397
-##     z-value: 2.5442, p-value: 0.010952
-## Wald statistic: 6.473, p-value: 0.010952
+## Approximate (numerical Hessian) standard error: 0.20433
+##     z-value: 2.5398, p-value: 0.011092
+## Wald statistic: 6.4505, p-value: 0.011092
 ## 
 ## Log likelihood: -197.4239 for error model
 ## ML residual variance (sigma squared): 12470, (sigma: 111.67)
 ## Number of observations: 32 
 ## Number of parameters estimated: 9 
 ## AIC: 412.85, (AIC for lm: 415.32)</code></pre>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="pre-procesamiento-de-datos.html#cb111-1" aria-hidden="true" tabindex="-1"></a>reg.eq3<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_BOG <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
-<span id="cb111-2"><a href="pre-procesamiento-de-datos.html#cb111-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq3,<span class="at">data=</span>Insumo, Insumo.lw)</span></code></pre></div>
-<pre><code>## Warning in errorsarlm(reg.eq3, data = Insumo, Insumo.lw): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
-##   número de condición recíproco = 9.36792e-18 - using numerical Hessian.</code></pre>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="pre-procesamiento-de-datos.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="pre-procesamiento-de-datos.html#cb171-1" aria-hidden="true" tabindex="-1"></a>reg.eq3<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_BOG <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
+<span id="cb171-2"><a href="pre-procesamiento-de-datos.html#cb171-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq3,<span class="at">data=</span>Insumo, Insumo.lw)</span>
+<span id="cb171-3"><a href="pre-procesamiento-de-datos.html#cb171-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
-## Call:errorsarlm(formula = reg.eq3, data = Insumo, listw = Insumo.lw)
+## Call:
+## errorsarlm(formula = reg.eq3, data = Insumo, listw = Insumo.lw)
 ## 
 ## Residuals:
 ##       Min        1Q    Median        3Q       Max 
@@ -765,30 +750,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: error 
 ## Coefficients: (asymptotic standard errors) 
 ##                 Estimate   Std. Error z value  Pr(&gt;|z|)
-## (Intercept) 76.659388408 48.733988015  1.5730 0.1157149
+## (Intercept) 76.659389371 48.733986281  1.5730 0.1157149
 ## PIB          0.003936351  0.002412095  1.6319 0.1026960
-## CAP_BOG     -0.026724271  0.035542537 -0.7519 0.4521140
+## CAP_BOG     -0.026724272  0.035542537 -0.7519 0.4521139
 ## CAP_OCC     -0.051550780  0.014822573 -3.4779 0.0005054
-## CAP_CS       0.249952769  0.204318663  1.2233 0.2211984
+## CAP_CS       0.249952777  0.204318664  1.2233 0.2211984
 ## Población    0.000047471  0.000055107  0.8614 0.3890008
 ## 
 ## Lambda: 0.52489, LR test value: 4.7822, p-value: 0.028756
-## Approximate (numerical Hessian) standard error: 0.19908
-##     z-value: 2.6365, p-value: 0.0083758
-## Wald statistic: 6.9513, p-value: 0.0083758
+## Approximate (numerical Hessian) standard error: 0.19905
+##     z-value: 2.6369, p-value: 0.0083666
+## Wald statistic: 6.9533, p-value: 0.0083666
 ## 
 ## Log likelihood: -197.4421 for error model
 ## ML residual variance (sigma squared): 12461, (sigma: 111.63)
 ## Number of observations: 32 
 ## Number of parameters estimated: 8 
 ## AIC: 410.88, (AIC for lm: 413.67)</code></pre>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="pre-procesamiento-de-datos.html#cb115-1" aria-hidden="true" tabindex="-1"></a>reg.eq4<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
-<span id="cb115-2"><a href="pre-procesamiento-de-datos.html#cb115-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq4,<span class="at">data=</span>Insumo, Insumo.lw)</span></code></pre></div>
-<pre><code>## Warning in errorsarlm(reg.eq4, data = Insumo, Insumo.lw): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
-##   número de condición recíproco = 9.46755e-18 - using numerical Hessian.</code></pre>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="pre-procesamiento-de-datos.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="pre-procesamiento-de-datos.html#cb173-1" aria-hidden="true" tabindex="-1"></a>reg.eq4<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
+<span id="cb173-2"><a href="pre-procesamiento-de-datos.html#cb173-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq4,<span class="at">data=</span>Insumo, Insumo.lw)</span>
+<span id="cb173-3"><a href="pre-procesamiento-de-datos.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
-## Call:errorsarlm(formula = reg.eq4, data = Insumo, listw = Insumo.lw)
+## Call:
+## errorsarlm(formula = reg.eq4, data = Insumo, listw = Insumo.lw)
 ## 
 ## Residuals:
 ##       Min        1Q    Median        3Q       Max 
@@ -797,7 +781,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: error 
 ## Coefficients: (asymptotic standard errors) 
 ##                 Estimate   Std. Error z value  Pr(&gt;|z|)
-## (Intercept) 78.047294222 51.760317160  1.5079 0.1315904
+## (Intercept) 78.047294926 51.760316072  1.5079 0.1315904
 ## PIB          0.003727043  0.002409110  1.5471 0.1218483
 ## CAP_OCC     -0.050131489  0.014726792 -3.4041 0.0006638
 ## CAP_CS       0.099564078  0.037675929  2.6426 0.0082261
@@ -805,19 +789,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Lambda: 0.56286, LR test value: 6.894, p-value: 0.0086485
 ## Approximate (numerical Hessian) standard error: 0.17902
-##     z-value: 3.1442, p-value: 0.0016655
-## Wald statistic: 9.8859, p-value: 0.0016655
+##     z-value: 3.1441, p-value: 0.0016662
+## Wald statistic: 9.8851, p-value: 0.0016662
 ## 
 ## Log likelihood: -197.7004 for error model
 ## ML residual variance (sigma squared): 12505, (sigma: 111.82)
 ## Number of observations: 32 
 ## Number of parameters estimated: 7 
 ## AIC: 409.4, (AIC for lm: 414.29)</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="pre-procesamiento-de-datos.html#cb119-1" aria-hidden="true" tabindex="-1"></a>reg.eq5<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS</span>
-<span id="cb119-2"><a href="pre-procesamiento-de-datos.html#cb119-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq5,<span class="at">data=</span>Insumo, Insumo.lw)</span>
-<span id="cb119-3"><a href="pre-procesamiento-de-datos.html#cb119-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="pre-procesamiento-de-datos.html#cb175-1" aria-hidden="true" tabindex="-1"></a>reg.eq5<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS</span>
+<span id="cb175-2"><a href="pre-procesamiento-de-datos.html#cb175-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq5,<span class="at">data=</span>Insumo, Insumo.lw)</span>
+<span id="cb175-3"><a href="pre-procesamiento-de-datos.html#cb175-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
-## Call:errorsarlm(formula = reg.eq5, data = Insumo, listw = Insumo.lw)
+## Call:
+## errorsarlm(formula = reg.eq5, data = Insumo, listw = Insumo.lw)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
@@ -825,11 +810,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Type: error 
 ## Coefficients: (asymptotic standard errors) 
-##                 Estimate   Std. Error z value         Pr(&gt;|z|)
-## (Intercept) 100.98165981  46.44259572  2.1743         0.029680
-## PIB           0.00611113   0.00092889  6.5789 0.00000000004738
-## CAP_OCC      -0.04669321   0.01466331 -3.1844         0.001451
-## CAP_CS        0.07261035   0.02868558  2.5312         0.011366
+##                 Estimate   Std. Error z value
+## (Intercept) 100.98166025  46.44259466  2.1743
+## PIB           0.00611113   0.00092889  6.5789
+## CAP_OCC      -0.04669321   0.01466331 -3.1844
+## CAP_CS        0.07261035   0.02868558  2.5312
+##                     Pr(&gt;|z|)
+## (Intercept)         0.029680
+## PIB         0.00000000004738
+## CAP_OCC             0.001451
+## CAP_CS              0.011366
 ## 
 ## Lambda: 0.54225, LR test value: 6.0083, p-value: 0.014239
 ## Asymptotic standard error: 0.17423
@@ -844,33 +834,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="mapa-estimado" class="section level2 hasAnchor" number="4.7">
 <h2><span class="header-section-number">4.7</span> Mapa Estimado<a href="pre-procesamiento-de-datos.html#mapa-estimado" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="pre-procesamiento-de-datos.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="do">###Mapa estimado</span></span>
-<span id="cb121-2"><a href="pre-procesamiento-de-datos.html#cb121-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> reg4<span class="sc">$</span>fitted.values</span>
-<span id="cb121-3"><a href="pre-procesamiento-de-datos.html#cb121-3" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb121-4"><a href="pre-procesamiento-de-datos.html#cb121-4" aria-hidden="true" tabindex="-1"></a>shade.fit <span class="ot">=</span> <span class="fu">shading</span>(<span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">130</span>,<span class="dv">200</span>,<span class="dv">400</span>), <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Reds&quot;</span>)))</span>
-<span id="cb121-5"><a href="pre-procesamiento-de-datos.html#cb121-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, fit, <span class="at">shading=</span>shade.fit)</span>
-<span id="cb121-6"><a href="pre-procesamiento-de-datos.html#cb121-6" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shade.fit, <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Estimaciones&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
-<span id="cb121-7"><a href="pre-procesamiento-de-datos.html#cb121-7" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Valores ajustados mediante el modelo SEM para las captaciones del banco agrario </span></span>
-<span id="cb121-8"><a href="pre-procesamiento-de-datos.html#cb121-8" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
-<span id="cb121-9"><a href="pre-procesamiento-de-datos.html#cb121-9" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="pre-procesamiento-de-datos.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="do">###R^2 Nagelkerke</span></span>
-<span id="cb122-2"><a href="pre-procesamiento-de-datos.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary.sarlm(reg4,Nagelkerke = TRUE) TO-DO</span></span>
-<span id="cb122-3"><a href="pre-procesamiento-de-datos.html#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="do">###Test de moran residuales modelo SEM</span></span>
-<span id="cb122-4"><a href="pre-procesamiento-de-datos.html#cb122-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(reg4<span class="sc">$</span>residuals, Insumo.lw)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="pre-procesamiento-de-datos.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="do">###Mapa estimado</span></span>
+<span id="cb177-2"><a href="pre-procesamiento-de-datos.html#cb177-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> reg4<span class="sc">$</span>fitted.values</span>
+<span id="cb177-3"><a href="pre-procesamiento-de-datos.html#cb177-3" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb177-4"><a href="pre-procesamiento-de-datos.html#cb177-4" aria-hidden="true" tabindex="-1"></a>shade.fit <span class="ot">=</span> <span class="fu">shading</span>(<span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">130</span>,<span class="dv">200</span>,<span class="dv">400</span>), <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Reds&quot;</span>)))</span>
+<span id="cb177-5"><a href="pre-procesamiento-de-datos.html#cb177-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, fit, <span class="at">shading=</span>shade.fit)</span>
+<span id="cb177-6"><a href="pre-procesamiento-de-datos.html#cb177-6" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shade.fit, <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Estimaciones&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
+<span id="cb177-7"><a href="pre-procesamiento-de-datos.html#cb177-7" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Valores ajustados mediante el modelo SEM para las captaciones del banco agrario </span></span>
+<span id="cb177-8"><a href="pre-procesamiento-de-datos.html#cb177-8" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb177-9"><a href="pre-procesamiento-de-datos.html#cb177-9" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="pre-procesamiento-de-datos.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="do">###R^2 Nagelkerke</span></span>
+<span id="cb178-2"><a href="pre-procesamiento-de-datos.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary.sarlm(reg4,Nagelkerke = TRUE) TO-DO</span></span>
+<span id="cb178-3"><a href="pre-procesamiento-de-datos.html#cb178-3" aria-hidden="true" tabindex="-1"></a><span class="do">###Test de moran residuales modelo SEM</span></span>
+<span id="cb178-4"><a href="pre-procesamiento-de-datos.html#cb178-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(reg4<span class="sc">$</span>residuals, Insumo.lw)</span></code></pre></div>
 <pre><code>## 
 ##  Moran I test under randomisation
 ## 
 ## data:  reg4$residuals  
 ## weights: Insumo.lw    
 ## 
-## Moran I statistic standard deviate = 0.83723, p-value = 0.2012
+## Moran I statistic standard deviate = 0.83723, p-value
+## = 0.2012
 ## alternative hypothesis: greater
 ## sample estimates:
 ## Moran I statistic       Expectation          Variance 
 ##        0.05266908       -0.03225806        0.01028984</code></pre>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="pre-procesamiento-de-datos.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Municipal</span></span>
-<span id="cb124-2"><a href="pre-procesamiento-de-datos.html#cb124-2" aria-hidden="true" tabindex="-1"></a>ColombiaM <span class="ot">=</span> <span class="fu">readOGR</span>(<span class="at">dsn =</span> <span class="st">&quot;Trabajo Grado/Geodatabase Colombia&quot;</span>, <span class="at">layer =</span> <span class="st">&quot;municipios&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="pre-procesamiento-de-datos.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Municipal</span></span>
+<span id="cb180-2"><a href="pre-procesamiento-de-datos.html#cb180-2" aria-hidden="true" tabindex="-1"></a>ColombiaM <span class="ot">=</span> <span class="fu">readOGR</span>(<span class="at">dsn =</span> <span class="st">&quot;Trabajo Grado/Geodatabase Colombia&quot;</span>, <span class="at">layer =</span> <span class="st">&quot;municipios&quot;</span>)</span></code></pre></div>
 <pre><code>## OGR data source with driver: ESRI Shapefile 
 ## Source: &quot;/home/martha/Documentos/Cursos EE UN/Trabajo Grado/Geodatabase Colombia&quot;, layer: &quot;municipios&quot;
 ## with 1107 features
@@ -916,7 +907,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jocastrocUnal/Cuadernos/edit/master/03-EstudioMercadeoEspacial.Rmd",
+"link": "https://github.com/mpbohorquezc/Clases-EE-UN/edit/master/03-EstudioMercadeoEspacial.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -924,7 +915,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/jocastrocUnal/Cuadernos/blob/master/03-EstudioMercadeoEspacial.Rmd",
+"link": "https://github.com/mpbohorquezc/Clases-EE-UN/blob/master/03-EstudioMercadeoEspacial.Rmd",
 "text": null
 },
 "download": null,
@@ -939,6 +930,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
