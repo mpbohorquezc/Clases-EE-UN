@@ -1,0 +1,58 @@
+---
+title: "Introducción proceso espacial bivariado"
+author: "Martha Bohorquez"
+date: "2022-12-18"
+output: html_document
+---
+
+# Introducción al proceso espacial bivariado
+
+## Dependencias
+
+```{r}
+library(geoR)
+library(mvtnorm)
+```
+
+## Ubicaciones: 
+En este caso se supone que ambos procesos están observados en los mismos lugares
+
+```{r}
+x=seq(0,1,len=3)
+y=seq(0,1,len=4)
+coordenadas=expand.grid(x,y)
+Mat_dist=as.matrix(dist(coordenadas))
+```
+
+## Modelo lineal de coregionalización
+
+```{r}
+Cova1=function(h,a){exp(-h/a)}
+Cova2=function(h,a){ifelse(h <= a, 1-1.5*(h/a)+0.5*(h/a)^3, 0)}
+B1=matrix(c(26.3,0.3,0.3,2.1),nrow=2,byrow=T)
+B2=matrix(c(2.1,1.3,1.3,17.5),nrow=2,byrow=T)
+Mat_Cov_bloque11=B1[1,1]*Cova1(Mat_dist,1)+B2[1,1]*Cova2(Mat_dist,0.5)
+Mat_Cov_bloque22=B1[2,2]*Cova1(Mat_dist,1)+B2[2,2]*Cova2(Mat_dist,0.5)
+Mat_Cov_bloque12=B1[1,2]*Cova1(Mat_dist,1)+B2[1,2]*Cova2(Mat_dist,0.5)
+Mat_Cov_bloque21=B1[2,1]*Cova1(Mat_dist,1)+B2[2,1]*Cova2(Mat_dist,0.5)
+MAT_COV=rbind(cbind(Mat_Cov_bloque11,Mat_Cov_bloque12),cbind(Mat_Cov_bloque21,Mat_Cov_bloque22))
+dim(MAT_COV)
+```
+
+### Determinante de la matriz de covarianzas
+
+```{r}
+det(MAT_COV)
+```
+
+## simulación de un proceso espacial Gaussiano bivariado
+
+```{r}
+sim1=rmvnorm(1,mean=rep(0,2*nrow(coordenadas)), sigma=MAT_COV)
+datos=cbind(coordenadas,z1=sim1[1:12],z2=sim1[13:24])
+```
+
+
+
+
+

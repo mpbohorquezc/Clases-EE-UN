@@ -57,3 +57,16 @@ semivarogramas-cruzados-bivariados
 gstat
 estimación-del-semivariograma
 mapas-de-predicción-de-o3-con-las-covariables-espaciales-no2-y-nox
+introducción-al-proceso-espacial-bivariado
+dependencias
+ubicaciones
+modelo-lineal-de-coregionalización-1
+determinante-de-la-matriz-de-covarianzas
+simulación-de-un-proceso-espacial-gaussiano-bivariado-1
+ilustración-del-kriging-simple-espacio-tiempo-1
+dependencias-1
+simulación-no-condicional-de-una-realización-de-un-campo-aleatorio-espacio-temporal-no-separable-usando-el-modelo-de-covarianza-cressie1-1
+algunas-funciones-de-covarianza-espacio-temporal-no-separables-1
+c-r-e-s-s-i-e---h-u-a-n-g-1999-1
+gneiting-2002-combina-fun1-fun2-y-psi-en-gneiting-1
+iaco_cessare
