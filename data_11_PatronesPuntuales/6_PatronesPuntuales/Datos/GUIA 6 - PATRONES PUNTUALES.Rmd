@@ -1,0 +1,277 @@
+---
+title: "Patrones Puntuales"
+subtitle: "Curso de Estadística Espacial"
+output: html_document
+author:
+- name: Jeimy Paola Aristizabal R.
+  
+- name: Martha Patricia Bohorquez C.
+  affiliation: Universidad Nacional de Colombia - Sede Bogotá
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+El análisis de patrones puntuales (PP) estudia la distribución espacial de los puntos (Boots & Getis, 1988). En el análisis se utiliza la densidad, la dispersión y la homogeneidad de conjuntos de datos de puntos para evaluar, cuantificar y caracterizar su distribución. Durante los últimos cincuenta años, se han desarrollado varios métodos y medidas para analizar, modelar, visualizar e interpretar estas propiedades de los patrones puntuales (Qiang et al, 2020).
+
+Hay tres categorías principales de técnicas que se pueden aplicar en PP:
+
+1. Estadísticas descriptivas
+2. Métodos basados en densidades
+3. Métodos basados en distancias
+
+El uso de estadísticas descriptivas proporciona un resumen de las características básicas del patrón, como su tendencia central y dispersión. Las estadísticas descriptivas brindan una manera simple de visualizar un conjunto de datos como un todo, a partir de estadísticas como la mediana o la media o con medidas de dispersión tales como el eclipse de desviación estándar para aquellos conjuntos de datos que muestran un patrón direccional.
+
+Sin embargo, las estadísticas descriptivas son algo limitadas en lo que pueden comunicar sobre el patrón de un conjunto de datos. Así, se han desarrollado técnicas más poderosas para explorar patrones, que se basan en la densidad o en la distancia, según las propiedades espaciales que la técnica esté considerando (Gimond, 2020).
+
+Los métodos basados en densidades se centran en las propiedades de primer orden de un conjunto de datos, es decir, la variación en las ubicaciones individuales de los puntos del conjunto de datos en el área de interés, y caracterizan la distribución del conjunto de datos en términos de densidad.
+
+Los métodos basados en distancias se centran en las propiedades de segundo orden de un conjunto de datos, es decir, las interacciones entre puntos, la forma de distriburirse o la tendencia a formar grupos, y caracterizan la distribución del conjunto de datos en términos de dispersión.
+
+
+
+## Datos
+
+La base de datos que se trabaja en esta guía presenta información de la intensidad de sismos en el territorio colombiano en el 2009. Se cuenta con las coordanadas planas y la intensidad del sismo.
+
+```{r cars1, warning=FALSE, cache=FALSE, message=FALSE}
+#================================================
+#paquetes necesarios
+#================================================
+library (sp)
+library(nlme)
+library(rpart)
+library(splancs)
+library(spatstat)
+library(mctest)
+library(ape)
+library(maptools)
+library(rgdal)
+library(ecodist)
+library(RANN)
+
+#================================================
+#Lectura datos
+#================================================
+
+setwd("C:/Users/jeimy.aristizabal/Dropbox/COORDINACION 2022/FDA/ENTREGA/GUIA 6 - PATRONES PUNTUALES/Datos-20220621T185717Z-001/Datos")
+#Datos = Datos_Sismos_2009
+Datos=read.table("Datos_Sismos_2009.txt",dec=",",sep="\t",header=T)
+summary(Datos)
+
+S <- readShapePoly("colombia.shp")
+SP <- as(S, "SpatialPolygons")
+
+sismos=ppp(Datos$X,Datos$Y,marks=Datos$Magnitud,window=owin(c(450433,1806815),c(22875.5,1870870.5)))
+unitname(sismos)="meter"
+
+```
+
+
+### Análisis descriptivo
+
+A continuación, se presentan los respectivos histogramas.
+
+```{r cars2, warning=FALSE, cache=FALSE, message=FALSE}
+#================================================
+#Gráficas básicas
+#================================================
+x11()
+plot(sismos, main="")
+x11()
+par(mfrow=c(1,2))
+hist(sismos$x,xlab="Este",ylab="",main="")
+hist(sismos$y,xlab="Norte",ylab="",main="")
+
+
+```
+
+### Pruebas de Aleatoriedad basadas en cuadrantes
+
+Al observar la distribución de los puntos en el conjunto de datos y los patrones respectivos que muestran, la pregunta clave que a menudo es necesario responder es: ¿los puntos en el conjunto de datos están agrupados, distribuidos aleatoriamente (es decir, muestran una aleatoriedad espacial completa), uniformes o dispersos? 
+
+Si bien es posible evaluar visualmente esta distribución, para poder cuantificar estadísticamente la distribución de los datos, es posible comparar su distribución con la distribución de Poisson (la distribución de Poisson describe la probabilidad o tasa de que ocurra un evento en un intervalo fijo de tiempo o espacio).
+
+Esencialmente, si los datos no se ajustan al modelo de Poisson, entonces se puede inferir que algo interesante podría estar sucediendo y que nuestros eventos podrían no ser independientes entre sí. En cambio, pueden estar agrupados o dispersos y es probable que haya procesos subyacentes que influyan en estos patrones.
+
+La prueba más básica de aleatoriedad espacial  se puede completar con los resultados de una análisis por cuadrantes. La idea de esta prueba es comparar los cuadrantes construidos con la base de datos y compararlos con una distribución de Poisson para los mismos cuadrantes; es decir, se verifica si la distribución de puntos en el área de estudio difiere de la aleatoriedad espacial completa y si se encuentran algunos grupos presentes. Así, es posible llevar a cabo una prueba de chi-cuadrado. Esta prueba permitirá evidenciar si los datos observados se distribuyen bajo la hipótesis nula de aleatoriedad 
+
+
+```{r cars3, warning=FALSE, cache=FALSE, message=FALSE}
+#================================================
+#Por medio de cuadrados
+#================================================
+
+#Prueba Chi-cuadrado
+#Ho: la intensidad es homogenea
+#Ha: la intensidad no es homogenea
+#sismos.split <- split(sismos)
+
+#Cuadricula 4x4
+quadratcount(sismos, nx = 4, ny = 4)
+Q4 = quadratcount(sismos, nx = 4, ny = 4)
+x11()
+plot(sismos, cex = 0.5, pch = "+",main="")
+plot(Q4, add = TRUE, cex = 0.8,col=4)
+plot(S,add = TRUE)
+quadrat.test(sismos, nx = 4, ny = 4)
+
+#Cuadricula 5x5
+quadratcount(sismos, nx = 5, ny = 5)
+Q5 = quadratcount(sismos, nx = 5, ny = 5)
+x11()
+plot(sismos, cex = 0.5, pch = "+",main="")
+plot(Q5, add = TRUE, cex = 0.8,col=4)
+plot(S,add = TRUE)
+quadrat.test(sismos, nx = 5, ny = 5)
+
+#Cuadricula 6x6
+quadratcount(sismos, nx = 6, ny = 6)
+Q4 = quadratcount(sismos, nx = 6, ny = 6)
+x11()
+plot(sismos, cex = 0.5, pch = "+",main="")
+plot(Q4, add = TRUE, cex = 0.8,col=4)
+plot(S,add = TRUE)
+quadrat.test(sismos, nx = 6, ny = 6)
+
+# Lamda Retícula 4X4
+plot(sismos, main="Eventos", pch=18)
+lambda1<-quadratcount(sismos, nx=4,ny=4)
+plot(lambda1, main=" Intensidad reticula 4*4", cex=1)
+# Lamda Retícula 5X5
+lambda2<-quadratcount(sismos, nx=5,ny=5)
+plot(lambda2, main=" Intensidad reticula 5*5", cex=1)
+#Lamda 6X6
+lambda3<-quadratcount(sismos, nx=6,ny=6)
+plot(lambda3, main="Intensidad reticula 6*6", cex=1)
+```
+
+
+### Pruebas de Aleatoriedad basadas en distancias
+
+El análisis de aleatoriedad permite identificar si los datos de se distribuyen aleatoriamente y visualizar e identificar áreas de alta y baja densidad, mostrando si están agrupados y dónde. Sin embargo, también existen algunos mmétodos basados en distancias que permiten cuantificar las propiedades de segundo orden de los datos, es decir, la influencia que de acuerdo con la ubicación tiene unos datos sobre otros.
+
+Las medidas basadas en la distancia analizan la distribución espacial de los puntos usando distancias entre pares de puntos, y la mayoría usa la distancia euclidiana, para determinar cuantitativamente si los datos están, nuevamente, distribuidos al azar o muestran signos de agrupamiento o dispersión.
+
+Estos métodos son una alternativa más rigurosa al uso del enfoque de análisis de cuadrantes y permiten evaluar el agrupamiento dentro del conjunto de datos puntuales tanto a escala global como local.
+
+
+```{r cars4, warning=FALSE, cache=FALSE, message=FALSE}
+#=================================================================
+#Gráficas de las funciones de distribución empíricas G-hat y F-hat
+#=================================================================
+n <- length(sismos$x)
+x11()
+par(mfrow=c(1,2))
+
+#================================================
+#Para calcular la función G
+#================================================
+sismos.ghat <- Gest(sismos)
+plot(sismos.ghat,xlab="r",ylab="Ghat(r)")
+
+Genv<-envelope(sismos,fun="Gest",nsim=999,nrank=5)
+plot(Genv,xlab="r",ylab="Ghat(r)",cex.lab=1.6,cex.axis=1.5,main="G-Hat",cex.main=1.5)
+
+#Test Hopkins-Skellam
+#Ho: El patrón espacial es completamente aleatorizado
+#Ha: El patrón espacial no es completamente aleatorizado
+#Nivel de significancia (alpha=0.05)
+
+hopskel.test(sismos, method = "MonteCarlo", nsim = 999)
+
+#================================================
+#Para calcular la función F
+#================================================
+sismos.fhat <- Fest(sismos)    
+plot(sismos.fhat,xlab="r",ylab="Fhat(r)")
+
+Fenv<-envelope(sismos,fun="Fest",nsim=999,nrank=5)
+plot(Fenv,xlab="r",ylab="Fhat(r)",cex.lab=1.6,cex.axis=1.5,main="F-Hat",cex.main=1.5)
+```
+
+#### Funciones de Ripley
+
+
+La función K de Ripley analiza la distancia entre un punto y "todas las distancias" a otros puntos y la compara automáticamente con un patrón de puntos de distribución de Poisson. Esta función esencialmente resume la distancia entre puntos para todas las distancias usando bandas de distancia radial. El cálculo es relativamente sencillo:
+
+1. Para el evento de punto A, cuente el número de puntos dentro de un búfer (radio) de cierto tamaño. Luego cuente el número de puntos dentro de un búfer (radio) un poco más grande.
+2. Repita esto para cada evento de punto en el conjunto de datos.
+3. Calcule el número medio de puntos en cada zona de influencia (radio) y divídalo por la densidad total de puntos.
+4. Repita esto utilizando puntos extraídos de un modelo aleatorio de Poisson para el mismo conjunto de zonas de influencia.
+5. Compare la distribución observada con la distribución con la distribución de Poisson.
+
+
+```{r cars5, warning=FALSE, cache=FALSE, message=FALSE}
+#=================================================================
+#Gráficas de las funciones K y L de Ripley 
+#=================================================================
+
+#================================================
+#Para calcular la función K
+#================================================
+sismos.khat <- Kest(sismos)
+plot(sismos.khat$r,sismos.khat$iso,xlab="r",ylab="Ripley's K")
+lines(sismos.khat$r,sismos.khat$theo,lty=8,lwd=2)
+#================================================
+#Para calcular la función L
+#================================================
+sismos.lhat <- Lest(sismos)
+plot(sismos.lhat$r,sismos.lhat$iso,xlab="r",ylab="Ripley's L")
+lines(sismos.lhat$r,sismos.lhat$theo,lty=8,lwd=2)
+```
+
+
+### Estimación de la intensidad
+
+Las técnicas basadas en la densidad se utilizan para caracterizar el patrón de un conjunto de datos utilizando su distribución general.Es posible calcular densidades tanto a escala global como local. Sin embargo, en el análisis de patrones puntuales, la densidad global realmente no dice mucho sobre la distribución de los datos, en términos de áreas de alta y baja densidad, por ejemplo.
+
+Aquí es donde las técnicas de densidad local, como la estimación de la densidad y la intensidad, pueden ayudar a visualizar estas diferencias  en la distribución de los datos.Dentro del análisis espacial, la estimación de la densidad produce una superficie (ráster) que detalla la distribución estimada de los datos en el espacio. Cada celda dentro del ráster contiene un valor que corresponde con la densidad estimada en esa ubicación; cuando se visualiza en su totalidad el ráster completo, se puede identificar rápidamente áreas de alta y baja densidad, es decir, dónde están ubicados los grupos en el conjunto de datos.
+
+
+Un kernel define la forma y el tamaño de la ventana y también puede ponderar los puntos, utilizando una función de kernel definida (Gimond, 2020). La función kernel más simple es un kernel básico donde a cada punto de la ventana del kernel se le asigna el mismo peso. La superficie resultante se crea a partir de estos valores de densidad calculados localmente de forma individual.
+
+
+```{r cars6, warning=FALSE, cache=FALSE, message=FALSE}
+#==========================================================================
+########################Estimación de la intensidad########################
+#==========================================================================
+#================================================
+#Por medio de kernel Gaussiano
+#================================================
+#Ancho de banda ideal (mínimo mse)
+banda <- 18939.72936
+
+
+dengaus=density(sismos,kernel="gaussian", bw = banda)
+x11()
+plot(dengaus)
+plot(S,add = TRUE)
+contour(dengaus, add = TRUE)
+x11()
+plot(dengaus)
+persp(dengaus)
+x11()
+contour(dengaus)
+plot(S,add = TRUE)
+
+#Marcas según la intensidad del sismo
+#Menor a 3.5 en la escala de Richter
+#y entre 3.5 y 5.5 en la escala de Richter
+
+Datos1=read.table("Datos_Sismos_2009_1.txt",dec=",",sep="\t",header=T)
+sismos1=ppp(Datos1$X,Datos1$Y,marks=Datos1$Marcas,window=owin(c(450433,1806815),c(22875.5,1870870.5)))
+Datos1$cat <- as.factor(Datos1$Marcas)
+mpp=ppp(Datos1$X,Datos1$Y,marks=Datos1$cat,window=owin(c(450433,1806815),c(22875.5,1870870.5)))
+spp <- split(mpp)
+dengaus1=density(spp[1:1],kernel="gaussian")
+dengaus2=density(spp[2:2],kernel="gaussian")
+x11()
+plot(dengaus1)
+plot(S,add = TRUE)
+plot(dengaus2)
+plot(S,add = TRUE)
+```
