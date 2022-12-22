@@ -1,0 +1,47 @@
+---
+title: "fields package"
+author: "Martha Bohorquez"
+date: "22/6/2021"
+output: html_document
+---
+
+## fields package
+
+This is guide for use fields package for geostatistical analysis
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Packages**
+
+```{r warning=FALSE, results='hide',message=FALSE}
+library(fields)
+```
+rm(list=ls())
+
+
+## Including Plots
+
+You can also embed plots, for example:
+```{r}
+x11()
+data(lennon)
+plot(3.5:5.5,3.5:5.5, type="n")
+add.image(5,4,lennon, col=grey( (0:256)/256))
+# reference lines
+xline(5, col=2)
+yline(4,col=2)
+```
+
+```{r}
+fit<- Krig( ChicagoO3$x, ChicagoO3$y, Covariance="Matern", aRange=100,smoothness=2)
+data( ozone2)
+x<- ozone2$lon.lat
+y<- ozone2$y[16,]
+# Omit the NAs
+good<- !is.na( y)
+x<- x[good,]
+y<- y[good]
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
