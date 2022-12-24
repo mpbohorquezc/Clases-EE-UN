@@ -6,7 +6,9 @@ date: "2023-01-31"
 ---
 
 # Modelos de regresión espacial
+
 ## Estudio de Mercadeo
+
 Se comparan varios tipos de modelos de regresión espacial para ver con cual se obtiene el mejor ajuste. Se consideran modelos autoregresivos y de medias móvviles así como su combinación.
 
 ## Paquetes

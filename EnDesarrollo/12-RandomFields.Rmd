@@ -1,212 +1,3 @@
---- 
-title: "Cuaderno EE"
-author: '....'
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
----
-
-# Simulación Proceso Espacio Temporal
-
-Placeholder
-
-
-## Funciones
-## CH 1 no separable
-## CH3 no separable
-## CH 4
-
-<!--chapter:end:index.Rmd-->
-
-
-# Spatial modeling leukemia
-
-Placeholder
-
-
-## **Mortality**
-### *Packages Mortality*
-### *Code Mortality*
-## Incidence
-### **Packages Incidence**
-### *Code Incidence*
-
-<!--chapter:end:02-Leukimia.Rmd-->
-
-
-# Modelos de regresión espacial
-
-Placeholder
-
-
-## Estudio de Mercadeo
-## Paquetes
-## Lectura de Datos
-### Cruce de información y arreglo de coordenadas
-## Matriz de vecindades 
-## Mapa de valores observados
-## Pruebas de Autocorrelación
-## Mapas
-## Resumen de modelos
-## Calculo de varibles significativas
-## Mapa Estimado
-
-<!--chapter:end:03-EstudioMercadeoEspacial.Rmd-->
-
-
-# Ilustración del kriging simple espacio tiempo
-
-Placeholder
-
-
-## librerías 
-## **Simulación no condicional de una realización de un campo aleatorio espacio temporal no separable usando el modelo de covarianza cressie1**
-## **Algunas funciones de covarianza espacio temporal no separables**
-### C R E S S I E - H U A N G (1999)
-### Gneiting (2002), combina fun1, fun2 y psi en Gneiting
-
-<!--chapter:end:04-KrigingSimple.Rmd-->
-
-
-# Pulimiento de medianas
-
-Placeholder
-
-
-## Cargar librerias
-## Grilla de las ubicaciones espaciales.
-## Definición de objeto VGM
-## Matriz de varianza dadas coordenadas.
-## Simulación.
-## Pulimiento de medianas
-
-<!--chapter:end:05-PulimientoMedianas.Rmd-->
-
-
-# Introducción proceso espacial bivariado
-
-Placeholder
-
-
-## Librerías
-## Ubicaciones: En este caso se supone que ambos procesos están observados en los mismos lugares
-## Modelo lineal de coregionalización
-## Simulación de un proceso espacial Gaussiano bivariado
-
-<!--chapter:end:06-IntroProcesoEspacialBivariado.Rmd-->
-
-
-# Geoestadística con sgeostat
-
-Placeholder
-
-
-## Data Load
-## Libraries
-## Including Plots
-
-<!--chapter:end:07-GeoestadisticaSGEOSTAT.Rmd-->
-
-
-# Cokriging
-
-Placeholder
-
-
-## Librerías
-## Descripción de los datos
-## Matrices de coregionalización.
-### Matriz definida positiva para el modelo Esférico.
-### Matriz definida positiva para el modelo efecto Hueco.
-## Definición de objeto en gstat
-### Semivariogramas univariados
-### Semivarogramas cruzados (Bivariados)
-### gstat
-### Estimación del semivariograma
-### Mapas de predicción de O3 con las covariables espaciales NO2 y NOX
-
-<!--chapter:end:08-Cokriging.Rmd-->
-
-
-# Introducción al proceso espacial bivariado
-
-Placeholder
-
-
-## Dependencias
-## Ubicaciones: 
-## Modelo lineal de coregionalización
-### Determinante de la matriz de covarianzas
-## simulación de un proceso espacial Gaussiano bivariado
-
-<!--chapter:end:09-SimulacionBivariado.Rmd-->
-
-
-# Ilustración del kriging simple espacio tiempo
-
-Placeholder
-
-
-## Dependencias
-## Simulación no condicional de una realización de un campo aleatorio espacio temporal no separable usando el modelo de covarianza cressie1
-## Algunas funciones de covarianza espacio temporal no separables
-### C R E S S I E - H U A N G (1999)
-### Gneiting (2002), combina fun1, fun2 y psi en Gneiting
-#### IACO_CESSARE
-
-<!--chapter:end:10-SimulaciónMultivariado.Rmd-->
-
-
-# Análisis de datos funcionales
-
-Placeholder
-
-
-## Análisis de datos funcionales (ADF) - Análisis exploratorio
-### Datos funcionales
-#### Descripción
-#### Suavizamiento de curvas
-##### Bases monomiales
-##### Bases de Fourier
-##### B-splines
-##### Otras bases
-##### Suavizamiento de la temperatura 
-#### Estadística descriptiva
-### Análisis gráfico y detección de outliers
-## Análisis de datos funcionales (ADF) - Análisis gráfico
-### Deteccción de curvas atípicas
-### Otras medidas de resumen
-### Análisis en Componentes Principales (ACPF)
-## Modelos lineales
-### Regresión lineal funcional con respuesta escalar
-### Estimación de los coeficientes $\beta$ con regularización
-### Prueba $F$ para ajuste del modelo a través de permutaciones
-## Modelos lineales funcionales (Regresión Funcional)
-### Regresión lineal funcional con respuesta funcional (ANOVA Funcional)
-### Estimación - Mínimos cuadrados ordinarios
-### Pruebas de hipótesis - Prueba de Shen & Faraway
-### Ejemplo
-#### Experimento
-#### Sistema de referencia 10-20
-#### Análisis de varianza a dos vías de clasificación
-## Estadística Espacial
-### Metodología de predicción espacial con datos funcionales
-### Ilustración
-#### Lectura y gráfica de las curvas y las coordenadas
-#### Suavizamiento a través de B-splines
-#### Estimación de la traza-variograma y ajuste de modelos
-#### Modelos
-#### Predicciones espaciales en una ubicación no muestreada
-#### Uso de bases de Fourier
-## Patrones Puntuales
-### Datos
-#### Análisis descriptivo
-#### Pruebas de Aleatoriedad basadas en cuadrantes
-#### Pruebas de Aleatoriedad basadas en distancias
-##### Funciones de Ripley
-#### Estimación de la intensidad
-
-<!--chapter:end:11-PatronesPuntuales.Rmd-->
-
 ---
 title: "Random Fields"
 author: "Martha Bohorquez"
@@ -249,7 +40,6 @@ image.plot(datosIm)
 ```
 
 ```{r}
-
 #Thin plate spline regression
 fit_TPS<- Tps(ChicagoO3$x, ChicagoO3$y)
 x11()
@@ -260,7 +50,6 @@ surface.Krig(fit_TPS,type="I",extrap=F)
 ```
 
 ```{r}
-
 # fitting a surface to ozone measurements.
 fit_Krig<- Krig(ChicagoO3$x, ChicagoO3$y, Covariance="Matern", aRange=100,smoothness=2,sigma=var(ChicagoO3$y))
 data(ozone2)
@@ -274,12 +63,10 @@ y<- y[good]
 ```
 
 ```{r}
-
 #simulation with circulant embedding. Simula un GRF en una grilla regular con silla=1. El algoritmo circulant embedding usa FFT.
 ```
 
 ```{r}
-
 #Usar con alcances no tan grandes o agrandando el spatial domain
 grid<- list(x= seq(0,5,len=100), y= seq(0,5,len=150))
 obj<- circulantEmbeddingSetup(grid, Covariance="Exponential", aRange=.5)
@@ -309,13 +96,11 @@ title("Fourth realization with sim.rf ...")
 ```
 
 ```{r}
-
 #calculando covarianzas entre conjuntos de puntos, esto sirve para las distancias
 #entre observados y lugares a predecir por ej.
 ```
 
 ```{r}
-
 out2<- Exp.cov( ChicagoO3$x[6:20,],ChicagoO3$x[1:2,], aRange=100)
 ```
 
@@ -327,7 +112,6 @@ obj<- circulantEmbeddingSetup(grid,cov.args=list(Covariance="Matern", aRange=2, 
 ```
 
 ```{r}
-
 # NOTE: choice of aRange is close to giving a negative weight array
 set.seed(102)
 look<- circulantEmbedding(obj)
@@ -342,7 +126,6 @@ for( k in 1:16){
 ```
 
 ```{r}
-
 data(ozone2)
 quilt.plot(ozone2$lon.lat, ozone2$y[16,],main="day 16")
 bubblePlot(ozone2$lon.lat, ozone2$y[16,],main="day 16")
@@ -352,13 +135,12 @@ data(CO2)
 ```
 
 ```{r}
-
 #
 # A quick look at the observations with world map
-x11()
-quilt.plot(CO2$lon.lat, CO2$y[20,])
-bubblePlot(CO2$lon.lat, CO2$y[20,])
-world(add=TRUE)
+#x11()
+#quilt.plot(CO2$lon.lat, CO2$y[20,])
+#bubblePlot(CO2$lon.lat, CO2$y[20,])
+#world(add=TRUE)
 out<-fastTps(CO2$lon.lat, CO2$y, aRange=4, lambda=2.0)
 #summary of fit note about 7300 degrees of freedom
 # associated with fitted surface
@@ -1701,7 +1483,4 @@ loc <- par("usr")
 text(loc[1.5], loc[4.3], adj = c(2.5,4),expression(bold(chi)[s]^1),xpd = T,cex=2)
 ```
 
-
-
-<!--chapter:end:12-RandomFields.Rmd-->
 

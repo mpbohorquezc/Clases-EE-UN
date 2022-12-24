@@ -5,6 +5,7 @@ date: "2022-11-22"
 ---
 
 # Pulimiento de medianas
+
 Esta es una alternativa al modelamiento de la media cuando los modelos de regresión polinómicos usuales no logran el objetivo de eliminar la tendencia ya sea porque el tipo de tendencia corresponde mas a unas ventanas móviles o porque hay presentes datos atípicos.
 
 ## Cargar librerias
