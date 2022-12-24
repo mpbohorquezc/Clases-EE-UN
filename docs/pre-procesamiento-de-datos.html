@@ -313,92 +313,82 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="pre-procesamiento-de-datos" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Pre-procesamiento de datos<a href="pre-procesamiento-de-datos.html#pre-procesamiento-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="pre-procesamiento-de-datos.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cruce de información con el shape cargado</span></span>
-<span id="cb195-2"><a href="pre-procesamiento-de-datos.html#cb195-2" aria-hidden="true" tabindex="-1"></a>Insumo <span class="ot">=</span> <span class="fu">merge</span>(Colombia, BASE, <span class="at">by.x=</span><span class="st">&quot;COD_DANE&quot;</span>, <span class="at">by.y=</span><span class="st">&quot;Cod&quot;</span>)</span>
-<span id="cb195-3"><a href="pre-procesamiento-de-datos.html#cb195-3" aria-hidden="true" tabindex="-1"></a>Insumo <span class="ot">=</span> <span class="fu">subset</span>(Insumo[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">31</span>,<span class="dv">33</span>),])</span>
-<span id="cb195-4"><a href="pre-procesamiento-de-datos.html#cb195-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversión a Coordenadas UTM</span></span>
-<span id="cb195-5"><a href="pre-procesamiento-de-datos.html#cb195-5" aria-hidden="true" tabindex="-1"></a>Crs.geo <span class="ot">=</span> <span class="fu">CRS</span>(<span class="st">&quot;+proj=tmerc +lat_0=4.599047222222222 +lon_0=-74.08091666666667 +k=1 +x_0=1000000 +y_0=1000000 +ellps=intl +towgs84=307,304,-318,0,0,0,0 +units=m +no_defs&quot;</span>)  </span>
-<span id="cb195-6"><a href="pre-procesamiento-de-datos.html#cb195-6" aria-hidden="true" tabindex="-1"></a><span class="fu">proj4string</span>(Insumo) <span class="ot">&lt;-</span> Crs.geo </span>
-<span id="cb195-7"><a href="pre-procesamiento-de-datos.html#cb195-7" aria-hidden="true" tabindex="-1"></a>Insumo.utm <span class="ot">=</span> <span class="fu">spTransform</span>(Insumo, <span class="fu">CRS</span>(<span class="st">&quot;+init=epsg:3724 +units=km&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="pre-procesamiento-de-datos.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cruce de información con el shape cargado</span></span>
+<span id="cb142-2"><a href="pre-procesamiento-de-datos.html#cb142-2" aria-hidden="true" tabindex="-1"></a>Insumo <span class="ot">=</span> <span class="fu">merge</span>(Colombia, BASE, <span class="at">by.x=</span><span class="st">&quot;COD_DANE&quot;</span>, <span class="at">by.y=</span><span class="st">&quot;Cod&quot;</span>)</span>
+<span id="cb142-3"><a href="pre-procesamiento-de-datos.html#cb142-3" aria-hidden="true" tabindex="-1"></a>Insumo <span class="ot">=</span> <span class="fu">subset</span>(Insumo[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">31</span>,<span class="dv">33</span>),])</span>
+<span id="cb142-4"><a href="pre-procesamiento-de-datos.html#cb142-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversión a Coordenadas UTM</span></span>
+<span id="cb142-5"><a href="pre-procesamiento-de-datos.html#cb142-5" aria-hidden="true" tabindex="-1"></a>Crs.geo <span class="ot">=</span> <span class="fu">CRS</span>(<span class="st">&quot;+proj=tmerc +lat_0=4.599047222222222 +lon_0=-74.08091666666667 +k=1 +x_0=1000000 +y_0=1000000 +ellps=intl +towgs84=307,304,-318,0,0,0,0 +units=m +no_defs&quot;</span>)  </span>
+<span id="cb142-6"><a href="pre-procesamiento-de-datos.html#cb142-6" aria-hidden="true" tabindex="-1"></a><span class="fu">proj4string</span>(Insumo) <span class="ot">&lt;-</span> Crs.geo </span>
+<span id="cb142-7"><a href="pre-procesamiento-de-datos.html#cb142-7" aria-hidden="true" tabindex="-1"></a>Insumo.utm <span class="ot">=</span> <span class="fu">spTransform</span>(Insumo, <span class="fu">CRS</span>(<span class="st">&quot;+init=epsg:3724 +units=km&quot;</span>))</span></code></pre></div>
 <div id="matriz-de-vecindades" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Matriz de vecindades<a href="pre-procesamiento-de-datos.html#matriz-de-vecindades" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="pre-procesamiento-de-datos.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="co">#---</span></span>
-<span id="cb196-2"><a href="pre-procesamiento-de-datos.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="co"># MATRIZ DE VECINDADES (W)</span></span>
-<span id="cb196-3"><a href="pre-procesamiento-de-datos.html#cb196-3" aria-hidden="true" tabindex="-1"></a><span class="co">#---</span></span>
-<span id="cb196-4"><a href="pre-procesamiento-de-datos.html#cb196-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Centroides de las Áreas</span></span>
-<span id="cb196-5"><a href="pre-procesamiento-de-datos.html#cb196-5" aria-hidden="true" tabindex="-1"></a>Centros <span class="ot">=</span> <span class="fu">getSpPPolygonsLabptSlots</span>(Insumo.utm)</span>
-<span id="cb196-6"><a href="pre-procesamiento-de-datos.html#cb196-6" aria-hidden="true" tabindex="-1"></a>Centroids <span class="ot">&lt;-</span> <span class="fu">SpatialPointsDataFrame</span>(<span class="at">coords =</span> Centros, <span class="at">data=</span>Insumo.utm<span class="sc">@</span>data, </span>
-<span id="cb196-7"><a href="pre-procesamiento-de-datos.html#cb196-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">proj4string=</span><span class="fu">CRS</span>(<span class="st">&quot;+init=epsg:3724 +units=km&quot;</span>))</span>
-<span id="cb196-8"><a href="pre-procesamiento-de-datos.html#cb196-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de Distancias entre los Centriodes</span></span>
-<span id="cb196-9"><a href="pre-procesamiento-de-datos.html#cb196-9" aria-hidden="true" tabindex="-1"></a>Wdist <span class="ot">=</span> <span class="fu">dist</span>(Centros, <span class="at">up=</span>T)</span>
-<span id="cb196-10"><a href="pre-procesamiento-de-datos.html#cb196-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz W de vecindades</span></span>
-<span id="cb196-11"><a href="pre-procesamiento-de-datos.html#cb196-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pgirmess)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;pgirmess&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:psych&#39;:
-## 
-##     shannon</code></pre>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="pre-procesamiento-de-datos.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(HistogramTools)</span>
-<span id="cb199-2"><a href="pre-procesamiento-de-datos.html#cb199-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(strucchange)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;strucchange&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:stringr&#39;:
-## 
-##     boundary</code></pre>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="pre-procesamiento-de-datos.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
-<span id="cb202-2"><a href="pre-procesamiento-de-datos.html#cb202-2" aria-hidden="true" tabindex="-1"></a>Insumo.nb <span class="ot">=</span> <span class="fu">poly2nb</span>(Insumo.utm, <span class="at">queen=</span>T)</span>
-<span id="cb202-3"><a href="pre-procesamiento-de-datos.html#cb202-3" aria-hidden="true" tabindex="-1"></a><span class="co">#n &lt;- max(sapply(Insumo.nb, length))</span></span>
-<span id="cb202-4"><a href="pre-procesamiento-de-datos.html#cb202-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ll &lt;- lapply(Insumo.nb, function(X) {</span></span>
-<span id="cb202-5"><a href="pre-procesamiento-de-datos.html#cb202-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  c(as.numeric(X), rep(0, times = n - length(X)))</span></span>
-<span id="cb202-6"><a href="pre-procesamiento-de-datos.html#cb202-6" aria-hidden="true" tabindex="-1"></a><span class="co">#})</span></span>
-<span id="cb202-7"><a href="pre-procesamiento-de-datos.html#cb202-7" aria-hidden="true" tabindex="-1"></a><span class="co">#out &lt;- do.call(cbind, ll)</span></span>
-<span id="cb202-8"><a href="pre-procesamiento-de-datos.html#cb202-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Departamentos&lt;-Insumo$Departamento</span></span>
-<span id="cb202-9"><a href="pre-procesamiento-de-datos.html#cb202-9" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW&lt;-matrix(NA,32,32)</span></span>
-<span id="cb202-10"><a href="pre-procesamiento-de-datos.html#cb202-10" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:8) {</span></span>
-<span id="cb202-11"><a href="pre-procesamiento-de-datos.html#cb202-11" aria-hidden="true" tabindex="-1"></a><span class="co">#  for (j in 1:32) {</span></span>
-<span id="cb202-12"><a href="pre-procesamiento-de-datos.html#cb202-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    if (out[i,j]!=0) {</span></span>
-<span id="cb202-13"><a href="pre-procesamiento-de-datos.html#cb202-13" aria-hidden="true" tabindex="-1"></a><span class="co">#      MatW[out[i,j],j]&lt;-1</span></span>
-<span id="cb202-14"><a href="pre-procesamiento-de-datos.html#cb202-14" aria-hidden="true" tabindex="-1"></a><span class="co">#    } else{MatW[out[i,j],j]&lt;-0}</span></span>
-<span id="cb202-15"><a href="pre-procesamiento-de-datos.html#cb202-15" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
-<span id="cb202-16"><a href="pre-procesamiento-de-datos.html#cb202-16" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
-<span id="cb202-17"><a href="pre-procesamiento-de-datos.html#cb202-17" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:32) {</span></span>
-<span id="cb202-18"><a href="pre-procesamiento-de-datos.html#cb202-18" aria-hidden="true" tabindex="-1"></a><span class="co">#  for (j in 1:32) {</span></span>
-<span id="cb202-19"><a href="pre-procesamiento-de-datos.html#cb202-19" aria-hidden="true" tabindex="-1"></a><span class="co">#    if (is.na(MatW[i,j])) {</span></span>
-<span id="cb202-20"><a href="pre-procesamiento-de-datos.html#cb202-20" aria-hidden="true" tabindex="-1"></a><span class="co">#      MatW[i,j]&lt;-0</span></span>
-<span id="cb202-21"><a href="pre-procesamiento-de-datos.html#cb202-21" aria-hidden="true" tabindex="-1"></a><span class="co">#    }</span></span>
-<span id="cb202-22"><a href="pre-procesamiento-de-datos.html#cb202-22" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
-<span id="cb202-23"><a href="pre-procesamiento-de-datos.html#cb202-23" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
-<span id="cb202-24"><a href="pre-procesamiento-de-datos.html#cb202-24" aria-hidden="true" tabindex="-1"></a><span class="co">#colnames(MatW)&lt;-Departamentos</span></span>
-<span id="cb202-25"><a href="pre-procesamiento-de-datos.html#cb202-25" aria-hidden="true" tabindex="-1"></a><span class="co">#rownames(MatW)&lt;-Departamentos</span></span>
-<span id="cb202-26"><a href="pre-procesamiento-de-datos.html#cb202-26" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW1&lt;-MatW[,1:16]</span></span>
-<span id="cb202-27"><a href="pre-procesamiento-de-datos.html#cb202-27" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW2&lt;-MatW[,17:32]</span></span>
-<span id="cb202-28"><a href="pre-procesamiento-de-datos.html#cb202-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Martiz W (Estilos)</span></span>
-<span id="cb202-29"><a href="pre-procesamiento-de-datos.html#cb202-29" aria-hidden="true" tabindex="-1"></a>Insumo.lw <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb)</span>
-<span id="cb202-30"><a href="pre-procesamiento-de-datos.html#cb202-30" aria-hidden="true" tabindex="-1"></a>Insumo.lwb <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;B&quot;</span>)</span>
-<span id="cb202-31"><a href="pre-procesamiento-de-datos.html#cb202-31" aria-hidden="true" tabindex="-1"></a>Insumo.lwc <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;C&quot;</span>)</span>
-<span id="cb202-32"><a href="pre-procesamiento-de-datos.html#cb202-32" aria-hidden="true" tabindex="-1"></a>Insumo.lwu <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;U&quot;</span>)</span>
-<span id="cb202-33"><a href="pre-procesamiento-de-datos.html#cb202-33" aria-hidden="true" tabindex="-1"></a>Insumo.lww <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;W&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="pre-procesamiento-de-datos.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co">#---</span></span>
+<span id="cb143-2"><a href="pre-procesamiento-de-datos.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="co"># MATRIZ DE VECINDADES (W)</span></span>
+<span id="cb143-3"><a href="pre-procesamiento-de-datos.html#cb143-3" aria-hidden="true" tabindex="-1"></a><span class="co">#---</span></span>
+<span id="cb143-4"><a href="pre-procesamiento-de-datos.html#cb143-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Centroides de las Áreas</span></span>
+<span id="cb143-5"><a href="pre-procesamiento-de-datos.html#cb143-5" aria-hidden="true" tabindex="-1"></a>Centros <span class="ot">=</span> <span class="fu">getSpPPolygonsLabptSlots</span>(Insumo.utm)</span>
+<span id="cb143-6"><a href="pre-procesamiento-de-datos.html#cb143-6" aria-hidden="true" tabindex="-1"></a>Centroids <span class="ot">&lt;-</span> <span class="fu">SpatialPointsDataFrame</span>(<span class="at">coords =</span> Centros, <span class="at">data=</span>Insumo.utm<span class="sc">@</span>data, </span>
+<span id="cb143-7"><a href="pre-procesamiento-de-datos.html#cb143-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">proj4string=</span><span class="fu">CRS</span>(<span class="st">&quot;+init=epsg:3724 +units=km&quot;</span>))</span>
+<span id="cb143-8"><a href="pre-procesamiento-de-datos.html#cb143-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de Distancias entre los Centriodes</span></span>
+<span id="cb143-9"><a href="pre-procesamiento-de-datos.html#cb143-9" aria-hidden="true" tabindex="-1"></a>Wdist <span class="ot">=</span> <span class="fu">dist</span>(Centros, <span class="at">up=</span>T)</span>
+<span id="cb143-10"><a href="pre-procesamiento-de-datos.html#cb143-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz W de vecindades</span></span>
+<span id="cb143-11"><a href="pre-procesamiento-de-datos.html#cb143-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pgirmess)</span>
+<span id="cb143-12"><a href="pre-procesamiento-de-datos.html#cb143-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(HistogramTools)</span>
+<span id="cb143-13"><a href="pre-procesamiento-de-datos.html#cb143-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(strucchange)</span>
+<span id="cb143-14"><a href="pre-procesamiento-de-datos.html#cb143-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
+<span id="cb143-15"><a href="pre-procesamiento-de-datos.html#cb143-15" aria-hidden="true" tabindex="-1"></a>Insumo.nb <span class="ot">=</span> <span class="fu">poly2nb</span>(Insumo.utm, <span class="at">queen=</span>T)</span>
+<span id="cb143-16"><a href="pre-procesamiento-de-datos.html#cb143-16" aria-hidden="true" tabindex="-1"></a><span class="co">#n &lt;- max(sapply(Insumo.nb, length))</span></span>
+<span id="cb143-17"><a href="pre-procesamiento-de-datos.html#cb143-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ll &lt;- lapply(Insumo.nb, function(X) {</span></span>
+<span id="cb143-18"><a href="pre-procesamiento-de-datos.html#cb143-18" aria-hidden="true" tabindex="-1"></a><span class="co">#  c(as.numeric(X), rep(0, times = n - length(X)))</span></span>
+<span id="cb143-19"><a href="pre-procesamiento-de-datos.html#cb143-19" aria-hidden="true" tabindex="-1"></a><span class="co">#})</span></span>
+<span id="cb143-20"><a href="pre-procesamiento-de-datos.html#cb143-20" aria-hidden="true" tabindex="-1"></a><span class="co">#out &lt;- do.call(cbind, ll)</span></span>
+<span id="cb143-21"><a href="pre-procesamiento-de-datos.html#cb143-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Departamentos&lt;-Insumo$Departamento</span></span>
+<span id="cb143-22"><a href="pre-procesamiento-de-datos.html#cb143-22" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW&lt;-matrix(NA,32,32)</span></span>
+<span id="cb143-23"><a href="pre-procesamiento-de-datos.html#cb143-23" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:8) {</span></span>
+<span id="cb143-24"><a href="pre-procesamiento-de-datos.html#cb143-24" aria-hidden="true" tabindex="-1"></a><span class="co">#  for (j in 1:32) {</span></span>
+<span id="cb143-25"><a href="pre-procesamiento-de-datos.html#cb143-25" aria-hidden="true" tabindex="-1"></a><span class="co">#    if (out[i,j]!=0) {</span></span>
+<span id="cb143-26"><a href="pre-procesamiento-de-datos.html#cb143-26" aria-hidden="true" tabindex="-1"></a><span class="co">#      MatW[out[i,j],j]&lt;-1</span></span>
+<span id="cb143-27"><a href="pre-procesamiento-de-datos.html#cb143-27" aria-hidden="true" tabindex="-1"></a><span class="co">#    } else{MatW[out[i,j],j]&lt;-0}</span></span>
+<span id="cb143-28"><a href="pre-procesamiento-de-datos.html#cb143-28" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
+<span id="cb143-29"><a href="pre-procesamiento-de-datos.html#cb143-29" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
+<span id="cb143-30"><a href="pre-procesamiento-de-datos.html#cb143-30" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:32) {</span></span>
+<span id="cb143-31"><a href="pre-procesamiento-de-datos.html#cb143-31" aria-hidden="true" tabindex="-1"></a><span class="co">#  for (j in 1:32) {</span></span>
+<span id="cb143-32"><a href="pre-procesamiento-de-datos.html#cb143-32" aria-hidden="true" tabindex="-1"></a><span class="co">#    if (is.na(MatW[i,j])) {</span></span>
+<span id="cb143-33"><a href="pre-procesamiento-de-datos.html#cb143-33" aria-hidden="true" tabindex="-1"></a><span class="co">#      MatW[i,j]&lt;-0</span></span>
+<span id="cb143-34"><a href="pre-procesamiento-de-datos.html#cb143-34" aria-hidden="true" tabindex="-1"></a><span class="co">#    }</span></span>
+<span id="cb143-35"><a href="pre-procesamiento-de-datos.html#cb143-35" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
+<span id="cb143-36"><a href="pre-procesamiento-de-datos.html#cb143-36" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
+<span id="cb143-37"><a href="pre-procesamiento-de-datos.html#cb143-37" aria-hidden="true" tabindex="-1"></a><span class="co">#colnames(MatW)&lt;-Departamentos</span></span>
+<span id="cb143-38"><a href="pre-procesamiento-de-datos.html#cb143-38" aria-hidden="true" tabindex="-1"></a><span class="co">#rownames(MatW)&lt;-Departamentos</span></span>
+<span id="cb143-39"><a href="pre-procesamiento-de-datos.html#cb143-39" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW1&lt;-MatW[,1:16]</span></span>
+<span id="cb143-40"><a href="pre-procesamiento-de-datos.html#cb143-40" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW2&lt;-MatW[,17:32]</span></span>
+<span id="cb143-41"><a href="pre-procesamiento-de-datos.html#cb143-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Martiz W (Estilos)</span></span>
+<span id="cb143-42"><a href="pre-procesamiento-de-datos.html#cb143-42" aria-hidden="true" tabindex="-1"></a>Insumo.lw <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb)</span>
+<span id="cb143-43"><a href="pre-procesamiento-de-datos.html#cb143-43" aria-hidden="true" tabindex="-1"></a>Insumo.lwb <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;B&quot;</span>)</span>
+<span id="cb143-44"><a href="pre-procesamiento-de-datos.html#cb143-44" aria-hidden="true" tabindex="-1"></a>Insumo.lwc <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;C&quot;</span>)</span>
+<span id="cb143-45"><a href="pre-procesamiento-de-datos.html#cb143-45" aria-hidden="true" tabindex="-1"></a>Insumo.lwu <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;U&quot;</span>)</span>
+<span id="cb143-46"><a href="pre-procesamiento-de-datos.html#cb143-46" aria-hidden="true" tabindex="-1"></a>Insumo.lww <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;W&quot;</span>)</span></code></pre></div>
 </div>
 <div id="mapa-de-valores-observados" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Mapa de valores observados<a href="pre-procesamiento-de-datos.html#mapa-de-valores-observados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="pre-procesamiento-de-datos.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Mapa de Valores Observados</span></span>
-<span id="cb203-2"><a href="pre-procesamiento-de-datos.html#cb203-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb203-3"><a href="pre-procesamiento-de-datos.html#cb203-3" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, Insumo<span class="sc">$</span>CAP_BAC)</span>
-<span id="cb203-4"><a href="pre-procesamiento-de-datos.html#cb203-4" aria-hidden="true" tabindex="-1"></a>shad <span class="ot">=</span> <span class="fu">auto.shading</span>(Insumo<span class="sc">$</span>CAP_BAC, <span class="at">n=</span><span class="dv">5</span>, <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Reds&quot;</span>)), <span class="at">cutter =</span> quantileCuts)</span>
-<span id="cb203-5"><a href="pre-procesamiento-de-datos.html#cb203-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shad, <span class="at">fmt=</span><span class="st">&quot;%1.1f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Valores Locales&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
-<span id="cb203-6"><a href="pre-procesamiento-de-datos.html#cb203-6" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Valores Observados para las captaciones del banco agrario </span></span>
-<span id="cb203-7"><a href="pre-procesamiento-de-datos.html#cb203-7" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
-<span id="cb203-8"><a href="pre-procesamiento-de-datos.html#cb203-8" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="pre-procesamiento-de-datos.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Mapa de Valores Observados</span></span>
+<span id="cb144-2"><a href="pre-procesamiento-de-datos.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb144-3"><a href="pre-procesamiento-de-datos.html#cb144-3" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, Insumo<span class="sc">$</span>CAP_BAC)</span>
+<span id="cb144-4"><a href="pre-procesamiento-de-datos.html#cb144-4" aria-hidden="true" tabindex="-1"></a>shad <span class="ot">=</span> <span class="fu">auto.shading</span>(Insumo<span class="sc">$</span>CAP_BAC, <span class="at">n=</span><span class="dv">5</span>, <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Reds&quot;</span>)), <span class="at">cutter =</span> quantileCuts)</span>
+<span id="cb144-5"><a href="pre-procesamiento-de-datos.html#cb144-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shad, <span class="at">fmt=</span><span class="st">&quot;%1.1f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Valores Locales&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
+<span id="cb144-6"><a href="pre-procesamiento-de-datos.html#cb144-6" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Valores Observados para las captaciones del banco agrario </span></span>
+<span id="cb144-7"><a href="pre-procesamiento-de-datos.html#cb144-7" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb144-8"><a href="pre-procesamiento-de-datos.html#cb144-8" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 </div>
 <div id="pruebas-de-autocorrelación" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Pruebas de Autocorrelación<a href="pre-procesamiento-de-datos.html#pruebas-de-autocorrelación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="pre-procesamiento-de-datos.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="co">#----------------------------</span></span>
-<span id="cb204-2"><a href="pre-procesamiento-de-datos.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  PRUEBAS DE AUTOCORRELACION</span></span>
-<span id="cb204-3"><a href="pre-procesamiento-de-datos.html#cb204-3" aria-hidden="true" tabindex="-1"></a><span class="co">#----------------------------</span></span>
-<span id="cb204-4"><a href="pre-procesamiento-de-datos.html#cb204-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb204-5"><a href="pre-procesamiento-de-datos.html#cb204-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Moran</span></span>
-<span id="cb204-6"><a href="pre-procesamiento-de-datos.html#cb204-6" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="pre-procesamiento-de-datos.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co">#----------------------------</span></span>
+<span id="cb145-2"><a href="pre-procesamiento-de-datos.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  PRUEBAS DE AUTOCORRELACION</span></span>
+<span id="cb145-3"><a href="pre-procesamiento-de-datos.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="co">#----------------------------</span></span>
+<span id="cb145-4"><a href="pre-procesamiento-de-datos.html#cb145-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb145-5"><a href="pre-procesamiento-de-datos.html#cb145-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Moran</span></span>
+<span id="cb145-6"><a href="pre-procesamiento-de-datos.html#cb145-6" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw)</span></code></pre></div>
 <pre><code>## 
 ##  Moran I test under randomisation
 ## 
@@ -410,18 +400,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sample estimates:
 ## Moran I statistic       Expectation          Variance 
 ##       0.153081266      -0.032258065       0.008566935</code></pre>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="pre-procesamiento-de-datos.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dispersograma de Moran</span></span>
-<span id="cb206-2"><a href="pre-procesamiento-de-datos.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb206-3"><a href="pre-procesamiento-de-datos.html#cb206-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.plot</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw, <span class="at">labels=</span><span class="fu">as.character</span>(Insumo<span class="sc">$</span>Departamento), <span class="at">xlab=</span><span class="st">&quot;Captaciones BAC&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Captaciones BAC rezagado&quot;</span>, <span class="at">las=</span><span class="dv">1</span>, <span class="at">pch=</span><span class="dv">16</span>, <span class="at">cex=</span><span class="fl">0.5</span>)</span>
-<span id="cb206-4"><a href="pre-procesamiento-de-datos.html#cb206-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;I de Moran: 0.1530&quot;</span>, <span class="st">&quot;Valor P:      0.02262&quot;</span>), <span class="at">cex=</span><span class="dv">1</span>,<span class="at">bg=</span><span class="st">&#39;lightgreen&#39;</span>)</span>
-<span id="cb206-5"><a href="pre-procesamiento-de-datos.html#cb206-5" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Dispersograma de Moran para las captaciones del banco agrario en </span></span>
-<span id="cb206-6"><a href="pre-procesamiento-de-datos.html#cb206-6" aria-hidden="true" tabindex="-1"></a><span class="st">los Departamentos de Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="pre-procesamiento-de-datos.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Local G</span></span>
-<span id="cb207-2"><a href="pre-procesamiento-de-datos.html#cb207-2" aria-hidden="true" tabindex="-1"></a>nearng <span class="ot">=</span> <span class="fu">dnearneigh</span>(<span class="fu">coordinates</span>(Insumo.utm), <span class="dv">0</span>, <span class="dv">550</span>)</span>
-<span id="cb207-3"><a href="pre-procesamiento-de-datos.html#cb207-3" aria-hidden="true" tabindex="-1"></a>Insumo.lw.g <span class="ot">=</span> <span class="fu">nb2listw</span>(nearng, <span class="at">style=</span><span class="st">&quot;B&quot;</span>)</span>
-<span id="cb207-4"><a href="pre-procesamiento-de-datos.html#cb207-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb207-5"><a href="pre-procesamiento-de-datos.html#cb207-5" aria-hidden="true" tabindex="-1"></a>localG <span class="ot">=</span> <span class="fu">localG</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw.g); localG</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="pre-procesamiento-de-datos.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dispersograma de Moran</span></span>
+<span id="cb147-2"><a href="pre-procesamiento-de-datos.html#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb147-3"><a href="pre-procesamiento-de-datos.html#cb147-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.plot</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw, <span class="at">labels=</span><span class="fu">as.character</span>(Insumo<span class="sc">$</span>Departamento), <span class="at">xlab=</span><span class="st">&quot;Captaciones BAC&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Captaciones BAC rezagado&quot;</span>, <span class="at">las=</span><span class="dv">1</span>, <span class="at">pch=</span><span class="dv">16</span>, <span class="at">cex=</span><span class="fl">0.5</span>)</span>
+<span id="cb147-4"><a href="pre-procesamiento-de-datos.html#cb147-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;I de Moran: 0.1530&quot;</span>, <span class="st">&quot;Valor P:      0.02262&quot;</span>), <span class="at">cex=</span><span class="dv">1</span>,<span class="at">bg=</span><span class="st">&#39;lightgreen&#39;</span>)</span>
+<span id="cb147-5"><a href="pre-procesamiento-de-datos.html#cb147-5" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Dispersograma de Moran para las captaciones del banco agrario en </span></span>
+<span id="cb147-6"><a href="pre-procesamiento-de-datos.html#cb147-6" aria-hidden="true" tabindex="-1"></a><span class="st">los Departamentos de Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="pre-procesamiento-de-datos.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Local G</span></span>
+<span id="cb148-2"><a href="pre-procesamiento-de-datos.html#cb148-2" aria-hidden="true" tabindex="-1"></a>nearng <span class="ot">=</span> <span class="fu">dnearneigh</span>(<span class="fu">coordinates</span>(Insumo.utm), <span class="dv">0</span>, <span class="dv">550</span>)</span>
+<span id="cb148-3"><a href="pre-procesamiento-de-datos.html#cb148-3" aria-hidden="true" tabindex="-1"></a>Insumo.lw.g <span class="ot">=</span> <span class="fu">nb2listw</span>(nearng, <span class="at">style=</span><span class="st">&quot;B&quot;</span>)</span>
+<span id="cb148-4"><a href="pre-procesamiento-de-datos.html#cb148-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb148-5"><a href="pre-procesamiento-de-datos.html#cb148-5" aria-hidden="true" tabindex="-1"></a>localG <span class="ot">=</span> <span class="fu">localG</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw.g); localG</span></code></pre></div>
 <pre><code>##  [1]  1.66525050  0.02608278  1.33032949  1.15892050  1.85852161  0.68445519  1.49486468  0.10163662  1.64717068
 ## [10]  1.32714028  2.53361281  2.21899396 -0.71311540  0.50952811  1.48899277  0.81676480  0.98434717  2.09087184
 ## [19]  2.08725553  1.05493906  1.32486118  2.09147517  2.16305539  1.89323276  1.52155929  0.84992902 -1.19798594
@@ -436,55 +426,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## localG(x = Insumo$CAP_BAC, listw = Insumo.lw.g)
 ## attr(,&quot;class&quot;)
 ## [1] &quot;localG&quot;</code></pre>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="pre-procesamiento-de-datos.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulaci?n montecarlo</span></span>
-<span id="cb209-2"><a href="pre-procesamiento-de-datos.html#cb209-2" aria-hidden="true" tabindex="-1"></a>sim.G <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>,<span class="dv">1000</span>,<span class="dv">32</span>)</span>
-<span id="cb209-3"><a href="pre-procesamiento-de-datos.html#cb209-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) sim.G[i,] <span class="ot">=</span> <span class="fu">localG</span>(<span class="fu">sample</span>(Insumo<span class="sc">$</span>CAP_BAC),Insumo.lw.g)</span>
-<span id="cb209-4"><a href="pre-procesamiento-de-datos.html#cb209-4" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G <span class="ot">=</span> (<span class="fu">colSums</span>(<span class="fu">sweep</span>(sim.G,<span class="dv">2</span>,localG,<span class="st">&quot;&gt;=&quot;</span>))<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">nrow</span>(sim.G)<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb209-5"><a href="pre-procesamiento-de-datos.html#cb209-5" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G</span></code></pre></div>
-<pre><code>##  [1] 0.009990010 0.448551449 0.074925075 0.114885115 0.001998002 0.272727273 0.074925075 0.488511489 0.033966034
-## [10] 0.053946054 0.000999001 0.000999001 0.732267732 0.321678322 0.026973027 0.231768232 0.170829171 0.000999001
-## [19] 0.000999001 0.139860140 0.084915085 0.000999001 0.002997003 0.018981019 0.046953047 0.224775225 0.961038961
-## [28] 0.961038961 0.417582418 0.991008991 0.057942058 0.000999001</code></pre>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="pre-procesamiento-de-datos.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulaci?n montecarlo</span></span>
+<span id="cb150-2"><a href="pre-procesamiento-de-datos.html#cb150-2" aria-hidden="true" tabindex="-1"></a>sim.G <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>,<span class="dv">1000</span>,<span class="dv">32</span>)</span>
+<span id="cb150-3"><a href="pre-procesamiento-de-datos.html#cb150-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) sim.G[i,] <span class="ot">=</span> <span class="fu">localG</span>(<span class="fu">sample</span>(Insumo<span class="sc">$</span>CAP_BAC),Insumo.lw.g)</span>
+<span id="cb150-4"><a href="pre-procesamiento-de-datos.html#cb150-4" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G <span class="ot">=</span> (<span class="fu">colSums</span>(<span class="fu">sweep</span>(sim.G,<span class="dv">2</span>,localG,<span class="st">&quot;&gt;=&quot;</span>))<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">nrow</span>(sim.G)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb150-5"><a href="pre-procesamiento-de-datos.html#cb150-5" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G</span></code></pre></div>
+<pre><code>##  [1] 0.017982018 0.443556444 0.078921079 0.102897103 0.000999001 0.297702298 0.085914086 0.475524476 0.034965035
+## [10] 0.034965035 0.000999001 0.001998002 0.714285714 0.318681319 0.031968032 0.247752248 0.165834166 0.000999001
+## [19] 0.000999001 0.137862138 0.098901099 0.000999001 0.002997003 0.018981019 0.043956044 0.243756244 0.963036963
+## [28] 0.968031968 0.422577423 0.994005994 0.053946054 0.000999001</code></pre>
 </div>
 <div id="mapas" class="section level2 hasAnchor" number="5.4">
 <h2><span class="header-section-number">5.4</span> Mapas<a href="pre-procesamiento-de-datos.html#mapas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="pre-procesamiento-de-datos.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapas</span></span>
-<span id="cb211-2"><a href="pre-procesamiento-de-datos.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb211-3"><a href="pre-procesamiento-de-datos.html#cb211-3" aria-hidden="true" tabindex="-1"></a>shadeg <span class="ot">=</span> <span class="fu">auto.shading</span>(localG, <span class="at">n=</span><span class="dv">5</span>, <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Purples&quot;</span>)), <span class="at">cutter=</span>quantileCuts)</span>
-<span id="cb211-4"><a href="pre-procesamiento-de-datos.html#cb211-4" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb211-5"><a href="pre-procesamiento-de-datos.html#cb211-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, localG, <span class="at">shading=</span>shadeg)</span>
-<span id="cb211-6"><a href="pre-procesamiento-de-datos.html#cb211-6" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shadeg, <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;G&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
-<span id="cb211-7"><a href="pre-procesamiento-de-datos.html#cb211-7" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;G Getis Ord Local para las captaciones del banco agrario </span></span>
-<span id="cb211-8"><a href="pre-procesamiento-de-datos.html#cb211-8" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
-<span id="cb211-9"><a href="pre-procesamiento-de-datos.html#cb211-9" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="pre-procesamiento-de-datos.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa de P-values</span></span>
-<span id="cb212-2"><a href="pre-procesamiento-de-datos.html#cb212-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb212-3"><a href="pre-procesamiento-de-datos.html#cb212-3" aria-hidden="true" tabindex="-1"></a>shadegp <span class="ot">=</span> <span class="fu">shading</span>(<span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">cols =</span> (<span class="fu">brewer.pal</span>(<span class="dv">4</span>,<span class="st">&quot;Spectral&quot;</span>)))</span>
-<span id="cb212-4"><a href="pre-procesamiento-de-datos.html#cb212-4" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, mc.pvalor.G, <span class="at">shading=</span>shadegp)</span>
-<span id="cb212-5"><a href="pre-procesamiento-de-datos.html#cb212-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shadegp, <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;P-valor de G&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
-<span id="cb212-6"><a href="pre-procesamiento-de-datos.html#cb212-6" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;P- Valor de G Getis Ord Local para las captaciones del banco agrario </span></span>
-<span id="cb212-7"><a href="pre-procesamiento-de-datos.html#cb212-7" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
-<span id="cb212-8"><a href="pre-procesamiento-de-datos.html#cb212-8" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="pre-procesamiento-de-datos.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapas</span></span>
+<span id="cb152-2"><a href="pre-procesamiento-de-datos.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb152-3"><a href="pre-procesamiento-de-datos.html#cb152-3" aria-hidden="true" tabindex="-1"></a>shadeg <span class="ot">=</span> <span class="fu">auto.shading</span>(localG, <span class="at">n=</span><span class="dv">5</span>, <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Purples&quot;</span>)), <span class="at">cutter=</span>quantileCuts)</span>
+<span id="cb152-4"><a href="pre-procesamiento-de-datos.html#cb152-4" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb152-5"><a href="pre-procesamiento-de-datos.html#cb152-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, localG, <span class="at">shading=</span>shadeg)</span>
+<span id="cb152-6"><a href="pre-procesamiento-de-datos.html#cb152-6" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shadeg, <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;G&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
+<span id="cb152-7"><a href="pre-procesamiento-de-datos.html#cb152-7" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;G Getis Ord Local para las captaciones del banco agrario </span></span>
+<span id="cb152-8"><a href="pre-procesamiento-de-datos.html#cb152-8" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb152-9"><a href="pre-procesamiento-de-datos.html#cb152-9" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="pre-procesamiento-de-datos.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa de P-values</span></span>
+<span id="cb153-2"><a href="pre-procesamiento-de-datos.html#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb153-3"><a href="pre-procesamiento-de-datos.html#cb153-3" aria-hidden="true" tabindex="-1"></a>shadegp <span class="ot">=</span> <span class="fu">shading</span>(<span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">cols =</span> (<span class="fu">brewer.pal</span>(<span class="dv">4</span>,<span class="st">&quot;Spectral&quot;</span>)))</span>
+<span id="cb153-4"><a href="pre-procesamiento-de-datos.html#cb153-4" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, mc.pvalor.G, <span class="at">shading=</span>shadegp)</span>
+<span id="cb153-5"><a href="pre-procesamiento-de-datos.html#cb153-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shadegp, <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;P-valor de G&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
+<span id="cb153-6"><a href="pre-procesamiento-de-datos.html#cb153-6" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;P- Valor de G Getis Ord Local para las captaciones del banco agrario </span></span>
+<span id="cb153-7"><a href="pre-procesamiento-de-datos.html#cb153-7" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb153-8"><a href="pre-procesamiento-de-datos.html#cb153-8" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <p>##Modelos SDEM, SDM, Manski, SARAR</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="pre-procesamiento-de-datos.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="do">####Modelos SDEM, SDM, Manski, SARAR########</span></span>
-<span id="cb213-2"><a href="pre-procesamiento-de-datos.html#cb213-2" aria-hidden="true" tabindex="-1"></a><span class="co">#reg.eq1=CAP_BAC ~ PIB + NBI + CAP_BOG + CAP_BC + CAP_OCC + CAP_CS + Población + IPM</span></span>
-<span id="cb213-3"><a href="pre-procesamiento-de-datos.html#cb213-3" aria-hidden="true" tabindex="-1"></a>reg.eq1<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> NBI <span class="sc">+</span> CAP_BOG<span class="sc">+</span>CAP_BC <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
-<span id="cb213-4"><a href="pre-procesamiento-de-datos.html#cb213-4" aria-hidden="true" tabindex="-1"></a>reg1<span class="ot">=</span><span class="fu">lm</span>(reg.eq1,<span class="at">data=</span>Insumo)                                     <span class="co">#OLS            y=XB+e,    </span></span>
-<span id="cb213-5"><a href="pre-procesamiento-de-datos.html#cb213-5" aria-hidden="true" tabindex="-1"></a>reg2<span class="ot">=</span><span class="fu">lmSLX</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw)                       <span class="co">#SLX            y=XB+WxT+e</span></span>
-<span id="cb213-6"><a href="pre-procesamiento-de-datos.html#cb213-6" aria-hidden="true" tabindex="-1"></a>reg3<span class="ot">=</span><span class="fu">lagsarlm</span>(reg.eq1,<span class="at">data=</span> Insumo, Insumo.lw)                   <span class="co">#Lag Y          y=XB+WxT+u,   u=LWu+e</span></span>
-<span id="cb213-7"><a href="pre-procesamiento-de-datos.html#cb213-7" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw)                  <span class="co">#Spatial Error  y=pWy+XB+e   </span></span>
-<span id="cb213-8"><a href="pre-procesamiento-de-datos.html#cb213-8" aria-hidden="true" tabindex="-1"></a>reg5<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq1, <span class="at">data=</span>Insumo, Insumo.lw, <span class="at">etype=</span><span class="st">&quot;emixed&quot;</span>) <span class="co">#SDEM Spatial Durbin Error Model y=XB+WxT+u,   u=LWu+e</span></span>
-<span id="cb213-9"><a href="pre-procesamiento-de-datos.html#cb213-9" aria-hidden="true" tabindex="-1"></a>reg6<span class="ot">=</span><span class="fu">lagsarlm</span>(reg.eq1, <span class="at">data=</span>Insumo,Insumo.lw, <span class="at">type=</span><span class="st">&quot;mixed&quot;</span>)      <span class="co">#SDM Spatial Durbin Model (add lag X to SAR) y=pWy+XB+WXT+e </span></span>
-<span id="cb213-10"><a href="pre-procesamiento-de-datos.html#cb213-10" aria-hidden="true" tabindex="-1"></a>reg7<span class="ot">=</span><span class="fu">sacsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw, <span class="at">type=</span><span class="st">&quot;sacmixed&quot;</span>)   <span class="co">#Manski Model: y=pWy+XB+WXT+u,   u=LWu+e (no recomendado)</span></span>
-<span id="cb213-11"><a href="pre-procesamiento-de-datos.html#cb213-11" aria-hidden="true" tabindex="-1"></a>reg8<span class="ot">=</span><span class="fu">sacsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo,Insumo.lw, <span class="at">type=</span><span class="st">&quot;sac&quot;</span>)         <span class="co">#SARAR o Kelejian-Prucha, Cliff-Ord, o SAC If all T=0,y=pWy+XB+u, u=LWu+e</span></span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="pre-procesamiento-de-datos.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="do">####Modelos SDEM, SDM, Manski, SARAR########</span></span>
+<span id="cb154-2"><a href="pre-procesamiento-de-datos.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="co">#reg.eq1=CAP_BAC ~ PIB + NBI + CAP_BOG + CAP_BC + CAP_OCC + CAP_CS + Población + IPM</span></span>
+<span id="cb154-3"><a href="pre-procesamiento-de-datos.html#cb154-3" aria-hidden="true" tabindex="-1"></a>reg.eq1<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> NBI <span class="sc">+</span> CAP_BOG<span class="sc">+</span>CAP_BC <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
+<span id="cb154-4"><a href="pre-procesamiento-de-datos.html#cb154-4" aria-hidden="true" tabindex="-1"></a>reg1<span class="ot">=</span><span class="fu">lm</span>(reg.eq1,<span class="at">data=</span>Insumo)                                     <span class="co">#OLS            y=XB+e,    </span></span>
+<span id="cb154-5"><a href="pre-procesamiento-de-datos.html#cb154-5" aria-hidden="true" tabindex="-1"></a>reg2<span class="ot">=</span><span class="fu">lmSLX</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw)                       <span class="co">#SLX            y=XB+WxT+e</span></span>
+<span id="cb154-6"><a href="pre-procesamiento-de-datos.html#cb154-6" aria-hidden="true" tabindex="-1"></a>reg3<span class="ot">=</span><span class="fu">lagsarlm</span>(reg.eq1,<span class="at">data=</span> Insumo, Insumo.lw)                   <span class="co">#Lag Y          y=XB+WxT+u,   u=LWu+e</span></span>
+<span id="cb154-7"><a href="pre-procesamiento-de-datos.html#cb154-7" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw)                  <span class="co">#Spatial Error  y=pWy+XB+e   </span></span>
+<span id="cb154-8"><a href="pre-procesamiento-de-datos.html#cb154-8" aria-hidden="true" tabindex="-1"></a>reg5<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq1, <span class="at">data=</span>Insumo, Insumo.lw, <span class="at">etype=</span><span class="st">&quot;emixed&quot;</span>) <span class="co">#SDEM Spatial Durbin Error Model y=XB+WxT+u,   u=LWu+e</span></span>
+<span id="cb154-9"><a href="pre-procesamiento-de-datos.html#cb154-9" aria-hidden="true" tabindex="-1"></a>reg6<span class="ot">=</span><span class="fu">lagsarlm</span>(reg.eq1, <span class="at">data=</span>Insumo,Insumo.lw, <span class="at">type=</span><span class="st">&quot;mixed&quot;</span>)      <span class="co">#SDM Spatial Durbin Model (add lag X to SAR) y=pWy+XB+WXT+e </span></span>
+<span id="cb154-10"><a href="pre-procesamiento-de-datos.html#cb154-10" aria-hidden="true" tabindex="-1"></a>reg7<span class="ot">=</span><span class="fu">sacsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw, <span class="at">type=</span><span class="st">&quot;sacmixed&quot;</span>)   <span class="co">#Manski Model: y=pWy+XB+WXT+u,   u=LWu+e (no recomendado)</span></span>
+<span id="cb154-11"><a href="pre-procesamiento-de-datos.html#cb154-11" aria-hidden="true" tabindex="-1"></a>reg8<span class="ot">=</span><span class="fu">sacsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo,Insumo.lw, <span class="at">type=</span><span class="st">&quot;sac&quot;</span>)         <span class="co">#SARAR o Kelejian-Prucha, Cliff-Ord, o SAC If all T=0,y=pWy+XB+u, u=LWu+e</span></span></code></pre></div>
 </div>
 <div id="resumen-de-modelos" class="section level2 hasAnchor" number="5.5">
 <h2><span class="header-section-number">5.5</span> Resumen de modelos<a href="pre-procesamiento-de-datos.html#resumen-de-modelos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="pre-procesamiento-de-datos.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Resumen de modelos</span></span>
-<span id="cb214-2"><a href="pre-procesamiento-de-datos.html#cb214-2" aria-hidden="true" tabindex="-1"></a>s<span class="ot">=</span>summary</span>
-<span id="cb214-3"><a href="pre-procesamiento-de-datos.html#cb214-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg1)<span class="co">#OLS</span></span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="pre-procesamiento-de-datos.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Resumen de modelos</span></span>
+<span id="cb155-2"><a href="pre-procesamiento-de-datos.html#cb155-2" aria-hidden="true" tabindex="-1"></a>s<span class="ot">=</span>summary</span>
+<span id="cb155-3"><a href="pre-procesamiento-de-datos.html#cb155-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg1)<span class="co">#OLS</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = reg.eq1, data = Insumo)
@@ -509,7 +499,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 141.6 on 24 degrees of freedom
 ## Multiple R-squared:  0.8807, Adjusted R-squared:  0.8459 
 ## F-statistic: 25.31 on 7 and 24 DF,  p-value: 0.000000001309</code></pre>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="pre-procesamiento-de-datos.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg2)<span class="co">#SLX</span></span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="pre-procesamiento-de-datos.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg2)<span class="co">#SLX</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = formula(paste(&quot;y ~ &quot;, paste(colnames(x)[-1], collapse = &quot;+&quot;))), 
@@ -540,7 +530,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 151.6 on 17 degrees of freedom
 ## Multiple R-squared:  0.9031, Adjusted R-squared:  0.8234 
 ## F-statistic: 11.32 on 14 and 17 DF,  p-value: 0.000005467</code></pre>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="pre-procesamiento-de-datos.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg3)<span class="co">#Lag Y</span></span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="pre-procesamiento-de-datos.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg3)<span class="co">#Lag Y</span></span></code></pre></div>
 <pre><code>## 
 ## Call:lagsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw)
 ## 
@@ -570,7 +560,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of observations: 32 
 ## Number of parameters estimated: 10 
 ## AIC: 416.5, (AIC for lm: 416.6)</code></pre>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="pre-procesamiento-de-datos.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="pre-procesamiento-de-datos.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:errorsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw)
 ## 
@@ -600,7 +590,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of observations: 32 
 ## Number of parameters estimated: 10 
 ## AIC: 414.79, (AIC for lm: 416.6)</code></pre>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="pre-procesamiento-de-datos.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg5)<span class="co">#Durbin Error (SDEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="pre-procesamiento-de-datos.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg5)<span class="co">#Durbin Error (SDEM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:errorsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw,     etype = &quot;emixed&quot;)
 ## 
@@ -637,7 +627,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of observations: 32 
 ## Number of parameters estimated: 17 
 ## AIC: 425.59, (AIC for lm: 423.93)</code></pre>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="pre-procesamiento-de-datos.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg6)<span class="co">#Durbin (SDM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="pre-procesamiento-de-datos.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg6)<span class="co">#Durbin (SDM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:lagsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw,     type = &quot;mixed&quot;)
 ## 
@@ -674,7 +664,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of observations: 32 
 ## Number of parameters estimated: 17 
 ## AIC: 424.94, (AIC for lm: 423.93)</code></pre>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="pre-procesamiento-de-datos.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg7)<span class="co">#Manski</span></span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="pre-procesamiento-de-datos.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg7)<span class="co">#Manski</span></span></code></pre></div>
 <pre><code>## 
 ## Call:sacsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw,     type = &quot;sacmixed&quot;)
 ## 
@@ -715,7 +705,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of observations: 32 
 ## Number of parameters estimated: 18 
 ## AIC: 426.82, (AIC for lm: 416.6)</code></pre>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="pre-procesamiento-de-datos.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg8)<span class="co">#SARAR lag Y and lag e (SAC)</span></span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="pre-procesamiento-de-datos.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg8)<span class="co">#SARAR lag Y and lag e (SAC)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:sacsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw,     type = &quot;sac&quot;)
 ## 
@@ -752,10 +742,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="calculo-de-varibles-significativas" class="section level2 hasAnchor" number="5.6">
 <h2><span class="header-section-number">5.6</span> Calculo de varibles significativas<a href="pre-procesamiento-de-datos.html#calculo-de-varibles-significativas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="pre-procesamiento-de-datos.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculo de variables signid¿ficativas</span></span>
-<span id="cb230-2"><a href="pre-procesamiento-de-datos.html#cb230-2" aria-hidden="true" tabindex="-1"></a>reg.eq2<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_BOG<span class="sc">+</span>CAP_BC <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
-<span id="cb230-3"><a href="pre-procesamiento-de-datos.html#cb230-3" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq2,<span class="at">data=</span>Insumo, Insumo.lw)</span>
-<span id="cb230-4"><a href="pre-procesamiento-de-datos.html#cb230-4" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="pre-procesamiento-de-datos.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculo de variables signid¿ficativas</span></span>
+<span id="cb171-2"><a href="pre-procesamiento-de-datos.html#cb171-2" aria-hidden="true" tabindex="-1"></a>reg.eq2<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_BOG<span class="sc">+</span>CAP_BC <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
+<span id="cb171-3"><a href="pre-procesamiento-de-datos.html#cb171-3" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq2,<span class="at">data=</span>Insumo, Insumo.lw)</span>
+<span id="cb171-4"><a href="pre-procesamiento-de-datos.html#cb171-4" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:errorsarlm(formula = reg.eq2, data = Insumo, listw = Insumo.lw)
 ## 
@@ -784,9 +774,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of observations: 32 
 ## Number of parameters estimated: 9 
 ## AIC: 412.85, (AIC for lm: 415.32)</code></pre>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="pre-procesamiento-de-datos.html#cb232-1" aria-hidden="true" tabindex="-1"></a>reg.eq3<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_BOG <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
-<span id="cb232-2"><a href="pre-procesamiento-de-datos.html#cb232-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq3,<span class="at">data=</span>Insumo, Insumo.lw)</span>
-<span id="cb232-3"><a href="pre-procesamiento-de-datos.html#cb232-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="pre-procesamiento-de-datos.html#cb173-1" aria-hidden="true" tabindex="-1"></a>reg.eq3<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_BOG <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
+<span id="cb173-2"><a href="pre-procesamiento-de-datos.html#cb173-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq3,<span class="at">data=</span>Insumo, Insumo.lw)</span>
+<span id="cb173-3"><a href="pre-procesamiento-de-datos.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:errorsarlm(formula = reg.eq3, data = Insumo, listw = Insumo.lw)
 ## 
@@ -814,9 +804,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of observations: 32 
 ## Number of parameters estimated: 8 
 ## AIC: 410.88, (AIC for lm: 413.67)</code></pre>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="pre-procesamiento-de-datos.html#cb234-1" aria-hidden="true" tabindex="-1"></a>reg.eq4<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
-<span id="cb234-2"><a href="pre-procesamiento-de-datos.html#cb234-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq4,<span class="at">data=</span>Insumo, Insumo.lw)</span>
-<span id="cb234-3"><a href="pre-procesamiento-de-datos.html#cb234-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="pre-procesamiento-de-datos.html#cb175-1" aria-hidden="true" tabindex="-1"></a>reg.eq4<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
+<span id="cb175-2"><a href="pre-procesamiento-de-datos.html#cb175-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq4,<span class="at">data=</span>Insumo, Insumo.lw)</span>
+<span id="cb175-3"><a href="pre-procesamiento-de-datos.html#cb175-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:errorsarlm(formula = reg.eq4, data = Insumo, listw = Insumo.lw)
 ## 
@@ -843,9 +833,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of observations: 32 
 ## Number of parameters estimated: 7 
 ## AIC: 409.4, (AIC for lm: 414.29)</code></pre>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="pre-procesamiento-de-datos.html#cb236-1" aria-hidden="true" tabindex="-1"></a>reg.eq5<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS</span>
-<span id="cb236-2"><a href="pre-procesamiento-de-datos.html#cb236-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq5,<span class="at">data=</span>Insumo, Insumo.lw)</span>
-<span id="cb236-3"><a href="pre-procesamiento-de-datos.html#cb236-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="pre-procesamiento-de-datos.html#cb177-1" aria-hidden="true" tabindex="-1"></a>reg.eq5<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS</span>
+<span id="cb177-2"><a href="pre-procesamiento-de-datos.html#cb177-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq5,<span class="at">data=</span>Insumo, Insumo.lw)</span>
+<span id="cb177-3"><a href="pre-procesamiento-de-datos.html#cb177-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:errorsarlm(formula = reg.eq5, data = Insumo, listw = Insumo.lw)
 ## 
@@ -874,20 +864,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="mapa-estimado" class="section level2 hasAnchor" number="5.7">
 <h2><span class="header-section-number">5.7</span> Mapa Estimado<a href="pre-procesamiento-de-datos.html#mapa-estimado" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="pre-procesamiento-de-datos.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="do">###Mapa estimado</span></span>
-<span id="cb238-2"><a href="pre-procesamiento-de-datos.html#cb238-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> reg4<span class="sc">$</span>fitted.values</span>
-<span id="cb238-3"><a href="pre-procesamiento-de-datos.html#cb238-3" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb238-4"><a href="pre-procesamiento-de-datos.html#cb238-4" aria-hidden="true" tabindex="-1"></a>shade.fit <span class="ot">=</span> <span class="fu">shading</span>(<span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">130</span>,<span class="dv">200</span>,<span class="dv">400</span>), <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Reds&quot;</span>)))</span>
-<span id="cb238-5"><a href="pre-procesamiento-de-datos.html#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, fit, <span class="at">shading=</span>shade.fit)</span>
-<span id="cb238-6"><a href="pre-procesamiento-de-datos.html#cb238-6" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shade.fit, <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Estimaciones&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
-<span id="cb238-7"><a href="pre-procesamiento-de-datos.html#cb238-7" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Valores ajustados mediante el modelo SEM para las captaciones del banco agrario </span></span>
-<span id="cb238-8"><a href="pre-procesamiento-de-datos.html#cb238-8" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
-<span id="cb238-9"><a href="pre-procesamiento-de-datos.html#cb238-9" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="pre-procesamiento-de-datos.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="do">###R^2 Nagelkerke</span></span>
-<span id="cb239-2"><a href="pre-procesamiento-de-datos.html#cb239-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary.sarlm(reg4,Nagelkerke = TRUE) TO-DO</span></span>
-<span id="cb239-3"><a href="pre-procesamiento-de-datos.html#cb239-3" aria-hidden="true" tabindex="-1"></a><span class="do">###Test de moran residuales modelo SEM</span></span>
-<span id="cb239-4"><a href="pre-procesamiento-de-datos.html#cb239-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(reg4<span class="sc">$</span>residuals, Insumo.lw)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="pre-procesamiento-de-datos.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="do">###Mapa estimado</span></span>
+<span id="cb179-2"><a href="pre-procesamiento-de-datos.html#cb179-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> reg4<span class="sc">$</span>fitted.values</span>
+<span id="cb179-3"><a href="pre-procesamiento-de-datos.html#cb179-3" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb179-4"><a href="pre-procesamiento-de-datos.html#cb179-4" aria-hidden="true" tabindex="-1"></a>shade.fit <span class="ot">=</span> <span class="fu">shading</span>(<span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">130</span>,<span class="dv">200</span>,<span class="dv">400</span>), <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Reds&quot;</span>)))</span>
+<span id="cb179-5"><a href="pre-procesamiento-de-datos.html#cb179-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, fit, <span class="at">shading=</span>shade.fit)</span>
+<span id="cb179-6"><a href="pre-procesamiento-de-datos.html#cb179-6" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, shade.fit, <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Estimaciones&quot;</span>, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
+<span id="cb179-7"><a href="pre-procesamiento-de-datos.html#cb179-7" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Valores ajustados mediante el modelo SEM para las captaciones del banco agrario </span></span>
+<span id="cb179-8"><a href="pre-procesamiento-de-datos.html#cb179-8" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb179-9"><a href="pre-procesamiento-de-datos.html#cb179-9" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="pre-procesamiento-de-datos.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="do">###R^2 Nagelkerke</span></span>
+<span id="cb180-2"><a href="pre-procesamiento-de-datos.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary.sarlm(reg4,Nagelkerke = TRUE) TO-DO</span></span>
+<span id="cb180-3"><a href="pre-procesamiento-de-datos.html#cb180-3" aria-hidden="true" tabindex="-1"></a><span class="do">###Test de moran residuales modelo SEM</span></span>
+<span id="cb180-4"><a href="pre-procesamiento-de-datos.html#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(reg4<span class="sc">$</span>residuals, Insumo.lw)</span></code></pre></div>
 <pre><code>## 
 ##  Moran I test under randomisation
 ## 
@@ -899,8 +889,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sample estimates:
 ## Moran I statistic       Expectation          Variance 
 ##        0.05266908       -0.03225806        0.01028984</code></pre>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="pre-procesamiento-de-datos.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Municipal</span></span>
-<span id="cb241-2"><a href="pre-procesamiento-de-datos.html#cb241-2" aria-hidden="true" tabindex="-1"></a>ColombiaM <span class="ot">=</span> <span class="fu">readOGR</span>(<span class="at">dsn =</span> <span class="st">&quot;Trabajo Grado/Geodatabase Colombia&quot;</span>, <span class="at">layer =</span> <span class="st">&quot;municipios&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="pre-procesamiento-de-datos.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Municipal</span></span>
+<span id="cb182-2"><a href="pre-procesamiento-de-datos.html#cb182-2" aria-hidden="true" tabindex="-1"></a>ColombiaM <span class="ot">=</span> <span class="fu">readOGR</span>(<span class="at">dsn =</span> <span class="st">&quot;Trabajo Grado/Geodatabase Colombia&quot;</span>, <span class="at">layer =</span> <span class="st">&quot;municipios&quot;</span>)</span></code></pre></div>
 <pre><code>## OGR data source with driver: ESRI Shapefile 
 ## Source: &quot;/home/jncc/Documents/Monitorias/EspacialPage/Clases-EE-UN/Trabajo Grado/Geodatabase Colombia&quot;, layer: &quot;municipios&quot;
 ## with 1107 features
