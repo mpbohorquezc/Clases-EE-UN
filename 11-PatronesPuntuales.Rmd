@@ -74,7 +74,6 @@ Las bases monomiales requieren el dominio y el número de base. Por ejemplo, la 
 
 
 ```{r cars03}
-
 library(fda)
 bbasis_obj = create.monomial.basis(rangeval=c(0,1), nbasis = 6)
 
@@ -83,7 +82,6 @@ bbasis_obj = create.monomial.basis(rangeval=c(0,1), nbasis = 6)
 Esto devolverá una salida de "funciones". Para evaluar las bases en una cuadrícula de puntos $s$, debemos:
 
 ```{r cars04}
-
 library(fda)
 x <- seq(0,1,length.out=100)
 bbasisevals <- eval.basis(x, bbasis_obj)
@@ -99,7 +97,6 @@ matplot(x, bbasisevals, type='l', lty=1, col=rainbow(6),
 Para utilizarlas bases de Fourier se requiere que se defina el dominio, el período de oscilación y el número de funciones de base.
 
 ```{r cars05}
-
 fbasis_obj <- create.fourier.basis(rangeval=c(0,1), 
                                    nbasis=65, period = 1)
 fbasisevals <- eval.basis(x, fbasis_obj)
@@ -114,7 +111,6 @@ matplot(x, fbasisevals[, 1:3], type='l', lty=1, col=rainbow(3),
 Las bases B-spline requieren el dominio, el número de funciones de la base y el orden.
 
 ```{r cars06}
-
 bsbasis_obj <- create.bspline.basis(rangeval=c(0,1),
                                     nbasis=10, norder=4)
 bsbasisevals <- eval.basis(x, bsbasis_obj)

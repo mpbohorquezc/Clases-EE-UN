@@ -1,6 +1,7 @@
 ---
 title: "Cokriging"
 output: html_document
+author: "Martha Bohorquez"
 date: "2022-11-22"
 ---
 

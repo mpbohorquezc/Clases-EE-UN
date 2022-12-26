@@ -314,10 +314,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cargar-librerias" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Cargar librerias<a href="pulimiento-de-medianas.html#cargar-librerias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Lista de librerías con link a la documentación.</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="pulimiento-de-medianas.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb212-2"><a href="pulimiento-de-medianas.html#cb212-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gstat)</span>
-<span id="cb212-3"><a href="pulimiento-de-medianas.html#cb212-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
-<span id="cb212-4"><a href="pulimiento-de-medianas.html#cb212-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="pulimiento-de-medianas.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb253-2"><a href="pulimiento-de-medianas.html#cb253-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gstat)</span>
+<span id="cb253-3"><a href="pulimiento-de-medianas.html#cb253-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb253-4"><a href="pulimiento-de-medianas.html#cb253-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span></code></pre></div>
 <ul>
 <li><a href="https://cran.r-project.org/web/packages/gstat/gstat.pdf">gstat</a></li>
 <li><a href="https://cran.r-project.org/web/packages/sp/sp.pdf">sp</a></li>
@@ -325,12 +325,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="grilla-de-las-ubicaciones-espaciales." class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Grilla de las ubicaciones espaciales.<a href="pulimiento-de-medianas.html#grilla-de-las-ubicaciones-espaciales." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="pulimiento-de-medianas.html#cb213-1" aria-hidden="true" tabindex="-1"></a>n_x <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb213-2"><a href="pulimiento-de-medianas.html#cb213-2" aria-hidden="true" tabindex="-1"></a>n_y <span class="ot">&lt;-</span> <span class="dv">6</span></span>
-<span id="cb213-3"><a href="pulimiento-de-medianas.html#cb213-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> n_x)</span>
-<span id="cb213-4"><a href="pulimiento-de-medianas.html#cb213-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> n_y)</span>
-<span id="cb213-5"><a href="pulimiento-de-medianas.html#cb213-5" aria-hidden="true" tabindex="-1"></a>coordenadas <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">expand.grid</span>(x, y))</span>
-<span id="cb213-6"><a href="pulimiento-de-medianas.html#cb213-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(coordenadas) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="pulimiento-de-medianas.html#cb254-1" aria-hidden="true" tabindex="-1"></a>n_x <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb254-2"><a href="pulimiento-de-medianas.html#cb254-2" aria-hidden="true" tabindex="-1"></a>n_y <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb254-3"><a href="pulimiento-de-medianas.html#cb254-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> n_x)</span>
+<span id="cb254-4"><a href="pulimiento-de-medianas.html#cb254-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> n_y)</span>
+<span id="cb254-5"><a href="pulimiento-de-medianas.html#cb254-5" aria-hidden="true" tabindex="-1"></a>coordenadas <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">expand.grid</span>(x, y))</span>
+<span id="cb254-6"><a href="pulimiento-de-medianas.html#cb254-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(coordenadas) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>)</span></code></pre></div>
 <p>Encabezado coordenadas</p>
 <table>
 <thead>
@@ -373,10 +373,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="https://cran.r-project.org/web/packages/gstat/gstat.pdf#page=73">vgm</a></li>
 </ul>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="pulimiento-de-medianas.html#cb214-1" aria-hidden="true" tabindex="-1"></a>vario <span class="ot">&lt;-</span> <span class="fu">vgm</span>(<span class="dv">10</span>, <span class="co"># Punto de silla</span></span>
-<span id="cb214-2"><a href="pulimiento-de-medianas.html#cb214-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Exp&quot;</span>, <span class="co"># Modelo, ver documentación</span></span>
-<span id="cb214-3"><a href="pulimiento-de-medianas.html#cb214-3" aria-hidden="true" tabindex="-1"></a>             <span class="fl">0.5</span>)  <span class="co"># Rango</span></span>
-<span id="cb214-4"><a href="pulimiento-de-medianas.html#cb214-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(vario)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="pulimiento-de-medianas.html#cb255-1" aria-hidden="true" tabindex="-1"></a>vario <span class="ot">&lt;-</span> <span class="fu">vgm</span>(<span class="dv">10</span>, <span class="co"># Punto de silla</span></span>
+<span id="cb255-2"><a href="pulimiento-de-medianas.html#cb255-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Exp&quot;</span>, <span class="co"># Modelo, ver documentación</span></span>
+<span id="cb255-3"><a href="pulimiento-de-medianas.html#cb255-3" aria-hidden="true" tabindex="-1"></a>             <span class="fl">0.5</span>)  <span class="co"># Rango</span></span>
+<span id="cb255-4"><a href="pulimiento-de-medianas.html#cb255-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(vario)</span></code></pre></div>
 <pre><code>##   model psill range
 ## 1   Exp    10   0.5</code></pre>
 </div>
@@ -386,155 +386,154 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://cran.r-project.org/web/packages/gstat/gstat.pdf#page=78">vgmArea</a></li>
 <li><a href="https://cran.r-project.org/web/packages/sp/sp.pdf#page=16">coordinates</a></li>
 </ul>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="pulimiento-de-medianas.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(coordenadas) <span class="ot">&lt;-</span> <span class="er">~</span>X <span class="sc">+</span> Y</span>
-<span id="cb216-2"><a href="pulimiento-de-medianas.html#cb216-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(coordenadas) <span class="co"># Cambio de objedto dataframe a sp</span></span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="pulimiento-de-medianas.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(coordenadas) <span class="ot">&lt;-</span> <span class="er">~</span>X <span class="sc">+</span> Y</span>
+<span id="cb257-2"><a href="pulimiento-de-medianas.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(coordenadas) <span class="co"># Cambio de objedto dataframe a sp</span></span></code></pre></div>
 <pre><code>## [1] &quot;SpatialPoints&quot;
 ## attr(,&quot;package&quot;)
 ## [1] &quot;sp&quot;</code></pre>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="pulimiento-de-medianas.html#cb218-1" aria-hidden="true" tabindex="-1"></a>cov_mat <span class="ot">&lt;-</span> <span class="fu">vgmArea</span>(coordenadas, <span class="co"># Matriz de ubiaciones SP</span></span>
-<span id="cb218-2"><a href="pulimiento-de-medianas.html#cb218-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">vgm =</span> vario) <span class="co"># VGM object</span></span>
-<span id="cb218-3"><a href="pulimiento-de-medianas.html#cb218-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb218-4"><a href="pulimiento-de-medianas.html#cb218-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(cov_mat))</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="pulimiento-de-medianas.html#cb259-1" aria-hidden="true" tabindex="-1"></a>cov_mat <span class="ot">&lt;-</span> <span class="fu">vgmArea</span>(coordenadas, <span class="co"># Matriz de ubiaciones SP</span></span>
+<span id="cb259-2"><a href="pulimiento-de-medianas.html#cb259-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">vgm =</span> vario) <span class="co"># VGM object</span></span>
+<span id="cb259-3"><a href="pulimiento-de-medianas.html#cb259-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-4"><a href="pulimiento-de-medianas.html#cb259-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(cov_mat))</span></code></pre></div>
 <pre><code>## [1] 24 24</code></pre>
 </div>
 <div id="simulación." class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> Simulación.<a href="pulimiento-de-medianas.html#simulación." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Simulación dada la media y la matriz de varianza</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="pulimiento-de-medianas.html#cb220-1" aria-hidden="true" tabindex="-1"></a>mu  <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_x <span class="sc">*</span> n_y) <span class="co"># Media del proceso</span></span>
-<span id="cb220-2"><a href="pulimiento-de-medianas.html#cb220-2" aria-hidden="true" tabindex="-1"></a>simu <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>,</span>
-<span id="cb220-3"><a href="pulimiento-de-medianas.html#cb220-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">mean =</span> mu,</span>
-<span id="cb220-4"><a href="pulimiento-de-medianas.html#cb220-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">sigma =</span> cov_mat)</span>
-<span id="cb220-5"><a href="pulimiento-de-medianas.html#cb220-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(simu[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
-<pre><code>## [1] 0.2145009 0.5584438 1.1714964 0.5512132 0.8049725</code></pre>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="pulimiento-de-medianas.html#cb261-1" aria-hidden="true" tabindex="-1"></a>mu  <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_x <span class="sc">*</span> n_y) <span class="co"># Media del proceso</span></span>
+<span id="cb261-2"><a href="pulimiento-de-medianas.html#cb261-2" aria-hidden="true" tabindex="-1"></a>simu <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>,</span>
+<span id="cb261-3"><a href="pulimiento-de-medianas.html#cb261-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">mean =</span> mu,</span>
+<span id="cb261-4"><a href="pulimiento-de-medianas.html#cb261-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">sigma =</span> cov_mat)</span>
+<span id="cb261-5"><a href="pulimiento-de-medianas.html#cb261-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(simu[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
+<pre><code>## [1] -2.36226926 -4.99201481 -3.02799557 -0.07277686 -0.68707337</code></pre>
 </div>
 <div id="pulimiento-de-medianas-1" class="section level2 hasAnchor" number="6.6">
 <h2><span class="header-section-number">6.6</span> Pulimiento de medianas<a href="pulimiento-de-medianas.html#pulimiento-de-medianas-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Unir las coordenadas con la columna de simulación</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="pulimiento-de-medianas.html#cb222-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(coordenadas<span class="sc">@</span>coords,</span>
-<span id="cb222-2"><a href="pulimiento-de-medianas.html#cb222-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Simula =</span> <span class="fu">t</span>(simu)))</span>
-<span id="cb222-3"><a href="pulimiento-de-medianas.html#cb222-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>, <span class="st">&quot;Var&quot;</span>)</span>
-<span id="cb222-4"><a href="pulimiento-de-medianas.html#cb222-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(data))</span></code></pre></div>
-<pre><code>##           X   Y       Var
-## 1 0.0000000 0.0 0.2145009
-## 2 0.3333333 0.0 0.5584438
-## 3 0.6666667 0.0 1.1714964
-## 4 1.0000000 0.0 0.5512132
-## 5 0.0000000 0.2 0.8049725
-## 6 0.3333333 0.2 2.1669449</code></pre>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="pulimiento-de-medianas.html#cb263-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(coordenadas<span class="sc">@</span>coords,</span>
+<span id="cb263-2"><a href="pulimiento-de-medianas.html#cb263-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Simula =</span> <span class="fu">t</span>(simu)))</span>
+<span id="cb263-3"><a href="pulimiento-de-medianas.html#cb263-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>, <span class="st">&quot;Var&quot;</span>)</span>
+<span id="cb263-4"><a href="pulimiento-de-medianas.html#cb263-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(data))</span></code></pre></div>
+<pre><code>##           X   Y         Var
+## 1 0.0000000 0.0 -2.36226926
+## 2 0.3333333 0.0 -4.99201481
+## 3 0.6666667 0.0 -3.02799557
+## 4 1.0000000 0.0 -0.07277686
+## 5 0.0000000 0.2 -0.68707337
+## 6 0.3333333 0.2 -3.06398000</code></pre>
 <p>Reshape para matriz, esto transforma la tabla de datos en matriz</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="pulimiento-de-medianas.html#cb224-1" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">dcast</span>(data,</span>
-<span id="cb224-2"><a href="pulimiento-de-medianas.html#cb224-2" aria-hidden="true" tabindex="-1"></a>                         X <span class="sc">~</span> Y,</span>
-<span id="cb224-3"><a href="pulimiento-de-medianas.html#cb224-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">value.var =</span> <span class="st">&quot;Var&quot;</span>)</span>
-<span id="cb224-4"><a href="pulimiento-de-medianas.html#cb224-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tabla) <span class="ot">&lt;-</span> tabla[, <span class="dv">1</span>]</span>
-<span id="cb224-5"><a href="pulimiento-de-medianas.html#cb224-5" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> tabla[, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>)]</span>
-<span id="cb224-6"><a href="pulimiento-de-medianas.html#cb224-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tabla)</span></code></pre></div>
-<pre><code>##                           0        0.2        0.4        0.6        0.8          1
-## 0                 0.2145009  0.8049725  3.3939058  3.3793326  6.8841781  7.6246662
-## 0.333333333333333 0.5584438  2.1669449 -1.8366374  2.7507059  3.9877241  5.6760855
-## 0.666666666666667 1.1714964 -0.5504724  0.4327237 -0.8205906 -0.7875332  0.1750975
-## 1                 0.5512132 -0.9773974  1.7393967  1.9778193  2.1164238 -0.4552667</code></pre>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="pulimiento-de-medianas.html#cb265-1" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">dcast</span>(data,</span>
+<span id="cb265-2"><a href="pulimiento-de-medianas.html#cb265-2" aria-hidden="true" tabindex="-1"></a>                         X <span class="sc">~</span> Y,</span>
+<span id="cb265-3"><a href="pulimiento-de-medianas.html#cb265-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">value.var =</span> <span class="st">&quot;Var&quot;</span>)</span>
+<span id="cb265-4"><a href="pulimiento-de-medianas.html#cb265-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tabla) <span class="ot">&lt;-</span> tabla[, <span class="dv">1</span>]</span>
+<span id="cb265-5"><a href="pulimiento-de-medianas.html#cb265-5" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> tabla[, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>)]</span>
+<span id="cb265-6"><a href="pulimiento-de-medianas.html#cb265-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tabla)</span></code></pre></div>
+<pre><code>##                             0        0.2        0.4        0.6        0.8         1
+## 0                 -2.36226926 -0.6870734 -1.1832368 -4.4055777 -3.9870467 -2.278700
+## 0.333333333333333 -4.99201481 -3.0639800 -1.2569380 -0.4888374 -5.8148815 -5.472106
+## 0.666666666666667 -3.02799557 -2.8541614  1.1192821 -1.3320332  1.1554883  1.740054
+## 1                 -0.07277686 -1.7498092  0.1438912 -1.5373774 -0.4834592 -0.381242</code></pre>
 <p>Pulimiento de medianas de la tabla</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="pulimiento-de-medianas.html#cb226-1" aria-hidden="true" tabindex="-1"></a>med <span class="ot">&lt;-</span> <span class="fu">medpolish</span>(tabla)</span></code></pre></div>
-<pre><code>## 1: 30.50282
-## 2: 29.90448
-## Final: 29.90448</code></pre>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="pulimiento-de-medianas.html#cb228-1" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(med<span class="sc">$</span>residuals)</span>
-<span id="cb228-2"><a href="pulimiento-de-medianas.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(med)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="pulimiento-de-medianas.html#cb267-1" aria-hidden="true" tabindex="-1"></a>med <span class="ot">&lt;-</span> <span class="fu">medpolish</span>(tabla)</span></code></pre></div>
+<pre><code>## 1: 26.85827
+## Final: 26.83963</code></pre>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="pulimiento-de-medianas.html#cb269-1" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(med<span class="sc">$</span>residuals)</span>
+<span id="cb269-2"><a href="pulimiento-de-medianas.html#cb269-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(med)</span></code></pre></div>
 <pre><code>## 
 ## Median Polish Results (Dataset: &quot;tabla&quot;)
 ## 
-## Overall: 2.217365
+## Overall: -1.712201
 ## 
 ## Row Effects:
 ##                 0 0.333333333333333 0.666666666666667                 1 
-##          1.169255          0.786123         -2.411298         -0.786123 
+##         -0.972528         -2.315797          1.257959          0.972528 
 ## 
 ## Column Effects:
-##          0        0.2        0.4        0.6        0.8          1 
-## -1.6625362 -1.6225909  0.1577208 -0.1300342  0.8347093  1.5208144 
+##           0         0.2         0.4         0.6         0.8           1 
+## -0.32077896 -0.02305949  1.53750781 -0.83774811 -0.52305218  0.38222999 
 ## 
 ## Residuals:
-##                          0      0.2      0.4      0.6      0.8       1
-## 0                 -1.50958 -0.95906 -0.15043  0.12275  2.66285  2.7172
-## 0.333333333333333 -0.78251  0.78605 -4.99785 -0.12275  0.14953  1.1518
-## 0.666666666666667  3.02797  1.26605  0.46894 -0.49662 -1.42831 -1.1518
-## 1                  0.78251 -0.78605  0.15043  0.67661 -0.14953 -3.4073</code></pre>
+##                          0      0.2       0.4       0.6      0.8         1
+## 0                  0.64324  2.02071 -0.036016 -0.883101 -0.77927  0.023799
+## 0.333333333333333 -0.64324  0.98708  1.233552  4.376908 -1.26383 -1.826338
+## 0.666666666666667 -2.25297 -2.37686  0.036016 -0.040044  2.13278  1.812066
+## 1                  0.98767 -0.98708 -0.653944  0.040044  0.77927 -0.023799</code></pre>
 <p>Reshape de los datos, con efecto de la fila y la columna</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="pulimiento-de-medianas.html#cb230-1" aria-hidden="true" tabindex="-1"></a>tabla_residuales <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(med<span class="sc">$</span>residuals)</span>
-<span id="cb230-2"><a href="pulimiento-de-medianas.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tabla_residuales) <span class="ot">&lt;-</span> med<span class="sc">$</span>col</span>
-<span id="cb230-3"><a href="pulimiento-de-medianas.html#cb230-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tabla_residuales) <span class="ot">&lt;-</span> med<span class="sc">$</span>row</span>
-<span id="cb230-4"><a href="pulimiento-de-medianas.html#cb230-4" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(<span class="fu">as.matrix</span>(tabla_residuales))</span>
-<span id="cb230-5"><a href="pulimiento-de-medianas.html#cb230-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb230-6"><a href="pulimiento-de-medianas.html#cb230-6" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(data,</span>
-<span id="cb230-7"><a href="pulimiento-de-medianas.html#cb230-7" aria-hidden="true" tabindex="-1"></a>                  geo_data,</span>
-<span id="cb230-8"><a href="pulimiento-de-medianas.html#cb230-8" aria-hidden="true" tabindex="-1"></a>                  med<span class="sc">$</span>overall)</span>
-<span id="cb230-9"><a href="pulimiento-de-medianas.html#cb230-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(geo_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>,</span>
-<span id="cb230-10"><a href="pulimiento-de-medianas.html#cb230-10" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Y&quot;</span>,</span>
-<span id="cb230-11"><a href="pulimiento-de-medianas.html#cb230-11" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Var&quot;</span>,</span>
-<span id="cb230-12"><a href="pulimiento-de-medianas.html#cb230-12" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto fila&quot;</span>,</span>
-<span id="cb230-13"><a href="pulimiento-de-medianas.html#cb230-13" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto columa&quot;</span>,</span>
-<span id="cb230-14"><a href="pulimiento-de-medianas.html#cb230-14" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Residual&quot;</span>,</span>
-<span id="cb230-15"><a href="pulimiento-de-medianas.html#cb230-15" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto Global&quot;</span>)</span>
-<span id="cb230-16"><a href="pulimiento-de-medianas.html#cb230-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geo_data)</span></code></pre></div>
-<pre><code>##            X   Y        Var Efecto fila Efecto columa   Residual Efecto Global
-## 1  0.0000000 0.0  0.2145009    1.169255    -1.6625362 -1.5095821      2.217365
-## 2  0.3333333 0.0  0.5584438    0.786123    -1.6625362 -0.7825077      2.217365
-## 3  0.6666667 0.0  1.1714964   -2.411298    -1.6625362  3.0279661      2.217365
-## 4  1.0000000 0.0  0.5512132   -0.786123    -1.6625362  0.7825077      2.217365
-## 5  0.0000000 0.2  0.8049725    1.169255    -1.6225909 -0.9590557      2.217365
-## 6  0.3333333 0.2  2.1669449    0.786123    -1.6225909  0.7860482      2.217365
-## 7  0.6666667 0.2 -0.5504724   -2.411298    -1.6225909  1.2660520      2.217365
-## 8  1.0000000 0.2 -0.9773974   -0.786123    -1.6225909 -0.7860482      2.217365
-## 9  0.0000000 0.4  3.3939058    1.169255     0.1577208 -0.1504342      2.217365
-## 10 0.3333333 0.4 -1.8366374    0.786123     0.1577208 -4.9978459      2.217365
-## 11 0.6666667 0.4  0.4327237   -2.411298     0.1577208  0.4689363      2.217365
-## 12 1.0000000 0.4  1.7393967   -0.786123     0.1577208  0.1504342      2.217365
-## 13 0.0000000 0.6  3.3793326    1.169255    -0.1300342  0.1227476      2.217365
-## 14 0.3333333 0.6  2.7507059    0.786123    -0.1300342 -0.1227476      2.217365
-## 15 0.6666667 0.6 -0.8205906   -2.411298    -0.1300342 -0.4966230      2.217365
-## 16 1.0000000 0.6  1.9778193   -0.786123    -0.1300342  0.6766118      2.217365
-## 17 0.0000000 0.8  6.8841781    1.169255     0.8347093  2.6628496      2.217365
-## 18 0.3333333 0.8  3.9877241    0.786123     0.8347093  0.1495271      2.217365
-## 19 0.6666667 0.8 -0.7875332   -2.411298     0.8347093 -1.4283090      2.217365
-## 20 1.0000000 0.8  2.1164238   -0.786123     0.8347093 -0.1495271      2.217365
-## 21 0.0000000 1.0  7.6246662    1.169255     1.5208144  2.7172326      2.217365
-## 22 0.3333333 1.0  5.6760855    0.786123     1.5208144  1.1517834      2.217365
-## 23 0.6666667 1.0  0.1750975   -2.411298     1.5208144 -1.1517834      2.217365
-## 24 1.0000000 1.0 -0.4552667   -0.786123     1.5208144 -3.4073228      2.217365</code></pre>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="pulimiento-de-medianas.html#cb271-1" aria-hidden="true" tabindex="-1"></a>tabla_residuales <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(med<span class="sc">$</span>residuals)</span>
+<span id="cb271-2"><a href="pulimiento-de-medianas.html#cb271-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tabla_residuales) <span class="ot">&lt;-</span> med<span class="sc">$</span>col</span>
+<span id="cb271-3"><a href="pulimiento-de-medianas.html#cb271-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tabla_residuales) <span class="ot">&lt;-</span> med<span class="sc">$</span>row</span>
+<span id="cb271-4"><a href="pulimiento-de-medianas.html#cb271-4" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(<span class="fu">as.matrix</span>(tabla_residuales))</span>
+<span id="cb271-5"><a href="pulimiento-de-medianas.html#cb271-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb271-6"><a href="pulimiento-de-medianas.html#cb271-6" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(data,</span>
+<span id="cb271-7"><a href="pulimiento-de-medianas.html#cb271-7" aria-hidden="true" tabindex="-1"></a>                  geo_data,</span>
+<span id="cb271-8"><a href="pulimiento-de-medianas.html#cb271-8" aria-hidden="true" tabindex="-1"></a>                  med<span class="sc">$</span>overall)</span>
+<span id="cb271-9"><a href="pulimiento-de-medianas.html#cb271-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(geo_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>,</span>
+<span id="cb271-10"><a href="pulimiento-de-medianas.html#cb271-10" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Y&quot;</span>,</span>
+<span id="cb271-11"><a href="pulimiento-de-medianas.html#cb271-11" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Var&quot;</span>,</span>
+<span id="cb271-12"><a href="pulimiento-de-medianas.html#cb271-12" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto fila&quot;</span>,</span>
+<span id="cb271-13"><a href="pulimiento-de-medianas.html#cb271-13" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto columa&quot;</span>,</span>
+<span id="cb271-14"><a href="pulimiento-de-medianas.html#cb271-14" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Residual&quot;</span>,</span>
+<span id="cb271-15"><a href="pulimiento-de-medianas.html#cb271-15" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto Global&quot;</span>)</span>
+<span id="cb271-16"><a href="pulimiento-de-medianas.html#cb271-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geo_data)</span></code></pre></div>
+<pre><code>##            X   Y         Var Efecto fila Efecto columa    Residual Efecto Global
+## 1  0.0000000 0.0 -2.36226926   -0.972528   -0.32077896  0.64323844     -1.712201
+## 2  0.3333333 0.0 -4.99201481   -2.315797   -0.32077896 -0.64323844     -1.712201
+## 3  0.6666667 0.0 -3.02799557    1.257959   -0.32077896 -2.25297500     -1.712201
+## 4  1.0000000 0.0 -0.07277686    0.972528   -0.32077896  0.98767493     -1.712201
+## 5  0.0000000 0.2 -0.68707337   -0.972528   -0.02305949  2.02071486     -1.712201
+## 6  0.3333333 0.2 -3.06398000   -2.315797   -0.02305949  0.98707690     -1.712201
+## 7  0.6666667 0.2 -2.85416144    1.257959   -0.02305949 -2.37686033     -1.712201
+## 8  1.0000000 0.2 -1.74980921    0.972528   -0.02305949 -0.98707690     -1.712201
+## 9  0.0000000 0.4 -1.18323684   -0.972528    1.53750781 -0.03601591     -1.712201
+## 10 0.3333333 0.4 -1.25693801   -2.315797    1.53750781  1.23355159     -1.712201
+## 11 0.6666667 0.4  1.11928211    1.257959    1.53750781  0.03601591     -1.712201
+## 12 1.0000000 0.4  0.14389117    0.972528    1.53750781 -0.65394382     -1.712201
+## 13 0.0000000 0.6 -4.40557766   -0.972528   -0.83774811 -0.88310081     -1.712201
+## 14 0.3333333 0.6 -0.48883741   -2.315797   -0.83774811  4.37690811     -1.712201
+## 15 0.6666667 0.6 -1.33203323    1.257959   -0.83774811 -0.04004350     -1.712201
+## 16 1.0000000 0.6 -1.53737743    0.972528   -0.83774811  0.04004350     -1.712201
+## 17 0.0000000 0.8 -3.98704673   -0.972528   -0.52305218 -0.77926581     -1.712201
+## 18 0.3333333 0.8 -5.81488153   -2.315797   -0.52305218 -1.26383194     -1.712201
+## 19 0.6666667 0.8  1.15548828    1.257959   -0.52305218  2.13278207     -1.712201
+## 20 1.0000000 0.8 -0.48345919    0.972528   -0.52305218  0.77926581     -1.712201
+## 21 0.0000000 1.0 -2.27869957   -0.972528    0.38222999  0.02379918     -1.712201
+## 22 0.3333333 1.0 -5.47210551   -2.315797    0.38222999 -1.82633809     -1.712201
+## 23 0.6666667 1.0  1.74005392    1.257959    0.38222999  1.81206554     -1.712201
+## 24 1.0000000 1.0 -0.38124201    0.972528    0.38222999 -0.02379918     -1.712201</code></pre>
 <p>Validación de la descomposición</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="pulimiento-de-medianas.html#cb232-1" aria-hidden="true" tabindex="-1"></a>valida <span class="ot">&lt;-</span> <span class="fu">cbind</span>(geo_data<span class="sc">$</span>Var,</span>
-<span id="cb232-2"><a href="pulimiento-de-medianas.html#cb232-2" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto fila&quot;</span>]] <span class="sc">+</span></span>
-<span id="cb232-3"><a href="pulimiento-de-medianas.html#cb232-3" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto columa&quot;</span>]] <span class="sc">+</span></span>
-<span id="cb232-4"><a href="pulimiento-de-medianas.html#cb232-4" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Residual&quot;</span>]] <span class="sc">+</span></span>
-<span id="cb232-5"><a href="pulimiento-de-medianas.html#cb232-5" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto Global&quot;</span>]])</span>
-<span id="cb232-6"><a href="pulimiento-de-medianas.html#cb232-6" aria-hidden="true" tabindex="-1"></a>valida <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(valida)</span>
-<span id="cb232-7"><a href="pulimiento-de-medianas.html#cb232-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(valida) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;datos&quot;</span>, <span class="st">&quot;suma&quot;</span>)</span>
-<span id="cb232-8"><a href="pulimiento-de-medianas.html#cb232-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(valida)</span></code></pre></div>
-<pre><code>##         datos       suma
-## 1   0.2145009  0.2145009
-## 2   0.5584438  0.5584438
-## 3   1.1714964  1.1714964
-## 4   0.5512132  0.5512132
-## 5   0.8049725  0.8049725
-## 6   2.1669449  2.1669449
-## 7  -0.5504724 -0.5504724
-## 8  -0.9773974 -0.9773974
-## 9   3.3939058  3.3939058
-## 10 -1.8366374 -1.8366374
-## 11  0.4327237  0.4327237
-## 12  1.7393967  1.7393967
-## 13  3.3793326  3.3793326
-## 14  2.7507059  2.7507059
-## 15 -0.8205906 -0.8205906
-## 16  1.9778193  1.9778193
-## 17  6.8841781  6.8841781
-## 18  3.9877241  3.9877241
-## 19 -0.7875332 -0.7875332
-## 20  2.1164238  2.1164238
-## 21  7.6246662  7.6246662
-## 22  5.6760855  5.6760855
-## 23  0.1750975  0.1750975
-## 24 -0.4552667 -0.4552667</code></pre>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="pulimiento-de-medianas.html#cb273-1" aria-hidden="true" tabindex="-1"></a>valida <span class="ot">&lt;-</span> <span class="fu">cbind</span>(geo_data<span class="sc">$</span>Var,</span>
+<span id="cb273-2"><a href="pulimiento-de-medianas.html#cb273-2" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto fila&quot;</span>]] <span class="sc">+</span></span>
+<span id="cb273-3"><a href="pulimiento-de-medianas.html#cb273-3" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto columa&quot;</span>]] <span class="sc">+</span></span>
+<span id="cb273-4"><a href="pulimiento-de-medianas.html#cb273-4" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Residual&quot;</span>]] <span class="sc">+</span></span>
+<span id="cb273-5"><a href="pulimiento-de-medianas.html#cb273-5" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto Global&quot;</span>]])</span>
+<span id="cb273-6"><a href="pulimiento-de-medianas.html#cb273-6" aria-hidden="true" tabindex="-1"></a>valida <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(valida)</span>
+<span id="cb273-7"><a href="pulimiento-de-medianas.html#cb273-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(valida) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;datos&quot;</span>, <span class="st">&quot;suma&quot;</span>)</span>
+<span id="cb273-8"><a href="pulimiento-de-medianas.html#cb273-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(valida)</span></code></pre></div>
+<pre><code>##          datos        suma
+## 1  -2.36226926 -2.36226926
+## 2  -4.99201481 -4.99201481
+## 3  -3.02799557 -3.02799557
+## 4  -0.07277686 -0.07277686
+## 5  -0.68707337 -0.68707337
+## 6  -3.06398000 -3.06398000
+## 7  -2.85416144 -2.85416144
+## 8  -1.74980921 -1.74980921
+## 9  -1.18323684 -1.18323684
+## 10 -1.25693801 -1.25693801
+## 11  1.11928211  1.11928211
+## 12  0.14389117  0.14389117
+## 13 -4.40557766 -4.40557766
+## 14 -0.48883741 -0.48883741
+## 15 -1.33203323 -1.33203323
+## 16 -1.53737743 -1.53737743
+## 17 -3.98704673 -3.98704673
+## 18 -5.81488153 -5.81488153
+## 19  1.15548828  1.15548828
+## 20 -0.48345919 -0.48345919
+## 21 -2.27869957 -2.27869957
+## 22 -5.47210551 -5.47210551
+## 23  1.74005392  1.74005392
+## 24 -0.38124201 -0.38124201</code></pre>
 
 </div>
 </div>

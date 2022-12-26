@@ -1,8 +1,8 @@
 ---
-title: "Spatial modeling of incidence and mortality childhood leukemia based on Colombian armed conflict and poverty for children born during the years 2002-2013"
+title: "Spatial modeling leukemia"
 date: "`r Sys.Date()`"
 output: html_document
-subtitle: Pilar Montilla, Martha Bohorquez and Rafael Rentería
+author: "Pilar Montilla, Martha Bohorquez and Rafael Rentería"
 ---
 
 # Spatial modeling leukemia

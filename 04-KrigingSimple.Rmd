@@ -1,6 +1,7 @@
 ---
-title: "04-Ilustrcion del krigin simple espacio tiempo"
+title: "Ilustrcion del krigin simple espacio tiempo"
 output: html_document
+author: "Martha Bohorquez"
 date: "16-05-2022"
 ---
 

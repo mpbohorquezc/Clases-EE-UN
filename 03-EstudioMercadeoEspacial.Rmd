@@ -2,6 +2,7 @@
 title: "Modelos de regresión espacial"
 subtitle: "Estudio de Mercadeo"
 output: html_document
+author: "Martha Bohorquez"
 date: "2023-01-31"
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "Geoestadística con sgeostat"
 output: html_document
+author: "Martha Bohorquez"
 date: "2022-09-18"
 ---
 

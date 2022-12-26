@@ -430,7 +430,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ##      Chi-square = 902.95398 
 ##      df = 1
-##      pvalue: &lt; 0.000000000000000222</code></pre>
+##      pvalue: &lt; 2.22e-16</code></pre>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="spatial-modeling-leukemia.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">##Checking overdispersion</span></span>
 <span id="cb44-2"><a href="spatial-modeling-leukemia.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dispersiontest</span>(glmbaseLMR)             <span class="co">#Cameron &amp; Trivedi (1990)</span></span></code></pre></div>
 <pre><code>## 
@@ -560,7 +560,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## data:  resid_Pois_Hurdle  
 ## weights: mat[[which.max(aux)]]    
 ## 
-## Moran I statistic standard deviate = 4.8924, p-value = 0.0000009964
+## Moran I statistic standard deviate = 4.8924, p-value = 9.964e-07
 ## alternative hypothesis: two.sided
 ## sample estimates:
 ## Moran I statistic       Expectation          Variance 
@@ -569,7 +569,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong><em>Only Conflict armed index predictor is significant but model residuals are significantly spatially autocorrelated. So, we use spatial filtering and check significance again. Below we find Moran Eigenvectors.</em></strong></li>
 </ul>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="spatial-modeling-leukemia.html#cb60-1" aria-hidden="true" tabindex="-1"></a>MEpoisLMR <span class="ot">&lt;-</span> spatialreg<span class="sc">::</span><span class="fu">ME</span>(Ndeaths <span class="sc">~</span> IICA_High<span class="sc">+</span>UBN<span class="sc">+</span>Per_Rur<span class="sc">+</span>Cobertura<span class="sc">+</span><span class="fu">offset</span>(<span class="fu">log</span>(EsperadosDeNCancer)),<span class="at">data=</span>muncol,<span class="at">family=</span><span class="st">&quot;poisson&quot;</span>,<span class="at">listw=</span>knn4_nb_b, <span class="at">alpha=</span><span class="fl">0.02</span>, <span class="at">verbose=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## eV[,11], I: 0.02918226 ZI: NA, pr(ZI): 0.08</code></pre>
+<pre><code>## eV[,11], I: 0.02918226 ZI: NA, pr(ZI): 0.06</code></pre>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="spatial-modeling-leukemia.html#cb62-1" aria-hidden="true" tabindex="-1"></a>MoranEigenVLMR<span class="ot">=</span><span class="fu">data.frame</span>(<span class="fu">fitted</span>(MEpoisLMR))</span>
 <span id="cb62-2"><a href="spatial-modeling-leukemia.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(MoranEigenVLMR)</span></span></code></pre></div>
 <ul>
@@ -596,13 +596,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -1.6969 -0.4153 -0.2920 -0.1791  7.8744 
 ## 
 ## Count model coefficients (truncated poisson with log link):
-##                    Estimate Std. Error z value    Pr(&gt;|z|)    
-## (Intercept)        0.374295   0.391853   0.955     0.33948    
-## IICA_High1         0.286868   0.104433   2.747     0.00602 ** 
-## UBN               -0.010727   0.005917  -1.813     0.06986 .  
-## Per_Rur           -0.003464   0.005096  -0.680     0.49664    
-## Cobertura         -0.058726   0.436141  -0.135     0.89289    
-## fitted(MEpoisLMR) -8.856022   1.670191  -5.302 0.000000114 ***
+##                    Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)        0.374295   0.391853   0.955  0.33948    
+## IICA_High1         0.286868   0.104433   2.747  0.00602 ** 
+## UBN               -0.010727   0.005917  -1.813  0.06986 .  
+## Per_Rur           -0.003464   0.005096  -0.680  0.49664    
+## Cobertura         -0.058726   0.436141  -0.135  0.89289    
+## fitted(MEpoisLMR) -8.856022   1.670191  -5.302 1.14e-07 ***
 ## Zero hurdle model coefficients (binomial with logit link):
 ##              Estimate Std. Error z value Pr(&gt;|z|)    
 ## (Intercept) -1.013658   0.570592  -1.777 0.075650 .  
@@ -641,7 +641,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb70-5"><a href="spatial-modeling-leukemia.html#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">listw=</span>knn4_nb_b, </span>
 <span id="cb70-6"><a href="spatial-modeling-leukemia.html#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.02</span>, </span>
 <span id="cb70-7"><a href="spatial-modeling-leukemia.html#cb70-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## eV[,11], I: 0.01071212 ZI: NA, pr(ZI): 0.25</code></pre>
+<pre><code>## eV[,11], I: 0.01071212 ZI: NA, pr(ZI): 0.37</code></pre>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="spatial-modeling-leukemia.html#cb72-1" aria-hidden="true" tabindex="-1"></a>MoranEigenVLMR<span class="ot">=</span><span class="fu">data.frame</span>(<span class="fu">fitted</span>(MEpoisLMR))</span>
 <span id="cb72-2"><a href="spatial-modeling-leukemia.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(MoranEigenVLMR)</span></span></code></pre></div>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="spatial-modeling-leukemia.html#cb73-1" aria-hidden="true" tabindex="-1"></a>mod.hurdleLMR <span class="ot">&lt;-</span> <span class="fu">hurdle</span>(</span>
@@ -662,11 +662,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -1.5905 -0.4184 -0.2973 -0.1823  7.3265 
 ## 
 ## Count model coefficients (truncated poisson with log link):
-##                    Estimate Std. Error z value     Pr(&gt;|z|)    
-## (Intercept)        0.355460   0.097724   3.637     0.000275 ***
-## IICA_High1         0.274468   0.100011   2.744     0.006062 ** 
-## UBN               -0.013803   0.003796  -3.636     0.000277 ***
-## fitted(MEpoisLMR) -9.134355   1.617421  -5.647 0.0000000163 ***
+##                    Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)        0.355460   0.097724   3.637 0.000275 ***
+## IICA_High1         0.274468   0.100011   2.744 0.006062 ** 
+## UBN               -0.013803   0.003796  -3.636 0.000277 ***
+## fitted(MEpoisLMR) -9.134355   1.617421  -5.647 1.63e-08 ***
 ## Zero hurdle model coefficients (binomial with logit link):
 ##              Estimate Std. Error z value Pr(&gt;|z|)    
 ## (Intercept) -1.279352   0.535993  -2.387 0.016992 *  
@@ -722,7 +722,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb82-12"><a href="spatial-modeling-leukemia.html#cb82-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Number of deaths&quot;</span>,</span>
 <span id="cb82-13"><a href="spatial-modeling-leukemia.html#cb82-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Frecuencies&quot;</span>)</span>
 <span id="cb82-14"><a href="spatial-modeling-leukemia.html#cb82-14" aria-hidden="true" tabindex="-1"></a>pMortality</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 </div>
 </div>
 <div id="incidence" class="section level2 hasAnchor" number="3.2">
@@ -814,11 +814,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -5.1779  -1.1632  -0.5270   0.6082   7.7193  
 ## 
 ## Coefficients:
-##               Estimate Std. Error z value             Pr(&gt;|z|)    
-## (Intercept)  0.3226036  0.0276280  11.677 &lt; 0.0000000000000002 ***
-## IICA_High1   0.0818208  0.0294297   2.780              0.00543 ** 
-## UBN         -0.0123797  0.0010425 -11.875 &lt; 0.0000000000000002 ***
-## Per_Rur     -0.0002510  0.0007692  -0.326              0.74419    
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  0.3226036  0.0276280  11.677  &lt; 2e-16 ***
+## IICA_High1   0.0818208  0.0294297   2.780  0.00543 ** 
+## UBN         -0.0123797  0.0010425 -11.875  &lt; 2e-16 ***
+## Per_Rur     -0.0002510  0.0007692  -0.326  0.74419    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -845,14 +845,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ##      Chi-square = 12268.7129 
 ##      df = 1
-##      pvalue: &lt; 0.000000000000000222</code></pre>
+##      pvalue: &lt; 2.22e-16</code></pre>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="spatial-modeling-leukemia.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="do">##Checking overdispersion</span></span>
 <span id="cb100-2"><a href="spatial-modeling-leukemia.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dispersiontest</span>(glmbaseLR)             <span class="co">#Cameron &amp; Trivedi (1990)</span></span></code></pre></div>
 <pre><code>## 
 ##  Overdispersion test
 ## 
 ## data:  glmbaseLR
-## z = 4.1887, p-value = 0.00001403
+## z = 4.1887, p-value = 1.403e-05
 ## alternative hypothesis: true dispersion is greater than 1
 ## sample estimates:
 ## dispersion 
@@ -923,11 +923,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb106-5"><a href="spatial-modeling-leukemia.html#cb106-5" aria-hidden="true" tabindex="-1"></a>aux[i]<span class="ot">=</span><span class="fu">moran.test</span>(muncol<span class="sc">$</span>residLR,mat[[i]],<span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>)<span class="sc">$</span><span class="st">&quot;p&quot;</span></span>
 <span id="cb106-6"><a href="spatial-modeling-leukemia.html#cb106-6" aria-hidden="true" tabindex="-1"></a>} </span>
 <span id="cb106-7"><a href="spatial-modeling-leukemia.html#cb106-7" aria-hidden="true" tabindex="-1"></a>aux</span></code></pre></div>
-<pre><code>##  [1] 0.0000000017764454223 0.0000000000163053411 0.0000000011162954779 0.0000000000340919650 0.0000000002619438209
-##  [6] 0.0000000000198490005 0.0000000000280007352 0.0000000000264847296 0.0000000000707310275 0.0000000000040680047
-## [11] 0.0000000013453360945 0.0000000058676552459 0.0006342820038119387 0.0006342820038119387 0.0000000053378560647
-## [16] 0.0000000053378560647 0.0000000000046536598 0.0000000000046536598 0.0000000000002138542 0.0000000000002138542
-## [21] 0.0000000000005932765 0.0000000000005932765</code></pre>
+<pre><code>##  [1] 1.776445e-09 1.630534e-11 1.116295e-09 3.409196e-11 2.619438e-10 1.984900e-11 2.800074e-11 2.648473e-11
+##  [9] 7.073103e-11 4.068005e-12 1.345336e-09 5.867655e-09 6.342820e-04 6.342820e-04 5.337856e-09 5.337856e-09
+## [17] 4.653660e-12 4.653660e-12 2.138542e-13 2.138542e-13 5.932765e-13 5.932765e-13</code></pre>
 <div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="spatial-modeling-leukemia.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(muncol<span class="sc">$</span>residLR, mat[[<span class="fu">which.max</span>(aux)]], <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Moran I test under randomisation
@@ -963,17 +961,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -3.6935 -0.7943 -0.3775  0.6266 17.7799 
 ## 
 ## Count model coefficients (truncated poisson with log link):
-##               Estimate Std. Error z value            Pr(&gt;|z|)    
-## (Intercept)  0.3151943  0.0289252  10.897 &lt;0.0000000000000002 ***
-## IICA_High1   0.0769858  0.0309613   2.487              0.0129 *  
-## UBN         -0.0123171  0.0011548 -10.666 &lt;0.0000000000000002 ***
-## Per_Rur      0.0020604  0.0008876   2.321              0.0203 *  
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  0.3151943  0.0289252  10.897   &lt;2e-16 ***
+## IICA_High1   0.0769858  0.0309613   2.487   0.0129 *  
+## UBN         -0.0123171  0.0011548 -10.666   &lt;2e-16 ***
+## Per_Rur      0.0020604  0.0008876   2.321   0.0203 *  
 ## Zero hurdle model coefficients (binomial with logit link):
-##              Estimate Std. Error z value  Pr(&gt;|z|)    
-## (Intercept)  1.001514   0.249402   4.016 0.0000593 ***
-## IICA_High1   0.072259   0.137921   0.524     0.600    
-## UBN         -0.013830   0.003541  -3.906 0.0000939 ***
-## Per_Rur     -0.004660   0.003364  -1.385     0.166    
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.001514   0.249402   4.016 5.93e-05 ***
+## IICA_High1   0.072259   0.137921   0.524    0.600    
+## UBN         -0.013830   0.003541  -3.906 9.39e-05 ***
+## Per_Rur     -0.004660   0.003364  -1.385    0.166    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
 ## 
@@ -990,7 +988,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## data:  resid_Pois_Hurdle  
 ## weights: mat[[which.max(aux)]]    
 ## 
-## Moran I statistic standard deviate = 4.5053, p-value = 0.000006627
+## Moran I statistic standard deviate = 4.5053, p-value = 6.627e-06
 ## alternative hypothesis: two.sided
 ## sample estimates:
 ## Moran I statistic       Expectation          Variance 
@@ -1006,7 +1004,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb117-6"><a href="spatial-modeling-leukemia.html#cb117-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">listw=</span>mat[[<span class="dv">3</span>]], </span>
 <span id="cb117-7"><a href="spatial-modeling-leukemia.html#cb117-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.02</span>, </span>
 <span id="cb117-8"><a href="spatial-modeling-leukemia.html#cb117-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## eV[,29], I: 0.01179903 ZI: NA, pr(ZI): 0.25</code></pre>
+<pre><code>## eV[,29], I: 0.01179903 ZI: NA, pr(ZI): 0.22</code></pre>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="spatial-modeling-leukemia.html#cb119-1" aria-hidden="true" tabindex="-1"></a>MoranEigenVLR<span class="ot">=</span><span class="fu">data.frame</span>(<span class="fu">fitted</span>(MEpoisLR))</span></code></pre></div>
 <ul>
 <li><strong><em>Now, we used Poisson Hurdle model to manage the overdispersion due to zero excess and Moran eigenfunctions are included as additional explanatory variables, so that spatial autocorrelation is considered.</em></strong></li>
@@ -1043,12 +1041,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -3.2263 -0.7927 -0.3875  0.6339 17.8272 
 ## 
 ## Count model coefficients (truncated poisson with log link):
-##                    Estimate Std. Error z value             Pr(&gt;|z|)    
-## (Intercept)       0.2275843  0.0328678   6.924     0.00000000000438 ***
-## IICA_High1        0.1568024  0.0342051   4.584     0.00000455776769 ***
-## UBN              -0.0113328  0.0011644  -9.733 &lt; 0.0000000000000002 ***
-## Per_Rur           0.0016899  0.0008965   1.885               0.0594 .  
-## fitted(MEpoisLR)  2.6540637  0.4767638   5.567     0.00000002594128 ***
+##                    Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)       0.2275843  0.0328678   6.924 4.38e-12 ***
+## IICA_High1        0.1568024  0.0342051   4.584 4.56e-06 ***
+## UBN              -0.0113328  0.0011644  -9.733  &lt; 2e-16 ***
+## Per_Rur           0.0016899  0.0008965   1.885   0.0594 .  
+## fitted(MEpoisLR)  2.6540637  0.4767638   5.567 2.59e-08 ***
 ## Zero hurdle model coefficients (binomial with logit link):
 ##              Estimate Std. Error z value Pr(&gt;|z|)   
 ## (Intercept)  0.646903   0.213106   3.036   0.0024 **
@@ -1072,7 +1070,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb127-5"><a href="spatial-modeling-leukemia.html#cb127-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">listw=</span>mat[[<span class="dv">3</span>]], </span>
 <span id="cb127-6"><a href="spatial-modeling-leukemia.html#cb127-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.02</span>, </span>
 <span id="cb127-7"><a href="spatial-modeling-leukemia.html#cb127-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## eV[,29], I: 0.01112525 ZI: NA, pr(ZI): 0.18</code></pre>
+<pre><code>## eV[,29], I: 0.01112525 ZI: NA, pr(ZI): 0.24</code></pre>
 <div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="spatial-modeling-leukemia.html#cb129-1" aria-hidden="true" tabindex="-1"></a>MoranEigenVLR<span class="ot">=</span><span class="fu">data.frame</span>(<span class="fu">fitted</span>(MEpoisLR))</span>
 <span id="cb129-2"><a href="spatial-modeling-leukemia.html#cb129-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb129-3"><a href="spatial-modeling-leukemia.html#cb129-3" aria-hidden="true" tabindex="-1"></a>mod.hurdleLR <span class="ot">&lt;-</span> <span class="fu">hurdle</span>(</span>
@@ -1106,11 +1104,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -3.3173 -0.7976 -0.3786  0.6607 18.2757 
 ## 
 ## Count model coefficients (truncated poisson with log link):
-##                    Estimate Std. Error z value             Pr(&gt;|z|)    
-## (Intercept)       0.2143974  0.0321264   6.674       0.000000000025 ***
-## IICA_High1        0.1700350  0.0335266   5.072       0.000000394376 ***
-## UBN              -0.0097928  0.0008191 -11.955 &lt; 0.0000000000000002 ***
-## fitted(MEpoisLR)  2.7262303  0.4759204   5.728       0.000000010142 ***
+##                    Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)       0.2143974  0.0321264   6.674 2.50e-11 ***
+## IICA_High1        0.1700350  0.0335266   5.072 3.94e-07 ***
+## UBN              -0.0097928  0.0008191 -11.955  &lt; 2e-16 ***
+## fitted(MEpoisLR)  2.7262303  0.4759204   5.728 1.01e-08 ***
 ## Zero hurdle model coefficients (binomial with logit link):
 ##              Estimate Std. Error z value Pr(&gt;|z|)   
 ## (Intercept)  0.646903   0.213106   3.036   0.0024 **
@@ -1153,7 +1151,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb138-12"><a href="spatial-modeling-leukemia.html#cb138-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Number of cases&quot;</span>,</span>
 <span id="cb138-13"><a href="spatial-modeling-leukemia.html#cb138-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Frecuencies&quot;</span>)</span>
 <span id="cb138-14"><a href="spatial-modeling-leukemia.html#cb138-14" aria-hidden="true" tabindex="-1"></a>pl1</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 
 </div>
 </div>

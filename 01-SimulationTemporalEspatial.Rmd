@@ -1,5 +1,5 @@
 ---
-title: "Simulación Proceso Espacio Temporal"
+title: "Simulación Proceso Espacio-Temporal"
 author: "Martha Bohorquez"
 output: html_document
 ---
@@ -60,17 +60,20 @@ psi3=function(r,a,alpha,beta){(a*r^alpha+beta)/(beta*(a*r^alpha+1))}            
 
 ```{r}
 #Cualquier combinaci?n genera una funci?n de covarianza v?lida
-Gneiting=function(h,u,sigma,d,a,alpha,beta,c,gama,v,psi,phi){(sigma^2/(psi((abs(u)^2),a,alpha,beta))^(d/2))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
+Gneiting=function(h,u,sigma,d,a,alpha,beta,c,gama,v,psi,phi){
+  (sigma^2/(psi((abs(u)^2),a,alpha,beta))^(d/2))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
 ```
 
 ```{r}
 #el caso mas general de Gneiting (2002) es cuando d=2, entonces queda
-Gneiting=function(h,u,sigma,a,alpha,beta,c,gama,v,psi,phi){(sigma^2/(psi((abs(u)^2),a,alpha,beta)))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
+Gneiting=function(h,u,sigma,a,alpha,beta,c,gama,v,psi,phi){
+  (sigma^2/(psi((abs(u)^2),a,alpha,beta)))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
 ```
 
 ```{r}
 ####IACO_CESSARE
-C_IACO_CESSARE=function(h,u,sigma,a,b,alpha,beta,gama){(1 + (h/a)^alpha + (u/b)^beta)^(-gama)}
+C_IACO_CESSARE=function(h,u,sigma,a,b,alpha,beta,gama){
+  (1 + (h/a)^alpha + (u/b)^beta)^(-gama)}
 ```
 
 ```{r}
@@ -79,8 +82,10 @@ C_IACO_CESSARE=function(h,u,sigma,a,b,alpha,beta,gama){(1 + (h/a)^alpha + (u/b)^
 Dagum=function(r,lambda,theta,epsilon){1-1/(1+lambda*r^(-theta))^epsilon}                                                                                     #lamdba, theta in (0,7), epsilon in (0,7)
 Dagumm=function(r,lambda,theta,epsilon){ifelse(r==0,1,Dagum(r,lambda,theta,epsilon))}
 
-Porcu_sep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u){Dagumm(h,lambda_h,theta_h,epsilon_h)*Dagumm(u,lambda_u,theta_u,epsilon_u)}      
-Porcu_Nsep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u,vartheta){vartheta*Dagumm(h,lambda_h,theta_h,epsilon_h)+(1-vartheta)*Dagumm(u,lambda_u,theta_u,epsilon_u)}
+Porcu_sep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u){
+  Dagumm(h,lambda_h,theta_h,epsilon_h)*Dagumm(u,lambda_u,theta_u,epsilon_u)}      
+Porcu_Nsep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u,vartheta){
+  vartheta*Dagumm(h,lambda_h,theta_h,epsilon_h)+(1-vartheta)*Dagumm(u,lambda_u,theta_u,epsilon_u)}
 ```
 
 ## CH 1 no separable
@@ -117,7 +122,8 @@ datos1_ord=datos1[order(datos1$x, datos1$y, datos1$t),]
 dataSim1=matrix(c(datos1_ord[,4]),nrow=length(t),ncol=nrow(grillaSp),byrow=F)
 colnames(dataSim1)=rownames(grillaSp)
 rownames(dataSim1)=t
-write.table(dataSim1,"dataSim1.txt")
+dataSim1_path = file("data_1_SimulationTemporalEspatial/dataSim1.txt",open="at")
+write.table(dataSim1,dataSim1_path)
 ```
 
 "" CH 2 no sepaarable
@@ -151,7 +157,8 @@ datos2_ord=datos2[order(datos2$x, datos2$y, datos2$t),]
 dataSim2=matrix(c(datos2_ord[,4]),nrow=length(t),ncol=nrow(grillaSp),byrow=F)
 colnames(dataSim2)=rownames(grillaSp)
 rownames(dataSim2)=t
-write.table(dataSim2,"dataSim2.txt")
+dataSim2_path = file("data_1_SimulationTemporalEspatial/dataSim2.txt",open="at")
+write.table(dataSim2,dataSim2_path)
 class(dataSim2)
 ```
 
