@@ -10,6 +10,7 @@ output: html_document
 ## Dependencias
 
 ```{r}
+rm(list=ls())
 library(geoR)
 library(mvtnorm)
 ```
@@ -35,7 +36,9 @@ Mat_Cov_bloque11=B1[1,1]*Cova1(Mat_dist,1)+B2[1,1]*Cova2(Mat_dist,0.5)
 Mat_Cov_bloque22=B1[2,2]*Cova1(Mat_dist,1)+B2[2,2]*Cova2(Mat_dist,0.5)
 Mat_Cov_bloque12=B1[1,2]*Cova1(Mat_dist,1)+B2[1,2]*Cova2(Mat_dist,0.5)
 Mat_Cov_bloque21=B1[2,1]*Cova1(Mat_dist,1)+B2[2,1]*Cova2(Mat_dist,0.5)
-MAT_COV=rbind(cbind(Mat_Cov_bloque11,Mat_Cov_bloque12),cbind(Mat_Cov_bloque21,Mat_Cov_bloque22))
+
+MAT_COV=rbind(cbind(Mat_Cov_bloque11,Mat_Cov_bloque12),
+              cbind(Mat_Cov_bloque21,Mat_Cov_bloque22))
 dim(MAT_COV)
 ```
 

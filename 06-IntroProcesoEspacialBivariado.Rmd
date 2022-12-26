@@ -13,6 +13,7 @@ Martha Bohorquez
 ## Librerías
 
 ```{r}
+rm(list=ls())
 library(geoR)
 library(mvtnorm)
 ```

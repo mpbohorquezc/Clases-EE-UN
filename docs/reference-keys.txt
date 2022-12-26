@@ -17,7 +17,6 @@ estudio-de-mercadeo
 paquetes
 lectura-de-datos
 cruce-de-información-y-arreglo-de-coordenadas
-pre-procesamiento-de-datos
 matriz-de-vecindades
 mapa-de-valores-observados
 pruebas-de-autocorrelación

@@ -9,6 +9,7 @@ date: "2022-11-22"
 ## Librerías
 
 ```{r}
+rm(list=ls())
 library(sp)
 library(gstat)
 library(sf)
@@ -23,7 +24,7 @@ library(Matrix)
 Cokriging para las variables $NO2$, $O3$, y $NOX$. La variable de principal riesgo es ozono ($O3$), así que se usan las otras dos como covariables espaciales. Día 2020/01/16 A las 17 horas.
 
 ```{r}
-datos <- read.csv("2_COK_G_stat/Air_polution_cdmx_2020_01_16_17h.csv")
+datos <- read.csv("data_8_Cokriging/Air_polution_cdmx_2020_01_16_17h.csv")
 datos <- datos[c("Estacion",
                "X",
                "Y",
@@ -120,18 +121,12 @@ vgmno3_nox <- vgm(psill = mat1[2, 3],
 
 ```{r}
 remove_na <- function(frame, vari_) {
-
     # Remove na from sp object
-
     datos1 <- frame
-
     bool <- !is.na(datos1@data[vari_])
     datos1@data <- datos1@data[bool, ]
     datos1@coords <- datos1@coords[bool, ]
-
-    return(datos1)
-
-}
+    return(datos1)}
 
 coordinates(datos) <- ~ X + Y
 
@@ -203,9 +198,7 @@ prediction_plot <- function(g_object, variable, map_path) {
             scale_fill_viridis_c() +
             theme_void()
 
-    return(plot)
-
-}
+    return(plot)}
 
 
 variance_plot <- function(g_object, variable, map_path) {
@@ -227,9 +220,7 @@ variance_plot <- function(g_object, variable, map_path) {
                                  direction = -1) +
             theme_void()
 
-    return(plot)
-
-}
+    return(plot)}
 
 cv_plot <- function(g_object, variable, map_path) {
 
@@ -253,22 +244,21 @@ cv_plot <- function(g_object, variable, map_path) {
                                  direction = -1) +
             theme_void()
 
-    return(plot)
-}
+    return(plot)}
 
 
 pl1 <- prediction_plot(g_st, "O3",
-                       "2_COK_G_stat/SP/mpiosutm.shp")
+                       "data_8_Cokriging/SP/mpiosutm.shp")
 ```
 
 ```{r}
 pl2 <- variance_plot(g_st, "O3",
-                     "2_COK_G_stat/SP/mpiosutm.shp")
+                     "data_8_Cokriging/SP/mpiosutm.shp")
 ```
 
 ```{r}
 pl3 <- cv_plot(g_st, "O3",
-               "2_COK_G_stat/SP/mpiosutm.shp")
+               "data_8_Cokriging/SP/mpiosutm.shp")
 ```
 
 ```{r}

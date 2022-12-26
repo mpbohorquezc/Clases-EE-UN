@@ -13,6 +13,7 @@ Esta es una alternativa al modelamiento de la media cuando los modelos de regres
 Lista de librerías con link a la documentación.
 
 ```{r}
+rm(list=ls())
 library(gstat)
 library(sp)
 library(mvtnorm)

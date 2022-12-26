@@ -11,10 +11,6 @@ subtitle: Pilar Montilla, Martha Bohorquez and Rafael Rentería
 
 Spatial modeling of incidence and mortality childhood leukemia based on Colombian armed conflict and poverty for children born during the years 2002-2013
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ### *Packages Mortality*
 
 ```{r message=FALSE, warning=FALSE, results='hide'}
@@ -38,7 +34,7 @@ require(dbscan)
 
 ```{r}
 #Reading the shapefile of 1124 Colombian municipalities
-muncol <- rgdal::readOGR(dsn="Armed_Conflict_Vs_Leukemia/muncol.shp")
+muncol <- rgdal::readOGR(dsn="data_2_Leukemia/muncol.shp")
 muncol=spTransform(muncol,CRS("+init=epsg:21897"))
 (l <- length(muncol))
 
@@ -177,7 +173,14 @@ MoranEigenVLMR=data.frame(fitted(MEpoisLMR))
 -   ***Now, we used Poisson Hurdle model to manage the overdispersion due to zero excess and Moran eigenfunctions are included as additional explanatory variables, so that spatial autocorrelation is considered.***
 
 ```{r}
-mod.hurdleLMR <- hurdle(Ndeaths ~IICA_High+UBN+Per_Rur+Cobertura+fitted(MEpoisLMR)+offset(log(EsperadosDeNCancer))|IICA_High+UBN+Per_Rur+Cobertura+offset(log(EsperadosDeNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+mod.hurdleLMR <- hurdle(
+  Ndeaths ~ IICA_High+UBN+Per_Rur+Cobertura+
+            fitted(MEpoisLMR)+offset(log(EsperadosDeNCancer))|IICA_High+
+            UBN+Per_Rur+Cobertura+offset(log(EsperadosDeNCancer)),
+  data = muncol,
+  dist = "poisson", 
+  zero.dist = "binomial")
+
 resid_Pois_Hurdle=residuals(mod.hurdleLMR,"response")
 summary(mod.hurdleLMR)
 pR2(mod.hurdleLMR)
@@ -187,13 +190,25 @@ moran.test(resid_Pois_Hurdle, mat[[which.max(aux)]], alternative="two.sided")
 -   ***Rurality and health coverage are not statistically significant for counto model. So, those predictors are excluded of the spatial filtering and model.***
 
 ```{r}
-MEpoisLMR <- spatialreg::ME(Ndeaths ~ IICA_High+UBN+offset(log(EsperadosDeNCancer)),data=muncol,family="poisson",listw=knn4_nb_b, alpha=0.02, verbose=TRUE)
+MEpoisLMR <- spatialreg::ME(
+  Ndeaths ~ IICA_High+UBN+offset(log(EsperadosDeNCancer)),
+  data=muncol,
+  family="poisson",
+  listw=knn4_nb_b, 
+  alpha=0.02, 
+  verbose=TRUE)
 MoranEigenVLMR=data.frame(fitted(MEpoisLMR))
 #summary(MoranEigenVLMR)
 ```
 
 ```{r}
-mod.hurdleLMR <- hurdle(Ndeaths ~IICA_High+UBN+fitted(MEpoisLMR)+offset(log(EsperadosDeNCancer))|UBN+Cobertura+offset(log(EsperadosDeNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+mod.hurdleLMR <- hurdle(
+  Ndeaths ~ IICA_High+UBN+fitted(MEpoisLMR)+
+    offset(log(EsperadosDeNCancer))|UBN+Cobertura+offset(log(EsperadosDeNCancer)),
+  data = muncol,
+  dist = "poisson", 
+  zero.dist = "binomial")
+
 summary(mod.hurdleLMR)
 pR2(mod.hurdleLMR)
 moran.test(resid_Pois_Hurdle, mat[[which.max(aux)]], alternative="two.sided")
@@ -255,7 +270,7 @@ require(vcdExtra)
 
 ```{r}
 #Reading the shapefile of 1124 Colombian municipalities
-muncol <- rgdal::readOGR(dsn="Armed_Conflict_Vs_Leukemia/muncol.shp")
+muncol <- rgdal::readOGR(dsn="data_2_Leukemia/muncol.shp")
 muncol=spTransform(muncol,CRS("+init=epsg:21897"))
 (l <- length(muncol))
 
@@ -288,7 +303,11 @@ muncol$UBN=muncol$NBI
 -   **Modeling leukemia Incidence Rate (LR) in terms of Colombian armed conflict index, poverty and rurality. First, the usual Poisson regression model with incidence rate as response variable is estimated.**
 
 ```{r}
-glmbaseLR<-glm(NCases ~IICA_High+UBN+Per_Rur+offset(log(EsperadosNCancer)), family = poisson,data = muncol)
+glmbaseLR<-glm(
+  NCases ~ IICA_High+UBN+Per_Rur+
+          offset(log(EsperadosNCancer)), 
+  family = poisson,data = muncol)
+
 anova(glmbaseLR)
 summary(glmbaseLR)
 muncol$residLR=residuals(glmbaseLR)
@@ -378,7 +397,14 @@ moran.test(muncol$residLR, mat[[which.max(aux)]], alternative="two.sided")
 -   ***First, Poisson Hurdle model is estimated without consider spatial autocorrelation.***
 
 ```{r}
-mod.hurdleLR <- hurdle(NCases ~IICA_High+UBN+Per_Rur+offset(log(EsperadosNCancer))|IICA_High+UBN+Per_Rur+offset(log(EsperadosNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+mod.hurdleLR <- hurdle(
+  NCases ~ IICA_High+UBN+Per_Rur+
+            offset(log(EsperadosNCancer))|IICA_High+UBN+
+            Per_Rur+offset(log(EsperadosNCancer)),
+  data = muncol,
+  dist = "poisson", 
+  zero.dist = "binomial")
+
 resid_Pois_Hurdle=residuals(mod.hurdleLR,"response")
 summary(mod.hurdleLR)
 pR2(mod.hurdleLR)
@@ -388,14 +414,29 @@ moran.test(resid_Pois_Hurdle, mat[[which.max(aux)]], alternative="two.sided")
 -   ***Thus, residuals are significantly spatially autocorrelated. So, we are going tu use spatial filtering. Below we find Moran Eigenvectors.***
 
 ```{r}
-MEpoisLR <- spatialreg::ME(NCases ~ IICA_High+UBN+Per_Rur+offset(log(EsperadosNCancer)),data=muncol,family="poisson",listw=mat[[3]], alpha=0.02, verbose=TRUE)
+MEpoisLR <- spatialreg::ME(
+  NCases ~ IICA_High+UBN+Per_Rur+
+            offset(log(EsperadosNCancer)),
+  data=muncol,
+  family="poisson",
+  listw=mat[[3]], 
+  alpha=0.02, 
+  verbose=TRUE)
+
 MoranEigenVLR=data.frame(fitted(MEpoisLR))
 ```
 
 -   ***Now, we used Poisson Hurdle model to manage the overdispersion due to zero excess and Moran eigenfunctions are included as additional explanatory variables, so that spatial autocorrelation is considered.***
 
 ```{r}
-mod.hurdleLR <- hurdle(NCases ~IICA_High+UBN+Per_Rur+fitted(MEpoisLR)+offset(log(EsperadosNCancer))|Per_Rur+offset(log(EsperadosNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+mod.hurdleLR <- hurdle(
+  NCases ~ IICA_High+UBN+Per_Rur+fitted(MEpoisLR)+
+            offset(log(EsperadosNCancer))|Per_Rur+
+            offset(log(EsperadosNCancer)),
+  data = muncol,
+  dist = "poisson", 
+  zero.dist = "binomial")
+
 resid_Pois_Hurdle=residuals(mod.hurdleLR,"response")
 moran.test(resid_Pois_Hurdle, mat[[3]], alternative="two.sided")
 summary(mod.hurdleLR)
@@ -405,11 +446,26 @@ pR2(mod.hurdleLR)
 -   ***Rurality is not statistically significant to explain the Leukemia incidence rate. The only predictor statistically significant for zeroes model is rurality. In addition, the Spatial filtering results are the same without this variable.***
 
 ```{r}
-MEpoisLR <- spatialreg::ME(NCases ~ IICA_High+UBN+offset(log(EsperadosNCancer)),data=muncol,family="poisson",listw=mat[[3]], alpha=0.02, verbose=TRUE)
+MEpoisLR <- spatialreg::ME(
+  NCases ~ IICA_High+UBN+offset(log(EsperadosNCancer)),
+  data=muncol,
+  family="poisson",
+  listw=mat[[3]], 
+  alpha=0.02, 
+  verbose=TRUE)
+
 MoranEigenVLR=data.frame(fitted(MEpoisLR))
-mod.hurdleLR <- hurdle(NCases ~IICA_High+UBN+fitted(MEpoisLR)+offset(log(EsperadosNCancer))|Per_Rur+offset(log(EsperadosNCancer)),data = muncol,dist = "poisson", zero.dist = "binomial")
+
+mod.hurdleLR <- hurdle(
+  NCases ~ IICA_High+UBN+fitted(MEpoisLR)+
+            offset(log(EsperadosNCancer))|Per_Rur+offset(log(EsperadosNCancer)),
+  data = muncol,
+  dist = "poisson", 
+  zero.dist = "binomial")
+
 resid_Pois_Hurdle=residuals(mod.hurdleLR,"response")
 moran.test(resid_Pois_Hurdle, mat[[3]], alternative="two.sided")
+
 summary(mod.hurdleLR)
 pR2(mod.hurdleLR)
 ```

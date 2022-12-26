@@ -10,6 +10,7 @@ output: html_document
 ## Dependencias
 
 ```{r}
+rm(list=ls())
 library(mvtnorm)
 ```
 
@@ -27,7 +28,8 @@ grillaSpT=expand.grid(x1,x2,t)
 matDistSp=as.matrix(dist(grillaSpT[,1:2]))
 #matriz de distancias (rezagos) temporales
 matDistT=as.matrix(dist(grillaSpT[,3:3]))
-cressie1=function(h,u,p){(p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+cressie1=function(h,u,p){
+  (p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
 ##parámetros p, mu, que en este caso son p=c(0.4,1.7,1.9) y mu=0
 sigma=cressie1(matDistSp,matDistT,p=c(0.15,1.7,1.9))
 sim1=rmvnorm(1,mean=rep(0,nrow(grillaSpT)), sigma=sigma)
@@ -78,68 +80,96 @@ VarErropred0
 
 ```{r}
 ##Funciones de covarianza espacio temporal p vector de parámetros para cada modelo
-exp_esp_temp=function(h,u,p){((p[1])^2)*exp(-h/p[2]-u/p[3])}
-gauss_esp_temp=function(h,u,p){(p[1]^2)*exp(-(h/p[2])^2-(u/p[3])^2)}
-cressie1=function(h,u,p){(p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
-Gneiting1=function(h,u,p){p[1]^2/((p[2]*u^(2*p[3])+1)^(p[4]))*exp(-(p[6]*h^(2*p[5]))/((p[2]*u^(2*p[3])+1)^(p[4]*p[5])))}
-Gneiting2=function(h,u,sigma,p)
-{p[1]^2/((2^(p[3]-1))*p[7](p[3])*(p[2]*u^(2*p[3])+1)^(p[4]+p[5]))*
-(((p[6]*h)/((p[2]*u^(2*p[3])+1)^(p[5]/2)))^p[3])*
-besselK(((p[6]*h)/((p[2]*u^(2*p[3])+1)^(p[5]/2))),p[3])}
-Iaco_Cesare=function(h,u,a,b,c){(1+h^p[1]+u^p[2])^(-p[3])}
+exp_esp_temp=function(h,u,p){
+  ((p[1])^2)*exp(-h/p[2]-u/p[3])}
+gauss_esp_temp=function(h,u,p){
+  (p[1]^2)*exp(-(h/p[2])^2-(u/p[3])^2)}
+cressie1=function(h,u,p){
+  (p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+Gneiting1=function(h,u,p){
+  p[1]^2/((p[2]*u^(2*p[3])+1)^(p[4]))*exp(-(p[6]*h^(2*p[5]))/((p[2]*u^(2*p[3])+1)^(p[4]*p[5])))}
+Gneiting2=function(h,u,sigma,p){
+  p[1]^2/((2^(p[3]-1))*p[7](p[3])*(p[2]*u^(2*p[3])+1)^(p[4]+p[5]))*
+    (((p[6]*h)/((p[2]*u^(2*p[3])+1)^(p[5]/2)))^p[3])*
+    besselK(((p[6]*h)/((p[2]*u^(2*p[3])+1)^(p[5]/2))),p[3])}
+Iaco_Cesare=function(h,u,a,b,c){
+  (1+h^p[1]+u^p[2])^(-p[3])}
 ```
 
 ### C R E S S I E - H U A N G (1999)
 
 ```{r}
 #sigma:desviacion estandar, a es el parámetros de escala del tiempo, b es el parámetros de escala del espacio, d es la dimensión espacial; a,b positivos
-CH_1=function(h,u,p,d){(p[1]^2/((p[2]^2*u^2+1)^(d/2)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
-CH_2=function(h,u,p,d){(p[1]^2/((p[2]*abs(u)+1)^(d/2)))*exp(-(p[3]^2*h^2)/(p[2]*abs(u)+1))}
-CH_3=function(h,u,p,d){p[1]^2*((p[2]^2)*(u^2)+1)/(((p[2]^2)*(u^2)+1)^2+(p[3]^2)*h^2)^((d+1)/2)}
-CH_4=function(h,u,p,d){p[1]^2*(p[2]*abs(u)+1)/((p[2]*abs(u)+1)^2+(p[3]^2)*h^2)^((d+1)/2)}
+CH_1=function(h,u,p,d){
+  (p[1]^2/((p[2]^2*u^2+1)^(d/2)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+CH_2=function(h,u,p,d){
+  (p[1]^2/((p[2]*abs(u)+1)^(d/2)))*exp(-(p[3]^2*h^2)/(p[2]*abs(u)+1))}
+CH_3=function(h,u,p,d){
+  p[1]^2*((p[2]^2)*(u^2)+1)/(((p[2]^2)*(u^2)+1)^2+(p[3]^2)*h^2)^((d+1)/2)}
+CH_4=function(h,u,p,d){
+  p[1]^2*(p[2]*abs(u)+1)/((p[2]*abs(u)+1)^2+(p[3]^2)*h^2)^((d+1)/2)}
 
 #el caso mas general de C R E S S I E - H U A N G (1999) es cuando d=2, entonces queda
-CH_1=function(h,u,p){(p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
-CH_2=function(h,u,p){(p[1]^2/((p[2]*abs(u)+1)))*exp(-(p[3]^2*h^2)/(p[2]*abs(u)+1))}
-CH_3=function(h,u,p){p[1]^2*((p[2]^2)*(u^2)+1)/(((p[2]^2)*(u^2)+1)^2+(p[3]^2)*h^2)^((3)/2)}
-CH_4=function(h,u,p){p[1]^2*(p[2]*abs(u)+1)/((p[2]*abs(u)+1)^2+(p[3]^2)*h^2)^((3)/2)}
+CH_1=function(h,u,p){
+  (p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+CH_2=function(h,u,p){
+  (p[1]^2/((p[2]*abs(u)+1)))*exp(-(p[3]^2*h^2)/(p[2]*abs(u)+1))}
+CH_3=function(h,u,p){
+  p[1]^2*((p[2]^2)*(u^2)+1)/(((p[2]^2)*(u^2)+1)^2+(p[3]^2)*h^2)^((3)/2)}
+CH_4=function(h,u,p){
+  p[1]^2*(p[2]*abs(u)+1)/((p[2]*abs(u)+1)^2+(p[3]^2)*h^2)^((3)/2)}
 ```
 
 ### Gneiting (2002), combina fun1, fun2 y psi en Gneiting
 
 ```{r}
 #fun1
-phi1=function(r,c,gama,v){v*exp(-c*r^gama)}                                            #c>0, 0<gama<=1, siempre v=1
-phi2=function(r,c,gama,v){((2^(v-1))*gamma(v))^(-1)*(c*r^0.5)^v*besselK(c*r^0.5,v)}    #c>0, v>0
-phi3=function(r,c,gama,v){(1+c*r^gama)^(-v)}                                           #c>0, 0<gama<=1, v>0
-phi4=function(r,c,gama,v){gama*(2^v)*(exp(c*r^0.5)+exp(-c*r^0.5))^(-v)}                #c>0, v>0, siempre gama=1
+phi1=function(r,c,gama,v){
+  v*exp(-c*r^gama)}                                            #c>0, 0<gama<=1, siempre v=1
+phi2=function(r,c,gama,v){
+  ((2^(v-1))*gamma(v))^(-1)*(c*r^0.5)^v*besselK(c*r^0.5,v)}    #c>0, v>0
+phi3=function(r,c,gama,v){
+  (1+c*r^gama)^(-v)}                                           #c>0, 0<gama<=1, v>0
+phi4=function(r,c,gama,v){
+  gama*(2^v)*(exp(c*r^0.5)+exp(-c*r^0.5))^(-v)}                #c>0, v>0, siempre gama=1
 
 #fun2
-psi1=function(r,a,alpha,beta){(a*r^alpha+1)^beta}                                      #a>0, 0<alpha<=1, 0<=beta<=1
-psi2=function(r,a,alpha,beta){log(a*r^alpha+beta)/log(beta)}                           #a>0, beta>1,  0<alpha<=1
-psi3=function(r,a,alpha,beta){(a*r^alpha+beta)/(beta*(a*r^alpha+1))}                   #a>0, 0<beta<=1   0<alpha<=1  
+psi1=function(r,a,alpha,beta){
+  (a*r^alpha+1)^beta}                                      #a>0, 0<alpha<=1, 0<=beta<=1
+psi2=function(r,a,alpha,beta){
+  log(a*r^alpha+beta)/log(beta)}                           #a>0, beta>1,  0<alpha<=1
+psi3=function(r,a,alpha,beta){
+  (a*r^alpha+beta)/(beta*(a*r^alpha+1))}                   #a>0, 0<beta<=1   0<alpha<=1  
 
 #Cualquier combinación genera una función de covarianza válida
-Gneiting=function(h,u,sigma,d,a,alpha,beta,c,gama,v,psi,phi){(sigma^2/(psi((abs(u)^2),a,alpha,beta))^(d/2))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
+Gneiting=function(h,u,sigma,d,a,alpha,beta,c,gama,v,psi,phi){
+  (sigma^2/(psi((abs(u)^2),a,alpha,beta))^(d/2))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
 
 #el caso mas general de Gneiting (2002) es cuando d=2, entonces queda
-Gneiting=function(h,u,sigma,a,alpha,beta,c,gama,v,psi,phi){(sigma^2/(psi((abs(u)^2),a,alpha,beta)))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
+Gneiting=function(h,u,sigma,a,alpha,beta,c,gama,v,psi,phi){
+  (sigma^2/(psi((abs(u)^2),a,alpha,beta)))*
+    phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
 ```
 
 
 #### IACO_CESSARE
 ```{r}
-C_IACO_CESSARE=function(h,u,sigma,a,b,alpha,beta,gama){(1 + (h/a)^alpha + (u/b)^beta)^(-gama)}
+C_IACO_CESSARE=function(h,u,sigma,a,b,alpha,beta,gama){
+  (1 + (h/a)^alpha + (u/b)^beta)^(-gama)}
 ```
 
 ```{r}
 #(Porcu, 2007) Basado en la función de supervivencia de Dagum 
 #función de Dagum
-Dagum=function(r,lambda,theta,epsilon){1-1/(1+lambda*r^(-theta))^epsilon}                                                                                     #lamdba, theta in (0,7), epsilon in (0,7)
-Dagumm=function(r,lambda,theta,epsilon){ifelse(r==0,1,Dagum(r,lambda,theta,epsilon))}
+Dagum=function(r,lambda,theta,epsilon){
+  1-1/(1+lambda*r^(-theta))^epsilon}                                                                                     #lamdba, theta in (0,7), epsilon in (0,7)
+Dagumm=function(r,lambda,theta,epsilon){
+  ifelse(r==0,1,Dagum(r,lambda,theta,epsilon))}
 
-Porcu_sep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u){Dagumm(h,lambda_h,theta_h,epsilon_h)*Dagumm(u,lambda_u,theta_u,epsilon_u)}      
-Porcu_Nsep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u,vartheta){vartheta*Dagumm(h,lambda_h,theta_h,epsilon_h)+(1-vartheta)*Dagumm(u,lambda_u,theta_u,epsilon_u)}
+Porcu_sep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u){
+  Dagumm(h,lambda_h,theta_h,epsilon_h)*Dagumm(u,lambda_u,theta_u,epsilon_u)}      
+Porcu_Nsep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u,vartheta){
+  vartheta*Dagumm(h,lambda_h,theta_h,epsilon_h)+(1-vartheta)*Dagumm(u,lambda_u,theta_u,epsilon_u)}
 ```
 
 

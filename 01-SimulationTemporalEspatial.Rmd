@@ -9,6 +9,7 @@ output: html_document
 ## Funciones
 
 ```{r}
+rm(list=ls())
 ##Funciones de covarianza espacio temporal
 exp_esp_temp=function(h,u,p){((p[1])^2)*exp(-h/p[2]-u/p[3])}
 gauss_esp_temp=function(h,u,p){(p[1]^2)*exp(-(h/p[2])^2-(u/p[3])^2)}

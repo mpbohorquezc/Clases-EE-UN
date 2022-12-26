@@ -27,6 +27,7 @@ Por ejemplo, consideremos la temperatura promedio mensual de la superficie del o
 Realizamos la lectura de los datos:
 
 ```{r cars01 }
+rm(list=ls())
 library(fda)
 library(fda.usc)
 library(rainbow)

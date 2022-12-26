@@ -9,7 +9,8 @@ date: "2022-09-18"
 ## Data Load
 
 ```{r}
-aquifer=read.table("data/aquifer.txt",head=T,dec=",")
+rm(list=ls())
+aquifer=read.table("data_7_GeoestadisticaGEOSTAT/aquifer.txt",head=T,dec=",")
 head(aquifer)
 ```
 
