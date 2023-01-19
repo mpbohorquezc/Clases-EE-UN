@@ -1,6 +1,6 @@
 # Introducción
 
-En los sisguientes cuadernos encontrará ejemplos con código sobre estadística espacial. Para poder correr todos los ejemplos clone el repositorio de la siguiente forma. Debe tener instalado previamente `git` en su computador.
+En los siguientes cuadernos encontrará ejemplos con código sobre estadística espacial. Para poder correr todos los ejemplos clone el repositorio de la siguiente forma. Debe tener instalado previamente `git` en su computador.
 
 ```
 git clone https://github.com/mpbohorquezc/Clases-EE-UN.git
