@@ -1,8 +1,5 @@
 ---
-title: "Pulimiento de medianas"
 output: html_document
-author: "Martha Bohorquez"
-date: "2022-11-22"
 ---
 
 # Pulimiento de medianas

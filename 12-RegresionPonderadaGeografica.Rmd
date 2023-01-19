@@ -1,0 +1,12 @@
+---
+output: html_document
+---
+
+# Regresión Ponderada Geográfica
+
+## (TO-DO)
+
+```{r}
+
+```
+

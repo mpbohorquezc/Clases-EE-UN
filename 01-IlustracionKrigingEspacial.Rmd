@@ -1,0 +1,12 @@
+---
+output: html_document
+---
+
+# Ilustración Kriging Espacial
+
+## (TO-DO)
+
+```{r}
+
+```
+

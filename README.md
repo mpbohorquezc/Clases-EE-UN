@@ -19,30 +19,31 @@ Si alguna dependencia hace falta algunos repositorios los puede descargar e inst
 
 - [Introducción](https://mpbohorquezc.github.io/Clases-EE-UN/index.html)
 
-- [Simulación Proceso Espacio Temporal](https://mpbohorquezc.github.io/Clases-EE-UN/simulaci%C3%B3n-proceso-espacio-temporal.html)
+- [Ilustración Kriging Espacial]()
 
-- [Spatial modeling leukemia](https://mpbohorquezc.github.io/Clases-EE-UN/spatial-modeling-leukemia.html)
+- [Geoestadística con `sgeostat`]()
 
-- [Modelos de regresión espacial](https://mpbohorquezc.github.io/Clases-EE-UN/modelos-de-regresi%C3%B3n-espacial.html)
+- [Geoestadística Univariada con `geoR`]()
 
-- [Pre-procesamiento de datos](https://mpbohorquezc.github.io/Clases-EE-UN/pre-procesamiento-de-datos.html)
+- [Introducción al Proceso Espacial Bivariado]()
 
-- [Ilustración del kriging simple espacio tiempo](https://mpbohorquezc.github.io/Clases-EE-UN/ilustraci%C3%B3n-del-kriging-simple-espacio-tiempo.html)
+- [Pulimiento de Medianas]()
 
-- [Pulimiento de medianas](https://mpbohorquezc.github.io/Clases-EE-UN/pulimiento-de-medianas.html)
+- [Otros Tipos de Kriging]()
 
-- [Introducción proceso espacial bivariado](https://mpbohorquezc.github.io/Clases-EE-UN/introducci%C3%B3n-proceso-espacial-bivariado.html)
+- [Ilustración Kriging Espacio Tiempo]()
 
-- [Geoestadística con sgeostat](https://mpbohorquezc.github.io/Clases-EE-UN/geoestad%C3%ADstica-con-sgeostat.html)
+- [Simulación Espacial]()
 
-- [Cokriging](https://mpbohorquezc.github.io/Clases-EE-UN/cokriging.html)
+- [Regresión Espacial]()
 
-- [ntroducción al proceso espacial bivariado](https://mpbohorquezc.github.io/Clases-EE-UN/introducci%C3%B3n-al-proceso-espacial-bivariado.html)
+- [Modelos Lineales y Modelos Lineales Generalizados]()
 
-- [Ilustración del kriging simple espacio tiempo](https://mpbohorquezc.github.io/Clases-EE-UN/ilustraci%C3%B3n-del-kriging-simple-espacio-tiempo-1.html)
+- [Spatial Modeling Leukimia]()
 
-- [Análisis de datos funcionales](https://mpbohorquezc.github.io/Clases-EE-UN/an%C3%A1lisis-de-datos-funcionales.html)
+- [Regresión Ponderada Geográfica]()
 
+- [Patrones Puntuales]()
 
 
 

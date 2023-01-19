@@ -1,0 +1,283 @@
+---
+output: html_document
+---
+
+# Simulacion
+
+## Simulacion Espacial
+
+### Dependencias
+
+```{r}
+rm(list=ls())
+library(geoR)
+library(mvtnorm)
+```
+
+### Ubicaciones: 
+En este caso se supone que ambos procesos están observados en los mismos lugares
+
+```{r}
+x=seq(0,1,len=3)
+y=seq(0,1,len=4)
+coordenadas=expand.grid(x,y)
+Mat_dist=as.matrix(dist(coordenadas))
+```
+
+### Modelo lineal de coregionalización
+
+```{r}
+Cova1=function(h,a){exp(-h/a)}
+Cova2=function(h,a){ifelse(h <= a, 1-1.5*(h/a)+0.5*(h/a)^3, 0)}
+B1=matrix(c(26.3,0.3,0.3,2.1),nrow=2,byrow=T)
+B2=matrix(c(2.1,1.3,1.3,17.5),nrow=2,byrow=T)
+Mat_Cov_bloque11=B1[1,1]*Cova1(Mat_dist,1)+B2[1,1]*Cova2(Mat_dist,0.5)
+Mat_Cov_bloque22=B1[2,2]*Cova1(Mat_dist,1)+B2[2,2]*Cova2(Mat_dist,0.5)
+Mat_Cov_bloque12=B1[1,2]*Cova1(Mat_dist,1)+B2[1,2]*Cova2(Mat_dist,0.5)
+Mat_Cov_bloque21=B1[2,1]*Cova1(Mat_dist,1)+B2[2,1]*Cova2(Mat_dist,0.5)
+
+MAT_COV=rbind(cbind(Mat_Cov_bloque11,Mat_Cov_bloque12),
+              cbind(Mat_Cov_bloque21,Mat_Cov_bloque22))
+dim(MAT_COV)
+```
+
+#### Determinante de la matriz de covarianzas
+
+```{r}
+det(MAT_COV)
+```
+
+### simulación de un proceso espacial Gaussiano bivariado
+
+```{r}
+sim1=rmvnorm(1,mean=rep(0,2*nrow(coordenadas)), sigma=MAT_COV)
+datos=cbind(coordenadas,z1=sim1[1:12],z2=sim1[13:24])
+```
+
+
+
+### Simulación Proceso Espacio Temporal
+
+#### Funciones
+
+```{r}
+rm(list=ls())
+##Funciones de covarianza espacio temporal
+exp_esp_temp=function(h,u,p){((p[1])^2)*exp(-h/p[2]-u/p[3])}
+gauss_esp_temp=function(h,u,p){(p[1]^2)*exp(-(h/p[2])^2-(u/p[3])^2)}
+cressie1=function(h,u,p){(p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+Gneiting1=function(h,u,p){p[1]^2/((p[2]*u^(2*p[3])+1)^(p[4]))*exp(-(p[6]*h^(2*p[5]))/((p[2]*u^(2*p[3])+1)^(p[4]*p[5])))}
+#Gneiting2=function(h,u,sigma,p){p[1]^2/((2^(p[3]-1))*p[7](p[3])*(p[2]*u^(2*p[3])+1)^(p[4]+p[5]))*(((p[6]*h)/((p[2]*u^(2*[3])+1)^(p[5]/2)))^p[3])*besselK(((p[6]*h)/((p[2]*u^(2*[3])+1)^(p[5]/2))),p[3])}
+Iaco_Cesare=function(h,u,a,b,c){(1+h^p[1]+u^p[2])^(-p[3])}
+```
+
+```{r}
+#separables mas comunes: gaussiano y exponencial   p=(sigma,a,b)
+Gaussiano=function(p,h,u){p[1]^2*exp(-p[2]^2*u^2-p[3]^2*h^2)}
+Exponencial=function(p,h,u){p[1]^2*exp(-p[2]^2*u-p[3]^2*h)}
+```
+
+```{r}
+#C R E S S I E - H U A N G (1999)
+#sigma:desviacion estandar, a es el par?metros de escala del tiempo, b es el par?metros de escala del espacio, d es la dimensi?n espacial; a,b positivos
+CH_1=function(h,u,p,d){(p[1]^2/((p[2]^2*u^2+1)^(d/2)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+CH_2=function(h,u,p,d){(p[1]^2/((p[2]*abs(u)+1)^(d/2)))*exp(-(p[3]^2*h^2)/(p[2]*abs(u)+1))}
+CH_3=function(h,u,p,d){p[1]^2*((p[2]^2)*(u^2)+1)/(((p[2]^2)*(u^2)+1)^2+(p[3]^2)*h^2)^((d+1)/2)}
+CH_4=function(h,u,p,d){p[1]^2*(p[2]*abs(u)+1)/((p[2]*abs(u)+1)^2+(p[3]^2)*h^2)^((d+1)/2)}
+```
+
+```{r}
+#el caso mas general de C R E S S I E - H U A N G (1999) es cuando d=2, entonces queda
+CH_1=function(h,u,p){(p[1]^2/((p[2]^2*u^2+1)))*exp(-(p[3]^2*h^2)/(p[2]^2*u^2+1))}
+CH_2=function(h,u,p){(p[1]^2/((p[2]*abs(u)+1)))*exp(-(p[3]^2*h^2)/(p[2]*abs(u)+1))}
+CH_3=function(h,u,p){p[1]^2*((p[2]^2)*(u^2)+1)/(((p[2]^2)*(u^2)+1)^2+(p[3]^2)*h^2)^((3)/2)}
+CH_4=function(h,u,p){p[1]^2*(p[2]*abs(u)+1)/((p[2]*abs(u)+1)^2+(p[3]^2)*h^2)^((3)/2)}
+```
+
+```{r}
+####Gneiting (2002), combina fun1, fun2 y psi en Gneiting#####
+#fun1
+phi1=function(r,c,gama,v){v*exp(-c*r^gama)}                                            #c>0, 0<gama<=1, siempre v=1
+phi2=function(r,c,gama,v){((2^(v-1))*gamma(v))^(-1)*(c*r^0.5)^v*besselK(c*r^0.5,v)}    #c>0, v>0
+phi3=function(r,c,gama,v){(1+c*r^gama)^(-v)}                                           #c>0, 0<gama<=1, v>0
+phi4=function(r,c,gama,v){gama*(2^v)*(exp(c*r^0.5)+exp(-c*r^0.5))^(-v)}                #c>0, v>0, siempre gama=1
+```
+
+```{r}
+#fun2
+psi1=function(r,a,alpha,beta){(a*r^alpha+1)^beta}                                      #a>0, 0<alpha<=1, 0<=beta<=1
+psi2=function(r,a,alpha,beta){log(a*r^alpha+beta)/log(beta)}                           #a>0, beta>1,  0<alpha<=1
+psi3=function(r,a,alpha,beta){(a*r^alpha+beta)/(beta*(a*r^alpha+1))}                   #a>0, 0<beta<=1   0<alpha<=1  
+```
+
+```{r}
+#Cualquier combinaci?n genera una funci?n de covarianza v?lida
+Gneiting=function(h,u,sigma,d,a,alpha,beta,c,gama,v,psi,phi){
+  (sigma^2/(psi((abs(u)^2),a,alpha,beta))^(d/2))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
+```
+
+```{r}
+#el caso mas general de Gneiting (2002) es cuando d=2, entonces queda
+Gneiting=function(h,u,sigma,a,alpha,beta,c,gama,v,psi,phi){
+  (sigma^2/(psi((abs(u)^2),a,alpha,beta)))*phi(h^2/(psi(abs(u)^2,a,alpha,beta)),c,gama,v)}
+```
+
+```{r}
+####IACO_CESSARE
+C_IACO_CESSARE=function(h,u,sigma,a,b,alpha,beta,gama){
+  (1 + (h/a)^alpha + (u/b)^beta)^(-gama)}
+```
+
+```{r}
+#(Porcu, 2007) Basado en la funci?n de supervivencia de Dagum 
+#funci?n de Dagum
+Dagum=function(r,lambda,theta,epsilon){1-1/(1+lambda*r^(-theta))^epsilon}                                                                                     #lamdba, theta in (0,7), epsilon in (0,7)
+Dagumm=function(r,lambda,theta,epsilon){ifelse(r==0,1,Dagum(r,lambda,theta,epsilon))}
+
+Porcu_sep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u){
+  Dagumm(h,lambda_h,theta_h,epsilon_h)*Dagumm(u,lambda_u,theta_u,epsilon_u)}      
+Porcu_Nsep=function(h,u,lambda_h,theta_h,epsilon_h,lambda_u,theta_u,epsilon_u,vartheta){
+  vartheta*Dagumm(h,lambda_h,theta_h,epsilon_h)+(1-vartheta)*Dagumm(u,lambda_u,theta_u,epsilon_u)}
+```
+
+#### CH 1 no separable
+
+```{r}
+###CH 1 no separable
+library(mvtnorm)
+```
+
+```{r}
+#generar la grilla espacio temporal
+x1 <- seq(0,30,by = 5)
+x2 <- seq(10,60,by = 7)
+t <- seq(1,20,len=10) 
+grillaSpT=expand.grid(x1,x2,t)
+matDistSp=as.matrix(dist(grillaSpT[,1:2]))
+matDistT=as.matrix(dist(grillaSpT[,3:3]))
+```
+
+```{r}
+##parameters p, mu, que en este caso son p=c(7,2,1) y mu=120
+sigma=cressie1(matDistSp,matDistT,p=c(7,2,1))
+sim1=rmvnorm(1,mean=rep(120,nrow(grillaSpT)), sigma=sigma)
+datos1=cbind(grillaSpT,t(sim1))
+```
+
+```{r}
+names(datos1)=c("x","y","t","z((x,y),t)")
+#View(datos1)
+grillaSp=expand.grid(x1,x2)
+colnames(grillaSp)=c("x","y")
+rownames(grillaSp)=paste("S",1:nrow(grillaSp))
+datos1_ord=datos1[order(datos1$x, datos1$y, datos1$t),]
+dataSim1=matrix(c(datos1_ord[,4]),nrow=length(t),ncol=nrow(grillaSp),byrow=F)
+colnames(dataSim1)=rownames(grillaSp)
+rownames(dataSim1)=t
+dataSim1_path = file("data_1_SimulationTemporalEspatial/dataSim1.txt",open="at")
+write.table(dataSim1,dataSim1_path)
+```
+
+#### CH 2 no sepaarable
+
+```{r}
+#CH 2 no separable
+library(mvtnorm)
+```
+
+```{r}
+#generar la grilla espacio temporal 
+x1 <- seq(0,30,by = 6)
+x2 <- seq(10,60,by = 8)
+t <- seq(1,20,len=10) 
+grillaSpT=expand.grid(x1,x2,t)
+matDistSp=as.matrix(dist(grillaSpT[,1:2]))
+matDistT=as.matrix(dist(grillaSpT[,3:3]))
+```
+
+```{r}
+##parameters p, mu, que en este caso son p=c(7,2,1) y mu=120
+sigma=CH_2(matDistSp,matDistT,p=c(10,3,4))
+sim2=rmvnorm(1,mean=rep(34,nrow(grillaSpT)), sigma=sigma)
+datos2=cbind(grillaSpT,t(sim2))
+names(datos2)=c("x","y","t","zz((x,y),t)")
+#View(datos2)
+grillaSp=expand.grid(x1,x2)
+colnames(grillaSp)=c("x","y")
+rownames(grillaSp)=paste("S",1:nrow(grillaSp))
+datos2_ord=datos2[order(datos2$x, datos2$y, datos2$t),]
+dataSim2=matrix(c(datos2_ord[,4]),nrow=length(t),ncol=nrow(grillaSp),byrow=F)
+colnames(dataSim2)=rownames(grillaSp)
+rownames(dataSim2)=t
+dataSim2_path = file("data_1_SimulationTemporalEspatial/dataSim2.txt",open="at")
+write.table(dataSim2,dataSim2_path)
+class(dataSim2)
+```
+
+#### CH3 no separable
+```{r}
+#CH 3 no separable
+x1 <- seq(0,30,by = 5)
+x2 <- seq(10,60,by = 7)
+grillaSp=expand.grid(x1,x2)
+colnames(grillaSp)=c("x","y")
+rownames(grillaSp)=paste("S",1:nrow(grillaSp))
+t <- seq(1,20,len=10) 
+grillaSpT=expand.grid(x1,x2,t)
+matDistSp=as.matrix(dist(grillaSpT[,1:2]))
+matDistT=as.matrix(dist(grillaSpT[,3:3]))
+```
+
+```{r}
+##parameters p, mu, que en este caso son p=c(7,2,1) y mu=120
+sigma=CH_3(matDistSp,matDistT,p=c(6,2.5,3.2))
+sim3=rmvnorm(1,mean=rep(34,nrow(grillaSpT)), sigma=sigma)
+datos2=cbind(grillaSpT,t(sim3))
+names(datos2)=c("x","y","t","zz((x,y),t)")
+```
+
+```{r}
+#View(datos2)
+datos3 = datos2
+datos3_ord=datos3[order(datos3$x, datos3$y, datos3$t),]
+dataSim3=matrix(c(datos3_ord[,4]),nrow=length(t),ncol=nrow(grillaSp),byrow=F)
+colnames(dataSim3)=rownames(grillaSp)
+rownames(dataSim3)=t
+```
+
+#### CH 4
+```{r}
+#caso 4
+library(mvtnorm)
+```
+
+```{r}
+#generar la grilla espacio temporal
+x1 <- seq(1,35,by = 7)
+x2 <- seq(10,60,by = 10)
+grillaSp=expand.grid(x1,x2)
+colnames(grillaSp)=c("x","y")
+rownames(grillaSp)=paste("S",1:nrow(grillaSp))
+t <- seq(1,20,len=10) 
+grillaSpT=expand.grid(x1,x2,t)
+matDistSp=as.matrix(dist(grillaSpT[,1:2]))
+matDistT=as.matrix(dist(grillaSpT[,3:3]))
+```
+
+```{r}
+##parameters p, mu, que en este caso son p=c(7,2,1) y mu=120
+sigma=CH_3(matDistSp,matDistT,p=c(6,2.5,3.2))
+sim4=rmvnorm(1,mean=rep(34,nrow(grillaSpT)), sigma=sigma)
+datos4=cbind(grillaSpT,t(sim4))
+names(datos4)=c("x","y","t","zz((x,y),t)")
+```
+
+```{r}
+#View(datos4)
+datos4_ord=datos4[order(datos4$x, datos4$y, datos4$t),]
+dataSim4=matrix(c(datos4_ord[,4]),nrow=length(t),ncol=nrow(grillaSp),byrow=F)
+colnames(dataSim4)=rownames(grillaSp)
+rownames(dataSim4)=t
+```
+
+## Simulación Condicionada (TO-DO)
