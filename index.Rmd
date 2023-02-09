@@ -24,35 +24,12 @@ Si alguna dependencia hace falta algunos repositorios los puede descargar e inst
 
 ## Indice
 
-- [Introducción](https://mpbohorquezc.github.io/Clases-EE-UN/index.html)
+- [1. Introducción](https://mpbohorquezc.github.io/Clases-EE-UN/index.html)
 
-- [Ilustración Kriging Espacial]()
+- [2. Geoestadística con `sgeostat`](https://mpbohorquezc.github.io/Clases-EE-UN/geoestadística-con-sgeostat.html)
 
-- [Geoestadística con `sgeostat`]()
+- [3. Geoestadística Univariada con `geoR`](https://mpbohorquezc.github.io/Clases-EE-UN/geoestadística-univariada-con-geor.html)
 
-- [Geoestadística Univariada con `geoR`]()
-
-- [Introducción al Proceso Espacial Bivariado]()
-
-- [Pulimiento de Medianas]()
-
-- [Otros Tipos de Kriging]()
-
-- [Ilustración Kriging Espacio Tiempo]()
-
-- [Simulación Espacial]()
-
-- [Regresión Espacial]()
-
-- [Modelos Lineales y Modelos Lineales Generalizados]()
-
-- [Spatial Modeling Leukimia]()
-
-- [Regresión Ponderada Geográfica]()
-
-- [Patrones Puntuales]()
-
-
-
+- [4. Otros Tipos de Kriging](https://mpbohorquezc.github.io/Clases-EE-UN/otros-tipos-de-kriging.html)
 
 

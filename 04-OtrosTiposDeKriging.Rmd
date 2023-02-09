@@ -1,0 +1,17 @@
+---
+output: html_document
+---
+
+# Otros Tipos de Kriging
+
+## (TO-DO)
+
+```{r}
+
+```
+
+## Kriging Indicador
+
+## Kriging Transgaussiano
+
+## Comparación Kriging Universal y Ordinario
