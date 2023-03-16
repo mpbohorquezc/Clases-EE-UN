@@ -10,7 +10,7 @@ Si esta corriendo sobre Ubuntu o Mint es importante tener algunos compiladores p
 
 ```
 sudo apt-get install r-base-dev
-sudo apt install liblapack-dev libopenblas-dev
+sudo apt install liblapack-dev libopenblas-dev libfontconfig1-dev
 ```
 
 Si alguna dependencia hace falta algunos repositorios los puede descargar e instalar a manera de archivo .tar.gz o se encuentran simplemente en los repositorios del CRAN.
