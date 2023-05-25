@@ -212,6 +212,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#calculo-de-varibles-significativas"><i class="fa fa-check"></i><b>6.9</b> Calculo de varibles significativas</a></li>
 <li class="chapter" data-level="6.10" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#mapa-estimado"><i class="fa fa-check"></i><b>6.10</b> Mapa Estimado</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html"><i class="fa fa-check"></i><b>7</b> Spatial modeling leukemia</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#mortality"><i class="fa fa-check"></i><b>7.1</b> <strong>Mortality</strong></a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#packages-mortality"><i class="fa fa-check"></i><b>7.1.1</b> <em>Packages Mortality</em></a></li>
+<li class="chapter" data-level="7.1.2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#code-mortality"><i class="fa fa-check"></i><b>7.1.2</b> <em>Code Mortality</em></a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#incidence"><i class="fa fa-check"></i><b>7.2</b> Incidence</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#packages-incidence"><i class="fa fa-check"></i><b>7.2.1</b> <strong>Packages Incidence</strong></a></li>
+<li class="chapter" data-level="7.2.2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#code-incidence"><i class="fa fa-check"></i><b>7.2.2</b> <em>Code Incidence</em></a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -294,24 +307,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -366.96 -161.53  -30.71  148.15  651.20 
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 2591.4302    38.9599   66.52   &lt;2e-16 ***
-## Este          -6.7514     0.3438  -19.64   &lt;2e-16 ***
-## Norte         -5.9872     0.4066  -14.73   &lt;2e-16 ***
+##              Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept) 2591.4302    38.9599   66.52 &lt;0.0000000000000002 ***
+## Este          -6.7514     0.3438  -19.64 &lt;0.0000000000000002 ***
+## Norte         -5.9872     0.4066  -14.73 &lt;0.0000000000000002 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 203.3 on 82 degrees of freedom
 ## Multiple R-squared:  0.8921, Adjusted R-squared:  0.8894 
-## F-statistic: 338.9 on 2 and 82 DF,  p-value: &lt; 2.2e-16</code></pre>
+## F-statistic: 338.9 on 2 and 82 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="geoestadística-con-sgeostat.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg1)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: Profundidad
-##           Df   Sum Sq  Mean Sq F value    Pr(&gt;F)    
-## Este       1 19045642 19045642  460.95 &lt; 2.2e-16 ***
-## Norte      1  8960172  8960172  216.86 &lt; 2.2e-16 ***
-## Residuals 82  3388069    41318                      
+##           Df   Sum Sq  Mean Sq F value                Pr(&gt;F)    
+## Este       1 19045642 19045642  460.95 &lt; 0.00000000000000022 ***
+## Norte      1  8960172  8960172  216.86 &lt; 0.00000000000000022 ***
+## Residuals 82  3388069    41318                                  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="geoestadística-con-sgeostat.html#cb14-1" aria-hidden="true" tabindex="-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este<span class="sc">*</span>Norte, <span class="at">data =</span> aquifer)</span>
@@ -326,26 +339,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -406.30 -138.88  -13.04  129.36  722.48 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  2.627e+03  3.833e+01  68.546  &lt; 2e-16 ***
-## Este        -8.287e+00  5.658e-01 -14.646  &lt; 2e-16 ***
-## Norte       -6.649e+00  4.327e-01 -15.366  &lt; 2e-16 ***
-## Este:Norte   2.452e-02  7.401e-03   3.314  0.00138 ** 
+##                Estimate  Std. Error t value             Pr(&gt;|t|)    
+## (Intercept) 2627.069474   38.325720  68.546 &lt; 0.0000000000000002 ***
+## Este          -8.287218    0.565845 -14.646 &lt; 0.0000000000000002 ***
+## Norte         -6.648559    0.432667 -15.366 &lt; 0.0000000000000002 ***
+## Este:Norte     0.024524    0.007401   3.314              0.00138 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 191.9 on 81 degrees of freedom
 ## Multiple R-squared:  0.905,  Adjusted R-squared:  0.9014 
-## F-statistic: 257.1 on 3 and 81 DF,  p-value: &lt; 2.2e-16</code></pre>
+## F-statistic: 257.1 on 3 and 81 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="geoestadística-con-sgeostat.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg2)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: Profundidad
-##            Df   Sum Sq  Mean Sq F value    Pr(&gt;F)    
-## Este        1 19045642 19045642  517.06 &lt; 2.2e-16 ***
-## Norte       1  8960172  8960172  243.25 &lt; 2.2e-16 ***
-## Este:Norte  1   404448   404448   10.98  0.001379 ** 
-## Residuals  81  2983621    36835                      
+##            Df   Sum Sq  Mean Sq F value                Pr(&gt;F)    
+## Este        1 19045642 19045642  517.06 &lt; 0.00000000000000022 ***
+## Norte       1  8960172  8960172  243.25 &lt; 0.00000000000000022 ***
+## Este:Norte  1   404448   404448   10.98              0.001379 ** 
+## Residuals  81  2983621    36835                                  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="geoestadística-con-sgeostat.html#cb18-1" aria-hidden="true" tabindex="-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este<span class="sc">*</span>Norte<span class="sc">+</span><span class="fu">I</span>(Este<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span><span class="fu">I</span>(Norte<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> aquifer)</span>
@@ -361,32 +374,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -372.7 -133.6  -20.3  129.9  505.1 
 ## 
 ## Coefficients:
-##                        Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)           2.538e+03  7.038e+01  36.055   &lt;2e-16 ***
-## Este                 -7.728e+00  6.028e-01 -12.822   &lt;2e-16 ***
-## Norte                -3.075e+00  1.770e+00  -1.737   0.0863 .  
-## I(Este^2)            -6.792e-03  5.967e-03  -1.138   0.2585    
-## I(Norte^2)           -2.372e-02  9.049e-03  -2.622   0.0105 *  
-## Este:Norte            1.155e-02  9.680e-03   1.193   0.2365    
-## I(Este^2):I(Norte^2)  2.251e-06  9.541e-07   2.360   0.0208 *  
+##                             Estimate      Std. Error t value            Pr(&gt;|t|)    
+## (Intercept)          2537.5624340948   70.3799189709  36.055 &lt;0.0000000000000002 ***
+## Este                   -7.7283066535    0.6027554102 -12.822 &lt;0.0000000000000002 ***
+## Norte                  -3.0747325957    1.7697466886  -1.737              0.0863 .  
+## I(Este^2)              -0.0067922127    0.0059674654  -1.138              0.2585    
+## I(Norte^2)             -0.0237215094    0.0090487081  -2.622              0.0105 *  
+## Este:Norte              0.0115491188    0.0096804349   1.193              0.2365    
+## I(Este^2):I(Norte^2)    0.0000022515    0.0000009541   2.360              0.0208 *  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 180.7 on 78 degrees of freedom
 ## Multiple R-squared:  0.9189, Adjusted R-squared:  0.9126 
-## F-statistic: 147.2 on 6 and 78 DF,  p-value: &lt; 2.2e-16</code></pre>
+## F-statistic: 147.2 on 6 and 78 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="geoestadística-con-sgeostat.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg3)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: Profundidad
-##                      Df   Sum Sq  Mean Sq  F value    Pr(&gt;F)    
-## Este                  1 19045642 19045642 583.2335 &lt; 2.2e-16 ***
-## Norte                 1  8960172  8960172 274.3868 &lt; 2.2e-16 ***
-## I(Este^2)             1    55368    55368   1.6955 0.1967061    
-## I(Norte^2)            1   152170   152170   4.6599 0.0339500 *  
-## Este:Norte            1   451567   451567  13.8283 0.0003755 ***
-## I(Este^2):I(Norte^2)  1   181854   181854   5.5689 0.0207829 *  
-## Residuals            78  2547110    32655                       
+##                      Df   Sum Sq  Mean Sq  F value                Pr(&gt;F)    
+## Este                  1 19045642 19045642 583.2335 &lt; 0.00000000000000022 ***
+## Norte                 1  8960172  8960172 274.3868 &lt; 0.00000000000000022 ***
+## I(Este^2)             1    55368    55368   1.6955             0.1967061    
+## I(Norte^2)            1   152170   152170   4.6599             0.0339500 *  
+## Este:Norte            1   451567   451567  13.8283             0.0003755 ***
+## I(Este^2):I(Norte^2)  1   181854   181854   5.5689             0.0207829 *  
+## Residuals            78  2547110    32655                                   
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="geoestadística-con-sgeostat.html#cb22-1" aria-hidden="true" tabindex="-1"></a>aquifer<span class="ot">=</span><span class="fu">data.frame</span>(aquifer,<span class="at">resi=</span>residuales2)</span>
@@ -622,8 +635,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb36-2"><a href="geoestadística-con-sgeostat.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fit.trend</span>(aquifer_points,<span class="at">at=</span><span class="st">&quot;Profundidad&quot;</span>, <span class="at">np=</span><span class="dv">2</span>, <span class="at">plot.it=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <pre><code>## $beta
-##       x^0 y^0       x^1 y^0       x^2 y^0       x^0 y^1       x^1 y^1       x^0 y^2 
-##  2.481430e+03 -8.373708e+00  1.416675e-03 -2.043419e+00  2.680056e-02 -2.464371e-02 
+##        x^0 y^0        x^1 y^0        x^2 y^0        x^0 y^1        x^1 y^1        x^0 y^2 
+## 2481.430108574   -8.373707821    0.001416675   -2.043419339    0.026800556   -0.024643707 
 ## 
 ## $R
 ##        x^0 y^0   x^1 y^0    x^2 y^0    x^0 y^1    x^1 y^1   x^0 y^2
@@ -732,181 +745,181 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <pre><code>## Iteration: 1 
 ## Gradient vector:  -4432.441 977.0988 -8.943538 
-## New parameter estimates:  1e-06 40977.1 11.05646 
+## New parameter estimates:  0.000001 40977.1 11.05646 
 ## 
 ## rse.dif =  3232643827 (rse = 3232643827 )  ;  parm.dist =  977.1397</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-2.png" width="672" /></p>
 <pre><code>## Iteration: 2 
 ## Gradient vector:  -26700.7 22493.46 -2.800242 
-## New parameter estimates:  1e-06 63470.56 8.256219 
+## New parameter estimates:  0.000001 63470.56 8.256219 
 ## 
-## rse.dif =  -17644208 (rse = 3.215e+09 )  ;  parm.dist =  22493.46</code></pre>
+## rse.dif =  -17644208 (rse = 3214999619 )  ;  parm.dist =  22493.46</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-3.png" width="672" /></p>
 <pre><code>## Iteration: 3 
 ## Gradient vector:  -11057.27 -15597.73 2.315183 
-## New parameter estimates:  1e-06 47872.83 10.5714 
+## New parameter estimates:  0.000001 47872.83 10.5714 
 ## 
 ## rse.dif =  -3772568 (rse = 3211227051 )  ;  parm.dist =  15597.73</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-4.png" width="672" /></p>
 <pre><code>## Iteration: 4 
 ## Gradient vector:  -27525.12 16431.58 -1.824505 
-## New parameter estimates:  1e-06 64304.41 8.746897 
+## New parameter estimates:  0.000001 64304.41 8.746897 
 ## 
 ## rse.dif =  3032851 (rse = 3214259902 )  ;  parm.dist =  16431.58</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-5.png" width="672" /></p>
 <pre><code>## Iteration: 5 
 ## Gradient vector:  -20442.22 -7053.019 1.144197 
-## New parameter estimates:  1e-06 57251.39 9.891094 
+## New parameter estimates:  0.000001 57251.39 9.891094 
 ## 
 ## rse.dif =  -2468665 (rse = 3211791237 )  ;  parm.dist =  7053.019</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-6.png" width="672" /></p>
 <pre><code>## Iteration: 6 
 ## Gradient vector:  -27557.41 7097.539 -0.7122805 
-## New parameter estimates:  1e-06 64348.93 9.178813 
+## New parameter estimates:  0.000001 64348.93 9.178813 
 ## 
 ## rse.dif =  1486180 (rse = 3213277417 )  ;  parm.dist =  7097.539</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-7.png" width="672" /></p>
 <pre><code>## Iteration: 7 
 ## Gradient vector:  -24787.06 -2758.919 0.3605893 
-## New parameter estimates:  1e-06 61590.01 9.539403 
+## New parameter estimates:  0.000001 61590.01 9.539403 
 ## 
 ## rse.dif =  -951749.7 (rse = 3212325667 )  ;  parm.dist =  2758.919</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-8.png" width="672" /></p>
 <pre><code>## Iteration: 8 
 ## Gradient vector:  -26691.4 1898.737 -0.1885371 
-## New parameter estimates:  1e-06 63488.75 9.350866 
+## New parameter estimates:  0.000001 63488.75 9.350866 
 ## 
 ## rse.dif =  471370.4 (rse = 3212797038 )  ;  parm.dist =  1898.737</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-9.png" width="672" /></p>
 <pre><code>## Iteration: 9 
 ## Gradient vector:  -25850.35 -838.0686 0.09276125 
-## New parameter estimates:  1e-06 62650.68 9.443627 
+## New parameter estimates:  0.000001 62650.68 9.443627 
 ## 
 ## rse.dif =  -249219.6 (rse = 3212547818 )  ;  parm.dist =  838.0686</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-10.png" width="672" /></p>
 <pre><code>## Iteration: 10 
 ## Gradient vector:  -26302.53 450.7265 -0.04631475 
-## New parameter estimates:  1e-06 63101.41 9.397312 
+## New parameter estimates:  0.000001 63101.41 9.397312 
 ## 
 ## rse.dif =  121873.4 (rse = 3212669692 )  ;  parm.dist =  450.7265</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-11.png" width="672" /></p>
 <pre><code>## Iteration: 11 
 ## Gradient vector:  -26086.54 -215.2624 0.02285916 
-## New parameter estimates:  1e-06 62886.14 9.420171 
+## New parameter estimates:  0.000001 62886.14 9.420171 
 ## 
 ## rse.dif =  -61031.79 (rse = 3212608660 )  ;  parm.dist =  215.2624</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-12.png" width="672" /></p>
 <pre><code>## Iteration: 12 
 ## Gradient vector:  -26195.52 108.6221 -0.01133309 
-## New parameter estimates:  1e-06 62994.77 9.408838 
+## New parameter estimates:  0.000001 62994.77 9.408838 
 ## 
 ## rse.dif =  30077.83 (rse = 3212638738 )  ;  parm.dist =  108.6221</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-13.png" width="672" /></p>
 <pre><code>## Iteration: 13 
 ## Gradient vector:  -26142.08 -53.26613 0.005604603 
-## New parameter estimates:  1e-06 62941.5 9.414443 
+## New parameter estimates:  0.000001 62941.5 9.414443 
 ## 
 ## rse.dif =  -14922.96 (rse = 3212623815 )  ;  parm.dist =  53.26613</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-14.png" width="672" /></p>
 <pre><code>## Iteration: 14 
 ## Gradient vector:  -26168.65 26.48517 -0.002774911 
-## New parameter estimates:  1e-06 62967.99 9.411668 
+## New parameter estimates:  0.000001 62967.99 9.411668 
 ## 
 ## rse.dif =  7377.216 (rse = 3212631192 )  ;  parm.dist =  26.48517</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-15.png" width="672" /></p>
 <pre><code>## Iteration: 15 
 ## Gradient vector:  -26155.53 -13.07801 0.001373075 
-## New parameter estimates:  1e-06 62954.91 9.413041 
+## New parameter estimates:  0.000001 62954.91 9.413041 
 ## 
 ## rse.dif =  -3653.216 (rse = 3212627539 )  ;  parm.dist =  13.07801</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-16.png" width="672" /></p>
 <pre><code>## Iteration: 16 
 ## Gradient vector:  -26162.03 6.479831 -0.0006796194 
-## New parameter estimates:  1e-06 62961.39 9.412361 
+## New parameter estimates:  0.000001 62961.39 9.412361 
 ## 
 ## rse.dif =  1807.514 (rse = 3212629346 )  ;  parm.dist =  6.479831</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-17.png" width="672" /></p>
 <pre><code>## Iteration: 17 
 ## Gradient vector:  -26158.82 -3.20516 0.0003363367 
-## New parameter estimates:  1e-06 62958.18 9.412698 
+## New parameter estimates:  0.000001 62958.18 9.412698 
 ## 
 ## rse.dif =  -894.6895 (rse = 3212628451 )  ;  parm.dist =  3.20516</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-18.png" width="672" /></p>
 <pre><code>## Iteration: 18 
 ## Gradient vector:  -26160.41 1.586717 -0.0001664615 
-## New parameter estimates:  1e-06 62959.77 9.412531 
+## New parameter estimates:  0.000001 62959.77 9.412531 
 ## 
 ## rse.dif =  442.763 (rse = 3212628894 )  ;  parm.dist =  1.586717</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-19.png" width="672" /></p>
 <pre><code>## Iteration: 19 
-## Gradient vector:  -26159.62 -0.7851797 8.238305e-05 
-## New parameter estimates:  1e-06 62958.98 9.412613 
+## Gradient vector:  -26159.62 -0.7851797 0.00008238305 
+## New parameter estimates:  0.000001 62958.98 9.412613 
 ## 
 ## rse.dif =  -219.1369 (rse = 3212628675 )  ;  parm.dist =  0.7851797</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-20.png" width="672" /></p>
 <pre><code>## Iteration: 20 
-## Gradient vector:  -26160.01 0.3886224 -4.077271e-05 
-## New parameter estimates:  1e-06 62959.37 9.412573 
+## Gradient vector:  -26160.01 0.3886224 -0.00004077271 
+## New parameter estimates:  0.000001 62959.37 9.412573 
 ## 
 ## rse.dif =  108.4519 (rse = 3212628784 )  ;  parm.dist =  0.3886224</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-21.png" width="672" /></p>
 <pre><code>## Iteration: 21 
-## Gradient vector:  -26159.82 -0.192328 2.017891e-05 
-## New parameter estimates:  1e-06 62959.18 9.412593 
+## Gradient vector:  -26159.82 -0.192328 0.00002017891 
+## New parameter estimates:  0.000001 62959.18 9.412593 
 ## 
 ## rse.dif =  -53.67477 (rse = 3212628730 )  ;  parm.dist =  0.192328</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-22.png" width="672" /></p>
 <pre><code>## Iteration: 22 
-## Gradient vector:  -26159.91 0.09518727 -9.986825e-06 
-## New parameter estimates:  1e-06 62959.28 9.412583 
+## Gradient vector:  -26159.91 0.09518727 -0.000009986825 
+## New parameter estimates:  0.000001 62959.28 9.412583 
 ## 
 ## rse.dif =  26.56425 (rse = 3212628756 )  ;  parm.dist =  0.09518727</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-23.png" width="672" /></p>
 <pre><code>## Iteration: 23 
-## Gradient vector:  -26159.86 -0.04710907 4.94261e-06 
-## New parameter estimates:  1e-06 62959.23 9.412588 
+## Gradient vector:  -26159.86 -0.04710907 0.00000494261 
+## New parameter estimates:  0.000001 62959.23 9.412588 
 ## 
 ## rse.dif =  -13.14703 (rse = 3212628743 )  ;  parm.dist =  0.04710907</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-24.png" width="672" /></p>
 <pre><code>## Iteration: 24 
-## Gradient vector:  -26159.89 0.023315 -2.446165e-06 
-## New parameter estimates:  1e-06 62959.25 9.412585 
+## Gradient vector:  -26159.89 0.023315 -0.000002446165 
+## New parameter estimates:  0.000001 62959.25 9.412585 
 ## 
 ## rse.dif =  6.506635 (rse = 3212628750 )  ;  parm.dist =  0.023315</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-25.png" width="672" /></p>
 <pre><code>## Iteration: 25 
-## Gradient vector:  -26159.88 -0.01153889 1.21064e-06 
-## New parameter estimates:  1e-06 62959.24 9.412587 
+## Gradient vector:  -26159.88 -0.01153889 0.00000121064 
+## New parameter estimates:  0.000001 62959.24 9.412587 
 ## 
 ## rse.dif =  -3.220221 (rse = 3212628747 )  ;  parm.dist =  0.01153889</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-26.png" width="672" /></p>
 <pre><code>## Iteration: 26 
-## Gradient vector:  -26159.88 0.00571076 -5.991624e-07 
-## New parameter estimates:  1e-06 62959.25 9.412586 
+## Gradient vector:  -26159.88 0.00571076 -0.0000005991624 
+## New parameter estimates:  0.000001 62959.25 9.412586 
 ## 
 ## rse.dif =  1.59373 (rse = 3212628748 )  ;  parm.dist =  0.00571076</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-27.png" width="672" /></p>
 <pre><code>## Iteration: 27 
-## Gradient vector:  -26159.88 -0.002826338 2.965343e-07 
-## New parameter estimates:  1e-06 62959.24 9.412586 
+## Gradient vector:  -26159.88 -0.002826338 0.0000002965343 
+## New parameter estimates:  0.000001 62959.24 9.412586 
 ## 
 ## rse.dif =  -0.7887597 (rse = 3212628747 )  ;  parm.dist =  0.002826338</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-28.png" width="672" /></p>
 <pre><code>## Iteration: 28 
-## Gradient vector:  -26159.88 0.001398796 -1.467592e-07 
-## New parameter estimates:  1e-06 62959.24 9.412586 
+## Gradient vector:  -26159.88 0.001398796 -0.0000001467592 
+## New parameter estimates:  0.000001 62959.24 9.412586 
 ## 
 ## rse.dif =  0.390367 (rse = 3212628748 )  ;  parm.dist =  0.001398796</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-29.png" width="672" /></p>
 <pre><code>## Iteration: 29 
-## Gradient vector:  -26159.88 -0.0006922856 7.263334e-08 
-## New parameter estimates:  1e-06 62959.24 9.412586 
+## Gradient vector:  -26159.88 -0.0006922856 0.00000007263334 
+## New parameter estimates:  0.000001 62959.24 9.412586 
 ## 
 ## rse.dif =  -0.1931996 (rse = 3212628748 )  ;  parm.dist =  0.0006922856</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-30.png" width="672" /></p>
 <pre><code>## Iteration: 30 
-## Gradient vector:  -26159.88 0.0003426254 -3.594764e-08 
-## New parameter estimates:  1e-06 62959.24 9.412586 
+## Gradient vector:  -26159.88 0.0003426254 -0.00000003594764 
+## New parameter estimates:  0.000001 62959.24 9.412586 
 ## 
 ## rse.dif =  0.09561968 (rse = 3212628748 )  ;  parm.dist =  0.0003426254</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-31.png" width="672" /></p>
@@ -975,70 +988,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## rse.dif =  605.1536 (rse = 3209336327 )  ;  parm.dist =  0.194743</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-11.png" width="672" /></p>
 <pre><code>## Iteration: 11 
-## Gradient vector:  0.02102884 -0.01993597 3.982407e-05 
+## Gradient vector:  0.02102884 -0.01993597 0.00003982407 
 ## New parameter estimates:  16409.42 20424.69 24.25397 
 ## 
 ## rse.dif =  -90.18701 (rse = 3209336237 )  ;  parm.dist =  0.02897682</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-12.png" width="672" /></p>
 <pre><code>## Iteration: 12 
-## Gradient vector:  -0.003132718 0.00296995 -5.931842e-06 
+## Gradient vector:  -0.003132718 0.00296995 -0.000005931842 
 ## New parameter estimates:  16409.42 20424.69 24.25396 
 ## 
 ## rse.dif =  13.43229 (rse = 3209336251 )  ;  parm.dist =  0.004316777</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-13.png" width="672" /></p>
 <pre><code>## Iteration: 13 
-## Gradient vector:  0.0004666088 -0.0004423641 8.835486e-07 
+## Gradient vector:  0.0004666088 -0.0004423641 0.0000008835486 
 ## New parameter estimates:  16409.42 20424.69 24.25396 
 ## 
 ## rse.dif =  -2.000768 (rse = 3209336249 )  ;  parm.dist =  0.0006429701</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-14.png" width="672" /></p>
 <pre><code>## Iteration: 14 
-## Gradient vector:  -6.950172e-05 6.589047e-05 -1.316048e-07 
+## Gradient vector:  -0.00006950172 0.00006589047 -0.0000001316048 
 ## New parameter estimates:  16409.42 20424.69 24.25396 
 ## 
-## rse.dif =  0.2980151 (rse = 3209336249 )  ;  parm.dist =  9.577088e-05</code></pre>
+## rse.dif =  0.2980151 (rse = 3209336249 )  ;  parm.dist =  0.00009577088</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-15.png" width="672" /></p>
 <pre><code>## Iteration: 15 
-## Gradient vector:  1.035228e-05 -9.81439e-06 1.960255e-08 
+## Gradient vector:  0.00001035228 -0.00000981439 0.00000001960255 
 ## New parameter estimates:  16409.42 20424.69 24.25396 
 ## 
-## rse.dif =  -0.04438925 (rse = 3209336249 )  ;  parm.dist =  1.426508e-05</code></pre>
+## rse.dif =  -0.04438925 (rse = 3209336249 )  ;  parm.dist =  0.00001426508</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-16.png" width="672" /></p>
 <pre><code>## Iteration: 16 
-## Gradient vector:  -1.541975e-06 1.461856e-06 -2.919804e-09 
+## Gradient vector:  -0.000001541975 0.000001461856 -0.000000002919804 
 ## New parameter estimates:  16409.42 20424.69 24.25396 
 ## 
-## rse.dif =  0.006612301 (rse = 3209336249 )  ;  parm.dist =  2.124787e-06</code></pre>
+## rse.dif =  0.006612301 (rse = 3209336249 )  ;  parm.dist =  0.000002124787</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-17.png" width="672" /></p>
 <pre><code>## Iteration: 17 
-## Gradient vector:  2.296693e-07 -2.17734e-07 4.348922e-10 
+## Gradient vector:  0.0000002296693 -0.000000217734 0.0000000004348922 
 ## New parameter estimates:  16409.42 20424.69 24.25396 
 ## 
-## rse.dif =  -0.0009851456 (rse = 3209336249 )  ;  parm.dist =  3.16474e-07</code></pre>
+## rse.dif =  -0.0009851456 (rse = 3209336249 )  ;  parm.dist =  0.000000316474</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-18.png" width="672" /></p>
 <pre><code>## Iteration: 18 
-## Gradient vector:  -3.420397e-08 3.242585e-08 -6.476836e-11 
+## Gradient vector:  -0.00000003420397 0.00000003242585 -0.00000000006476836 
 ## New parameter estimates:  16409.42 20424.69 24.25396 
 ## 
-## rse.dif =  0.000146389 (rse = 3209336249 )  ;  parm.dist =  4.713106e-08</code></pre>
+## rse.dif =  0.000146389 (rse = 3209336249 )  ;  parm.dist =  0.00000004713106</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-19.png" width="672" /></p>
 <pre><code>## Iteration: 19 
-## Gradient vector:  5.093371e-09 -4.82871e-09 9.64091e-12 
+## Gradient vector:  0.000000005093371 -0.00000000482871 0.00000000000964091 
 ## New parameter estimates:  16409.42 20424.69 24.25396 
 ## 
-## rse.dif =  -2.098083e-05 (rse = 3209336249 )  ;  parm.dist =  7.017562e-09</code></pre>
+## rse.dif =  -0.00002098083 (rse = 3209336249 )  ;  parm.dist =  0.000000007017562</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-20.png" width="672" /></p>
 <pre><code>## Iteration: 20 
-## Gradient vector:  -7.373076e-10 7.001616e-10 -1.395163e-12 
+## Gradient vector:  -0.0000000007373076 0.0000000007001616 -0.000000000001395163 
 ## New parameter estimates:  16409.42 20424.69 24.25396 
 ## 
-## rse.dif =  2.384186e-06 (rse = 3209336249 )  ;  parm.dist =  1.016508e-09</code></pre>
+## rse.dif =  0.000002384186 (rse = 3209336249 )  ;  parm.dist =  0.000000001016508</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-21.png" width="672" /></p>
 <pre><code>## Iteration: 21 
-## Gradient vector:  9.237102e-11 -8.310645e-11 1.693244e-13 
+## Gradient vector:  0.00000000009237102 -0.00000000008310645 0.0000000000001693244 
 ## New parameter estimates:  16409.42 20424.69 24.25396 
 ## 
-## rse.dif =  -4.768372e-07 (rse = 3209336249 )  ;  parm.dist =  1.235844e-10 
+## rse.dif =  -0.0000004768372 (rse = 3209336249 )  ;  parm.dist =  0.0000000001235844 
 ## 
 ## Convergence achieved by sums of squares.</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-22.png" width="672" /></p>
@@ -1090,7 +1103,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-8.png" width="672" /></p>
 <pre><code>## Iteration: 8 
 ## Gradient vector:  -15826.64 16212.91 0.3854677 
-## New parameter estimates:  1e-06 44560.72 5.362323 
+## New parameter estimates:  0.000001 44560.72 5.362323 
 ## 
 ## rse.dif =  -46983778 (rse = 3167441696 )  ;  parm.dist =  18178.84</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-9.png" width="672" /></p>
@@ -1102,7 +1115,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-10.png" width="672" /></p>
 <pre><code>## Iteration: 10 
 ## Gradient vector:  -9434763 9682459 25.73116 
-## New parameter estimates:  1e-06 9705575 30.21781 
+## New parameter estimates:  0.000001 9705575 30.21781 
 ## 
 ## rse.dif =  1636307005 (rse = 4045807822 )  ;  parm.dist =  9682468</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-11.png" width="672" /></p>
@@ -1132,41 +1145,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-15.png" width="672" /></p>
 <pre><code>## Iteration: 15 
 ## Gradient vector:  4786.661 2165.107 -43.14322 
-## New parameter estimates:  33497.3 9224.042 1e-06 
+## New parameter estimates:  33497.3 9224.042 0.000001 
 ## 
 ## rse.dif =  -686128326 (rse = 2769846205 )  ;  parm.dist =  5253.728</code></pre>
 <pre><code>## Iteration: 16</code></pre>
 <pre><code>## Warning in lsfit(xmat, y, wt = w, intercept = FALSE): &#39;X&#39; matrix was collinear</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-16.png" width="672" /></p>
-<pre><code>## Gradient vector:  -7188.308 -5.926894e-07 0 
-## New parameter estimates:  26308.99 9224.042 1e-06 
+<pre><code>## Gradient vector:  -7188.308 -0.0000005926894 0 
+## New parameter estimates:  26308.99 9224.042 0.000001 
 ## 
 ## rse.dif =  686457466 (rse = 3456303671 )  ;  parm.dist =  7188.308</code></pre>
 <pre><code>## Iteration: 17</code></pre>
 <pre><code>## Warning in lsfit(xmat, y, wt = w, intercept = FALSE): &#39;X&#39; matrix was collinear</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-17.png" width="672" /></p>
-<pre><code>## Gradient vector:  -5.339326e-06 -5.926894e-07 0 
-## New parameter estimates:  26308.99 9224.042 1e-06 
+<pre><code>## Gradient vector:  -0.000005339326 -0.0000005926894 0 
+## New parameter estimates:  26308.99 9224.042 0.000001 
 ## 
-## rse.dif =  0.4889345 (rse = 3456303672 )  ;  parm.dist =  5.372122e-06</code></pre>
+## rse.dif =  0.4889345 (rse = 3456303672 )  ;  parm.dist =  0.000005372122</code></pre>
 <pre><code>## Iteration: 18</code></pre>
 <pre><code>## Warning in lsfit(xmat, y, wt = w, intercept = FALSE): &#39;X&#39; matrix was collinear</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-18.png" width="672" /></p>
-<pre><code>## Gradient vector:  5.926903e-07 -5.926894e-07 0 
-## New parameter estimates:  26308.99 9224.042 1e-06 
+<pre><code>## Gradient vector:  0.0000005926903 -0.0000005926894 0 
+## New parameter estimates:  26308.99 9224.042 0.000001 
 ## 
-## rse.dif =  1.430511e-06 (rse = 3456303672 )  ;  parm.dist =  8.381882e-07</code></pre>
+## rse.dif =  0.000001430511 (rse = 3456303672 )  ;  parm.dist =  0.0000008381882</code></pre>
 <pre><code>## Iteration: 19</code></pre>
 <pre><code>## Warning in lsfit(xmat, y, wt = w, intercept = FALSE): &#39;X&#39; matrix was collinear</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-19.png" width="672" /></p>
-<pre><code>## Gradient vector:  5.926903e-07 -5.926894e-07 0 
-## New parameter estimates:  26308.99 9224.042 1e-06 
+<pre><code>## Gradient vector:  0.0000005926903 -0.0000005926894 0 
+## New parameter estimates:  26308.99 9224.042 0.000001 
 ## 
-## rse.dif =  0 (rse = 3456303672 )  ;  parm.dist =  8.381882e-07 
+## rse.dif =  0 (rse = 3456303672 )  ;  parm.dist =  0.0000008381882 
 ## 
 ## Convergence achieved by sums of squares.</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-20.png" width="672" /></p>
-<pre><code>## Final parameter estimates:  26308.99 9224.042 1e-06</code></pre>
+<pre><code>## Final parameter estimates:  26308.99 9224.042 0.000001</code></pre>
 <div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="geoestadística-con-sgeostat.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">65000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="dv">14</span><span class="sc">/</span>x)<span class="sc">*</span><span class="fu">sin</span>(x<span class="sc">/</span><span class="dv">14</span>)),<span class="dv">0</span>,<span class="dv">300</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">200000</span>))</span>
 <span id="cb130-2"><a href="geoestadística-con-sgeostat.html#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,<span class="at">col=</span><span class="dv">3</span>)</span>
 <span id="cb130-3"><a href="geoestadística-con-sgeostat.html#cb130-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,aquifer.v<span class="sc">$</span>n,<span class="at">col=</span><span class="dv">2</span>)</span></code></pre></div>
@@ -1179,11 +1192,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb132-3"><a href="geoestadística-con-sgeostat.html#cb132-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,aquifer.v<span class="sc">$</span>n,<span class="at">col=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="geoestadística-con-sgeostat.html#cb133-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodExp<span class="ot">&lt;-</span><span class="fu">fit.exponential</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">ce=</span><span class="dv">200000</span>,<span class="at">ae=</span><span class="dv">170</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>,<span class="at">weighted=</span>T)</span></code></pre></div>
-<pre><code>## Initial parameter estimates:  0 2e+05 170</code></pre>
+<pre><code>## Initial parameter estimates:  0 200000 170</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <pre><code>## Iteration: 1 
 ## Gradient vector:  16365.66 -238859.4 -103.7436 
-## New parameter estimates:  16365.66 1e-06 66.25643 
+## New parameter estimates:  16365.66 0.000001 66.25643 
 ## 
 ## rse.dif =  3826411368 (rse = 3826411368 )  ;  parm.dist =  200668.5</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-31-2.png" width="672" /></p>
@@ -1195,63 +1208,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Iteration: 3</code></pre>
 <pre><code>## Warning in lsfit(xmat, y, wt = w, intercept = FALSE): &#39;X&#39; matrix was collinear</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-31-3.png" width="672" /></p>
-<pre><code>## Gradient vector:  3355.03 1.242479e+13 0 
-## New parameter estimates:  27457.94 1.242479e+13 166070861318 
+<pre><code>## Gradient vector:  3355.03 12424786768746 0 
+## New parameter estimates:  27457.94 12424786785294 166070861318 
 ## 
-## rse.dif =  -120011141 (rse = 2938925906 )  ;  parm.dist =  1.242479e+13</code></pre>
+## rse.dif =  -120011141 (rse = 2938925906 )  ;  parm.dist =  12424786768746</code></pre>
 <pre><code>## Iteration: 4</code></pre>
 <pre><code>## Warning in lsfit(xmat, y, wt = w, intercept = FALSE): &#39;X&#39; matrix was collinear</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-31-4.png" width="672" /></p>
 <pre><code>## Gradient vector:  423.3165 -663474885968 0 
-## New parameter estimates:  27881.25 1.176131e+13 166070861318 
+## New parameter estimates:  27881.25 11761311899326 166070861318 
 ## 
 ## rse.dif =  11801483 (rse = 2950727388 )  ;  parm.dist =  663474885968</code></pre>
 <pre><code>## Iteration: 5</code></pre>
 <pre><code>## Warning in lsfit(xmat, y, wt = w, intercept = FALSE): &#39;X&#39; matrix was collinear</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-31-5.png" width="672" /></p>
 <pre><code>## Gradient vector:  3.873181 -6320523090 0 
-## New parameter estimates:  27885.12 1.175499e+13 166070861318 
+## New parameter estimates:  27885.12 11754991376237 166070861318 
 ## 
 ## rse.dif =  128956.4 (rse = 2950856345 )  ;  parm.dist =  6320523090</code></pre>
 <pre><code>## Iteration: 6</code></pre>
 <pre><code>## Warning in lsfit(xmat, y, wt = w, intercept = FALSE): &#39;X&#39; matrix was collinear</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-31-6.png" width="672" /></p>
 <pre><code>## Gradient vector:  0.02266712 -36921321 0 
-## New parameter estimates:  27885.15 1.175495e+13 166070861318 
+## New parameter estimates:  27885.15 11754954454916 166070861318 
 ## 
 ## rse.dif =  752.3639 (rse = 2950857097 )  ;  parm.dist =  36921321</code></pre>
 <pre><code>## Iteration: 7</code></pre>
 <pre><code>## Warning in lsfit(xmat, y, wt = w, intercept = FALSE): &#39;X&#39; matrix was collinear</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-31-7.png" width="672" /></p>
 <pre><code>## Gradient vector:  0.0001316946 -214507.3 0 
-## New parameter estimates:  27885.15 1.175495e+13 166070861318 
+## New parameter estimates:  27885.15 11754954240408 166070861318 
 ## 
 ## rse.dif =  4.371066 (rse = 2950857102 )  ;  parm.dist =  214507.3</code></pre>
 <pre><code>## Iteration: 8</code></pre>
 <pre><code>## Warning in lsfit(xmat, y, wt = w, intercept = FALSE): &#39;X&#39; matrix was collinear</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-31-8.png" width="672" /></p>
-<pre><code>## Gradient vector:  7.651031e-07 -1246.215 0 
-## New parameter estimates:  27885.15 1.175495e+13 166070861318 
+<pre><code>## Gradient vector:  0.0000007651031 -1246.215 0 
+## New parameter estimates:  27885.15 11754954239162 166070861318 
 ## 
 ## rse.dif =  0.02539492 (rse = 2950857102 )  ;  parm.dist =  1246.215</code></pre>
 <pre><code>## Iteration: 9</code></pre>
 <pre><code>## Warning in lsfit(xmat, y, wt = w, intercept = FALSE): &#39;X&#39; matrix was collinear</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-31-9.png" width="672" /></p>
-<pre><code>## Gradient vector:  4.444268e-09 -7.241979 0 
-## New parameter estimates:  27885.15 1.175495e+13 166070861318 
+<pre><code>## Gradient vector:  0.000000004444268 -7.241979 0 
+## New parameter estimates:  27885.15 11754954239155 166070861318 
 ## 
 ## rse.dif =  0.0001473427 (rse = 2950857102 )  ;  parm.dist =  7.242188</code></pre>
 <pre><code>## Iteration: 10</code></pre>
 <pre><code>## Warning in lsfit(xmat, y, wt = w, intercept = FALSE): &#39;X&#39; matrix was collinear</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-31-10.png" width="672" /></p>
-<pre><code>## Gradient vector:  1.914536e-11 -0.03484448 0 
-## New parameter estimates:  27885.15 1.175495e+13 166070861318 
+<pre><code>## Gradient vector:  0.00000000001914536 -0.03484448 0 
+## New parameter estimates:  27885.15 11754954239155 166070861318 
 ## 
-## rse.dif =  9.536743e-07 (rse = 2950857102 )  ;  parm.dist =  0.03515625 
+## rse.dif =  0.0000009536743 (rse = 2950857102 )  ;  parm.dist =  0.03515625 
 ## 
 ## Convergence achieved by sums of squares.</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-31-11.png" width="672" /></p>
-<pre><code>## Final parameter estimates:  27885.15 1.175495e+13 166070861318</code></pre>
+<pre><code>## Final parameter estimates:  27885.15 11754954239155 166070861318</code></pre>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="geoestadística-con-sgeostat.html#cb162-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodwave<span class="ot">&lt;-</span><span class="fu">fit.wave</span>(aquifer.v,<span class="at">c0=</span><span class="dv">4000</span>,<span class="at">cw=</span><span class="dv">30000</span>,<span class="at">aw=</span><span class="dv">15</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <pre><code>## Convergence not achieved!</code></pre>

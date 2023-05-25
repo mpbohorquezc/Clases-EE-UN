@@ -49,3 +49,10 @@ mapas
 resumen-de-modelos
 calculo-de-varibles-significativas
 mapa-estimado
+spatial-modeling-leukemia
+mortality
+packages-mortality
+code-mortality
+incidence
+packages-incidence
+code-incidence

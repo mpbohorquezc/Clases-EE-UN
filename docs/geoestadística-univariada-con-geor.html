@@ -212,6 +212,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#calculo-de-varibles-significativas"><i class="fa fa-check"></i><b>6.9</b> Calculo de varibles significativas</a></li>
 <li class="chapter" data-level="6.10" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#mapa-estimado"><i class="fa fa-check"></i><b>6.10</b> Mapa Estimado</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html"><i class="fa fa-check"></i><b>7</b> Spatial modeling leukemia</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#mortality"><i class="fa fa-check"></i><b>7.1</b> <strong>Mortality</strong></a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#packages-mortality"><i class="fa fa-check"></i><b>7.1.1</b> <em>Packages Mortality</em></a></li>
+<li class="chapter" data-level="7.1.2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#code-mortality"><i class="fa fa-check"></i><b>7.1.2</b> <em>Code Mortality</em></a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#incidence"><i class="fa fa-check"></i><b>7.2</b> Incidence</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#packages-incidence"><i class="fa fa-check"></i><b>7.2.1</b> <strong>Packages Incidence</strong></a></li>
+<li class="chapter" data-level="7.2.2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#code-incidence"><i class="fa fa-check"></i><b>7.2.2</b> <em>Code Incidence</em></a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -465,24 +478,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -366.96 -161.53  -30.71  148.15  651.20 
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 2591.4302    38.9599   66.52   &lt;2e-16 ***
-## Este          -6.7514     0.3438  -19.64   &lt;2e-16 ***
-## Norte         -5.9872     0.4066  -14.73   &lt;2e-16 ***
+##              Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept) 2591.4302    38.9599   66.52 &lt;0.0000000000000002 ***
+## Este          -6.7514     0.3438  -19.64 &lt;0.0000000000000002 ***
+## Norte         -5.9872     0.4066  -14.73 &lt;0.0000000000000002 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 203.3 on 82 degrees of freedom
 ## Multiple R-squared:  0.8921, Adjusted R-squared:  0.8894 
-## F-statistic: 338.9 on 2 and 82 DF,  p-value: &lt; 2.2e-16</code></pre>
+## F-statistic: 338.9 on 2 and 82 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="geoestadística-univariada-con-geor.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg1)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: Profundidad
-##           Df   Sum Sq  Mean Sq F value    Pr(&gt;F)    
-## Este       1 19045642 19045642  460.95 &lt; 2.2e-16 ***
-## Norte      1  8960172  8960172  216.86 &lt; 2.2e-16 ***
-## Residuals 82  3388069    41318                      
+##           Df   Sum Sq  Mean Sq F value                Pr(&gt;F)    
+## Este       1 19045642 19045642  460.95 &lt; 0.00000000000000022 ***
+## Norte      1  8960172  8960172  216.86 &lt; 0.00000000000000022 ***
+## Residuals 82  3388069    41318                                  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
@@ -504,30 +517,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -407.43 -138.76   -5.74  128.84  648.16 
 ## 
 ## Coefficients:
-##                   Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)      2.481e+03  6.813e+01  36.424  &lt; 2e-16 ***
-## Este            -8.374e+00  5.525e-01 -15.157  &lt; 2e-16 ***
-## Norte           -2.043e+00  1.764e+00  -1.159 0.250146    
-## I(Este^2)        1.417e-03  4.987e-03   0.284 0.777096    
-## I(Norte^2)      -2.464e-02  9.298e-03  -2.650 0.009708 ** 
-## I(Este * Norte)  2.680e-02  7.413e-03   3.616 0.000526 ***
+##                    Estimate  Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)     2481.430109   68.127017  36.424 &lt; 0.0000000000000002 ***
+## Este              -8.373708    0.552451 -15.157 &lt; 0.0000000000000002 ***
+## Norte             -2.043419    1.763832  -1.159             0.250146    
+## I(Este^2)          0.001417    0.004987   0.284             0.777096    
+## I(Norte^2)        -0.024644    0.009298  -2.650             0.009708 ** 
+## I(Este * Norte)    0.026801    0.007413   3.616             0.000526 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 185.9 on 79 degrees of freedom
 ## Multiple R-squared:  0.9131, Adjusted R-squared:  0.9076 
-## F-statistic:   166 on 5 and 79 DF,  p-value: &lt; 2.2e-16</code></pre>
+## F-statistic:   166 on 5 and 79 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="geoestadística-univariada-con-geor.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg2)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: Profundidad
-##                 Df   Sum Sq  Mean Sq  F value    Pr(&gt;F)    
-## Este             1 19045642 19045642 551.3469 &lt; 2.2e-16 ***
-## Norte            1  8960172  8960172 259.3855 &lt; 2.2e-16 ***
-## I(Este^2)        1    55368    55368   1.6028 0.2092235    
-## I(Norte^2)       1   152170   152170   4.4051 0.0390253 *  
-## I(Este * Norte)  1   451567   451567  13.0723 0.0005259 ***
-## Residuals       79  2728964    34544                       
+##                 Df   Sum Sq  Mean Sq  F value                Pr(&gt;F)    
+## Este             1 19045642 19045642 551.3469 &lt; 0.00000000000000022 ***
+## Norte            1  8960172  8960172 259.3855 &lt; 0.00000000000000022 ***
+## I(Este^2)        1    55368    55368   1.6028             0.2092235    
+## I(Norte^2)       1   152170   152170   4.4051             0.0390253 *  
+## I(Este * Norte)  1   451567   451567  13.0723             0.0005259 ***
+## Residuals       79  2728964    34544                                   
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
@@ -546,26 +559,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -406.30 -138.88  -13.04  129.36  722.48 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  2.627e+03  3.833e+01  68.546  &lt; 2e-16 ***
-## Este        -8.287e+00  5.658e-01 -14.646  &lt; 2e-16 ***
-## Norte       -6.649e+00  4.327e-01 -15.366  &lt; 2e-16 ***
-## Este:Norte   2.452e-02  7.401e-03   3.314  0.00138 ** 
+##                Estimate  Std. Error t value             Pr(&gt;|t|)    
+## (Intercept) 2627.069474   38.325720  68.546 &lt; 0.0000000000000002 ***
+## Este          -8.287218    0.565845 -14.646 &lt; 0.0000000000000002 ***
+## Norte         -6.648559    0.432667 -15.366 &lt; 0.0000000000000002 ***
+## Este:Norte     0.024524    0.007401   3.314              0.00138 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 191.9 on 81 degrees of freedom
 ## Multiple R-squared:  0.905,  Adjusted R-squared:  0.9014 
-## F-statistic: 257.1 on 3 and 81 DF,  p-value: &lt; 2.2e-16</code></pre>
+## F-statistic: 257.1 on 3 and 81 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="geoestadística-univariada-con-geor.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg3)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: Profundidad
-##            Df   Sum Sq  Mean Sq F value    Pr(&gt;F)    
-## Este        1 19045642 19045642  517.06 &lt; 2.2e-16 ***
-## Norte       1  8960172  8960172  243.25 &lt; 2.2e-16 ***
-## Este:Norte  1   404448   404448   10.98  0.001379 ** 
-## Residuals  81  2983621    36835                      
+##            Df   Sum Sq  Mean Sq F value                Pr(&gt;F)    
+## Este        1 19045642 19045642  517.06 &lt; 0.00000000000000022 ***
+## Norte       1  8960172  8960172  243.25 &lt; 0.00000000000000022 ***
+## Este:Norte  1   404448   404448   10.98              0.001379 ** 
+## Residuals  81  2983621    36835                                  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
@@ -1071,7 +1084,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb284-3"><a href="geoestadística-univariada-con-geor.html#cb284-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">mean =</span> mu,</span>
 <span id="cb284-4"><a href="geoestadística-univariada-con-geor.html#cb284-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">sigma =</span> cov_mat)</span>
 <span id="cb284-5"><a href="geoestadística-univariada-con-geor.html#cb284-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(simu[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
-<pre><code>## [1]  6.9849119  4.2522208 -0.1223729  1.0744386  2.7488001</code></pre>
+<pre><code>## [1]  2.1891916 -3.8833516  1.7460467  0.2713589 -5.1089803</code></pre>
 </div>
 <div id="pulimiento-de-medianas-1" class="section level3 hasAnchor" number="3.7.6">
 <h3><span class="header-section-number">3.7.6</span> Pulimiento de medianas<a href="geoestadística-univariada-con-geor.html#pulimiento-de-medianas-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1081,12 +1094,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb286-3"><a href="geoestadística-univariada-con-geor.html#cb286-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>, <span class="st">&quot;Var&quot;</span>)</span>
 <span id="cb286-4"><a href="geoestadística-univariada-con-geor.html#cb286-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(data))</span></code></pre></div>
 <pre><code>##           X   Y        Var
-## 1 0.0000000 0.0  6.9849119
-## 2 0.3333333 0.0  4.2522208
-## 3 0.6666667 0.0 -0.1223729
-## 4 1.0000000 0.0  1.0744386
-## 5 0.0000000 0.2  2.7488001
-## 6 0.3333333 0.2  0.6706192</code></pre>
+## 1 0.0000000 0.0  2.1891916
+## 2 0.3333333 0.0 -3.8833516
+## 3 0.6666667 0.0  1.7460467
+## 4 1.0000000 0.0  0.2713589
+## 5 0.0000000 0.2 -5.1089803
+## 6 0.3333333 0.2 -0.4416415</code></pre>
 <p>Reshape para matriz, esto transforma la tabla de datos en matriz</p>
 <div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="geoestadística-univariada-con-geor.html#cb288-1" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">dcast</span>(data,</span>
 <span id="cb288-2"><a href="geoestadística-univariada-con-geor.html#cb288-2" aria-hidden="true" tabindex="-1"></a>                         X <span class="sc">~</span> Y,</span>
@@ -1094,38 +1107,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb288-4"><a href="geoestadística-univariada-con-geor.html#cb288-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tabla) <span class="ot">&lt;-</span> tabla[, <span class="dv">1</span>]</span>
 <span id="cb288-5"><a href="geoestadística-univariada-con-geor.html#cb288-5" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> tabla[, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>)]</span>
 <span id="cb288-6"><a href="geoestadística-univariada-con-geor.html#cb288-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tabla)</span></code></pre></div>
-<pre><code>##                            0        0.2        0.4       0.6        0.8          1
-## 0                  6.9849119  2.7488001  5.3191845  3.847564 -0.1070366 -1.0527613
-## 0.333333333333333  4.2522208  0.6706192  0.3234361 -1.102893 -1.5804597  0.9620464
-## 0.666666666666667 -0.1223729 -1.5210896 -0.6078059 -2.682613 -2.7470807  1.8978192
-## 1                  1.0744386 -0.8351375  0.7568543  2.847558 -1.7769896  1.3946143</code></pre>
+<pre><code>##                            0         0.2        0.4       0.6       0.8          1
+## 0                  2.1891916 -5.10898025 -2.6707419 -3.383100 -4.740408 -3.5000650
+## 0.333333333333333 -3.8833516 -0.44164152  1.9610943 -3.174812 -3.538608 -1.9888859
+## 0.666666666666667  1.7460467 -3.90262775 -0.7403839 -3.021353 -2.842467  2.1003900
+## 1                  0.2713589 -0.09471264  0.9514740 -3.338079 -1.579355 -0.8825137</code></pre>
 <p>Pulimiento de medianas de la tabla</p>
 <div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="geoestadística-univariada-con-geor.html#cb290-1" aria-hidden="true" tabindex="-1"></a>med <span class="ot">&lt;-</span> <span class="fu">medpolish</span>(tabla)</span></code></pre></div>
-<pre><code>## 1: 26.53247
-## 2: 25.56309
-## 3: 25.3016
-## Final: 25.3016</code></pre>
+<pre><code>## 1: 29.04747
+## 2: 27.58165
+## Final: 27.47662</code></pre>
 <div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="geoestadística-univariada-con-geor.html#cb292-1" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(med<span class="sc">$</span>residuals)</span>
 <span id="cb292-2"><a href="geoestadística-univariada-con-geor.html#cb292-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(med)</span></code></pre></div>
 <pre><code>## 
 ## Median Polish Results (Dataset: &quot;tabla&quot;)
 ## 
-## Overall: 0.1006269
+## Overall: -2.097145
 ## 
 ## Row Effects:
 ##                 0 0.333333333333333 0.666666666666667                 1 
-##        3.82387414       -0.01103186       -1.15634377        0.01103186 
+##        -1.6907089        -0.1343331         0.1343331         1.1985933 
 ## 
 ## Column Effects:
 ##          0        0.2        0.4        0.6        0.8          1 
-##  2.0115953 -0.7060845  0.5465533 -0.6347123 -1.7900061  1.0777035 
+##  2.4393849 -0.2586434  1.5362271 -1.0009371 -0.9161044  0.2651908 
 ## 
 ## Residuals:
-##                         0      0.2       0.4      0.6       0.8        1
-## 0                  1.0488 -0.46962  0.848130  0.55778 -2.241532 -6.05497
-## 0.333333333333333  2.1510  1.28711 -0.312712 -0.55778  0.119951 -0.20525
-## 0.666666666666667 -1.0783  0.24071 -0.098642 -0.99218  0.098642  1.87583
-## 1                 -1.0488 -0.24071  0.098642  3.37061 -0.098642  0.20525</code></pre>
+##                         0     0.2      0.4       0.6       0.8         1
+## 0                  3.5377 -1.0625 -0.41911  1.405691 -0.036449  0.022598
+## 0.333333333333333 -4.0913  2.0485  2.65635  0.057603 -0.391025 -0.022598
+## 0.666666666666667  1.2695 -1.6812 -0.31380 -0.057603  0.036449  3.798011
+## 1                 -1.2695  1.0625  0.31380 -1.438590  0.235302 -0.249153</code></pre>
 <p>Reshape de los datos, con efecto de la fila y la columna</p>
 <div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="geoestadística-univariada-con-geor.html#cb294-1" aria-hidden="true" tabindex="-1"></a>tabla_residuales <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(med<span class="sc">$</span>residuals)</span>
 <span id="cb294-2"><a href="geoestadística-univariada-con-geor.html#cb294-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tabla_residuales) <span class="ot">&lt;-</span> med<span class="sc">$</span>col</span>
@@ -1143,31 +1155,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb294-14"><a href="geoestadística-univariada-con-geor.html#cb294-14" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Residual&quot;</span>,</span>
 <span id="cb294-15"><a href="geoestadística-univariada-con-geor.html#cb294-15" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto Global&quot;</span>)</span>
 <span id="cb294-16"><a href="geoestadística-univariada-con-geor.html#cb294-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geo_data)</span></code></pre></div>
-<pre><code>##            X   Y        Var Efecto fila Efecto columa    Residual Efecto Global
-## 1  0.0000000 0.0  6.9849119  3.82387414     2.0115953  1.04881550     0.1006269
-## 2  0.3333333 0.0  4.2522208 -0.01103186     2.0115953  2.15103040     0.1006269
-## 3  0.6666667 0.0 -0.1223729 -1.15634377     2.0115953 -1.07825134     0.1006269
-## 4  1.0000000 0.0  1.0744386  0.01103186     2.0115953 -1.04881550     0.1006269
-## 5  0.0000000 0.2  2.7488001  3.82387414    -0.7060845 -0.46961645     0.1006269
-## 6  0.3333333 0.2  0.6706192 -0.01103186    -0.7060845  1.28710870     0.1006269
-## 7  0.6666667 0.2 -1.5210896 -1.15634377    -0.7060845  0.24071175     0.1006269
-## 8  1.0000000 0.2 -0.8351375  0.01103186    -0.7060845 -0.24071175     0.1006269
-## 9  0.0000000 0.4  5.3191845  3.82387414     0.5465533  0.84813014     0.1006269
-## 10 0.3333333 0.4  0.3234361 -0.01103186     0.5465533 -0.31271225     0.1006269
-## 11 0.6666667 0.4 -0.6078059 -1.15634377     0.5465533 -0.09864226     0.1006269
-## 12 1.0000000 0.4  0.7568543  0.01103186     0.5465533  0.09864226     0.1006269
-## 13 0.0000000 0.6  3.8475642  3.82387414    -0.6347123  0.55777548     0.1006269
-## 14 0.3333333 0.6 -1.1028928 -0.01103186    -0.6347123 -0.55777548     0.1006269
-## 15 0.6666667 0.6 -2.6826131 -1.15634377    -0.6347123 -0.99218386     0.1006269
-## 16 1.0000000 0.6  2.8475577  0.01103186    -0.6347123  3.37061122     0.1006269
-## 17 0.0000000 0.8 -0.1070366  3.82387414    -1.7900061 -2.24153154     0.1006269
-## 18 0.3333333 0.8 -1.5804597 -0.01103186    -1.7900061  0.11995138     0.1006269
-## 19 0.6666667 0.8 -2.7470807 -1.15634377    -1.7900061  0.09864226     0.1006269
-## 20 1.0000000 0.8 -1.7769896  0.01103186    -1.7900061 -0.09864226     0.1006269
-## 21 0.0000000 1.0 -1.0527613  3.82387414     1.0777035 -6.05496578     0.1006269
-## 22 0.3333333 1.0  0.9620464 -0.01103186     1.0777035 -0.20525209     0.1006269
-## 23 0.6666667 1.0  1.8978192 -1.15634377     1.0777035  1.87583264     0.1006269
-## 24 1.0000000 1.0  1.3946143  0.01103186     1.0777035  0.20525209     0.1006269</code></pre>
+<pre><code>##            X   Y         Var Efecto fila Efecto columa    Residual Efecto Global
+## 1  0.0000000 0.0  2.18919156  -1.6907089     2.4393849  3.53766088     -2.097145
+## 2  0.3333333 0.0 -3.88335158  -0.1343331     2.4393849 -4.09125810     -2.097145
+## 3  0.6666667 0.0  1.74604671   0.1343331     2.4393849  1.26947407     -2.097145
+## 4  1.0000000 0.0  0.27135885   1.1985933     2.4393849 -1.26947407     -2.097145
+## 5  0.0000000 0.2 -5.10898025  -1.6907089    -0.2586434 -1.06248268     -2.097145
+## 6  0.3333333 0.2 -0.44164152  -0.1343331    -0.2586434  2.04848020     -2.097145
+## 7  0.6666667 0.2 -3.90262775   0.1343331    -0.2586434 -1.68117214     -2.097145
+## 8  1.0000000 0.2 -0.09471264   1.1985933    -0.2586434  1.06248268     -2.097145
+## 9  0.0000000 0.4 -2.67074194  -1.6907089     1.5362271 -0.41911488     -2.097145
+## 10 0.3333333 0.4  1.96109434  -0.1343331     1.5362271  2.65634555     -2.097145
+## 11 0.6666667 0.4 -0.74038392   0.1343331     1.5362271 -0.31379882     -2.097145
+## 12 1.0000000 0.4  0.95147400   1.1985933     1.5362271  0.31379882     -2.097145
+## 13 0.0000000 0.6 -3.38310030  -1.6907089    -1.0009371  1.40569100     -2.097145
+## 14 0.3333333 0.6 -3.17481203  -0.1343331    -1.0009371  0.05760342     -2.097145
+## 15 0.6666667 0.6 -3.02135276   0.1343331    -1.0009371 -0.05760342     -2.097145
+## 16 1.0000000 0.6 -3.33807864   1.1985933    -1.0009371 -1.43858959     -2.097145
+## 17 0.0000000 0.8 -4.74040787  -1.6907089    -0.9161044 -0.03644924     -2.097145
+## 18 0.3333333 0.8 -3.53860798  -0.1343331    -0.9161044 -0.39102519     -2.097145
+## 19 0.6666667 0.8 -2.84246743   0.1343331    -0.9161044  0.03644924     -2.097145
+## 20 1.0000000 0.8 -1.57935464   1.1985933    -0.9161044  0.23530174     -2.097145
+## 21 0.0000000 1.0 -3.50006497  -1.6907089     0.2651908  0.02259841     -2.097145
+## 22 0.3333333 1.0 -1.98888595  -0.1343331     0.2651908 -0.02259841     -2.097145
+## 23 0.6666667 1.0  2.10039000   0.1343331     0.2651908  3.79801142     -2.097145
+## 24 1.0000000 1.0 -0.88251371   1.1985933     0.2651908 -0.24915257     -2.097145</code></pre>
 <p>Validación de la descomposición</p>
 <div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="geoestadística-univariada-con-geor.html#cb296-1" aria-hidden="true" tabindex="-1"></a>valida <span class="ot">&lt;-</span> <span class="fu">cbind</span>(geo_data<span class="sc">$</span>Var,</span>
 <span id="cb296-2"><a href="geoestadística-univariada-con-geor.html#cb296-2" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto fila&quot;</span>]] <span class="sc">+</span></span>
@@ -1177,31 +1189,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb296-6"><a href="geoestadística-univariada-con-geor.html#cb296-6" aria-hidden="true" tabindex="-1"></a>valida <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(valida)</span>
 <span id="cb296-7"><a href="geoestadística-univariada-con-geor.html#cb296-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(valida) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;datos&quot;</span>, <span class="st">&quot;suma&quot;</span>)</span>
 <span id="cb296-8"><a href="geoestadística-univariada-con-geor.html#cb296-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(valida)</span></code></pre></div>
-<pre><code>##         datos       suma
-## 1   6.9849119  6.9849119
-## 2   4.2522208  4.2522208
-## 3  -0.1223729 -0.1223729
-## 4   1.0744386  1.0744386
-## 5   2.7488001  2.7488001
-## 6   0.6706192  0.6706192
-## 7  -1.5210896 -1.5210896
-## 8  -0.8351375 -0.8351375
-## 9   5.3191845  5.3191845
-## 10  0.3234361  0.3234361
-## 11 -0.6078059 -0.6078059
-## 12  0.7568543  0.7568543
-## 13  3.8475642  3.8475642
-## 14 -1.1028928 -1.1028928
-## 15 -2.6826131 -2.6826131
-## 16  2.8475577  2.8475577
-## 17 -0.1070366 -0.1070366
-## 18 -1.5804597 -1.5804597
-## 19 -2.7470807 -2.7470807
-## 20 -1.7769896 -1.7769896
-## 21 -1.0527613 -1.0527613
-## 22  0.9620464  0.9620464
-## 23  1.8978192  1.8978192
-## 24  1.3946143  1.3946143</code></pre>
+<pre><code>##          datos        suma
+## 1   2.18919156  2.18919156
+## 2  -3.88335158 -3.88335158
+## 3   1.74604671  1.74604671
+## 4   0.27135885  0.27135885
+## 5  -5.10898025 -5.10898025
+## 6  -0.44164152 -0.44164152
+## 7  -3.90262775 -3.90262775
+## 8  -0.09471264 -0.09471264
+## 9  -2.67074194 -2.67074194
+## 10  1.96109434  1.96109434
+## 11 -0.74038392 -0.74038392
+## 12  0.95147400  0.95147400
+## 13 -3.38310030 -3.38310030
+## 14 -3.17481203 -3.17481203
+## 15 -3.02135276 -3.02135276
+## 16 -3.33807864 -3.33807864
+## 17 -4.74040787 -4.74040787
+## 18 -3.53860798 -3.53860798
+## 19 -2.84246743 -2.84246743
+## 20 -1.57935464 -1.57935464
+## 21 -3.50006497 -3.50006497
+## 22 -1.98888595 -1.98888595
+## 23  2.10039000  2.10039000
+## 24 -0.88251371 -0.88251371</code></pre>
 
 </div>
 </div>
