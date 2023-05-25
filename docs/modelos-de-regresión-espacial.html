@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 4 Modelos de regresión espacial | Patrones Puntuales</title>
-  <meta name="description" content="Capítulo 4 Modelos de regresión espacial | Patrones Puntuales" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <title>Capítulo 6 Modelos de regresión espacial | Cuadernos Estadística Espacial</title>
+  <meta name="description" content="Capítulo 6 Modelos de regresión espacial | Cuadernos Estadística Espacial" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 4 Modelos de regresión espacial | Patrones Puntuales" />
+  <meta property="og:title" content="Capítulo 6 Modelos de regresión espacial | Cuadernos Estadística Espacial" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 4 Modelos de regresión espacial | Patrones Puntuales" />
+  <meta name="twitter:title" content="Capítulo 6 Modelos de regresión espacial | Cuadernos Estadística Espacial" />
   
   
   
@@ -23,15 +23,14 @@
 <meta name="author" content="Martha Bohorquez" />
 
 
-<meta name="date" content="2022-12-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="spatial-modeling-leukemia.html"/>
-<link rel="next" href="ilustración-del-kriging-simple-espacio-tiempo.html"/>
+<link rel="prev" href="simulación-to-do.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,13 +51,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -126,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -147,147 +143,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#indice"><i class="fa fa-check"></i><b>1.1</b> Indice</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="simulación-proceso-espacio-temporal.html"><a href="simulación-proceso-espacio-temporal.html"><i class="fa fa-check"></i><b>2</b> Simulación Proceso Espacio Temporal</a>
+<li class="chapter" data-level="2" data-path="geoestadística-con-sgeostat.html"><a href="geoestadística-con-sgeostat.html"><i class="fa fa-check"></i><b>2</b> Geoestadística con <code>sgeostat</code></a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="simulación-proceso-espacio-temporal.html"><a href="simulación-proceso-espacio-temporal.html#funciones"><i class="fa fa-check"></i><b>2.1</b> Funciones</a></li>
-<li class="chapter" data-level="2.2" data-path="simulación-proceso-espacio-temporal.html"><a href="simulación-proceso-espacio-temporal.html#ch-1-no-separable"><i class="fa fa-check"></i><b>2.2</b> CH 1 no separable</a></li>
-<li class="chapter" data-level="2.3" data-path="simulación-proceso-espacio-temporal.html"><a href="simulación-proceso-espacio-temporal.html#ch3-no-separable"><i class="fa fa-check"></i><b>2.3</b> CH3 no separable</a></li>
-<li class="chapter" data-level="2.4" data-path="simulación-proceso-espacio-temporal.html"><a href="simulación-proceso-espacio-temporal.html#ch-4"><i class="fa fa-check"></i><b>2.4</b> CH 4</a></li>
+<li class="chapter" data-level="2.1" data-path="geoestadística-con-sgeostat.html"><a href="geoestadística-con-sgeostat.html#data-load"><i class="fa fa-check"></i><b>2.1</b> Data Load</a></li>
+<li class="chapter" data-level="2.2" data-path="geoestadística-con-sgeostat.html"><a href="geoestadística-con-sgeostat.html#libraries"><i class="fa fa-check"></i><b>2.2</b> Libraries</a></li>
+<li class="chapter" data-level="2.3" data-path="geoestadística-con-sgeostat.html"><a href="geoestadística-con-sgeostat.html#including-plots"><i class="fa fa-check"></i><b>2.3</b> Including Plots</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html"><i class="fa fa-check"></i><b>3</b> Spatial modeling leukemia</a>
+<li class="chapter" data-level="3" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html"><i class="fa fa-check"></i><b>3</b> Geoestadística univariada con <code>geoR</code></a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#mortality"><i class="fa fa-check"></i><b>3.1</b> <strong>Mortality</strong></a>
+<li class="chapter" data-level="3.1" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#parte-descriptiva"><i class="fa fa-check"></i><b>3.1</b> Parte descriptiva</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#packages-mortality"><i class="fa fa-check"></i><b>3.1.1</b> <em>Packages Mortality</em></a></li>
-<li class="chapter" data-level="3.1.2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#code-mortality"><i class="fa fa-check"></i><b>3.1.2</b> <em>Code Mortality</em></a></li>
+<li class="chapter" data-level="3.1.1" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#librerías"><i class="fa fa-check"></i><b>3.1.1</b> Librerías</a></li>
+<li class="chapter" data-level="3.1.2" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#lectura-de-datos"><i class="fa fa-check"></i><b>3.1.2</b> Lectura de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#incidence"><i class="fa fa-check"></i><b>3.2</b> Incidence</a>
+<li class="chapter" data-level="3.2" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#geo_data"><i class="fa fa-check"></i><b>3.2</b> GEO_Data</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#packages-incidence"><i class="fa fa-check"></i><b>3.2.1</b> <strong>Packages Incidence</strong></a></li>
-<li class="chapter" data-level="3.2.2" data-path="spatial-modeling-leukemia.html"><a href="spatial-modeling-leukemia.html#code-incidence"><i class="fa fa-check"></i><b>3.2.2</b> <em>Code Incidence</em></a></li>
+<li class="chapter" data-level="3.2.1" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#convertir-aquifer-a-un-objeto-geodata-geor-obj"><i class="fa fa-check"></i><b>3.2.1</b> Convertir aquifer a un objeto geodata (geoR obj)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#gráfico-de-objeto-geodata"><i class="fa fa-check"></i><b>3.2.2</b> Gráfico de objeto geodata</a></li>
+<li class="chapter" data-level="3.2.3" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#gráficos-descriptivos-interpolación"><i class="fa fa-check"></i><b>3.2.3</b> Gráficos descriptivos interpolación</a></li>
+<li class="chapter" data-level="3.2.4" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#gráficos-de-contorno"><i class="fa fa-check"></i><b>3.2.4</b> Gráficos de contorno</a></li>
+<li class="chapter" data-level="3.2.5" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#funciones-y-gráficas-a-partir-de-la-función-outer"><i class="fa fa-check"></i><b>3.2.5</b> Funciones y gráficas a partir de la función outer</a></li>
 </ul></li>
+<li class="chapter" data-level="3.3" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#modelando-la-media-con-regresión-polinomial"><i class="fa fa-check"></i><b>3.3</b> Modelando la media con regresión polinomial</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#primer-modelo"><i class="fa fa-check"></i><b>3.3.1</b> Primer modelo</a></li>
+<li class="chapter" data-level="3.3.2" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#segundo-modelo"><i class="fa fa-check"></i><b>3.3.2</b> Segundo modelo</a></li>
+<li class="chapter" data-level="3.3.3" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#tercer-modelo"><i class="fa fa-check"></i><b>3.3.3</b> Tercer modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html"><i class="fa fa-check"></i><b>4</b> Modelos de regresión espacial</a>
+<li class="chapter" data-level="3.4" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#estimación-del-semivariograma-empírico"><i class="fa fa-check"></i><b>3.4</b> Estimación del semivariograma empírico</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#estudio-de-mercadeo"><i class="fa fa-check"></i><b>4.1</b> Estudio de Mercadeo</a></li>
-<li class="chapter" data-level="4.2" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#paquetes"><i class="fa fa-check"></i><b>4.2</b> Paquetes</a></li>
-<li class="chapter" data-level="4.3" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#lectura-de-datos"><i class="fa fa-check"></i><b>4.3</b> Lectura de Datos</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#cruce-de-información-y-arreglo-de-coordenadas"><i class="fa fa-check"></i><b>4.3.1</b> Cruce de información y arreglo de coordenadas</a></li>
+<li class="chapter" data-level="3.4.1" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#explorando-estimación-clásica-removiendo-tendencia"><i class="fa fa-check"></i><b>3.4.1</b> Explorando estimación clásica, removiendo tendencia</a></li>
+<li class="chapter" data-level="3.4.2" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#explorando-estimación-resistente-a-datos-atípicos-y-removiendo-tendencia"><i class="fa fa-check"></i><b>3.4.2</b> Explorando estimación resistente a datos atípicos y removiendo tendencia</a></li>
+<li class="chapter" data-level="3.4.3" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#explorando-anisotropía"><i class="fa fa-check"></i><b>3.4.3</b> Explorando anisotropía</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#matriz-de-vecindades"><i class="fa fa-check"></i><b>4.4</b> Matriz de vecindades</a></li>
-<li class="chapter" data-level="4.5" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#mapa-de-valores-observados"><i class="fa fa-check"></i><b>4.5</b> Mapa de valores observados</a></li>
-<li class="chapter" data-level="4.6" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#pruebas-de-autocorrelación"><i class="fa fa-check"></i><b>4.6</b> Pruebas de Autocorrelación</a></li>
-<li class="chapter" data-level="4.7" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#mapas"><i class="fa fa-check"></i><b>4.7</b> Mapas</a></li>
-<li class="chapter" data-level="4.8" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#resumen-de-modelos"><i class="fa fa-check"></i><b>4.8</b> Resumen de modelos</a></li>
-<li class="chapter" data-level="4.9" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#calculo-de-varibles-significativas"><i class="fa fa-check"></i><b>4.9</b> Calculo de varibles significativas</a></li>
-<li class="chapter" data-level="4.10" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#mapa-estimado"><i class="fa fa-check"></i><b>4.10</b> Mapa Estimado</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="ilustración-del-kriging-simple-espacio-tiempo.html"><a href="ilustración-del-kriging-simple-espacio-tiempo.html"><i class="fa fa-check"></i><b>5</b> Ilustración del kriging simple espacio tiempo</a>
+<li class="chapter" data-level="3.5" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#estimación-teórica-del-semivariograma"><i class="fa fa-check"></i><b>3.5</b> Estimación teórica del semivariograma</a></li>
+<li class="chapter" data-level="3.6" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#resultados"><i class="fa fa-check"></i><b>3.6</b> Resultados</a></li>
+<li class="chapter" data-level="3.7" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#pulimiento-de-medianas"><i class="fa fa-check"></i><b>3.7</b> Pulimiento de medianas</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="ilustración-del-kriging-simple-espacio-tiempo.html"><a href="ilustración-del-kriging-simple-espacio-tiempo.html#librerías"><i class="fa fa-check"></i><b>5.1</b> librerías</a></li>
-<li class="chapter" data-level="5.2" data-path="ilustración-del-kriging-simple-espacio-tiempo.html"><a href="ilustración-del-kriging-simple-espacio-tiempo.html#simulación-no-condicional-de-una-realización-de-un-campo-aleatorio-espacio-temporal-no-separable-usando-el-modelo-de-covarianza-cressie1"><i class="fa fa-check"></i><b>5.2</b> <strong>Simulación no condicional de una realización de un campo aleatorio espacio temporal no separable usando el modelo de covarianza cressie1</strong></a></li>
-<li class="chapter" data-level="5.3" data-path="ilustración-del-kriging-simple-espacio-tiempo.html"><a href="ilustración-del-kriging-simple-espacio-tiempo.html#algunas-funciones-de-covarianza-espacio-temporal-no-separables"><i class="fa fa-check"></i><b>5.3</b> <strong>Algunas funciones de covarianza espacio temporal no separables</strong></a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="ilustración-del-kriging-simple-espacio-tiempo.html"><a href="ilustración-del-kriging-simple-espacio-tiempo.html#c-r-e-s-s-i-e---h-u-a-n-g-1999"><i class="fa fa-check"></i><b>5.3.1</b> C R E S S I E - H U A N G (1999)</a></li>
-<li class="chapter" data-level="5.3.2" data-path="ilustración-del-kriging-simple-espacio-tiempo.html"><a href="ilustración-del-kriging-simple-espacio-tiempo.html#gneiting-2002-combina-fun1-fun2-y-psi-en-gneiting"><i class="fa fa-check"></i><b>5.3.2</b> Gneiting (2002), combina fun1, fun2 y psi en Gneiting</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html"><i class="fa fa-check"></i><b>6</b> Pulimiento de medianas</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#cargar-librerias"><i class="fa fa-check"></i><b>6.1</b> Cargar librerias</a></li>
-<li class="chapter" data-level="6.2" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#grilla-de-las-ubicaciones-espaciales."><i class="fa fa-check"></i><b>6.2</b> Grilla de las ubicaciones espaciales.</a></li>
-<li class="chapter" data-level="6.3" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#definición-de-objeto-vgm"><i class="fa fa-check"></i><b>6.3</b> Definición de objeto VGM</a></li>
-<li class="chapter" data-level="6.4" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#matriz-de-varianza-dadas-coordenadas."><i class="fa fa-check"></i><b>6.4</b> Matriz de varianza dadas coordenadas.</a></li>
-<li class="chapter" data-level="6.5" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#simulación."><i class="fa fa-check"></i><b>6.5</b> Simulación.</a></li>
-<li class="chapter" data-level="6.6" data-path="pulimiento-de-medianas.html"><a href="pulimiento-de-medianas.html#pulimiento-de-medianas-1"><i class="fa fa-check"></i><b>6.6</b> Pulimiento de medianas</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="introducción-proceso-espacial-bivariado.html"><a href="introducción-proceso-espacial-bivariado.html"><i class="fa fa-check"></i><b>7</b> Introducción proceso espacial bivariado</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="introducción-proceso-espacial-bivariado.html"><a href="introducción-proceso-espacial-bivariado.html#librerías-1"><i class="fa fa-check"></i><b>7.1</b> Librerías</a></li>
-<li class="chapter" data-level="7.2" data-path="introducción-proceso-espacial-bivariado.html"><a href="introducción-proceso-espacial-bivariado.html#ubicaciones-en-este-caso-se-supone-que-ambos-procesos-están-observados-en-los-mismos-lugares"><i class="fa fa-check"></i><b>7.2</b> Ubicaciones: En este caso se supone que ambos procesos están observados en los mismos lugares</a></li>
-<li class="chapter" data-level="7.3" data-path="introducción-proceso-espacial-bivariado.html"><a href="introducción-proceso-espacial-bivariado.html#modelo-lineal-de-coregionalización"><i class="fa fa-check"></i><b>7.3</b> Modelo lineal de coregionalización</a></li>
-<li class="chapter" data-level="7.4" data-path="introducción-proceso-espacial-bivariado.html"><a href="introducción-proceso-espacial-bivariado.html#simulación-de-un-proceso-espacial-gaussiano-bivariado"><i class="fa fa-check"></i><b>7.4</b> Simulación de un proceso espacial Gaussiano bivariado</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="geoestadística-con-sgeostat.html"><a href="geoestadística-con-sgeostat.html"><i class="fa fa-check"></i><b>8</b> Geoestadística con sgeostat</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="geoestadística-con-sgeostat.html"><a href="geoestadística-con-sgeostat.html#data-load"><i class="fa fa-check"></i><b>8.1</b> Data Load</a></li>
-<li class="chapter" data-level="8.2" data-path="geoestadística-con-sgeostat.html"><a href="geoestadística-con-sgeostat.html#libraries"><i class="fa fa-check"></i><b>8.2</b> Libraries</a></li>
-<li class="chapter" data-level="8.3" data-path="geoestadística-con-sgeostat.html"><a href="geoestadística-con-sgeostat.html#including-plots"><i class="fa fa-check"></i><b>8.3</b> Including Plots</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="cokriging.html"><a href="cokriging.html"><i class="fa fa-check"></i><b>9</b> Cokriging</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="cokriging.html"><a href="cokriging.html#librerías-2"><i class="fa fa-check"></i><b>9.1</b> Librerías</a></li>
-<li class="chapter" data-level="9.2" data-path="cokriging.html"><a href="cokriging.html#descripción-de-los-datos"><i class="fa fa-check"></i><b>9.2</b> Descripción de los datos</a></li>
-<li class="chapter" data-level="9.3" data-path="cokriging.html"><a href="cokriging.html#matrices-de-coregionalización."><i class="fa fa-check"></i><b>9.3</b> Matrices de coregionalización.</a>
-<ul>
-<li class="chapter" data-level="9.3.1" data-path="cokriging.html"><a href="cokriging.html#matriz-definida-positiva-para-el-modelo-esférico."><i class="fa fa-check"></i><b>9.3.1</b> Matriz definida positiva para el modelo Esférico.</a></li>
-<li class="chapter" data-level="9.3.2" data-path="cokriging.html"><a href="cokriging.html#matriz-definida-positiva-para-el-modelo-efecto-hueco."><i class="fa fa-check"></i><b>9.3.2</b> Matriz definida positiva para el modelo efecto Hueco.</a></li>
-</ul></li>
-<li class="chapter" data-level="9.4" data-path="cokriging.html"><a href="cokriging.html#definición-de-objeto-en-gstat"><i class="fa fa-check"></i><b>9.4</b> Definición de objeto en gstat</a>
-<ul>
-<li class="chapter" data-level="9.4.1" data-path="cokriging.html"><a href="cokriging.html#semivariogramas-univariados"><i class="fa fa-check"></i><b>9.4.1</b> Semivariogramas univariados</a></li>
-<li class="chapter" data-level="9.4.2" data-path="cokriging.html"><a href="cokriging.html#semivarogramas-cruzados-bivariados"><i class="fa fa-check"></i><b>9.4.2</b> Semivarogramas cruzados (Bivariados)</a></li>
-<li class="chapter" data-level="9.4.3" data-path="cokriging.html"><a href="cokriging.html#gstat"><i class="fa fa-check"></i><b>9.4.3</b> gstat</a></li>
-<li class="chapter" data-level="9.4.4" data-path="cokriging.html"><a href="cokriging.html#estimación-del-semivariograma"><i class="fa fa-check"></i><b>9.4.4</b> Estimación del semivariograma</a></li>
-<li class="chapter" data-level="9.4.5" data-path="cokriging.html"><a href="cokriging.html#mapas-de-predicción-de-o3-con-las-covariables-espaciales-no2-y-nox"><i class="fa fa-check"></i><b>9.4.5</b> Mapas de predicción de O3 con las covariables espaciales NO2 y NOX</a></li>
+<li class="chapter" data-level="3.7.1" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#cargar-librerias"><i class="fa fa-check"></i><b>3.7.1</b> Cargar librerias</a></li>
+<li class="chapter" data-level="3.7.2" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#grilla-de-las-ubicaciones-espaciales."><i class="fa fa-check"></i><b>3.7.2</b> Grilla de las ubicaciones espaciales.</a></li>
+<li class="chapter" data-level="3.7.3" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#definición-de-objeto-vgm"><i class="fa fa-check"></i><b>3.7.3</b> Definición de objeto VGM</a></li>
+<li class="chapter" data-level="3.7.4" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#matriz-de-varianza-dadas-coordenadas."><i class="fa fa-check"></i><b>3.7.4</b> Matriz de varianza dadas coordenadas.</a></li>
+<li class="chapter" data-level="3.7.5" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#simulación."><i class="fa fa-check"></i><b>3.7.5</b> Simulación.</a></li>
+<li class="chapter" data-level="3.7.6" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#pulimiento-de-medianas-1"><i class="fa fa-check"></i><b>3.7.6</b> Pulimiento de medianas</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="introducción-al-proceso-espacial-bivariado.html"><a href="introducción-al-proceso-espacial-bivariado.html"><i class="fa fa-check"></i><b>10</b> Introducción al proceso espacial bivariado</a>
+<li class="chapter" data-level="4" data-path="kriging.html"><a href="kriging.html"><i class="fa fa-check"></i><b>4</b> Kriging</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="introducción-al-proceso-espacial-bivariado.html"><a href="introducción-al-proceso-espacial-bivariado.html#dependencias"><i class="fa fa-check"></i><b>10.1</b> Dependencias</a></li>
-<li class="chapter" data-level="10.2" data-path="introducción-al-proceso-espacial-bivariado.html"><a href="introducción-al-proceso-espacial-bivariado.html#ubicaciones"><i class="fa fa-check"></i><b>10.2</b> Ubicaciones:</a></li>
-<li class="chapter" data-level="10.3" data-path="introducción-al-proceso-espacial-bivariado.html"><a href="introducción-al-proceso-espacial-bivariado.html#modelo-lineal-de-coregionalización-1"><i class="fa fa-check"></i><b>10.3</b> Modelo lineal de coregionalización</a>
-<ul>
-<li class="chapter" data-level="10.3.1" data-path="introducción-al-proceso-espacial-bivariado.html"><a href="introducción-al-proceso-espacial-bivariado.html#determinante-de-la-matriz-de-covarianzas"><i class="fa fa-check"></i><b>10.3.1</b> Determinante de la matriz de covarianzas</a></li>
+<li class="chapter" data-level="4.1" data-path="kriging.html"><a href="kriging.html#introducción-kriging"><i class="fa fa-check"></i><b>4.1</b> Introducción Kriging</a></li>
+<li class="chapter" data-level="4.2" data-path="kriging.html"><a href="kriging.html#kriging-simple"><i class="fa fa-check"></i><b>4.2</b> Kriging Simple</a></li>
+<li class="chapter" data-level="4.3" data-path="kriging.html"><a href="kriging.html#kriging-ordinario"><i class="fa fa-check"></i><b>4.3</b> Kriging Ordinario</a></li>
+<li class="chapter" data-level="4.4" data-path="kriging.html"><a href="kriging.html#kriging-universal"><i class="fa fa-check"></i><b>4.4</b> Kriging Universal</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="introducción-al-proceso-espacial-bivariado.html"><a href="introducción-al-proceso-espacial-bivariado.html#simulación-de-un-proceso-espacial-gaussiano-bivariado-1"><i class="fa fa-check"></i><b>10.4</b> simulación de un proceso espacial Gaussiano bivariado</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="ilustración-del-kriging-simple-espacio-tiempo-1.html"><a href="ilustración-del-kriging-simple-espacio-tiempo-1.html"><i class="fa fa-check"></i><b>11</b> Ilustración del kriging simple espacio tiempo</a>
+<li class="chapter" data-level="5" data-path="simulación-to-do.html"><a href="simulación-to-do.html"><i class="fa fa-check"></i><b>5</b> Simulación (TO-DO)</a></li>
+<li class="chapter" data-level="6" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html"><i class="fa fa-check"></i><b>6</b> Modelos de regresión espacial</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="ilustración-del-kriging-simple-espacio-tiempo-1.html"><a href="ilustración-del-kriging-simple-espacio-tiempo-1.html#dependencias-1"><i class="fa fa-check"></i><b>11.1</b> Dependencias</a></li>
-<li class="chapter" data-level="11.2" data-path="ilustración-del-kriging-simple-espacio-tiempo-1.html"><a href="ilustración-del-kriging-simple-espacio-tiempo-1.html#simulación-no-condicional-de-una-realización-de-un-campo-aleatorio-espacio-temporal-no-separable-usando-el-modelo-de-covarianza-cressie1-1"><i class="fa fa-check"></i><b>11.2</b> Simulación no condicional de una realización de un campo aleatorio espacio temporal no separable usando el modelo de covarianza cressie1</a></li>
-<li class="chapter" data-level="11.3" data-path="ilustración-del-kriging-simple-espacio-tiempo-1.html"><a href="ilustración-del-kriging-simple-espacio-tiempo-1.html#algunas-funciones-de-covarianza-espacio-temporal-no-separables-1"><i class="fa fa-check"></i><b>11.3</b> Algunas funciones de covarianza espacio temporal no separables</a>
+<li class="chapter" data-level="6.1" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#estudio-de-mercadeo"><i class="fa fa-check"></i><b>6.1</b> Estudio de Mercadeo</a></li>
+<li class="chapter" data-level="6.2" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#paquetes"><i class="fa fa-check"></i><b>6.2</b> Paquetes</a></li>
+<li class="chapter" data-level="6.3" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#lectura-de-datos-1"><i class="fa fa-check"></i><b>6.3</b> Lectura de Datos</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="ilustración-del-kriging-simple-espacio-tiempo-1.html"><a href="ilustración-del-kriging-simple-espacio-tiempo-1.html#c-r-e-s-s-i-e---h-u-a-n-g-1999-1"><i class="fa fa-check"></i><b>11.3.1</b> C R E S S I E - H U A N G (1999)</a></li>
-<li class="chapter" data-level="11.3.2" data-path="ilustración-del-kriging-simple-espacio-tiempo-1.html"><a href="ilustración-del-kriging-simple-espacio-tiempo-1.html#gneiting-2002-combina-fun1-fun2-y-psi-en-gneiting-1"><i class="fa fa-check"></i><b>11.3.2</b> Gneiting (2002), combina fun1, fun2 y psi en Gneiting</a></li>
+<li class="chapter" data-level="6.3.1" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#cruce-de-información-y-arreglo-de-coordenadas"><i class="fa fa-check"></i><b>6.3.1</b> Cruce de información y arreglo de coordenadas</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html"><i class="fa fa-check"></i><b>12</b> Análisis de datos funcionales</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#análisis-de-datos-funcionales-adf---análisis-exploratorio"><i class="fa fa-check"></i><b>12.1</b> Análisis de datos funcionales (ADF) - Análisis exploratorio</a>
-<ul>
-<li class="chapter" data-level="12.1.1" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#datos-funcionales"><i class="fa fa-check"></i><b>12.1.1</b> Datos funcionales</a></li>
-<li class="chapter" data-level="12.1.2" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#análisis-gráfico-y-detección-de-outliers"><i class="fa fa-check"></i><b>12.1.2</b> Análisis gráfico y detección de outliers</a></li>
-</ul></li>
-<li class="chapter" data-level="12.2" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#análisis-de-datos-funcionales-adf---análisis-gráfico"><i class="fa fa-check"></i><b>12.2</b> Análisis de datos funcionales (ADF) - Análisis gráfico</a>
-<ul>
-<li class="chapter" data-level="12.2.1" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#deteccción-de-curvas-atípicas"><i class="fa fa-check"></i><b>12.2.1</b> Deteccción de curvas atípicas</a></li>
-<li class="chapter" data-level="12.2.2" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#otras-medidas-de-resumen"><i class="fa fa-check"></i><b>12.2.2</b> Otras medidas de resumen</a></li>
-<li class="chapter" data-level="12.2.3" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#análisis-en-componentes-principales-acpf"><i class="fa fa-check"></i><b>12.2.3</b> Análisis en Componentes Principales (ACPF)</a></li>
-</ul></li>
-<li class="chapter" data-level="12.3" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#modelos-lineales"><i class="fa fa-check"></i><b>12.3</b> Modelos lineales</a>
-<ul>
-<li class="chapter" data-level="12.3.1" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#regresión-lineal-funcional-con-respuesta-escalar"><i class="fa fa-check"></i><b>12.3.1</b> Regresión lineal funcional con respuesta escalar</a></li>
-<li class="chapter" data-level="12.3.2" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#estimación-de-los-coeficientes-beta-con-regularización"><i class="fa fa-check"></i><b>12.3.2</b> Estimación de los coeficientes <span class="math inline">\(\beta\)</span> con regularización</a></li>
-<li class="chapter" data-level="12.3.3" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#prueba-f-para-ajuste-del-modelo-a-través-de-permutaciones"><i class="fa fa-check"></i><b>12.3.3</b> Prueba <span class="math inline">\(F\)</span> para ajuste del modelo a través de permutaciones</a></li>
-</ul></li>
-<li class="chapter" data-level="12.4" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#modelos-lineales-funcionales-regresión-funcional"><i class="fa fa-check"></i><b>12.4</b> Modelos lineales funcionales (Regresión Funcional)</a>
-<ul>
-<li class="chapter" data-level="12.4.1" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#regresión-lineal-funcional-con-respuesta-funcional-anova-funcional"><i class="fa fa-check"></i><b>12.4.1</b> Regresión lineal funcional con respuesta funcional (ANOVA Funcional)</a></li>
-<li class="chapter" data-level="12.4.2" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#estimación---mínimos-cuadrados-ordinarios"><i class="fa fa-check"></i><b>12.4.2</b> Estimación - Mínimos cuadrados ordinarios</a></li>
-<li class="chapter" data-level="12.4.3" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#pruebas-de-hipótesis---prueba-de-shen-faraway"><i class="fa fa-check"></i><b>12.4.3</b> Pruebas de hipótesis - Prueba de Shen &amp; Faraway</a></li>
-<li class="chapter" data-level="12.4.4" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#ejemplo"><i class="fa fa-check"></i><b>12.4.4</b> Ejemplo</a></li>
-</ul></li>
-<li class="chapter" data-level="12.5" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#estadística-espacial"><i class="fa fa-check"></i><b>12.5</b> Estadística Espacial</a>
-<ul>
-<li class="chapter" data-level="12.5.1" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#metodología-de-predicción-espacial-con-datos-funcionales"><i class="fa fa-check"></i><b>12.5.1</b> Metodología de predicción espacial con datos funcionales</a></li>
-<li class="chapter" data-level="12.5.2" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#ilustración"><i class="fa fa-check"></i><b>12.5.2</b> Ilustración</a></li>
-</ul></li>
-<li class="chapter" data-level="12.6" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#patrones-puntuales"><i class="fa fa-check"></i><b>12.6</b> Patrones Puntuales</a>
-<ul>
-<li class="chapter" data-level="12.6.1" data-path="análisis-de-datos-funcionales.html"><a href="análisis-de-datos-funcionales.html#datos"><i class="fa fa-check"></i><b>12.6.1</b> Datos</a></li>
-</ul></li>
+<li class="chapter" data-level="6.4" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#matriz-de-vecindades"><i class="fa fa-check"></i><b>6.4</b> Matriz de vecindades</a></li>
+<li class="chapter" data-level="6.5" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#mapa-de-valores-observados"><i class="fa fa-check"></i><b>6.5</b> Mapa de valores observados</a></li>
+<li class="chapter" data-level="6.6" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#pruebas-de-autocorrelación"><i class="fa fa-check"></i><b>6.6</b> Pruebas de Autocorrelación</a></li>
+<li class="chapter" data-level="6.7" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#mapas"><i class="fa fa-check"></i><b>6.7</b> Mapas</a></li>
+<li class="chapter" data-level="6.8" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#resumen-de-modelos"><i class="fa fa-check"></i><b>6.8</b> Resumen de modelos</a></li>
+<li class="chapter" data-level="6.9" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#calculo-de-varibles-significativas"><i class="fa fa-check"></i><b>6.9</b> Calculo de varibles significativas</a></li>
+<li class="chapter" data-level="6.10" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#mapa-estimado"><i class="fa fa-check"></i><b>6.10</b> Mapa Estimado</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -300,7 +223,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Patrones Puntuales</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cuadernos Estadística Espacial</a>
           </h1>
         </div>
 
@@ -308,43 +231,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="modelos-de-regresión-espacial" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Capítulo 4</span> Modelos de regresión espacial<a href="modelos-de-regresión-espacial.html#modelos-de-regresión-espacial" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="estudio-de-mercadeo" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Estudio de Mercadeo<a href="modelos-de-regresión-espacial.html#estudio-de-mercadeo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="modelos-de-regresión-espacial" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Capítulo 6</span> Modelos de regresión espacial<a href="modelos-de-regresión-espacial.html#modelos-de-regresión-espacial" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="estudio-de-mercadeo" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Estudio de Mercadeo<a href="modelos-de-regresión-espacial.html#estudio-de-mercadeo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se comparan varios tipos de modelos de regresión espacial para ver con cual se obtiene el mejor ajuste. Se consideran modelos autoregresivos y de medias móvviles así como su combinación.</p>
 </div>
-<div id="paquetes" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Paquetes<a href="modelos-de-regresión-espacial.html#paquetes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="modelos-de-regresión-espacial.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb148-2"><a href="modelos-de-regresión-espacial.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
-<span id="cb148-3"><a href="modelos-de-regresión-espacial.html#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<div id="paquetes" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Paquetes<a href="modelos-de-regresión-espacial.html#paquetes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="modelos-de-regresión-espacial.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb300-2"><a href="modelos-de-regresión-espacial.html#cb300-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb300-3"><a href="modelos-de-regresión-espacial.html#cb300-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:vcdExtra&#39;:
-## 
-##     summarise</code></pre>
-<pre><code>## The following object is masked from &#39;package:car&#39;:
-## 
-##     recode</code></pre>
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:
 ## 
 ##     filter, lag</code></pre>
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="modelos-de-regresión-espacial.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgdal)</span>
-<span id="cb154-2"><a href="modelos-de-regresión-espacial.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maptools)</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="modelos-de-regresión-espacial.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgdal)</span></code></pre></div>
+<pre><code>## Please note that rgdal will be retired during 2023,
+## plan transition to sf/stars/terra functions using GDAL and PROJ
+## at your earliest convenience.
+## See https://r-spatial.org/r/2022/04/12/evolution.html and https://github.com/r-spatial/evolution
+## rgdal: version: 1.6-6, (SVN revision 1201)
+## Geospatial Data Abstraction Library extensions to R successfully loaded
+## Loaded GDAL runtime: GDAL 3.4.1, released 2021/12/27
+## Path to GDAL shared files: /usr/share/gdal
+## GDAL binary built with GEOS: TRUE 
+## Loaded PROJ runtime: Rel. 8.2.1, January 1st, 2022, [PJ_VERSION: 821]
+## Path to PROJ shared files: /home/jncc/.local/share/proj:/usr/share/proj
+## PROJ CDN enabled: FALSE
+## Linking to sp version:1.6-0
+## To mute warnings of possible GDAL/OSR exportToProj4() degradation,
+## use options(&quot;rgdal_show_exportToProj4_warnings&quot;=&quot;none&quot;) before loading sp or rgdal.</code></pre>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="modelos-de-regresión-espacial.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maptools)</span></code></pre></div>
 <pre><code>## Checking rgeos availability: TRUE
 ## Please note that &#39;maptools&#39; will be retired during 2023,
 ## plan transition at your earliest convenience;
 ## some functionality will be moved to &#39;sp&#39;.</code></pre>
-<pre><code>## 
-## Attaching package: &#39;maptools&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:car&#39;:
-## 
-##     pointLabel</code></pre>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="modelos-de-regresión-espacial.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GISTools)</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="modelos-de-regresión-espacial.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GISTools)</span></code></pre></div>
 <pre><code>## Loading required package: RColorBrewer</code></pre>
 <pre><code>## Loading required package: MASS</code></pre>
 <pre><code>## 
@@ -353,28 +280,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ##     select</code></pre>
 <pre><code>## Loading required package: rgeos</code></pre>
-<pre><code>## rgeos version: 0.6-1, (SVN revision 692)
+<pre><code>## rgeos version: 0.6-3, (SVN revision 696)
 ##  GEOS runtime version: 3.10.2-CAPI-1.16.0 
-##  Please note that rgeos will be retired during 2023,
-## plan transition to sf functions using GEOS at your earliest convenience.
+##  Please note that rgeos will be retired during October 2023,
+## plan transition to sf or terra functions using GEOS at your earliest convenience.
+## See https://r-spatial.org/r/2023/05/15/evolution4.html for details.
 ##  GEOS using OverlayNG
-##  Linking to sp version: 1.5-1 
+##  Linking to sp version: 1.6-0 
 ##  Polygon checking: TRUE</code></pre>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="modelos-de-regresión-espacial.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
-<span id="cb165-2"><a href="modelos-de-regresión-espacial.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb165-3"><a href="modelos-de-regresión-espacial.html#cb165-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb165-4"><a href="modelos-de-regresión-espacial.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb165-5"><a href="modelos-de-regresión-espacial.html#cb165-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;rgeos&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     symdiff</code></pre>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="modelos-de-regresión-espacial.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span></code></pre></div>
+<pre><code>## Loading required package: spData</code></pre>
+<pre><code>## To access larger datasets in this package, install the spDataLarge package with:
+## `install.packages(&#39;spDataLarge&#39;, repos=&#39;https://nowosad.github.io/drat/&#39;, type=&#39;source&#39;)`</code></pre>
+<pre><code>## Loading required package: sf</code></pre>
+<pre><code>## Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE</code></pre>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="modelos-de-regresión-espacial.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb322-2"><a href="modelos-de-regresión-espacial.html#cb322-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<pre><code>## Loading required package: carData</code></pre>
+<pre><code>## 
+## Attaching package: &#39;car&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:maptools&#39;:
+## 
+##     pointLabel</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     recode</code></pre>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="modelos-de-regresión-espacial.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb327-2"><a href="modelos-de-regresión-espacial.html#cb327-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;psych&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:ggplot2&#39;:
-## 
-##     %+%, alpha</code></pre>
 <pre><code>## The following object is masked from &#39;package:car&#39;:
 ## 
 ##     logit</code></pre>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="modelos-de-regresión-espacial.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgdal)</span>
-<span id="cb169-2"><a href="modelos-de-regresión-espacial.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoClass)</span></code></pre></div>
+<pre><code>## The following object is masked from &#39;package:fields&#39;:
+## 
+##     describe</code></pre>
+<pre><code>## The following objects are masked from &#39;package:ggplot2&#39;:
+## 
+##     %+%, alpha</code></pre>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="modelos-de-regresión-espacial.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgdal)</span>
+<span id="cb332-2"><a href="modelos-de-regresión-espacial.html#cb332-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoClass)</span></code></pre></div>
 <pre><code>## Loading required package: ade4</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;ade4&#39;</code></pre>
@@ -388,144 +338,156 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## The following object is masked from &#39;package:maptools&#39;:
 ## 
 ##     label</code></pre>
-<pre><code>## The following object is masked from &#39;package:performance&#39;:
+<pre><code>## The following object is masked from &#39;package:spam&#39;:
 ## 
 ##     display</code></pre>
-<pre><code>## Loading required package: scatterplot3d</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="modelos-de-regresión-espacial.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
-<span id="cb179-2"><a href="modelos-de-regresión-espacial.html#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(<span class="st">&quot;GWmodel&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="modelos-de-regresión-espacial.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
+<span id="cb341-2"><a href="modelos-de-regresión-espacial.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(<span class="st">&quot;GWmodel&quot;</span>)</span></code></pre></div>
 <pre><code>## Loading required package: GWmodel</code></pre>
 <pre><code>## Loading required package: robustbase</code></pre>
-<pre><code>## 
-## Attaching package: &#39;robustbase&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:survival&#39;:
-## 
-##     heart</code></pre>
 <pre><code>## Loading required package: Rcpp</code></pre>
-<pre><code>## Welcome to GWmodel version 2.2-9.</code></pre>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="modelos-de-regresión-espacial.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;mapsRinteractive&quot;</span>)</span></code></pre></div>
+<pre><code>## Loading required package: spatialreg</code></pre>
+<pre><code>## Loading required package: Matrix</code></pre>
 <pre><code>## 
-## Attaching package: &#39;mapsRinteractive&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:performance&#39;:
+## Attaching package: &#39;Matrix&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:spam&#39;:
 ## 
-##     mae, r2, rmse</code></pre>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="modelos-de-regresión-espacial.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span></code></pre></div>
+##     det</code></pre>
+<pre><code>## 
+## Attaching package: &#39;spatialreg&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:spdep&#39;:
+## 
+##     get.ClusterOption, get.coresOption, get.mcOption, get.VerboseOption, get.ZeroPolicyOption,
+##     set.ClusterOption, set.coresOption, set.mcOption, set.VerboseOption, set.ZeroPolicyOption</code></pre>
+<pre><code>## Welcome to GWmodel version 2.2-9.</code></pre>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="modelos-de-regresión-espacial.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;mapsRinteractive&quot;</span>)</span>
+<span id="cb352-2"><a href="modelos-de-regresión-espacial.html#cb352-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span></code></pre></div>
 </div>
-<div id="lectura-de-datos" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Lectura de Datos<a href="modelos-de-regresión-espacial.html#lectura-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="modelos-de-regresión-espacial.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura de Datos</span></span>
-<span id="cb190-2"><a href="modelos-de-regresión-espacial.html#cb190-2" aria-hidden="true" tabindex="-1"></a>BASE <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data_3_EstudioDeMercadoEspacial/BASE.xlsx&quot;</span>)</span>
-<span id="cb190-3"><a href="modelos-de-regresión-espacial.html#cb190-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura del Shape de Colombia por Departamentos</span></span>
-<span id="cb190-4"><a href="modelos-de-regresión-espacial.html#cb190-4" aria-hidden="true" tabindex="-1"></a>Colombia <span class="ot">=</span> <span class="fu">readOGR</span>(<span class="at">dsn =</span> <span class="st">&quot;data_3_EstudioDeMercadoEspacial/Geodatabase Colombia&quot;</span>, </span>
-<span id="cb190-5"><a href="modelos-de-regresión-espacial.html#cb190-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">layer =</span> <span class="st">&quot;departamentos&quot;</span>)</span></code></pre></div>
+<div id="lectura-de-datos-1" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Lectura de Datos<a href="modelos-de-regresión-espacial.html#lectura-de-datos-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="modelos-de-regresión-espacial.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura de Datos</span></span>
+<span id="cb353-2"><a href="modelos-de-regresión-espacial.html#cb353-2" aria-hidden="true" tabindex="-1"></a>BASE <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data_3_EstudioDeMercadoEspacial/BASE.xlsx&quot;</span>)</span>
+<span id="cb353-3"><a href="modelos-de-regresión-espacial.html#cb353-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura del Shape de Colombia por Departamentos</span></span>
+<span id="cb353-4"><a href="modelos-de-regresión-espacial.html#cb353-4" aria-hidden="true" tabindex="-1"></a>Colombia <span class="ot">=</span> <span class="fu">readOGR</span>(<span class="at">dsn =</span> <span class="st">&quot;data_3_EstudioDeMercadoEspacial/Geodatabase Colombia&quot;</span>, </span>
+<span id="cb353-5"><a href="modelos-de-regresión-espacial.html#cb353-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">layer =</span> <span class="st">&quot;departamentos&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
 <pre><code>## OGR data source with driver: ESRI Shapefile 
 ## Source: &quot;/home/jncc/Documents/Monitorias/EspacialPage/Clases-EE-UN/data_3_EstudioDeMercadoEspacial/Geodatabase Colombia&quot;, layer: &quot;departamentos&quot;
 ## with 33 features
 ## It has 6 fields
 ## Integer64 fields read as strings:  AñO_CREAC</code></pre>
-<div id="cruce-de-información-y-arreglo-de-coordenadas" class="section level3 hasAnchor" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Cruce de información y arreglo de coordenadas<a href="modelos-de-regresión-espacial.html#cruce-de-información-y-arreglo-de-coordenadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="modelos-de-regresión-espacial.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cruce de información con el shape cargado</span></span>
-<span id="cb192-2"><a href="modelos-de-regresión-espacial.html#cb192-2" aria-hidden="true" tabindex="-1"></a>Insumo <span class="ot">=</span> <span class="fu">merge</span>(Colombia, BASE, <span class="at">by.x=</span><span class="st">&quot;COD_DANE&quot;</span>, <span class="at">by.y=</span><span class="st">&quot;Cod&quot;</span>)</span>
-<span id="cb192-3"><a href="modelos-de-regresión-espacial.html#cb192-3" aria-hidden="true" tabindex="-1"></a>Insumo <span class="ot">=</span> <span class="fu">subset</span>(Insumo[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">31</span>,<span class="dv">33</span>),])</span>
-<span id="cb192-4"><a href="modelos-de-regresión-espacial.html#cb192-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversión a Coordenadas UTM</span></span>
-<span id="cb192-5"><a href="modelos-de-regresión-espacial.html#cb192-5" aria-hidden="true" tabindex="-1"></a>Crs.geo <span class="ot">=</span> <span class="fu">CRS</span>(<span class="st">&quot;+proj=tmerc +lat_0=4.599047222222222 +lon_0=-74.08091666666667 +k=1 +x_0=1000000 +y_0=1000000 +ellps=intl +towgs84=307,304,-318,0,0,0,0 +units=m +no_defs&quot;</span>)</span>
-<span id="cb192-6"><a href="modelos-de-regresión-espacial.html#cb192-6" aria-hidden="true" tabindex="-1"></a><span class="fu">proj4string</span>(Insumo) <span class="ot">&lt;-</span> Crs.geo </span>
-<span id="cb192-7"><a href="modelos-de-regresión-espacial.html#cb192-7" aria-hidden="true" tabindex="-1"></a>Insumo.utm <span class="ot">=</span> <span class="fu">spTransform</span>(Insumo, <span class="fu">CRS</span>(<span class="st">&quot;+init=epsg:3724 +units=km&quot;</span>))</span></code></pre></div>
+<div id="cruce-de-información-y-arreglo-de-coordenadas" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Cruce de información y arreglo de coordenadas<a href="modelos-de-regresión-espacial.html#cruce-de-información-y-arreglo-de-coordenadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="modelos-de-regresión-espacial.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cruce de información con el shape cargado</span></span>
+<span id="cb361-2"><a href="modelos-de-regresión-espacial.html#cb361-2" aria-hidden="true" tabindex="-1"></a>Insumo <span class="ot">=</span> <span class="fu">merge</span>(Colombia, BASE, <span class="at">by.x=</span><span class="st">&quot;COD_DANE&quot;</span>, <span class="at">by.y=</span><span class="st">&quot;Cod&quot;</span>)</span>
+<span id="cb361-3"><a href="modelos-de-regresión-espacial.html#cb361-3" aria-hidden="true" tabindex="-1"></a>Insumo <span class="ot">=</span> <span class="fu">subset</span>(Insumo[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">31</span>,<span class="dv">33</span>),])</span>
+<span id="cb361-4"><a href="modelos-de-regresión-espacial.html#cb361-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversión a Coordenadas UTM</span></span>
+<span id="cb361-5"><a href="modelos-de-regresión-espacial.html#cb361-5" aria-hidden="true" tabindex="-1"></a>Crs.geo <span class="ot">=</span> <span class="fu">CRS</span>(<span class="st">&quot;+proj=tmerc +lat_0=4.599047222222222 +lon_0=-74.08091666666667 +k=1 +x_0=1000000 +y_0=1000000 +ellps=intl +towgs84=307,304,-318,0,0,0,0 +units=m +no_defs&quot;</span>)</span>
+<span id="cb361-6"><a href="modelos-de-regresión-espacial.html#cb361-6" aria-hidden="true" tabindex="-1"></a><span class="fu">proj4string</span>(Insumo) <span class="ot">&lt;-</span> Crs.geo </span>
+<span id="cb361-7"><a href="modelos-de-regresión-espacial.html#cb361-7" aria-hidden="true" tabindex="-1"></a>Insumo.utm <span class="ot">=</span> <span class="fu">spTransform</span>(Insumo, <span class="fu">CRS</span>(<span class="st">&quot;+init=epsg:3724 +units=km&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning: PROJ support is provided by the sf and terra packages among others</code></pre>
 </div>
 </div>
-<div id="matriz-de-vecindades" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> Matriz de vecindades<a href="modelos-de-regresión-espacial.html#matriz-de-vecindades" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="modelos-de-regresión-espacial.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="co">#---</span></span>
-<span id="cb193-2"><a href="modelos-de-regresión-espacial.html#cb193-2" aria-hidden="true" tabindex="-1"></a><span class="co"># MATRIZ DE VECINDADES (W)</span></span>
-<span id="cb193-3"><a href="modelos-de-regresión-espacial.html#cb193-3" aria-hidden="true" tabindex="-1"></a><span class="co">#---</span></span>
-<span id="cb193-4"><a href="modelos-de-regresión-espacial.html#cb193-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Centroides de las Áreas</span></span>
-<span id="cb193-5"><a href="modelos-de-regresión-espacial.html#cb193-5" aria-hidden="true" tabindex="-1"></a>Centros <span class="ot">=</span> <span class="fu">getSpPPolygonsLabptSlots</span>(Insumo.utm)</span>
-<span id="cb193-6"><a href="modelos-de-regresión-espacial.html#cb193-6" aria-hidden="true" tabindex="-1"></a>Centroids <span class="ot">&lt;-</span> <span class="fu">SpatialPointsDataFrame</span>(<span class="at">coords =</span> Centros, </span>
-<span id="cb193-7"><a href="modelos-de-regresión-espacial.html#cb193-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">data=</span>Insumo.utm<span class="sc">@</span>data, </span>
-<span id="cb193-8"><a href="modelos-de-regresión-espacial.html#cb193-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">proj4string=</span><span class="fu">CRS</span>(<span class="st">&quot;+init=epsg:3724 +units=km&quot;</span>))</span>
-<span id="cb193-9"><a href="modelos-de-regresión-espacial.html#cb193-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de Distancias entre los Centriodes</span></span>
-<span id="cb193-10"><a href="modelos-de-regresión-espacial.html#cb193-10" aria-hidden="true" tabindex="-1"></a>Wdist <span class="ot">=</span> <span class="fu">dist</span>(Centros, <span class="at">up=</span>T)</span>
-<span id="cb193-11"><a href="modelos-de-regresión-espacial.html#cb193-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz W de vecindades</span></span>
-<span id="cb193-12"><a href="modelos-de-regresión-espacial.html#cb193-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pgirmess)</span></code></pre></div>
+<div id="matriz-de-vecindades" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Matriz de vecindades<a href="modelos-de-regresión-espacial.html#matriz-de-vecindades" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="modelos-de-regresión-espacial.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="co">#---</span></span>
+<span id="cb363-2"><a href="modelos-de-regresión-espacial.html#cb363-2" aria-hidden="true" tabindex="-1"></a><span class="co"># MATRIZ DE VECINDADES (W)</span></span>
+<span id="cb363-3"><a href="modelos-de-regresión-espacial.html#cb363-3" aria-hidden="true" tabindex="-1"></a><span class="co">#---</span></span>
+<span id="cb363-4"><a href="modelos-de-regresión-espacial.html#cb363-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Centroides de las Áreas</span></span>
+<span id="cb363-5"><a href="modelos-de-regresión-espacial.html#cb363-5" aria-hidden="true" tabindex="-1"></a>Centros <span class="ot">=</span> <span class="fu">getSpPPolygonsLabptSlots</span>(Insumo.utm)</span></code></pre></div>
+<pre><code>## Warning: use coordinates method</code></pre>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="modelos-de-regresión-espacial.html#cb365-1" aria-hidden="true" tabindex="-1"></a>Centroids <span class="ot">&lt;-</span> <span class="fu">SpatialPointsDataFrame</span>(<span class="at">coords =</span> Centros, </span>
+<span id="cb365-2"><a href="modelos-de-regresión-espacial.html#cb365-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">data=</span>Insumo.utm<span class="sc">@</span>data, </span>
+<span id="cb365-3"><a href="modelos-de-regresión-espacial.html#cb365-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">proj4string=</span><span class="fu">CRS</span>(<span class="st">&quot;+init=epsg:3724 +units=km&quot;</span>))</span>
+<span id="cb365-4"><a href="modelos-de-regresión-espacial.html#cb365-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de Distancias entre los Centriodes</span></span>
+<span id="cb365-5"><a href="modelos-de-regresión-espacial.html#cb365-5" aria-hidden="true" tabindex="-1"></a>Wdist <span class="ot">=</span> <span class="fu">dist</span>(Centros, <span class="at">up=</span>T)</span>
+<span id="cb365-6"><a href="modelos-de-regresión-espacial.html#cb365-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz W de vecindades</span></span>
+<span id="cb365-7"><a href="modelos-de-regresión-espacial.html#cb365-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pgirmess)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;pgirmess&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:psych&#39;:
 ## 
 ##     shannon</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="modelos-de-regresión-espacial.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(HistogramTools)</span>
-<span id="cb196-2"><a href="modelos-de-regresión-espacial.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(strucchange)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="modelos-de-regresión-espacial.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(HistogramTools)</span>
+<span id="cb368-2"><a href="modelos-de-regresión-espacial.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(strucchange)</span></code></pre></div>
+<pre><code>## Loading required package: zoo</code></pre>
 <pre><code>## 
-## Attaching package: &#39;strucchange&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:stringr&#39;:
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
-##     boundary</code></pre>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="modelos-de-regresión-espacial.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
-<span id="cb199-2"><a href="modelos-de-regresión-espacial.html#cb199-2" aria-hidden="true" tabindex="-1"></a>Insumo.nb <span class="ot">=</span> <span class="fu">poly2nb</span>(Insumo.utm, <span class="at">queen=</span>T)</span>
-<span id="cb199-3"><a href="modelos-de-regresión-espacial.html#cb199-3" aria-hidden="true" tabindex="-1"></a><span class="co">#n &lt;- max(sapply(Insumo.nb, length))</span></span>
-<span id="cb199-4"><a href="modelos-de-regresión-espacial.html#cb199-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ll &lt;- lapply(Insumo.nb, function(X) {</span></span>
-<span id="cb199-5"><a href="modelos-de-regresión-espacial.html#cb199-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  c(as.numeric(X), rep(0, times = n - length(X)))</span></span>
-<span id="cb199-6"><a href="modelos-de-regresión-espacial.html#cb199-6" aria-hidden="true" tabindex="-1"></a><span class="co">#})</span></span>
-<span id="cb199-7"><a href="modelos-de-regresión-espacial.html#cb199-7" aria-hidden="true" tabindex="-1"></a><span class="co">#out &lt;- do.call(cbind, ll)</span></span>
-<span id="cb199-8"><a href="modelos-de-regresión-espacial.html#cb199-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Departamentos&lt;-Insumo$Departamento</span></span>
-<span id="cb199-9"><a href="modelos-de-regresión-espacial.html#cb199-9" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW&lt;-matrix(NA,32,32)</span></span>
-<span id="cb199-10"><a href="modelos-de-regresión-espacial.html#cb199-10" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:8) {</span></span>
-<span id="cb199-11"><a href="modelos-de-regresión-espacial.html#cb199-11" aria-hidden="true" tabindex="-1"></a><span class="co">#  for (j in 1:32) {</span></span>
-<span id="cb199-12"><a href="modelos-de-regresión-espacial.html#cb199-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    if (out[i,j]!=0) {</span></span>
-<span id="cb199-13"><a href="modelos-de-regresión-espacial.html#cb199-13" aria-hidden="true" tabindex="-1"></a><span class="co">#      MatW[out[i,j],j]&lt;-1</span></span>
-<span id="cb199-14"><a href="modelos-de-regresión-espacial.html#cb199-14" aria-hidden="true" tabindex="-1"></a><span class="co">#    } else{MatW[out[i,j],j]&lt;-0}</span></span>
-<span id="cb199-15"><a href="modelos-de-regresión-espacial.html#cb199-15" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
-<span id="cb199-16"><a href="modelos-de-regresión-espacial.html#cb199-16" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
-<span id="cb199-17"><a href="modelos-de-regresión-espacial.html#cb199-17" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:32) {</span></span>
-<span id="cb199-18"><a href="modelos-de-regresión-espacial.html#cb199-18" aria-hidden="true" tabindex="-1"></a><span class="co">#  for (j in 1:32) {</span></span>
-<span id="cb199-19"><a href="modelos-de-regresión-espacial.html#cb199-19" aria-hidden="true" tabindex="-1"></a><span class="co">#    if (is.na(MatW[i,j])) {</span></span>
-<span id="cb199-20"><a href="modelos-de-regresión-espacial.html#cb199-20" aria-hidden="true" tabindex="-1"></a><span class="co">#      MatW[i,j]&lt;-0</span></span>
-<span id="cb199-21"><a href="modelos-de-regresión-espacial.html#cb199-21" aria-hidden="true" tabindex="-1"></a><span class="co">#    }</span></span>
-<span id="cb199-22"><a href="modelos-de-regresión-espacial.html#cb199-22" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
-<span id="cb199-23"><a href="modelos-de-regresión-espacial.html#cb199-23" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
-<span id="cb199-24"><a href="modelos-de-regresión-espacial.html#cb199-24" aria-hidden="true" tabindex="-1"></a><span class="co">#colnames(MatW)&lt;-Departamentos</span></span>
-<span id="cb199-25"><a href="modelos-de-regresión-espacial.html#cb199-25" aria-hidden="true" tabindex="-1"></a><span class="co">#rownames(MatW)&lt;-Departamentos</span></span>
-<span id="cb199-26"><a href="modelos-de-regresión-espacial.html#cb199-26" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW1&lt;-MatW[,1:16]</span></span>
-<span id="cb199-27"><a href="modelos-de-regresión-espacial.html#cb199-27" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW2&lt;-MatW[,17:32]</span></span>
-<span id="cb199-28"><a href="modelos-de-regresión-espacial.html#cb199-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Martiz W (Estilos)</span></span>
-<span id="cb199-29"><a href="modelos-de-regresión-espacial.html#cb199-29" aria-hidden="true" tabindex="-1"></a>Insumo.lw <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb)</span>
-<span id="cb199-30"><a href="modelos-de-regresión-espacial.html#cb199-30" aria-hidden="true" tabindex="-1"></a>Insumo.lwb <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;B&quot;</span>)</span>
-<span id="cb199-31"><a href="modelos-de-regresión-espacial.html#cb199-31" aria-hidden="true" tabindex="-1"></a>Insumo.lwc <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;C&quot;</span>)</span>
-<span id="cb199-32"><a href="modelos-de-regresión-espacial.html#cb199-32" aria-hidden="true" tabindex="-1"></a>Insumo.lwu <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;U&quot;</span>)</span>
-<span id="cb199-33"><a href="modelos-de-regresión-espacial.html#cb199-33" aria-hidden="true" tabindex="-1"></a>Insumo.lww <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;W&quot;</span>)</span></code></pre></div>
+##     as.Date, as.Date.numeric</code></pre>
+<pre><code>## Loading required package: sandwich</code></pre>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="modelos-de-regresión-espacial.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
+<span id="cb373-2"><a href="modelos-de-regresión-espacial.html#cb373-2" aria-hidden="true" tabindex="-1"></a>Insumo.nb <span class="ot">=</span> <span class="fu">poly2nb</span>(Insumo.utm, <span class="at">queen=</span>T)</span>
+<span id="cb373-3"><a href="modelos-de-regresión-espacial.html#cb373-3" aria-hidden="true" tabindex="-1"></a><span class="co">#n &lt;- max(sapply(Insumo.nb, length))</span></span>
+<span id="cb373-4"><a href="modelos-de-regresión-espacial.html#cb373-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ll &lt;- lapply(Insumo.nb, function(X) {</span></span>
+<span id="cb373-5"><a href="modelos-de-regresión-espacial.html#cb373-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  c(as.numeric(X), rep(0, times = n - length(X)))</span></span>
+<span id="cb373-6"><a href="modelos-de-regresión-espacial.html#cb373-6" aria-hidden="true" tabindex="-1"></a><span class="co">#})</span></span>
+<span id="cb373-7"><a href="modelos-de-regresión-espacial.html#cb373-7" aria-hidden="true" tabindex="-1"></a><span class="co">#out &lt;- do.call(cbind, ll)</span></span>
+<span id="cb373-8"><a href="modelos-de-regresión-espacial.html#cb373-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Departamentos&lt;-Insumo$Departamento</span></span>
+<span id="cb373-9"><a href="modelos-de-regresión-espacial.html#cb373-9" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW&lt;-matrix(NA,32,32)</span></span>
+<span id="cb373-10"><a href="modelos-de-regresión-espacial.html#cb373-10" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:8) {</span></span>
+<span id="cb373-11"><a href="modelos-de-regresión-espacial.html#cb373-11" aria-hidden="true" tabindex="-1"></a><span class="co">#  for (j in 1:32) {</span></span>
+<span id="cb373-12"><a href="modelos-de-regresión-espacial.html#cb373-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    if (out[i,j]!=0) {</span></span>
+<span id="cb373-13"><a href="modelos-de-regresión-espacial.html#cb373-13" aria-hidden="true" tabindex="-1"></a><span class="co">#      MatW[out[i,j],j]&lt;-1</span></span>
+<span id="cb373-14"><a href="modelos-de-regresión-espacial.html#cb373-14" aria-hidden="true" tabindex="-1"></a><span class="co">#    } else{MatW[out[i,j],j]&lt;-0}</span></span>
+<span id="cb373-15"><a href="modelos-de-regresión-espacial.html#cb373-15" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
+<span id="cb373-16"><a href="modelos-de-regresión-espacial.html#cb373-16" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
+<span id="cb373-17"><a href="modelos-de-regresión-espacial.html#cb373-17" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:32) {</span></span>
+<span id="cb373-18"><a href="modelos-de-regresión-espacial.html#cb373-18" aria-hidden="true" tabindex="-1"></a><span class="co">#  for (j in 1:32) {</span></span>
+<span id="cb373-19"><a href="modelos-de-regresión-espacial.html#cb373-19" aria-hidden="true" tabindex="-1"></a><span class="co">#    if (is.na(MatW[i,j])) {</span></span>
+<span id="cb373-20"><a href="modelos-de-regresión-espacial.html#cb373-20" aria-hidden="true" tabindex="-1"></a><span class="co">#      MatW[i,j]&lt;-0</span></span>
+<span id="cb373-21"><a href="modelos-de-regresión-espacial.html#cb373-21" aria-hidden="true" tabindex="-1"></a><span class="co">#    }</span></span>
+<span id="cb373-22"><a href="modelos-de-regresión-espacial.html#cb373-22" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
+<span id="cb373-23"><a href="modelos-de-regresión-espacial.html#cb373-23" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
+<span id="cb373-24"><a href="modelos-de-regresión-espacial.html#cb373-24" aria-hidden="true" tabindex="-1"></a><span class="co">#colnames(MatW)&lt;-Departamentos</span></span>
+<span id="cb373-25"><a href="modelos-de-regresión-espacial.html#cb373-25" aria-hidden="true" tabindex="-1"></a><span class="co">#rownames(MatW)&lt;-Departamentos</span></span>
+<span id="cb373-26"><a href="modelos-de-regresión-espacial.html#cb373-26" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW1&lt;-MatW[,1:16]</span></span>
+<span id="cb373-27"><a href="modelos-de-regresión-espacial.html#cb373-27" aria-hidden="true" tabindex="-1"></a><span class="co">#MatW2&lt;-MatW[,17:32]</span></span>
+<span id="cb373-28"><a href="modelos-de-regresión-espacial.html#cb373-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Martiz W (Estilos)</span></span>
+<span id="cb373-29"><a href="modelos-de-regresión-espacial.html#cb373-29" aria-hidden="true" tabindex="-1"></a>Insumo.lw <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb)</span>
+<span id="cb373-30"><a href="modelos-de-regresión-espacial.html#cb373-30" aria-hidden="true" tabindex="-1"></a>Insumo.lwb <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;B&quot;</span>)</span>
+<span id="cb373-31"><a href="modelos-de-regresión-espacial.html#cb373-31" aria-hidden="true" tabindex="-1"></a>Insumo.lwc <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;C&quot;</span>)</span>
+<span id="cb373-32"><a href="modelos-de-regresión-espacial.html#cb373-32" aria-hidden="true" tabindex="-1"></a>Insumo.lwu <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;U&quot;</span>)</span>
+<span id="cb373-33"><a href="modelos-de-regresión-espacial.html#cb373-33" aria-hidden="true" tabindex="-1"></a>Insumo.lww <span class="ot">=</span> <span class="fu">nb2listw</span>(Insumo.nb, <span class="at">style=</span><span class="st">&quot;W&quot;</span>)</span></code></pre></div>
 </div>
-<div id="mapa-de-valores-observados" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> Mapa de valores observados<a href="modelos-de-regresión-espacial.html#mapa-de-valores-observados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="modelos-de-regresión-espacial.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Mapa de Valores Observados</span></span>
-<span id="cb200-2"><a href="modelos-de-regresión-espacial.html#cb200-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb200-3"><a href="modelos-de-regresión-espacial.html#cb200-3" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, Insumo<span class="sc">$</span>CAP_BAC)</span>
-<span id="cb200-4"><a href="modelos-de-regresión-espacial.html#cb200-4" aria-hidden="true" tabindex="-1"></a>shad <span class="ot">=</span> <span class="fu">auto.shading</span>(Insumo<span class="sc">$</span>CAP_BAC, </span>
-<span id="cb200-5"><a href="modelos-de-regresión-espacial.html#cb200-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">n=</span><span class="dv">5</span>, </span>
-<span id="cb200-6"><a href="modelos-de-regresión-espacial.html#cb200-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Reds&quot;</span>)), </span>
-<span id="cb200-7"><a href="modelos-de-regresión-espacial.html#cb200-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cutter =</span> quantileCuts)</span>
-<span id="cb200-8"><a href="modelos-de-regresión-espacial.html#cb200-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-9"><a href="modelos-de-regresión-espacial.html#cb200-9" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, </span>
-<span id="cb200-10"><a href="modelos-de-regresión-espacial.html#cb200-10" aria-hidden="true" tabindex="-1"></a>             shad, </span>
-<span id="cb200-11"><a href="modelos-de-regresión-espacial.html#cb200-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="st">&quot;%1.1f&quot;</span>, </span>
-<span id="cb200-12"><a href="modelos-de-regresión-espacial.html#cb200-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;Valores Locales&quot;</span>, </span>
-<span id="cb200-13"><a href="modelos-de-regresión-espacial.html#cb200-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">cex=</span><span class="fl">0.7</span>, </span>
-<span id="cb200-14"><a href="modelos-de-regresión-espacial.html#cb200-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, </span>
-<span id="cb200-15"><a href="modelos-de-regresión-espacial.html#cb200-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, </span>
-<span id="cb200-16"><a href="modelos-de-regresión-espacial.html#cb200-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
-<span id="cb200-17"><a href="modelos-de-regresión-espacial.html#cb200-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-18"><a href="modelos-de-regresión-espacial.html#cb200-18" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Valores Observados para las captaciones del banco agrario </span></span>
-<span id="cb200-19"><a href="modelos-de-regresión-espacial.html#cb200-19" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
-<span id="cb200-20"><a href="modelos-de-regresión-espacial.html#cb200-20" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<div id="mapa-de-valores-observados" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Mapa de valores observados<a href="modelos-de-regresión-espacial.html#mapa-de-valores-observados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="modelos-de-regresión-espacial.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Mapa de Valores Observados</span></span>
+<span id="cb374-2"><a href="modelos-de-regresión-espacial.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb374-3"><a href="modelos-de-regresión-espacial.html#cb374-3" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, Insumo<span class="sc">$</span>CAP_BAC)</span>
+<span id="cb374-4"><a href="modelos-de-regresión-espacial.html#cb374-4" aria-hidden="true" tabindex="-1"></a>shad <span class="ot">=</span> <span class="fu">auto.shading</span>(Insumo<span class="sc">$</span>CAP_BAC, </span>
+<span id="cb374-5"><a href="modelos-de-regresión-espacial.html#cb374-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">n=</span><span class="dv">5</span>, </span>
+<span id="cb374-6"><a href="modelos-de-regresión-espacial.html#cb374-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Reds&quot;</span>)), </span>
+<span id="cb374-7"><a href="modelos-de-regresión-espacial.html#cb374-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cutter =</span> quantileCuts)</span>
+<span id="cb374-8"><a href="modelos-de-regresión-espacial.html#cb374-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb374-9"><a href="modelos-de-regresión-espacial.html#cb374-9" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,<span class="fl">535165.5</span>, </span>
+<span id="cb374-10"><a href="modelos-de-regresión-espacial.html#cb374-10" aria-hidden="true" tabindex="-1"></a>             shad, </span>
+<span id="cb374-11"><a href="modelos-de-regresión-espacial.html#cb374-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="st">&quot;%1.1f&quot;</span>, </span>
+<span id="cb374-12"><a href="modelos-de-regresión-espacial.html#cb374-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;Valores Locales&quot;</span>, </span>
+<span id="cb374-13"><a href="modelos-de-regresión-espacial.html#cb374-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">cex=</span><span class="fl">0.7</span>, </span>
+<span id="cb374-14"><a href="modelos-de-regresión-espacial.html#cb374-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, </span>
+<span id="cb374-15"><a href="modelos-de-regresión-espacial.html#cb374-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, </span>
+<span id="cb374-16"><a href="modelos-de-regresión-espacial.html#cb374-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
+<span id="cb374-17"><a href="modelos-de-regresión-espacial.html#cb374-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb374-18"><a href="modelos-de-regresión-espacial.html#cb374-18" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Valores Observados para las captaciones del banco agrario </span></span>
+<span id="cb374-19"><a href="modelos-de-regresión-espacial.html#cb374-19" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb374-20"><a href="modelos-de-regresión-espacial.html#cb374-20" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
 </div>
-<div id="pruebas-de-autocorrelación" class="section level2 hasAnchor" number="4.6">
-<h2><span class="header-section-number">4.6</span> Pruebas de Autocorrelación<a href="modelos-de-regresión-espacial.html#pruebas-de-autocorrelación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="modelos-de-regresión-espacial.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="co">#----------------------------</span></span>
-<span id="cb201-2"><a href="modelos-de-regresión-espacial.html#cb201-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  PRUEBAS DE AUTOCORRELACION</span></span>
-<span id="cb201-3"><a href="modelos-de-regresión-espacial.html#cb201-3" aria-hidden="true" tabindex="-1"></a><span class="co">#----------------------------</span></span>
-<span id="cb201-4"><a href="modelos-de-regresión-espacial.html#cb201-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-5"><a href="modelos-de-regresión-espacial.html#cb201-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Moran</span></span>
-<span id="cb201-6"><a href="modelos-de-regresión-espacial.html#cb201-6" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw)</span></code></pre></div>
+<div id="pruebas-de-autocorrelación" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Pruebas de Autocorrelación<a href="modelos-de-regresión-espacial.html#pruebas-de-autocorrelación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="modelos-de-regresión-espacial.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="co">#----------------------------</span></span>
+<span id="cb375-2"><a href="modelos-de-regresión-espacial.html#cb375-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  PRUEBAS DE AUTOCORRELACION</span></span>
+<span id="cb375-3"><a href="modelos-de-regresión-espacial.html#cb375-3" aria-hidden="true" tabindex="-1"></a><span class="co">#----------------------------</span></span>
+<span id="cb375-4"><a href="modelos-de-regresión-espacial.html#cb375-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb375-5"><a href="modelos-de-regresión-espacial.html#cb375-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Moran</span></span>
+<span id="cb375-6"><a href="modelos-de-regresión-espacial.html#cb375-6" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw)</span></code></pre></div>
 <pre><code>## 
 ##  Moran I test under randomisation
 ## 
@@ -537,37 +499,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sample estimates:
 ## Moran I statistic       Expectation          Variance 
 ##       0.153081266      -0.032258065       0.008566935</code></pre>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="modelos-de-regresión-espacial.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dispersograma de Moran</span></span>
-<span id="cb203-2"><a href="modelos-de-regresión-espacial.html#cb203-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb203-3"><a href="modelos-de-regresión-espacial.html#cb203-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.plot</span>(Insumo<span class="sc">$</span>CAP_BAC, </span>
-<span id="cb203-4"><a href="modelos-de-regresión-espacial.html#cb203-4" aria-hidden="true" tabindex="-1"></a>           Insumo.lw, </span>
-<span id="cb203-5"><a href="modelos-de-regresión-espacial.html#cb203-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">labels=</span><span class="fu">as.character</span>(Insumo<span class="sc">$</span>Departamento), </span>
-<span id="cb203-6"><a href="modelos-de-regresión-espacial.html#cb203-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab=</span><span class="st">&quot;Captaciones BAC&quot;</span>, </span>
-<span id="cb203-7"><a href="modelos-de-regresión-espacial.html#cb203-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab=</span><span class="st">&quot;Captaciones BAC rezagado&quot;</span>, </span>
-<span id="cb203-8"><a href="modelos-de-regresión-espacial.html#cb203-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">las=</span><span class="dv">1</span>, </span>
-<span id="cb203-9"><a href="modelos-de-regresión-espacial.html#cb203-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">pch=</span><span class="dv">16</span>, </span>
-<span id="cb203-10"><a href="modelos-de-regresión-espacial.html#cb203-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">cex=</span><span class="fl">0.5</span>)</span>
-<span id="cb203-11"><a href="modelos-de-regresión-espacial.html#cb203-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-12"><a href="modelos-de-regresión-espacial.html#cb203-12" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, </span>
-<span id="cb203-13"><a href="modelos-de-regresión-espacial.html#cb203-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;I de Moran: 0.1530&quot;</span>, <span class="st">&quot;Valor P:      0.02262&quot;</span>), </span>
-<span id="cb203-14"><a href="modelos-de-regresión-espacial.html#cb203-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="dv">1</span>,</span>
-<span id="cb203-15"><a href="modelos-de-regresión-espacial.html#cb203-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">bg=</span><span class="st">&#39;lightgreen&#39;</span>)</span>
-<span id="cb203-16"><a href="modelos-de-regresión-espacial.html#cb203-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-17"><a href="modelos-de-regresión-espacial.html#cb203-17" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Dispersograma de Moran para las captaciones del banco agrario en </span></span>
-<span id="cb203-18"><a href="modelos-de-regresión-espacial.html#cb203-18" aria-hidden="true" tabindex="-1"></a><span class="st">los Departamentos de Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="modelos-de-regresión-espacial.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Local G</span></span>
-<span id="cb204-2"><a href="modelos-de-regresión-espacial.html#cb204-2" aria-hidden="true" tabindex="-1"></a>nearng <span class="ot">=</span> <span class="fu">dnearneigh</span>(<span class="fu">coordinates</span>(Insumo.utm), <span class="dv">0</span>, <span class="dv">550</span>)</span>
-<span id="cb204-3"><a href="modelos-de-regresión-espacial.html#cb204-3" aria-hidden="true" tabindex="-1"></a>Insumo.lw.g <span class="ot">=</span> <span class="fu">nb2listw</span>(nearng, <span class="at">style=</span><span class="st">&quot;B&quot;</span>)</span>
-<span id="cb204-4"><a href="modelos-de-regresión-espacial.html#cb204-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb204-5"><a href="modelos-de-regresión-espacial.html#cb204-5" aria-hidden="true" tabindex="-1"></a>localG <span class="ot">=</span> <span class="fu">localG</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw.g); localG</span></code></pre></div>
-<pre><code>##  [1]  1.66525050  0.02608278  1.33032949  1.15892050  1.85852161  0.68445519  1.49486468  0.10163662  1.64717068
-## [10]  1.32714028  2.53361281  2.21899396 -0.71311540  0.50952811  1.48899277  0.81676480  0.98434717  2.09087184
-## [19]  2.08725553  1.05493906  1.32486118  2.09147517  2.16305539  1.89323276  1.52155929  0.84992902 -1.19798594
-## [28] -1.33847805  0.29701426 -1.60300117  1.67015910  1.96543367
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="modelos-de-regresión-espacial.html#cb377-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dispersograma de Moran</span></span>
+<span id="cb377-2"><a href="modelos-de-regresión-espacial.html#cb377-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb377-3"><a href="modelos-de-regresión-espacial.html#cb377-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.plot</span>(Insumo<span class="sc">$</span>CAP_BAC, </span>
+<span id="cb377-4"><a href="modelos-de-regresión-espacial.html#cb377-4" aria-hidden="true" tabindex="-1"></a>           Insumo.lw, </span>
+<span id="cb377-5"><a href="modelos-de-regresión-espacial.html#cb377-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">labels=</span><span class="fu">as.character</span>(Insumo<span class="sc">$</span>Departamento), </span>
+<span id="cb377-6"><a href="modelos-de-regresión-espacial.html#cb377-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab=</span><span class="st">&quot;Captaciones BAC&quot;</span>, </span>
+<span id="cb377-7"><a href="modelos-de-regresión-espacial.html#cb377-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab=</span><span class="st">&quot;Captaciones BAC rezagado&quot;</span>, </span>
+<span id="cb377-8"><a href="modelos-de-regresión-espacial.html#cb377-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">las=</span><span class="dv">1</span>, </span>
+<span id="cb377-9"><a href="modelos-de-regresión-espacial.html#cb377-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">pch=</span><span class="dv">16</span>, </span>
+<span id="cb377-10"><a href="modelos-de-regresión-espacial.html#cb377-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">cex=</span><span class="fl">0.5</span>)</span>
+<span id="cb377-11"><a href="modelos-de-regresión-espacial.html#cb377-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb377-12"><a href="modelos-de-regresión-espacial.html#cb377-12" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, </span>
+<span id="cb377-13"><a href="modelos-de-regresión-espacial.html#cb377-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;I de Moran: 0.1530&quot;</span>, <span class="st">&quot;Valor P:      0.02262&quot;</span>), </span>
+<span id="cb377-14"><a href="modelos-de-regresión-espacial.html#cb377-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="dv">1</span>,</span>
+<span id="cb377-15"><a href="modelos-de-regresión-espacial.html#cb377-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">bg=</span><span class="st">&#39;lightgreen&#39;</span>)</span>
+<span id="cb377-16"><a href="modelos-de-regresión-espacial.html#cb377-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb377-17"><a href="modelos-de-regresión-espacial.html#cb377-17" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Dispersograma de Moran para las captaciones del banco agrario en </span></span>
+<span id="cb377-18"><a href="modelos-de-regresión-espacial.html#cb377-18" aria-hidden="true" tabindex="-1"></a><span class="st">los Departamentos de Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="modelos-de-regresión-espacial.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Local G</span></span>
+<span id="cb378-2"><a href="modelos-de-regresión-espacial.html#cb378-2" aria-hidden="true" tabindex="-1"></a>nearng <span class="ot">=</span> <span class="fu">dnearneigh</span>(<span class="fu">coordinates</span>(Insumo.utm), <span class="dv">0</span>, <span class="dv">550</span>)</span>
+<span id="cb378-3"><a href="modelos-de-regresión-espacial.html#cb378-3" aria-hidden="true" tabindex="-1"></a>Insumo.lw.g <span class="ot">=</span> <span class="fu">nb2listw</span>(nearng, <span class="at">style=</span><span class="st">&quot;B&quot;</span>)</span>
+<span id="cb378-4"><a href="modelos-de-regresión-espacial.html#cb378-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb378-5"><a href="modelos-de-regresión-espacial.html#cb378-5" aria-hidden="true" tabindex="-1"></a>localG <span class="ot">=</span> <span class="fu">localG</span>(Insumo<span class="sc">$</span>CAP_BAC, Insumo.lw.g); localG</span></code></pre></div>
+<pre><code>##  [1]  1.66525050  0.02608278  1.33032949  1.15892050  1.85852161  0.68445519  1.49486468  0.10163662
+##  [9]  1.64717068  1.32714028  2.53361281  2.21899396 -0.71311540  0.50952811  1.48899277  0.81676480
+## [17]  0.98434717  2.09087184  2.08725553  1.05493906  1.32486118  2.09147517  2.16305539  1.89323276
+## [25]  1.52155929  0.84992902 -1.19798594 -1.33847805  0.29701426 -1.60300117  1.67015910  1.96543367
+## attr(,&quot;internals&quot;)
+##               Gi     E(Gi)       V(Gi)       Z(Gi) Pr(z != E(Gi))
+##  [1,] 0.87682996 0.7096774 0.010075505  1.66525050     0.09586279
+##  [2,] 0.29285361 0.2903226 0.009416471  0.02608278     0.97919132
+##  [3,] 0.75219542 0.6129032 0.010963144  1.33032949     0.18340974
+##  [4,] 0.82743583 0.7096774 0.010324679  1.15892050     0.24648859
+##  [5,] 0.94189020 0.7741935 0.008141671  1.85852161     0.06309498
+##  [6,] 0.55680866 0.4838710 0.011355702  0.68445519     0.49368778
+##  [7,] 0.64933079 0.4838710 0.012251276  1.49486468     0.13494976
+##  [8,] 0.49483872 0.4838710 0.011644875  0.10163662     0.91904511
+##  [9,] 0.75532158 0.5806452 0.011245826  1.64717068     0.09952297
+## [10,] 0.89821754 0.7741935 0.008733287  1.32714028     0.18446228
+## [11,] 0.87606260 0.6129032 0.010788404  2.53361281     0.01128934
+## [12,] 0.82054359 0.5806452 0.011688064  2.21899396     0.02648714
+## [13,] 0.19194463 0.2580645 0.008596952 -0.71311540     0.47577435
+## [14,] 0.37327079 0.3225806 0.009897162  0.50952811     0.61038210
+## [15,] 0.85695474 0.7096774 0.009783327  1.48899277     0.13648927
+## [16,] 0.44117384 0.3548387 0.011173289  0.81676480     0.41406285
+## [17,] 0.77877751 0.6774194 0.010602806  0.98434717     0.32494485
+## [18,] 0.91159284 0.7096774 0.009325758  2.09087184     0.03653955
+## [19,] 0.91151422 0.7096774 0.009350815  2.08725553     0.03686504
+## [20,] 0.84508265 0.7419355 0.009560043  1.05493906     0.29145320
+## [21,] 0.68979418 0.5483871 0.011392042  1.32486118     0.18521720
+## [22,] 0.89320523 0.6774194 0.010644875  2.09147517     0.03648549
+## [23,] 0.81503466 0.5806452 0.011741972  2.16305539     0.03053692
+## [24,] 0.68555602 0.4838710 0.011348525  1.89323276     0.05832692
+## [25,] 0.77320627 0.6129032 0.011099561  1.52155929     0.12811954
+## [26,] 0.54263403 0.4516129 0.011468829  0.84992902     0.39536455
+## [27,] 0.04481324 0.1290323 0.004942162 -1.19798594     0.23092249
+## [28,] 0.08047617 0.1935484 0.007136566 -1.33847805     0.18074065
+## [29,] 0.64349326 0.6129032 0.010607310  0.29701426     0.76645562
+## [30,] 0.08284688 0.2258065 0.007953509 -1.60300117     0.10893440
+## [31,] 0.52325216 0.3548387 0.010168054  1.67015910     0.09488789
+## [32,] 0.90927502 0.7741935 0.004723618  1.96543367     0.04936407
 ## attr(,&quot;cluster&quot;)
-##  [1] High Low  Low  High Low  Low  High Low  Low  High Low  High Low  Low  Low  High High Low  Low  High Low  High
-## [23] High Low  Low  Low  Low  Low  Low  Low  Low  High
+##  [1] High Low  Low  High Low  Low  High Low  Low  High Low  High Low  Low  Low  High High Low  Low  High Low 
+## [22] High High Low  Low  Low  Low  Low  Low  Low  Low  High
 ## Levels: Low High
 ## attr(,&quot;gstari&quot;)
 ## [1] FALSE
@@ -575,81 +571,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## localG(x = Insumo$CAP_BAC, listw = Insumo.lw.g)
 ## attr(,&quot;class&quot;)
 ## [1] &quot;localG&quot;</code></pre>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="modelos-de-regresión-espacial.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulaci?n montecarlo</span></span>
-<span id="cb206-2"><a href="modelos-de-regresión-espacial.html#cb206-2" aria-hidden="true" tabindex="-1"></a>sim.G <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>,<span class="dv">1000</span>,<span class="dv">32</span>)</span>
-<span id="cb206-3"><a href="modelos-de-regresión-espacial.html#cb206-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) sim.G[i,] <span class="ot">=</span> <span class="fu">localG</span>(<span class="fu">sample</span>(Insumo<span class="sc">$</span>CAP_BAC),Insumo.lw.g)</span>
-<span id="cb206-4"><a href="modelos-de-regresión-espacial.html#cb206-4" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G <span class="ot">=</span> (<span class="fu">colSums</span>(<span class="fu">sweep</span>(sim.G,<span class="dv">2</span>,localG,<span class="st">&quot;&gt;=&quot;</span>))<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">nrow</span>(sim.G)<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb206-5"><a href="modelos-de-regresión-espacial.html#cb206-5" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G</span></code></pre></div>
-<pre><code>##  [1] 0.014985015 0.446553447 0.084915085 0.103896104 0.000999001 0.273726274 0.064935065 0.469530470 0.022977023
-## [10] 0.061938062 0.000999001 0.002997003 0.738261738 0.320679321 0.037962038 0.219780220 0.176823177 0.000999001
-## [19] 0.000999001 0.130869131 0.089910090 0.000999001 0.001998002 0.026973027 0.043956044 0.221778222 0.972027972
-## [28] 0.964035964 0.427572428 0.992007992 0.061938062 0.000999001</code></pre>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="modelos-de-regresión-espacial.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulaci?n montecarlo</span></span>
+<span id="cb380-2"><a href="modelos-de-regresión-espacial.html#cb380-2" aria-hidden="true" tabindex="-1"></a>sim.G <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>,<span class="dv">1000</span>,<span class="dv">32</span>)</span>
+<span id="cb380-3"><a href="modelos-de-regresión-espacial.html#cb380-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) sim.G[i,] <span class="ot">=</span> <span class="fu">localG</span>(<span class="fu">sample</span>(Insumo<span class="sc">$</span>CAP_BAC),Insumo.lw.g)</span>
+<span id="cb380-4"><a href="modelos-de-regresión-espacial.html#cb380-4" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G <span class="ot">=</span> (<span class="fu">colSums</span>(<span class="fu">sweep</span>(sim.G,<span class="dv">2</span>,localG,<span class="st">&quot;&gt;=&quot;</span>))<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">nrow</span>(sim.G)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb380-5"><a href="modelos-de-regresión-espacial.html#cb380-5" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G</span></code></pre></div>
+<pre><code>##  [1] 0.011988012 0.407592408 0.075924076 0.097902098 0.001998002 0.291708292 0.055944056 0.452547453
+##  [9] 0.037962038 0.034965035 0.000999001 0.000999001 0.712287712 0.285714286 0.027972028 0.205794206
+## [17] 0.144855145 0.000999001 0.000999001 0.116883117 0.082917083 0.000999001 0.000999001 0.018981019
+## [25] 0.050949051 0.220779221 0.959040959 0.971028971 0.447552448 0.989010989 0.080919081 0.000999001</code></pre>
 </div>
-<div id="mapas" class="section level2 hasAnchor" number="4.7">
-<h2><span class="header-section-number">4.7</span> Mapas<a href="modelos-de-regresión-espacial.html#mapas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="modelos-de-regresión-espacial.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapas</span></span>
-<span id="cb208-2"><a href="modelos-de-regresión-espacial.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb208-3"><a href="modelos-de-regresión-espacial.html#cb208-3" aria-hidden="true" tabindex="-1"></a>shadeg <span class="ot">=</span> <span class="fu">auto.shading</span>(localG, </span>
-<span id="cb208-4"><a href="modelos-de-regresión-espacial.html#cb208-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">n=</span><span class="dv">5</span>, </span>
-<span id="cb208-5"><a href="modelos-de-regresión-espacial.html#cb208-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Purples&quot;</span>)), </span>
-<span id="cb208-6"><a href="modelos-de-regresión-espacial.html#cb208-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cutter=</span>quantileCuts)</span>
-<span id="cb208-7"><a href="modelos-de-regresión-espacial.html#cb208-7" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb208-8"><a href="modelos-de-regresión-espacial.html#cb208-8" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, </span>
-<span id="cb208-9"><a href="modelos-de-regresión-espacial.html#cb208-9" aria-hidden="true" tabindex="-1"></a>           localG, </span>
-<span id="cb208-10"><a href="modelos-de-regresión-espacial.html#cb208-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">shading=</span>shadeg)</span>
-<span id="cb208-11"><a href="modelos-de-regresión-espacial.html#cb208-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb208-12"><a href="modelos-de-regresión-espacial.html#cb208-12" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,</span>
-<span id="cb208-13"><a href="modelos-de-regresión-espacial.html#cb208-13" aria-hidden="true" tabindex="-1"></a>             <span class="fl">535165.5</span>, </span>
-<span id="cb208-14"><a href="modelos-de-regresión-espacial.html#cb208-14" aria-hidden="true" tabindex="-1"></a>             shadeg, </span>
-<span id="cb208-15"><a href="modelos-de-regresión-espacial.html#cb208-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, </span>
-<span id="cb208-16"><a href="modelos-de-regresión-espacial.html#cb208-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;G&quot;</span>, </span>
-<span id="cb208-17"><a href="modelos-de-regresión-espacial.html#cb208-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">cex=</span><span class="fl">0.7</span>, </span>
-<span id="cb208-18"><a href="modelos-de-regresión-espacial.html#cb208-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, </span>
-<span id="cb208-19"><a href="modelos-de-regresión-espacial.html#cb208-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, </span>
-<span id="cb208-20"><a href="modelos-de-regresión-espacial.html#cb208-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
-<span id="cb208-21"><a href="modelos-de-regresión-espacial.html#cb208-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb208-22"><a href="modelos-de-regresión-espacial.html#cb208-22" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;G Getis Ord Local para las captaciones del banco agrario </span></span>
-<span id="cb208-23"><a href="modelos-de-regresión-espacial.html#cb208-23" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
-<span id="cb208-24"><a href="modelos-de-regresión-espacial.html#cb208-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb208-25"><a href="modelos-de-regresión-espacial.html#cb208-25" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="modelos-de-regresión-espacial.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa de P-values</span></span>
-<span id="cb209-2"><a href="modelos-de-regresión-espacial.html#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb209-3"><a href="modelos-de-regresión-espacial.html#cb209-3" aria-hidden="true" tabindex="-1"></a>shadegp <span class="ot">=</span> <span class="fu">shading</span>(<span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">cols =</span> (<span class="fu">brewer.pal</span>(<span class="dv">4</span>,<span class="st">&quot;Spectral&quot;</span>)))</span>
-<span id="cb209-4"><a href="modelos-de-regresión-espacial.html#cb209-4" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, mc.pvalor.G, <span class="at">shading=</span>shadegp)</span>
-<span id="cb209-5"><a href="modelos-de-regresión-espacial.html#cb209-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,</span>
-<span id="cb209-6"><a href="modelos-de-regresión-espacial.html#cb209-6" aria-hidden="true" tabindex="-1"></a>             <span class="fl">535165.5</span>, </span>
-<span id="cb209-7"><a href="modelos-de-regresión-espacial.html#cb209-7" aria-hidden="true" tabindex="-1"></a>             shadegp, </span>
-<span id="cb209-8"><a href="modelos-de-regresión-espacial.html#cb209-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, </span>
-<span id="cb209-9"><a href="modelos-de-regresión-espacial.html#cb209-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;P-valor de G&quot;</span>, </span>
-<span id="cb209-10"><a href="modelos-de-regresión-espacial.html#cb209-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">cex=</span><span class="fl">0.7</span>, </span>
-<span id="cb209-11"><a href="modelos-de-regresión-espacial.html#cb209-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, </span>
-<span id="cb209-12"><a href="modelos-de-regresión-espacial.html#cb209-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, </span>
-<span id="cb209-13"><a href="modelos-de-regresión-espacial.html#cb209-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
-<span id="cb209-14"><a href="modelos-de-regresión-espacial.html#cb209-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb209-15"><a href="modelos-de-regresión-espacial.html#cb209-15" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;P- Valor de G Getis Ord Local para las captaciones del banco agrario </span></span>
-<span id="cb209-16"><a href="modelos-de-regresión-espacial.html#cb209-16" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
-<span id="cb209-17"><a href="modelos-de-regresión-espacial.html#cb209-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb209-18"><a href="modelos-de-regresión-espacial.html#cb209-18" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<div id="mapas" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Mapas<a href="modelos-de-regresión-espacial.html#mapas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="modelos-de-regresión-espacial.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapas</span></span>
+<span id="cb382-2"><a href="modelos-de-regresión-espacial.html#cb382-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb382-3"><a href="modelos-de-regresión-espacial.html#cb382-3" aria-hidden="true" tabindex="-1"></a>shadeg <span class="ot">=</span> <span class="fu">auto.shading</span>(localG, </span>
+<span id="cb382-4"><a href="modelos-de-regresión-espacial.html#cb382-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">n=</span><span class="dv">5</span>, </span>
+<span id="cb382-5"><a href="modelos-de-regresión-espacial.html#cb382-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Purples&quot;</span>)), </span>
+<span id="cb382-6"><a href="modelos-de-regresión-espacial.html#cb382-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cutter=</span>quantileCuts)</span>
+<span id="cb382-7"><a href="modelos-de-regresión-espacial.html#cb382-7" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb382-8"><a href="modelos-de-regresión-espacial.html#cb382-8" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, </span>
+<span id="cb382-9"><a href="modelos-de-regresión-espacial.html#cb382-9" aria-hidden="true" tabindex="-1"></a>           localG, </span>
+<span id="cb382-10"><a href="modelos-de-regresión-espacial.html#cb382-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">shading=</span>shadeg)</span>
+<span id="cb382-11"><a href="modelos-de-regresión-espacial.html#cb382-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb382-12"><a href="modelos-de-regresión-espacial.html#cb382-12" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,</span>
+<span id="cb382-13"><a href="modelos-de-regresión-espacial.html#cb382-13" aria-hidden="true" tabindex="-1"></a>             <span class="fl">535165.5</span>, </span>
+<span id="cb382-14"><a href="modelos-de-regresión-espacial.html#cb382-14" aria-hidden="true" tabindex="-1"></a>             shadeg, </span>
+<span id="cb382-15"><a href="modelos-de-regresión-espacial.html#cb382-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, </span>
+<span id="cb382-16"><a href="modelos-de-regresión-espacial.html#cb382-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;G&quot;</span>, </span>
+<span id="cb382-17"><a href="modelos-de-regresión-espacial.html#cb382-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">cex=</span><span class="fl">0.7</span>, </span>
+<span id="cb382-18"><a href="modelos-de-regresión-espacial.html#cb382-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, </span>
+<span id="cb382-19"><a href="modelos-de-regresión-espacial.html#cb382-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, </span>
+<span id="cb382-20"><a href="modelos-de-regresión-espacial.html#cb382-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
+<span id="cb382-21"><a href="modelos-de-regresión-espacial.html#cb382-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb382-22"><a href="modelos-de-regresión-espacial.html#cb382-22" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;G Getis Ord Local para las captaciones del banco agrario </span></span>
+<span id="cb382-23"><a href="modelos-de-regresión-espacial.html#cb382-23" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb382-24"><a href="modelos-de-regresión-espacial.html#cb382-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb382-25"><a href="modelos-de-regresión-espacial.html#cb382-25" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="modelos-de-regresión-espacial.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa de P-values</span></span>
+<span id="cb383-2"><a href="modelos-de-regresión-espacial.html#cb383-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb383-3"><a href="modelos-de-regresión-espacial.html#cb383-3" aria-hidden="true" tabindex="-1"></a>shadegp <span class="ot">=</span> <span class="fu">shading</span>(<span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">cols =</span> (<span class="fu">brewer.pal</span>(<span class="dv">4</span>,<span class="st">&quot;Spectral&quot;</span>)))</span>
+<span id="cb383-4"><a href="modelos-de-regresión-espacial.html#cb383-4" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, mc.pvalor.G, <span class="at">shading=</span>shadegp)</span>
+<span id="cb383-5"><a href="modelos-de-regresión-espacial.html#cb383-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,</span>
+<span id="cb383-6"><a href="modelos-de-regresión-espacial.html#cb383-6" aria-hidden="true" tabindex="-1"></a>             <span class="fl">535165.5</span>, </span>
+<span id="cb383-7"><a href="modelos-de-regresión-espacial.html#cb383-7" aria-hidden="true" tabindex="-1"></a>             shadegp, </span>
+<span id="cb383-8"><a href="modelos-de-regresión-espacial.html#cb383-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, </span>
+<span id="cb383-9"><a href="modelos-de-regresión-espacial.html#cb383-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;P-valor de G&quot;</span>, </span>
+<span id="cb383-10"><a href="modelos-de-regresión-espacial.html#cb383-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">cex=</span><span class="fl">0.7</span>, </span>
+<span id="cb383-11"><a href="modelos-de-regresión-espacial.html#cb383-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, </span>
+<span id="cb383-12"><a href="modelos-de-regresión-espacial.html#cb383-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, </span>
+<span id="cb383-13"><a href="modelos-de-regresión-espacial.html#cb383-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
+<span id="cb383-14"><a href="modelos-de-regresión-espacial.html#cb383-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb383-15"><a href="modelos-de-regresión-espacial.html#cb383-15" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;P- Valor de G Getis Ord Local para las captaciones del banco agrario </span></span>
+<span id="cb383-16"><a href="modelos-de-regresión-espacial.html#cb383-16" aria-hidden="true" tabindex="-1"></a><span class="st">       en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb383-17"><a href="modelos-de-regresión-espacial.html#cb383-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb383-18"><a href="modelos-de-regresión-espacial.html#cb383-18" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
 <p>##Modelos SDEM, SDM, Manski, SARAR</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="modelos-de-regresión-espacial.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="do">####Modelos SDEM, SDM, Manski, SARAR########</span></span>
-<span id="cb210-2"><a href="modelos-de-regresión-espacial.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="co">#reg.eq1=CAP_BAC ~ PIB + NBI + CAP_BOG + CAP_BC + CAP_OCC + CAP_CS + Población + IPM</span></span>
-<span id="cb210-3"><a href="modelos-de-regresión-espacial.html#cb210-3" aria-hidden="true" tabindex="-1"></a>reg.eq1<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> NBI <span class="sc">+</span> CAP_BOG<span class="sc">+</span>CAP_BC <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
-<span id="cb210-4"><a href="modelos-de-regresión-espacial.html#cb210-4" aria-hidden="true" tabindex="-1"></a>reg1<span class="ot">=</span><span class="fu">lm</span>(reg.eq1,<span class="at">data=</span>Insumo)                                     <span class="co">#OLS            y=XB+e,    </span></span>
-<span id="cb210-5"><a href="modelos-de-regresión-espacial.html#cb210-5" aria-hidden="true" tabindex="-1"></a>reg2<span class="ot">=</span><span class="fu">lmSLX</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw)                       <span class="co">#SLX            y=XB+WxT+e</span></span>
-<span id="cb210-6"><a href="modelos-de-regresión-espacial.html#cb210-6" aria-hidden="true" tabindex="-1"></a>reg3<span class="ot">=</span><span class="fu">lagsarlm</span>(reg.eq1,<span class="at">data=</span> Insumo, Insumo.lw)                   <span class="co">#Lag Y          y=XB+WxT+u,   u=LWu+e</span></span>
-<span id="cb210-7"><a href="modelos-de-regresión-espacial.html#cb210-7" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw)                  <span class="co">#Spatial Error  y=pWy+XB+e   </span></span>
-<span id="cb210-8"><a href="modelos-de-regresión-espacial.html#cb210-8" aria-hidden="true" tabindex="-1"></a>reg5<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq1, <span class="at">data=</span>Insumo, Insumo.lw, <span class="at">etype=</span><span class="st">&quot;emixed&quot;</span>) <span class="co">#SDEM Spatial Durbin Error Model y=XB+WxT+u,   u=LWu+e</span></span>
-<span id="cb210-9"><a href="modelos-de-regresión-espacial.html#cb210-9" aria-hidden="true" tabindex="-1"></a>reg6<span class="ot">=</span><span class="fu">lagsarlm</span>(reg.eq1, <span class="at">data=</span>Insumo,Insumo.lw, <span class="at">type=</span><span class="st">&quot;mixed&quot;</span>)      <span class="co">#SDM Spatial Durbin Model (add lag X to SAR) y=pWy+XB+WXT+e </span></span>
-<span id="cb210-10"><a href="modelos-de-regresión-espacial.html#cb210-10" aria-hidden="true" tabindex="-1"></a>reg7<span class="ot">=</span><span class="fu">sacsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw, <span class="at">type=</span><span class="st">&quot;sacmixed&quot;</span>)   <span class="co">#Manski Model: y=pWy+XB+WXT+u,   u=LWu+e (no recomendado)</span></span>
-<span id="cb210-11"><a href="modelos-de-regresión-espacial.html#cb210-11" aria-hidden="true" tabindex="-1"></a>reg8<span class="ot">=</span><span class="fu">sacsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo,Insumo.lw, <span class="at">type=</span><span class="st">&quot;sac&quot;</span>)         <span class="co">#SARAR o Kelejian-Prucha, Cliff-Ord, o SAC If all T=0,y=pWy+XB+u, u=LWu+e</span></span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="modelos-de-regresión-espacial.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="do">####Modelos SDEM, SDM, Manski, SARAR########</span></span>
+<span id="cb384-2"><a href="modelos-de-regresión-espacial.html#cb384-2" aria-hidden="true" tabindex="-1"></a><span class="co">#reg.eq1=CAP_BAC ~ PIB + NBI + CAP_BOG + CAP_BC + CAP_OCC + CAP_CS + Población + IPM</span></span>
+<span id="cb384-3"><a href="modelos-de-regresión-espacial.html#cb384-3" aria-hidden="true" tabindex="-1"></a>reg.eq1<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> NBI <span class="sc">+</span> CAP_BOG<span class="sc">+</span>CAP_BC <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
+<span id="cb384-4"><a href="modelos-de-regresión-espacial.html#cb384-4" aria-hidden="true" tabindex="-1"></a>reg1<span class="ot">=</span><span class="fu">lm</span>(reg.eq1,<span class="at">data=</span>Insumo)                                     <span class="co">#OLS            y=XB+e,    </span></span>
+<span id="cb384-5"><a href="modelos-de-regresión-espacial.html#cb384-5" aria-hidden="true" tabindex="-1"></a>reg2<span class="ot">=</span><span class="fu">lmSLX</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw)                       <span class="co">#SLX            y=XB+WxT+e</span></span>
+<span id="cb384-6"><a href="modelos-de-regresión-espacial.html#cb384-6" aria-hidden="true" tabindex="-1"></a>reg3<span class="ot">=</span><span class="fu">lagsarlm</span>(reg.eq1,<span class="at">data=</span> Insumo, Insumo.lw)                   <span class="co">#Lag Y          y=XB+WxT+u,   u=LWu+e</span></span></code></pre></div>
+<pre><code>## Warning in lagsarlm(reg.eq1, data = Insumo, Insumo.lw): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
+##   reciprocal condition number = 5.81787e-18 - using numerical Hessian.</code></pre>
+<pre><code>## Warning in sqrt(diag(fdHess)[-1]): NaNs produced</code></pre>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="modelos-de-regresión-espacial.html#cb387-1" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw)                  <span class="co">#Spatial Error  y=pWy+XB+e   </span></span></code></pre></div>
+<pre><code>## Warning in errorsarlm(reg.eq1, data = Insumo, Insumo.lw): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
+##   reciprocal condition number = 9.23672e-18 - using numerical Hessian.</code></pre>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="modelos-de-regresión-espacial.html#cb389-1" aria-hidden="true" tabindex="-1"></a>reg5<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq1, <span class="at">data=</span>Insumo, Insumo.lw, <span class="at">etype=</span><span class="st">&quot;emixed&quot;</span>) <span class="co">#SDEM Spatial Durbin Error Model y=XB+WxT+u,   u=LWu+e</span></span></code></pre></div>
+<pre><code>## Warning in errorsarlm(reg.eq1, data = Insumo, Insumo.lw, etype = &quot;emixed&quot;): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
+##   reciprocal condition number = 6.96475e-18 - using numerical Hessian.</code></pre>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="modelos-de-regresión-espacial.html#cb391-1" aria-hidden="true" tabindex="-1"></a>reg6<span class="ot">=</span><span class="fu">lagsarlm</span>(reg.eq1, <span class="at">data=</span>Insumo,Insumo.lw, <span class="at">type=</span><span class="st">&quot;mixed&quot;</span>)      <span class="co">#SDM Spatial Durbin Model (add lag X to SAR) y=pWy+XB+WXT+e </span></span></code></pre></div>
+<pre><code>## Warning in lagsarlm(reg.eq1, data = Insumo, Insumo.lw, type = &quot;mixed&quot;): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
+##   reciprocal condition number = 4.67991e-18 - using numerical Hessian.</code></pre>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="modelos-de-regresión-espacial.html#cb393-1" aria-hidden="true" tabindex="-1"></a>reg7<span class="ot">=</span><span class="fu">sacsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo, Insumo.lw, <span class="at">type=</span><span class="st">&quot;sacmixed&quot;</span>)   <span class="co">#Manski Model: y=pWy+XB+WXT+u,   u=LWu+e (no recomendado)</span></span></code></pre></div>
+<pre><code>## Warning in sacsarlm(reg.eq1, data = Insumo, Insumo.lw, type = &quot;sacmixed&quot;): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
+##   reciprocal condition number = 1.95939e-18 - using numerical Hessian.</code></pre>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="modelos-de-regresión-espacial.html#cb395-1" aria-hidden="true" tabindex="-1"></a>reg8<span class="ot">=</span><span class="fu">sacsarlm</span>(reg.eq1,<span class="at">data=</span>Insumo,Insumo.lw, <span class="at">type=</span><span class="st">&quot;sac&quot;</span>)         <span class="co">#SARAR o Kelejian-Prucha, Cliff-Ord, o SAC If all T=0,y=pWy+XB+u, u=LWu+e</span></span></code></pre></div>
+<pre><code>## Warning in sacsarlm(reg.eq1, data = Insumo, Insumo.lw, type = &quot;sac&quot;): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
+##   reciprocal condition number = 8.69628e-18 - using numerical Hessian.</code></pre>
 </div>
-<div id="resumen-de-modelos" class="section level2 hasAnchor" number="4.8">
-<h2><span class="header-section-number">4.8</span> Resumen de modelos<a href="modelos-de-regresión-espacial.html#resumen-de-modelos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="modelos-de-regresión-espacial.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Resumen de modelos</span></span>
-<span id="cb211-2"><a href="modelos-de-regresión-espacial.html#cb211-2" aria-hidden="true" tabindex="-1"></a>s<span class="ot">=</span>summary</span>
-<span id="cb211-3"><a href="modelos-de-regresión-espacial.html#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg1)<span class="co">#OLS</span></span></code></pre></div>
+<div id="resumen-de-modelos" class="section level2 hasAnchor" number="6.8">
+<h2><span class="header-section-number">6.8</span> Resumen de modelos<a href="modelos-de-regresión-espacial.html#resumen-de-modelos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="modelos-de-regresión-espacial.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Resumen de modelos</span></span>
+<span id="cb397-2"><a href="modelos-de-regresión-espacial.html#cb397-2" aria-hidden="true" tabindex="-1"></a>s<span class="ot">=</span>summary</span>
+<span id="cb397-3"><a href="modelos-de-regresión-espacial.html#cb397-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg1)<span class="co">#OLS</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = reg.eq1, data = Insumo)
@@ -674,7 +683,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 141.6 on 24 degrees of freedom
 ## Multiple R-squared:  0.8807, Adjusted R-squared:  0.8459 
 ## F-statistic: 25.31 on 7 and 24 DF,  p-value: 0.000000001309</code></pre>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="modelos-de-regresión-espacial.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg2)<span class="co">#SLX</span></span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="modelos-de-regresión-espacial.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg2)<span class="co">#SLX</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = formula(paste(&quot;y ~ &quot;, paste(colnames(x)[-1], collapse = &quot;+&quot;))), 
@@ -705,7 +714,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 151.6 on 17 degrees of freedom
 ## Multiple R-squared:  0.9031, Adjusted R-squared:  0.8234 
 ## F-statistic: 11.32 on 14 and 17 DF,  p-value: 0.000005467</code></pre>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="modelos-de-regresión-espacial.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg3)<span class="co">#Lag Y</span></span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="modelos-de-regresión-espacial.html#cb401-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg3)<span class="co">#Lag Y</span></span></code></pre></div>
 <pre><code>## 
 ## Call:lagsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw)
 ## 
@@ -716,26 +725,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: lag 
 ## Coefficients: (numerical Hessian approximate standard errors) 
 ##                   Estimate     Std. Error z value Pr(&gt;|z|)
-## (Intercept) 77.75431414819 80.79616201670  0.9624  0.33587
-## PIB          0.00330780477  0.00254966082  1.2974  0.19451
-## NBI         -0.77863467134  1.49479379488 -0.5209  0.60244
-## CAP_BOG     -0.05466121768  0.04510317006 -1.2119  0.22554
-## CAP_BC       0.00533211210  0.00501910191  1.0624  0.28807
-## CAP_OCC     -0.03421667698  0.01868849261 -1.8309  0.06712
-## CAP_CS       0.40699816254  0.26348656211  1.5447  0.12243
-## Población    0.00000091508  0.00004281372  0.0214  0.98295
+## (Intercept) 77.75432883510 72.78425608641  1.0683  0.28539
+## PIB          0.00330780489  0.00158809777  2.0829  0.03726
+## NBI         -0.77863477697  1.47850389439 -0.5266  0.59845
+## CAP_BOG     -0.05466122014  0.04390266160 -1.2451  0.21311
+## CAP_BC       0.00533211182  0.00466511800  1.1430  0.25305
+## CAP_OCC     -0.03421667889  0.01727641951 -1.9805  0.04764
+## CAP_CS       0.40699817626  0.26143664946  1.5568  0.11952
+## Población    0.00000091508            NaN     NaN      NaN
 ## 
 ## Rho: 0.22884, LR test value: 2.096, p-value: 0.14768
-## Approximate (numerical Hessian) standard error: 0.15357
-##     z-value: 1.4901, p-value: 0.13619
-## Wald statistic: 2.2204, p-value: 0.13619
+## Approximate (numerical Hessian) standard error: 0.15349
+##     z-value: 1.4909, p-value: 0.13599
+## Wald statistic: 2.2227, p-value: 0.13599
 ## 
 ## Log likelihood: -198.251 for lag model
 ## ML residual variance (sigma squared): 13916, (sigma: 117.97)
 ## Number of observations: 32 
 ## Number of parameters estimated: 10 
 ## AIC: 416.5, (AIC for lm: 416.6)</code></pre>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="modelos-de-regresión-espacial.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="modelos-de-regresión-espacial.html#cb403-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:errorsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw)
 ## 
@@ -746,26 +755,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: error 
 ## Coefficients: (asymptotic standard errors) 
 ##                 Estimate   Std. Error z value Pr(&gt;|z|)
-## (Intercept) 94.500062171 73.097740078  1.2928  0.19608
+## (Intercept) 94.500065984 73.097738889  1.2928  0.19608
 ## PIB          0.003656790  0.002619923  1.3958  0.16279
-## NBI         -0.334674295  1.408551013 -0.2376  0.81219
-## CAP_BOG     -0.032484041  0.049990129 -0.6498  0.51582
-## CAP_BC       0.001202332  0.005555428  0.2164  0.82866
+## NBI         -0.334674352  1.408551017 -0.2376  0.81219
+## CAP_BOG     -0.032484043  0.049990128 -0.6498  0.51582
+## CAP_BC       0.001202333  0.005555428  0.2164  0.82866
 ## CAP_OCC     -0.048739699  0.019538015 -2.4946  0.01261
-## CAP_CS       0.285572474  0.287233645  0.9942  0.32012
+## CAP_CS       0.285572487  0.287233644  0.9942  0.32012
 ## Población    0.000040164  0.000066648  0.6026  0.54676
 ## 
 ## Lambda: 0.50692, LR test value: 3.8031, p-value: 0.051158
-## Approximate (numerical Hessian) standard error: 0.21454
-##     z-value: 2.3629, p-value: 0.018135
-## Wald statistic: 5.5831, p-value: 0.018135
+## Approximate (numerical Hessian) standard error: 0.21495
+##     z-value: 2.3584, p-value: 0.018356
+## Wald statistic: 5.5618, p-value: 0.018356
 ## 
 ## Log likelihood: -197.3975 for error model
 ## ML residual variance (sigma squared): 12495, (sigma: 111.78)
 ## Number of observations: 32 
 ## Number of parameters estimated: 10 
-## AIC: 414.79, (AIC for lm: 416.6)</code></pre>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="modelos-de-regresión-espacial.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg5)<span class="co">#Durbin Error (SDEM)</span></span></code></pre></div>
+## AIC: NA (not available for weighted model), (AIC for lm: 416.6)</code></pre>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="modelos-de-regresión-espacial.html#cb405-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg5)<span class="co">#Durbin Error (SDEM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:errorsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw,     etype = &quot;emixed&quot;)
 ## 
@@ -776,33 +785,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: error 
 ## Coefficients: (asymptotic standard errors) 
 ##                    Estimate    Std. Error z value Pr(&gt;|z|)
-## (Intercept)   248.934586826 220.997176296  1.1264  0.25999
+## (Intercept)   248.934472800 220.997187634  1.1264  0.25999
 ## PIB             0.004499050   0.002763860  1.6278  0.10356
-## NBI            -0.058411226   1.767448337 -0.0330  0.97364
-## CAP_BOG        -0.026724632   0.054644416 -0.4891  0.62480
-## CAP_BC         -0.000183348   0.007104435 -0.0258  0.97941
-## CAP_OCC        -0.051006013   0.024157938 -2.1114  0.03474
-## CAP_CS          0.227498753   0.309055950  0.7361  0.46166
+## NBI            -0.058410794   1.767448316 -0.0330  0.97364
+## CAP_BOG        -0.026724646   0.054644416 -0.4891  0.62480
+## CAP_BC         -0.000183348   0.007104434 -0.0258  0.97941
+## CAP_OCC        -0.051006011   0.024157938 -2.1114  0.03474
+## CAP_CS          0.227498823   0.309055945  0.7361  0.46166
 ## Población       0.000035177   0.000084525  0.4162  0.67729
 ## lag.PIB         0.003069904   0.007273446  0.4221  0.67297
-## lag.NBI        -4.397302667   4.370216203 -1.0062  0.31432
-## lag.CAP_BOG    -0.078935302   0.133353634 -0.5919  0.55390
-## lag.CAP_BC      0.000970534   0.011031858  0.0880  0.92990
-## lag.CAP_OCC    -0.013417106   0.040319109 -0.3328  0.73931
-## lag.CAP_CS      0.374124922   0.777502436  0.4812  0.63038
+## lag.NBI        -4.397300877   4.370216215 -1.0062  0.31432
+## lag.CAP_BOG    -0.078935307   0.133353631 -0.5919  0.55390
+## lag.CAP_BC      0.000970529   0.011031859  0.0880  0.92990
+## lag.CAP_OCC    -0.013417110   0.040319111 -0.3328  0.73931
+## lag.CAP_CS      0.374124930   0.777502425  0.4812  0.63038
 ## lag.Población  -0.000103911   0.000125213 -0.8299  0.40661
 ## 
 ## Lambda: 0.28217, LR test value: 0.34013, p-value: 0.55976
-## Approximate (numerical Hessian) standard error: 0.43688
-##     z-value: 0.64589, p-value: 0.51835
-## Wald statistic: 0.41717, p-value: 0.51835
+## Approximate (numerical Hessian) standard error: 0.45782
+##     z-value: 0.61635, p-value: 0.53767
+## Wald statistic: 0.37988, p-value: 0.53767
 ## 
 ## Log likelihood: -195.7931 for error model
 ## ML residual variance (sigma squared): 11856, (sigma: 108.89)
 ## Number of observations: 32 
 ## Number of parameters estimated: 17 
-## AIC: 425.59, (AIC for lm: 423.93)</code></pre>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="modelos-de-regresión-espacial.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg6)<span class="co">#Durbin (SDM)</span></span></code></pre></div>
+## AIC: NA (not available for weighted model), (AIC for lm: 423.93)</code></pre>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="modelos-de-regresión-espacial.html#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg6)<span class="co">#Durbin (SDM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:lagsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw,     type = &quot;mixed&quot;)
 ## 
@@ -812,34 +821,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Type: mixed 
 ## Coefficients: (numerical Hessian approximate standard errors) 
-##                    Estimate    Std. Error z value    Pr(&gt;|z|)
-## (Intercept)   259.002902069  55.621142504  4.6566 0.000003215
-## PIB             0.004292096   0.002531326  1.6956     0.08996
-## NBI            -0.068020300           NaN     NaN         NaN
-## CAP_BOG        -0.013498834   0.057267316 -0.2357     0.81365
-## CAP_BC         -0.000674466   0.007073100 -0.0954     0.92403
-## CAP_OCC        -0.052995708   0.024225842 -2.1876     0.02870
-## CAP_CS          0.159111966   0.330144713  0.4819     0.62984
-## Población       0.000046528   0.000093081  0.4999     0.61717
-## lag.PIB         0.001006279   0.005492940  0.1832     0.85464
-## lag.NBI        -5.022145973   4.547493579 -1.1044     0.26943
-## lag.CAP_BOG    -0.060141056   0.061322296 -0.9807     0.32672
-## lag.CAP_BC      0.003372687   0.010237335  0.3294     0.74182
-## lag.CAP_OCC     0.001941496   0.042927437  0.0452     0.96393
-## lag.CAP_CS      0.265435964   0.307708639  0.8626     0.38835
-## lag.Población  -0.000120261   0.000095918 -1.2538     0.20992
+##                    Estimate    Std. Error z value Pr(&gt;|z|)
+## (Intercept)   259.002885782 224.615320155  1.1531  0.24887
+## PIB             0.004292096   0.002708060  1.5849  0.11298
+## NBI            -0.068020238   2.132586505 -0.0319  0.97456
+## CAP_BOG        -0.013498835   0.053903632 -0.2504  0.80226
+## CAP_BC         -0.000674466   0.006222482 -0.1084  0.91368
+## CAP_OCC        -0.052995708   0.022652248 -2.3395  0.01931
+## CAP_CS          0.159111970   0.302853078  0.5254  0.59932
+## Población       0.000046528   0.000082317  0.5652  0.57191
+## lag.PIB         0.001006279   0.007240728  0.1390  0.88947
+## lag.NBI        -5.022145755   4.587135513 -1.0948  0.27359
+## lag.CAP_BOG    -0.060141055   0.131444000 -0.4575  0.64728
+## lag.CAP_BC      0.003372687   0.010959544  0.3077  0.75828
+## lag.CAP_OCC     0.001941497   0.053815702  0.0361  0.97122
+## lag.CAP_CS      0.265435956   0.784721558  0.3383  0.73517
+## lag.Población  -0.000120261   0.000146346 -0.8218  0.41122
 ## 
 ## Rho: 0.28321, LR test value: 0.99104, p-value: 0.31949
-## Approximate (numerical Hessian) standard error: 0.25885
-##     z-value: 1.0941, p-value: 0.27392
-## Wald statistic: 1.197, p-value: 0.27392
+## Approximate (numerical Hessian) standard error: 0.26283
+##     z-value: 1.0775, p-value: 0.28124
+## Wald statistic: 1.1611, p-value: 0.28124
 ## 
 ## Log likelihood: -195.4676 for mixed model
 ## ML residual variance (sigma squared): 11616, (sigma: 107.78)
 ## Number of observations: 32 
 ## Number of parameters estimated: 17 
 ## AIC: 424.94, (AIC for lm: 423.93)</code></pre>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="modelos-de-regresión-espacial.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg7)<span class="co">#Manski</span></span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="modelos-de-regresión-espacial.html#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg7)<span class="co">#Manski</span></span></code></pre></div>
 <pre><code>## 
 ## Call:sacsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw,     type = &quot;sacmixed&quot;)
 ## 
@@ -850,28 +859,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: sacmixed 
 ## Coefficients: (numerical Hessian approximate standard errors) 
 ##                    Estimate    Std. Error z value Pr(&gt;|z|)
-## (Intercept)   307.899506935 245.174840544  1.2558  0.20918
-## PIB             0.004070842   0.002818181  1.4445  0.14860
-## NBI            -0.195254122   1.741252781 -0.1121  0.91072
-## CAP_BOG         0.002531849   0.035792716  0.0707  0.94361
-## CAP_BC         -0.001838769   0.006389043 -0.2878  0.77350
-## CAP_OCC        -0.056119738   0.023484361 -2.3897  0.01686
-## CAP_CS          0.071595240   0.203731481  0.3514  0.72527
-## Población       0.000065749   0.000085924  0.7652  0.44415
-## lag.PIB         0.000817609   0.006451837  0.1267  0.89916
-## lag.NBI        -6.096432537   5.166092289 -1.1801  0.23797
-## lag.CAP_BOG    -0.052377434   0.133052991 -0.3937  0.69383
-## lag.CAP_BC      0.006801659   0.011453433  0.5939  0.55261
-## lag.CAP_OCC     0.008763486   0.040120481  0.2184  0.82709
-## lag.CAP_CS      0.219189292   0.775091430  0.2828  0.77734
-## lag.Población  -0.000162608   0.000147069 -1.1057  0.26888
+## (Intercept)   307.899524827 289.173507863  1.0648  0.28699
+## PIB             0.004070842   0.002881048  1.4130  0.15766
+## NBI            -0.195254186   1.932325107 -0.1010  0.91951
+## CAP_BOG         0.002531850   0.089756232  0.0282  0.97750
+## CAP_BC         -0.001838769   0.009348395 -0.1967  0.84407
+## CAP_OCC        -0.056119738   0.028292541 -1.9836  0.04731
+## CAP_CS          0.071595235   0.500476865  0.1431  0.88625
+## Población       0.000065749   0.000125447  0.5241  0.60019
+## lag.PIB         0.000817609   0.007040486  0.1161  0.90755
+## lag.NBI        -6.096432791   5.918183252 -1.0301  0.30295
+## lag.CAP_BOG    -0.052377434   0.139398457 -0.3757  0.70711
+## lag.CAP_BC      0.006801659   0.016628203  0.4090  0.68251
+## lag.CAP_OCC     0.008763485   0.049556804  0.1768  0.85964
+## lag.CAP_CS      0.219189298   0.815594280  0.2687  0.78812
+## lag.Población  -0.000162608   0.000233654 -0.6959  0.48647
 ## 
 ## Rho: 0.38485
-## Approximate (numerical Hessian) standard error: 0.34303
-##     z-value: 1.1219, p-value: 0.2619
+## Approximate (numerical Hessian) standard error: 0.39392
+##     z-value: 0.97698, p-value: 0.32858
 ## Lambda: -0.26343
-## Approximate (numerical Hessian) standard error: 0.62199
-##     z-value: -0.42353, p-value: 0.67191
+## Approximate (numerical Hessian) standard error: 0.88846
+##     z-value: -0.2965, p-value: 0.76685
 ## 
 ## LR test value: 7.7816, p-value: 0.5563
 ## 
@@ -880,7 +889,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of observations: 32 
 ## Number of parameters estimated: 18 
 ## AIC: 426.82, (AIC for lm: 416.6)</code></pre>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="modelos-de-regresión-espacial.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg8)<span class="co">#SARAR lag Y and lag e (SAC)</span></span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="modelos-de-regresión-espacial.html#cb411-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg8)<span class="co">#SARAR lag Y and lag e (SAC)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:sacsarlm(formula = reg.eq1, data = Insumo, listw = Insumo.lw,     type = &quot;sac&quot;)
 ## 
@@ -891,21 +900,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: sac 
 ## Coefficients: (numerical Hessian approximate standard errors) 
 ##                 Estimate   Std. Error z value Pr(&gt;|z|)
-## (Intercept) 73.149386026 83.556706428  0.8754  0.38133
-## PIB          0.003487952  0.002661736  1.3104  0.19006
-## NBI         -0.337466937  1.455155630 -0.2319  0.81661
-## CAP_BOG     -0.038888663  0.051338733 -0.7575  0.44876
-## CAP_BC       0.002799262  0.006119689  0.4574  0.64737
-## CAP_OCC     -0.043084476  0.021693387 -1.9861  0.04703
-## CAP_CS       0.320438586  0.294474987  1.0882  0.27652
-## Población    0.000028476  0.000068136  0.4179  0.67599
+## (Intercept) 73.149386014 83.317191361  0.8780  0.37996
+## PIB          0.003487952  0.002651478  1.3155  0.18835
+## NBI         -0.337466937  1.448625357 -0.2330  0.81580
+## CAP_BOG     -0.038888663  0.051162705 -0.7601  0.44720
+## CAP_BC       0.002799262  0.006077082  0.4606  0.64507
+## CAP_OCC     -0.043084476  0.021594358 -1.9952  0.04602
+## CAP_CS       0.320438586  0.293526107  1.0917  0.27497
+## Población    0.000028476  0.000067569  0.4214  0.67343
 ## 
 ## Rho: 0.1104
-## Approximate (numerical Hessian) standard error: 0.19087
-##     z-value: 0.57842, p-value: 0.56298
+## Approximate (numerical Hessian) standard error: 0.19009
+##     z-value: 0.58081, p-value: 0.56137
 ## Lambda: 0.41973
-## Approximate (numerical Hessian) standard error: 0.27323
-##     z-value: 1.5362, p-value: 0.1245
+## Approximate (numerical Hessian) standard error: 0.27257
+##     z-value: 1.5399, p-value: 0.12359
 ## 
 ## LR test value: 4.1193, p-value: 0.1275
 ## 
@@ -915,12 +924,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of parameters estimated: 11 
 ## AIC: 416.48, (AIC for lm: 416.6)</code></pre>
 </div>
-<div id="calculo-de-varibles-significativas" class="section level2 hasAnchor" number="4.9">
-<h2><span class="header-section-number">4.9</span> Calculo de varibles significativas<a href="modelos-de-regresión-espacial.html#calculo-de-varibles-significativas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="modelos-de-regresión-espacial.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculo de variables signid¿ficativas</span></span>
-<span id="cb227-2"><a href="modelos-de-regresión-espacial.html#cb227-2" aria-hidden="true" tabindex="-1"></a>reg.eq2<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_BOG<span class="sc">+</span>CAP_BC <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
-<span id="cb227-3"><a href="modelos-de-regresión-espacial.html#cb227-3" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq2,<span class="at">data=</span>Insumo, Insumo.lw)</span>
-<span id="cb227-4"><a href="modelos-de-regresión-espacial.html#cb227-4" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+<div id="calculo-de-varibles-significativas" class="section level2 hasAnchor" number="6.9">
+<h2><span class="header-section-number">6.9</span> Calculo de varibles significativas<a href="modelos-de-regresión-espacial.html#calculo-de-varibles-significativas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="modelos-de-regresión-espacial.html#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculo de variables signid¿ficativas</span></span>
+<span id="cb413-2"><a href="modelos-de-regresión-espacial.html#cb413-2" aria-hidden="true" tabindex="-1"></a>reg.eq2<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_BOG<span class="sc">+</span>CAP_BC <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
+<span id="cb413-3"><a href="modelos-de-regresión-espacial.html#cb413-3" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq2,<span class="at">data=</span>Insumo, Insumo.lw)</span></code></pre></div>
+<pre><code>## Warning in errorsarlm(reg.eq2, data = Insumo, Insumo.lw): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
+##   reciprocal condition number = 9.29353e-18 - using numerical Hessian.</code></pre>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="modelos-de-regresión-espacial.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:errorsarlm(formula = reg.eq2, data = Insumo, listw = Insumo.lw)
 ## 
@@ -931,27 +942,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: error 
 ## Coefficients: (asymptotic standard errors) 
 ##                 Estimate   Std. Error z value Pr(&gt;|z|)
-## (Intercept) 82.780380374 57.200033443  1.4472  0.14784
+## (Intercept) 82.780382772 57.200030716  1.4472  0.14784
 ## PIB          0.003786089  0.002550194  1.4846  0.13764
-## CAP_BOG     -0.033655761  0.049317358 -0.6824  0.49497
-## CAP_BC       0.001072561  0.005563108  0.1928  0.84712
+## CAP_BOG     -0.033655764  0.049317358 -0.6824  0.49497
+## CAP_BC       0.001072562  0.005563108  0.1928  0.84712
 ## CAP_OCC     -0.049110630  0.019547548 -2.5124  0.01199
-## CAP_CS       0.290079762  0.285013021  1.0178  0.30878
+## CAP_CS       0.290079781  0.285013019  1.0178  0.30878
 ## Población    0.000039933  0.000066827  0.5976  0.55013
 ## 
 ## Lambda: 0.51895, LR test value: 4.4697, p-value: 0.0345
-## Approximate (numerical Hessian) standard error: 0.20428
-##     z-value: 2.5404, p-value: 0.011073
-## Wald statistic: 6.4536, p-value: 0.011073
+## Approximate (numerical Hessian) standard error: 0.20419
+##     z-value: 2.5415, p-value: 0.011039
+## Wald statistic: 6.4591, p-value: 0.011039
 ## 
 ## Log likelihood: -197.4239 for error model
 ## ML residual variance (sigma squared): 12470, (sigma: 111.67)
 ## Number of observations: 32 
 ## Number of parameters estimated: 9 
-## AIC: 412.85, (AIC for lm: 415.32)</code></pre>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="modelos-de-regresión-espacial.html#cb229-1" aria-hidden="true" tabindex="-1"></a>reg.eq3<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_BOG <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
-<span id="cb229-2"><a href="modelos-de-regresión-espacial.html#cb229-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq3,<span class="at">data=</span>Insumo, Insumo.lw)</span>
-<span id="cb229-3"><a href="modelos-de-regresión-espacial.html#cb229-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+## AIC: NA (not available for weighted model), (AIC for lm: 415.32)</code></pre>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="modelos-de-regresión-espacial.html#cb417-1" aria-hidden="true" tabindex="-1"></a>reg.eq3<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_BOG <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
+<span id="cb417-2"><a href="modelos-de-regresión-espacial.html#cb417-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq3,<span class="at">data=</span>Insumo, Insumo.lw)</span></code></pre></div>
+<pre><code>## Warning in errorsarlm(reg.eq3, data = Insumo, Insumo.lw): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
+##   reciprocal condition number = 9.36792e-18 - using numerical Hessian.</code></pre>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="modelos-de-regresión-espacial.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:errorsarlm(formula = reg.eq3, data = Insumo, listw = Insumo.lw)
 ## 
@@ -962,26 +975,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: error 
 ## Coefficients: (asymptotic standard errors) 
 ##                 Estimate   Std. Error z value  Pr(&gt;|z|)
-## (Intercept) 76.659390740 48.733983813  1.5730 0.1157149
+## (Intercept) 76.659388419 48.733987996  1.5730 0.1157149
 ## PIB          0.003936351  0.002412095  1.6319 0.1026960
-## CAP_BOG     -0.026724274  0.035542538 -0.7519 0.4521139
+## CAP_BOG     -0.026724271  0.035542537 -0.7519 0.4521140
 ## CAP_OCC     -0.051550780  0.014822573 -3.4779 0.0005054
-## CAP_CS       0.249952788  0.204318664  1.2233 0.2211984
+## CAP_CS       0.249952769  0.204318663  1.2233 0.2211984
 ## Población    0.000047471  0.000055107  0.8614 0.3890008
 ## 
 ## Lambda: 0.52489, LR test value: 4.7822, p-value: 0.028756
 ## Approximate (numerical Hessian) standard error: 0.19904
-##     z-value: 2.6371, p-value: 0.0083613
-## Wald statistic: 6.9544, p-value: 0.0083613
+##     z-value: 2.6371, p-value: 0.008363
+## Wald statistic: 6.9541, p-value: 0.008363
 ## 
 ## Log likelihood: -197.4421 for error model
 ## ML residual variance (sigma squared): 12461, (sigma: 111.63)
 ## Number of observations: 32 
 ## Number of parameters estimated: 8 
-## AIC: 410.88, (AIC for lm: 413.67)</code></pre>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="modelos-de-regresión-espacial.html#cb231-1" aria-hidden="true" tabindex="-1"></a>reg.eq4<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
-<span id="cb231-2"><a href="modelos-de-regresión-espacial.html#cb231-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq4,<span class="at">data=</span>Insumo, Insumo.lw)</span>
-<span id="cb231-3"><a href="modelos-de-regresión-espacial.html#cb231-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+## AIC: NA (not available for weighted model), (AIC for lm: 413.67)</code></pre>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="modelos-de-regresión-espacial.html#cb421-1" aria-hidden="true" tabindex="-1"></a>reg.eq4<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS<span class="sc">+</span> Población</span>
+<span id="cb421-2"><a href="modelos-de-regresión-espacial.html#cb421-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq4,<span class="at">data=</span>Insumo, Insumo.lw)</span></code></pre></div>
+<pre><code>## Warning in errorsarlm(reg.eq4, data = Insumo, Insumo.lw): inversion of asymptotic covariance matrix failed for tol.solve = 0.000000000000000222044604925031 
+##   reciprocal condition number = 9.46755e-18 - using numerical Hessian.</code></pre>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="modelos-de-regresión-espacial.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:errorsarlm(formula = reg.eq4, data = Insumo, listw = Insumo.lw)
 ## 
@@ -992,25 +1007,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: error 
 ## Coefficients: (asymptotic standard errors) 
 ##                 Estimate   Std. Error z value  Pr(&gt;|z|)
-## (Intercept) 78.047295629 51.760314984  1.5079 0.1315904
+## (Intercept) 78.047294223 51.760317159  1.5079 0.1315904
 ## PIB          0.003727043  0.002409110  1.5471 0.1218483
 ## CAP_OCC     -0.050131489  0.014726792 -3.4041 0.0006638
 ## CAP_CS       0.099564078  0.037675929  2.6426 0.0082261
 ## Población    0.000057480  0.000053995  1.0646 0.2870778
 ## 
 ## Lambda: 0.56286, LR test value: 6.894, p-value: 0.0086485
-## Approximate (numerical Hessian) standard error: 0.17903
-##     z-value: 3.144, p-value: 0.0016664
-## Wald statistic: 9.8849, p-value: 0.0016664
+## Approximate (numerical Hessian) standard error: 0.17904
+##     z-value: 3.1437, p-value: 0.001668
+## Wald statistic: 9.8832, p-value: 0.001668
 ## 
 ## Log likelihood: -197.7004 for error model
 ## ML residual variance (sigma squared): 12505, (sigma: 111.82)
 ## Number of observations: 32 
 ## Number of parameters estimated: 7 
-## AIC: 409.4, (AIC for lm: 414.29)</code></pre>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="modelos-de-regresión-espacial.html#cb233-1" aria-hidden="true" tabindex="-1"></a>reg.eq5<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS</span>
-<span id="cb233-2"><a href="modelos-de-regresión-espacial.html#cb233-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq5,<span class="at">data=</span>Insumo, Insumo.lw)</span>
-<span id="cb233-3"><a href="modelos-de-regresión-espacial.html#cb233-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
+## AIC: NA (not available for weighted model), (AIC for lm: 414.29)</code></pre>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="modelos-de-regresión-espacial.html#cb425-1" aria-hidden="true" tabindex="-1"></a>reg.eq5<span class="ot">=</span>CAP_BAC <span class="sc">~</span> PIB <span class="sc">+</span> CAP_OCC <span class="sc">+</span> CAP_CS</span>
+<span id="cb425-2"><a href="modelos-de-regresión-espacial.html#cb425-2" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">=</span><span class="fu">errorsarlm</span>(reg.eq5,<span class="at">data=</span>Insumo, Insumo.lw)</span>
+<span id="cb425-3"><a href="modelos-de-regresión-espacial.html#cb425-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s</span>(reg4)<span class="co">#Lag Error (SEM)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:errorsarlm(formula = reg.eq5, data = Insumo, listw = Insumo.lw)
 ## 
@@ -1021,7 +1036,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Type: error 
 ## Coefficients: (asymptotic standard errors) 
 ##                 Estimate   Std. Error z value         Pr(&gt;|z|)
-## (Intercept) 100.98165977  46.44259581  2.1743         0.029680
+## (Intercept) 100.98165936  46.44259678  2.1743         0.029680
 ## PIB           0.00611113   0.00092889  6.5789 0.00000000004738
 ## CAP_OCC      -0.04669321   0.01466331 -3.1844         0.001451
 ## CAP_CS        0.07261035   0.02868558  2.5312         0.011366
@@ -1035,33 +1050,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ML residual variance (sigma squared): 13034, (sigma: 114.17)
 ## Number of observations: 32 
 ## Number of parameters estimated: 6 
-## AIC: 408.5, (AIC for lm: 412.51)</code></pre>
+## AIC: NA (not available for weighted model), (AIC for lm: 412.51)</code></pre>
 </div>
-<div id="mapa-estimado" class="section level2 hasAnchor" number="4.10">
-<h2><span class="header-section-number">4.10</span> Mapa Estimado<a href="modelos-de-regresión-espacial.html#mapa-estimado" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="modelos-de-regresión-espacial.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="do">###Mapa estimado</span></span>
-<span id="cb235-2"><a href="modelos-de-regresión-espacial.html#cb235-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> reg4<span class="sc">$</span>fitted.values</span>
-<span id="cb235-3"><a href="modelos-de-regresión-espacial.html#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
-<span id="cb235-4"><a href="modelos-de-regresión-espacial.html#cb235-4" aria-hidden="true" tabindex="-1"></a>shade.fit <span class="ot">=</span> <span class="fu">shading</span>(<span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">130</span>,<span class="dv">200</span>,<span class="dv">400</span>), <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Reds&quot;</span>)))</span>
-<span id="cb235-5"><a href="modelos-de-regresión-espacial.html#cb235-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, fit, <span class="at">shading=</span>shade.fit)</span>
-<span id="cb235-6"><a href="modelos-de-regresión-espacial.html#cb235-6" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,</span>
-<span id="cb235-7"><a href="modelos-de-regresión-espacial.html#cb235-7" aria-hidden="true" tabindex="-1"></a>             <span class="fl">535165.5</span>, </span>
-<span id="cb235-8"><a href="modelos-de-regresión-espacial.html#cb235-8" aria-hidden="true" tabindex="-1"></a>             shade.fit, </span>
-<span id="cb235-9"><a href="modelos-de-regresión-espacial.html#cb235-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, </span>
-<span id="cb235-10"><a href="modelos-de-regresión-espacial.html#cb235-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;Estimaciones&quot;</span>,</span>
-<span id="cb235-11"><a href="modelos-de-regresión-espacial.html#cb235-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">cex=</span><span class="fl">0.7</span>, </span>
-<span id="cb235-12"><a href="modelos-de-regresión-espacial.html#cb235-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, </span>
-<span id="cb235-13"><a href="modelos-de-regresión-espacial.html#cb235-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, </span>
-<span id="cb235-14"><a href="modelos-de-regresión-espacial.html#cb235-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
-<span id="cb235-15"><a href="modelos-de-regresión-espacial.html#cb235-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb235-16"><a href="modelos-de-regresión-espacial.html#cb235-16" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Valores ajustados mediante el modelo SEM para las captaciones del banco </span></span>
-<span id="cb235-17"><a href="modelos-de-regresión-espacial.html#cb235-17" aria-hidden="true" tabindex="-1"></a><span class="st">      agrario en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
-<span id="cb235-18"><a href="modelos-de-regresión-espacial.html#cb235-18" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="modelos-de-regresión-espacial.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="do">###R^2 Nagelkerke</span></span>
-<span id="cb236-2"><a href="modelos-de-regresión-espacial.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary.sarlm(reg4,Nagelkerke = TRUE) TO-DO</span></span>
-<span id="cb236-3"><a href="modelos-de-regresión-espacial.html#cb236-3" aria-hidden="true" tabindex="-1"></a><span class="do">###Test de moran residuales modelo SEM</span></span>
-<span id="cb236-4"><a href="modelos-de-regresión-espacial.html#cb236-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(reg4<span class="sc">$</span>residuals, Insumo.lw)</span></code></pre></div>
+<div id="mapa-estimado" class="section level2 hasAnchor" number="6.10">
+<h2><span class="header-section-number">6.10</span> Mapa Estimado<a href="modelos-de-regresión-espacial.html#mapa-estimado" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="modelos-de-regresión-espacial.html#cb427-1" aria-hidden="true" tabindex="-1"></a><span class="do">###Mapa estimado</span></span>
+<span id="cb427-2"><a href="modelos-de-regresión-espacial.html#cb427-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> reg4<span class="sc">$</span>fitted.values</span>
+<span id="cb427-3"><a href="modelos-de-regresión-espacial.html#cb427-3" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.new() #windows()</span></span>
+<span id="cb427-4"><a href="modelos-de-regresión-espacial.html#cb427-4" aria-hidden="true" tabindex="-1"></a>shade.fit <span class="ot">=</span> <span class="fu">shading</span>(<span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">130</span>,<span class="dv">200</span>,<span class="dv">400</span>), <span class="at">cols=</span>(<span class="fu">brewer.pal</span>(<span class="dv">5</span>,<span class="st">&quot;Reds&quot;</span>)))</span>
+<span id="cb427-5"><a href="modelos-de-regresión-espacial.html#cb427-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choropleth</span>(Insumo, fit, <span class="at">shading=</span>shade.fit)</span>
+<span id="cb427-6"><a href="modelos-de-regresión-espacial.html#cb427-6" aria-hidden="true" tabindex="-1"></a><span class="fu">choro.legend</span>(<span class="dv">1555874</span>,</span>
+<span id="cb427-7"><a href="modelos-de-regresión-espacial.html#cb427-7" aria-hidden="true" tabindex="-1"></a>             <span class="fl">535165.5</span>, </span>
+<span id="cb427-8"><a href="modelos-de-regresión-espacial.html#cb427-8" aria-hidden="true" tabindex="-1"></a>             shade.fit, </span>
+<span id="cb427-9"><a href="modelos-de-regresión-espacial.html#cb427-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="st">&quot;%1.2f&quot;</span>, </span>
+<span id="cb427-10"><a href="modelos-de-regresión-espacial.html#cb427-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;Estimaciones&quot;</span>,</span>
+<span id="cb427-11"><a href="modelos-de-regresión-espacial.html#cb427-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">cex=</span><span class="fl">0.7</span>, </span>
+<span id="cb427-12"><a href="modelos-de-regresión-espacial.html#cb427-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">under =</span> <span class="st">&quot;Menos de&quot;</span>, </span>
+<span id="cb427-13"><a href="modelos-de-regresión-espacial.html#cb427-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">between =</span> <span class="st">&quot;a&quot;</span>, </span>
+<span id="cb427-14"><a href="modelos-de-regresión-espacial.html#cb427-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">over =</span> <span class="st">&quot;Mas de&quot;</span>)</span>
+<span id="cb427-15"><a href="modelos-de-regresión-espacial.html#cb427-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb427-16"><a href="modelos-de-regresión-espacial.html#cb427-16" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">&quot;Valores ajustados mediante el modelo SEM para las captaciones del banco </span></span>
+<span id="cb427-17"><a href="modelos-de-regresión-espacial.html#cb427-17" aria-hidden="true" tabindex="-1"></a><span class="st">      agrario en Colombia, cuarto trimestre 2020&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb427-18"><a href="modelos-de-regresión-espacial.html#cb427-18" aria-hidden="true" tabindex="-1"></a><span class="fu">map.scale</span>(<span class="dv">755874</span>,<span class="fl">335165.5</span>, <span class="dv">250000</span>, <span class="st">&quot;km&quot;</span>, <span class="dv">2</span>, <span class="dv">50</span>, <span class="at">sfcol=</span><span class="st">&#39;brown&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="modelos-de-regresión-espacial.html#cb428-1" aria-hidden="true" tabindex="-1"></a><span class="do">###R^2 Nagelkerke</span></span>
+<span id="cb428-2"><a href="modelos-de-regresión-espacial.html#cb428-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary.sarlm(reg4,Nagelkerke = TRUE) TO-DO</span></span>
+<span id="cb428-3"><a href="modelos-de-regresión-espacial.html#cb428-3" aria-hidden="true" tabindex="-1"></a><span class="do">###Test de moran residuales modelo SEM</span></span>
+<span id="cb428-4"><a href="modelos-de-regresión-espacial.html#cb428-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(reg4<span class="sc">$</span>residuals, Insumo.lw)</span></code></pre></div>
 <pre><code>## 
 ##  Moran I test under randomisation
 ## 
@@ -1072,10 +1087,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## alternative hypothesis: greater
 ## sample estimates:
 ## Moran I statistic       Expectation          Variance 
-##        0.05266908       -0.03225806        0.01028984</code></pre>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="modelos-de-regresión-espacial.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Municipal</span></span>
-<span id="cb238-2"><a href="modelos-de-regresión-espacial.html#cb238-2" aria-hidden="true" tabindex="-1"></a>ColombiaM <span class="ot">=</span> <span class="fu">readOGR</span>(<span class="at">dsn =</span> <span class="st">&quot;data_3_EstudioDeMercadoEspacial/Geodatabase Colombia&quot;</span>, </span>
-<span id="cb238-3"><a href="modelos-de-regresión-espacial.html#cb238-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">layer =</span> <span class="st">&quot;municipios&quot;</span>)</span></code></pre></div>
+##        0.05266907       -0.03225806        0.01028984</code></pre>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="modelos-de-regresión-espacial.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Municipal</span></span>
+<span id="cb430-2"><a href="modelos-de-regresión-espacial.html#cb430-2" aria-hidden="true" tabindex="-1"></a>ColombiaM <span class="ot">=</span> <span class="fu">readOGR</span>(<span class="at">dsn =</span> <span class="st">&quot;data_3_EstudioDeMercadoEspacial/Geodatabase Colombia&quot;</span>, </span>
+<span id="cb430-3"><a href="modelos-de-regresión-espacial.html#cb430-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">layer =</span> <span class="st">&quot;municipios&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
 <pre><code>## OGR data source with driver: ESRI Shapefile 
 ## Source: &quot;/home/jncc/Documents/Monitorias/EspacialPage/Clases-EE-UN/data_3_EstudioDeMercadoEspacial/Geodatabase Colombia&quot;, layer: &quot;municipios&quot;
 ## with 1107 features
@@ -1089,8 +1110,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="spatial-modeling-leukemia.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ilustración-del-kriging-simple-espacio-tiempo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="simulación-to-do.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1121,7 +1142,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/mpbohorquezc/Clases-EE-UN/edit/master/03-EstudioMercadeoEspacial.Rmd",
+"link": "https://github.com/mpbohorquezc/Clases-EE-UN/edit/master/06-EstudioMercadeoEspacial.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -1129,7 +1150,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/mpbohorquezc/Clases-EE-UN/blob/master/03-EstudioMercadeoEspacial.Rmd",
+"link": "https://github.com/mpbohorquezc/Clases-EE-UN/blob/master/06-EstudioMercadeoEspacial.Rmd",
 "text": null
 },
 "download": null,

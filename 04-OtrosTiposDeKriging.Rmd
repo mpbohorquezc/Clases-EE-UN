@@ -2,16 +2,127 @@
 output: html_document
 ---
 
-# Otros Tipos de Kriging
+# Kriging
 
-## (TO-DO)
+Kriging es una técnica de interpolación espacial que permite estimar valores desconocidos en una superficie a partir de los valores conocidos en ubicaciones cercanas. Es especialmente útil para datos de alta densidad y para datos con estructuras espaciales complejas. En este cuaderno, vamos a explorar los diferentes tipos de Kriging y cómo implementarlos en R.
+
+Antes de comenzar, asegúrate de tener instalados los siguientes paquetes de R: "gstat", "sp", "raster" y "ggplot2". Si no los tienes, puedes instalarlos mediante el siguiente código:
+
+```{r}
+#install.packages(c("gstat", "sp", "raster", "ggplot2", "phylin"))
+```
+
+
+## Introducción Kriging
+
+Kriging es una técnica de interpolación espacial que se basa en la teoría de la estadística espacial. La idea fundamental detrás de Kriging es que la estimación del valor desconocido en una ubicación dada se hace como una combinación lineal ponderada de los valores conocidos en las ubicaciones vecinas. Los pesos de esta combinación se determinan utilizando la información de covarianza entre los puntos en el espacio.  Esta técnica se utiliza comúnmente en estadística espacial, geología, minería, geofísica, oceanografía y otros campos que involucran la toma de medidas en lugares dispersos en el espacio.
+
+El nombre "Kriging" proviene del geólogo Danie G. Krige, quien fue el primero en aplicar esta técnica para la exploración de minerales en Sudáfrica en la década de 1950
+
+## Kriging Simple
+
+En esta sección se explica el método de kriging simple, que es una técnica de interpolación espacial que utiliza una función de tendencia conocida y un modelo de variograma ajustado a los datos. El objetivo es estimar el valor de una variable Z en una ubicación s0 a partir de los valores observados en n ubicaciones si cercanas. El kriging simple asume que la variable Z se puede descomponer como:
+
+$$Z(s) = μ(s) + ε(s),$$
+
+donde $μ(s)$ es la función de tendencia conocida y $ε(s)$ es un proceso espacial aleatorio con media cero y covarianza $C(s_i,s_j) = Cov(ε(s_i),ε(s_j))$. El predictor del kriging simple es una combinación lineal de los valores observados:
+
+$$p(Z,s_0) = μ(s_0) + ∑_{i=1}^n λ_i (Z(s_i) - μ(s_i)),$$
+
+donde los pesos $λ_i$ se obtienen resolviendo el sistema de ecuaciones:
+
+$$∑_{j=1}^n λ_j C(s_i,s_j) - C(s_i,s_0) = 0, \  i = 1,...,n.$$
+
+El kriging simple minimiza el error cuadrático medio entre el valor estimado y el verdadero, que se denomina varianza kriging y se calcula como:
+
+$$σ^2 KS(s_0) = C(s_0,s_0) - ∑_{i=1}^n ∑_{j=1}^n λ_i λ_j C(s_i,s_j).$$
+
+Para implementar el kriging simple en R se puede utilizar la función krig del paquete phylin, que requiere como argumentos los valores observados, las coordenadas de las ubicaciones muestreadas y las ubicaciones a interpolar, el modelo de variograma ajustado y el valor conocido de la media (o NA para usar kriging ordinario). A continuación se muestra un ejemplo con datos simulados:
+
+
+```{r}
+# To-Do
+```
 
 ```{r}
 
 ```
 
-## Kriging Indicador
+```{r}
 
-## Kriging Transgaussiano
+```
 
-## Comparación Kriging Universal y Ordinario
+## Kriging Ordinario
+
+El kriging ordinario es el tipo más general y más utilizado de kriging. Presupone que el valor medio constante es desconocido y lo estima a partir de los datos disponibles. Esta es una suposición razonable a menos que haya una razón científica para rechazarla.
+
+El kriging ordinario se puede expresar como:
+
+$$Z^*(x_0) = \sum_{i=1}^n \lambda_i Z(x_i)$$
+
+Donde $Z^*(x_0)$ es el valor estimado en el punto $x_0$, $Z(x_i)$ son los valores medidos en los puntos $x_i$, $n$ es el número de puntos medidos y $\lambda_i$ son los pesos óptimos que minimizan la varianza del error de estimación.
+
+Los pesos óptimos se obtienen resolviendo un sistema de ecuaciones lineales conocido como sistema krigiano:
+
+$$
+\begin{bmatrix}
+\gamma_{11} & \gamma_{12} & \cdots & \gamma_{1n} & 1 \\
+\gamma_{21} & \gamma_{22} & \cdots & \gamma_{2n} & 1 \\
+\vdots      & \vdots      & \ddots & \vdots      & 1 \\
+\gamma_{n1} & \gamma_{n2} & \cdots & \gamma_{nn} & 1 \\
+1           & 1           & \cdots & 1           & 0
+\end{bmatrix}
+\begin{bmatrix}
+\lambda_1 \\
+\lambda_2 \\
+\vdots    \\
+\lambda_n \\
+m
+\end{bmatrix}
+=
+\begin{bmatrix}
+\gamma(x_0,x_1) \\
+\gamma(x_0,x_2) \\
+\vdots          \\
+\gamma(x_0,x_n) \\
+-1
+\end{bmatrix}
+$$
+
+Donde $\gamma_{ij}$ son los semivariogramas entre los puntos medidos, $\gamma(x_0,x_i)$ son los semivariogramas entre el punto a estimar y los puntos medidos y $m$ es un multiplicador lagrangeano que representa la estimación del valor medio constante.
+
+Para implementar el kriging ordinario en R, se pueden utilizar las librerías "gstat" o "kriging". A continuación se muestra un ejemplo usando la librería "gstat".
+
+```{r}
+
+```
+
+## Kriging Universal
+
+El kriging universal es una variante del kriging que permite incorporar variables auxiliares que influyen en la variable de interés. Por ejemplo, si queremos interpolar la temperatura en una región, podemos usar como variables auxiliares la altitud, la latitud o la distancia al mar. El kriging universal asume que la variable de interés se puede expresar como una combinación lineal de las variables auxiliares más un error espacialmente correlacionado. Es decir:
+
+$$
+Z(s) = p ∑_{j=0} X_j(s)β_j +ε(s),
+$$
+
+donde $Z(s)$ es la variable de interés en el punto $s$, $X_j(s)$ son las variables auxiliares (incluyendo una constante), βj son los coeficientes desconocidos y ε(s) es el error espacial con variograma conocido.
+
+Para estimar $Z(s_0)$ en un punto no observado $s_0$, se usa el predictor del kriging universal:
+
+$$
+p(Z,s_0) = ∑_{i=1}^n λ_iZ(s_i),
+$$
+
+donde $λ_i$ son los pesos que minimizan el error cuadrático medio de predicción sujeto a las restricciones:
+
+$$λ^⊤X = x^⊤ 0,$$
+
+donde $X$ es una matriz con las variables auxiliares en los puntos observados y $x_0$ es un vector con las variables auxiliares en el punto $s_0$.
+
+Para implementar el kriging universal en R, podemos usar el paquete gstat y la función krige. Esta función requiere una fórmula que defina la variable dependiente como un modelo lineal de las variables independientes, un objeto espacial con las coordenadas y los datos observados, un objeto espacial con las coordenadas de los puntos a predecir y un modelo de variograma para el error espacial.
+
+A continuación se muestra un ejemplo de cómo usar krige para realizar kriging universal con dos variables auxiliares: $x$ e $y$.
+
+```{r}
+
+```

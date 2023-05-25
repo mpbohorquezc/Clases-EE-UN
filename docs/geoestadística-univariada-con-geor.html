@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 3 Geoestadística univariada con geoR | Cuadernos Estadística Espacial</title>
   <meta name="description" content="Capítulo 3 Geoestadística univariada con geoR | Cuadernos Estadística Espacial" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 3 Geoestadística univariada con geoR | Cuadernos Estadística Espacial" />
   <meta property="og:type" content="book" />
@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="geoestadística-con-sgeostat.html"/>
-<link rel="next" href="otros-tipos-de-kriging.html"/>
+<link rel="next" href="kriging.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -184,12 +188,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7.6" data-path="geoestadística-univariada-con-geor.html"><a href="geoestadística-univariada-con-geor.html#pulimiento-de-medianas-1"><i class="fa fa-check"></i><b>3.7.6</b> Pulimiento de medianas</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="otros-tipos-de-kriging.html"><a href="otros-tipos-de-kriging.html"><i class="fa fa-check"></i><b>4</b> Otros Tipos de Kriging</a>
+<li class="chapter" data-level="4" data-path="kriging.html"><a href="kriging.html"><i class="fa fa-check"></i><b>4</b> Kriging</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="otros-tipos-de-kriging.html"><a href="otros-tipos-de-kriging.html#to-do"><i class="fa fa-check"></i><b>4.1</b> (TO-DO)</a></li>
-<li class="chapter" data-level="4.2" data-path="otros-tipos-de-kriging.html"><a href="otros-tipos-de-kriging.html#kriging-indicador"><i class="fa fa-check"></i><b>4.2</b> Kriging Indicador</a></li>
-<li class="chapter" data-level="4.3" data-path="otros-tipos-de-kriging.html"><a href="otros-tipos-de-kriging.html#kriging-transgaussiano"><i class="fa fa-check"></i><b>4.3</b> Kriging Transgaussiano</a></li>
-<li class="chapter" data-level="4.4" data-path="otros-tipos-de-kriging.html"><a href="otros-tipos-de-kriging.html#comparación-kriging-universal-y-ordinario"><i class="fa fa-check"></i><b>4.4</b> Comparación Kriging Universal y Ordinario</a></li>
+<li class="chapter" data-level="4.1" data-path="kriging.html"><a href="kriging.html#introducción-kriging"><i class="fa fa-check"></i><b>4.1</b> Introducción Kriging</a></li>
+<li class="chapter" data-level="4.2" data-path="kriging.html"><a href="kriging.html#kriging-simple"><i class="fa fa-check"></i><b>4.2</b> Kriging Simple</a></li>
+<li class="chapter" data-level="4.3" data-path="kriging.html"><a href="kriging.html#kriging-ordinario"><i class="fa fa-check"></i><b>4.3</b> Kriging Ordinario</a></li>
+<li class="chapter" data-level="4.4" data-path="kriging.html"><a href="kriging.html#kriging-universal"><i class="fa fa-check"></i><b>4.4</b> Kriging Universal</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="simulación-to-do.html"><a href="simulación-to-do.html"><i class="fa fa-check"></i><b>5</b> Simulación (TO-DO)</a></li>
+<li class="chapter" data-level="6" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html"><i class="fa fa-check"></i><b>6</b> Modelos de regresión espacial</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#estudio-de-mercadeo"><i class="fa fa-check"></i><b>6.1</b> Estudio de Mercadeo</a></li>
+<li class="chapter" data-level="6.2" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#paquetes"><i class="fa fa-check"></i><b>6.2</b> Paquetes</a></li>
+<li class="chapter" data-level="6.3" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#lectura-de-datos-1"><i class="fa fa-check"></i><b>6.3</b> Lectura de Datos</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#cruce-de-información-y-arreglo-de-coordenadas"><i class="fa fa-check"></i><b>6.3.1</b> Cruce de información y arreglo de coordenadas</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#matriz-de-vecindades"><i class="fa fa-check"></i><b>6.4</b> Matriz de vecindades</a></li>
+<li class="chapter" data-level="6.5" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#mapa-de-valores-observados"><i class="fa fa-check"></i><b>6.5</b> Mapa de valores observados</a></li>
+<li class="chapter" data-level="6.6" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#pruebas-de-autocorrelación"><i class="fa fa-check"></i><b>6.6</b> Pruebas de Autocorrelación</a></li>
+<li class="chapter" data-level="6.7" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#mapas"><i class="fa fa-check"></i><b>6.7</b> Mapas</a></li>
+<li class="chapter" data-level="6.8" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#resumen-de-modelos"><i class="fa fa-check"></i><b>6.8</b> Resumen de modelos</a></li>
+<li class="chapter" data-level="6.9" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#calculo-de-varibles-significativas"><i class="fa fa-check"></i><b>6.9</b> Calculo de varibles significativas</a></li>
+<li class="chapter" data-level="6.10" data-path="modelos-de-regresión-espacial.html"><a href="modelos-de-regresión-espacial.html#mapa-estimado"><i class="fa fa-check"></i><b>6.10</b> Mapa Estimado</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -222,39 +243,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://cran.r-project.org/web/packages/geoR/geoR.pdf">geoR</a></li>
 <li><a href="https://cran.r-project.org/web/packages/akima/akima.pdf">akima</a> Usado para gráficos descriptivos</li>
 </ul>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="geoestadística-univariada-con-geor.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb223-2"><a href="geoestadística-univariada-con-geor.html#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fields)</span></code></pre></div>
-<pre><code>## Loading required package: spam</code></pre>
-<pre><code>## Spam version 2.9-1 (2022-08-07) is loaded.
-## Type &#39;help( Spam)&#39; or &#39;demo( spam)&#39; for a short introduction 
-## and overview of this package.
-## Help for individual functions is also obtained by adding the
-## suffix &#39;.spam&#39; to the function name, e.g. &#39;help( chol.spam)&#39;.</code></pre>
-<pre><code>## 
-## Attaching package: &#39;spam&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     backsolve, forwardsolve</code></pre>
-<pre><code>## Loading required package: viridis</code></pre>
-<pre><code>## Loading required package: viridisLite</code></pre>
-<pre><code>## 
-## Try help(fields) to get started.</code></pre>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="geoestadística-univariada-con-geor.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geoR)</span></code></pre></div>
-<pre><code>## Registered S3 method overwritten by &#39;geoR&#39;:
-##   method         from    
-##   plot.variogram sgeostat</code></pre>
-<pre><code>## --------------------------------------------------------------
-##  Analysis of Geostatistical Data
-##  For an Introduction to geoR go to http://www.leg.ufpr.br/geoR
-##  geoR version 1.9-2 (built on 2022-08-09) is now loaded
-## --------------------------------------------------------------</code></pre>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="geoestadística-univariada-con-geor.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(akima)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="geoestadística-univariada-con-geor.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb190-2"><a href="geoestadística-univariada-con-geor.html#cb190-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fields)</span>
+<span id="cb190-3"><a href="geoestadística-univariada-con-geor.html#cb190-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geoR)</span>
+<span id="cb190-4"><a href="geoestadística-univariada-con-geor.html#cb190-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(akima)</span></code></pre></div>
 </div>
 <div id="lectura-de-datos" class="section level3 hasAnchor" number="3.1.2">
 <h3><span class="header-section-number">3.1.2</span> Lectura de datos<a href="geoestadística-univariada-con-geor.html#lectura-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="geoestadística-univariada-con-geor.html#cb235-1" aria-hidden="true" tabindex="-1"></a>aquifer <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data_7_GeoestadisticaGEOSTAT/aquifer.txt&quot;</span>, <span class="at">head =</span> <span class="cn">TRUE</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="geoestadística-univariada-con-geor.html#cb191-1" aria-hidden="true" tabindex="-1"></a>aquifer <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data_7_GeoestadisticaGEOSTAT/aquifer.txt&quot;</span>, <span class="at">head =</span> <span class="cn">TRUE</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>)</span></code></pre></div>
 <p>Encabezado de datos <code>aquifer.txt</code></p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="geoestadística-univariada-con-geor.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aquifer)</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="geoestadística-univariada-con-geor.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aquifer)</span></code></pre></div>
 <pre><code>##        Este     Norte Profundidad
 ## 1  42.78275 127.62282        1464
 ## 2 -27.39691  90.78732        2553
@@ -263,7 +261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5  96.46549  64.58058        1756
 ## 6 108.56243  82.92325        1702</code></pre>
 <p>Summary de los datos <code>aquifer.txt</code></p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="geoestadística-univariada-con-geor.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aquifer)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="geoestadística-univariada-con-geor.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aquifer)</span></code></pre></div>
 <pre><code>##       Este             Norte          Profundidad  
 ##  Min.   :-145.24   Min.   :  9.414   Min.   :1024  
 ##  1st Qu.: -21.30   1st Qu.: 33.682   1st Qu.:1548  
@@ -280,8 +278,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Documentación <a href="https://cran.r-project.org/web/packages/geoR/geoR.pdf#page=5">as.geodata</a></li>
 </ul>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="geoestadística-univariada-con-geor.html#cb240-1" aria-hidden="true" tabindex="-1"></a>aquiferg <span class="ot">&lt;-</span> <span class="fu">as.geodata</span>(aquifer)</span>
-<span id="cb240-2"><a href="geoestadística-univariada-con-geor.html#cb240-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aquiferg)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="geoestadística-univariada-con-geor.html#cb196-1" aria-hidden="true" tabindex="-1"></a>aquiferg <span class="ot">&lt;-</span> <span class="fu">as.geodata</span>(aquifer)</span>
+<span id="cb196-2"><a href="geoestadística-univariada-con-geor.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aquiferg)</span></code></pre></div>
 <pre><code>## Number of data points: 85 
 ## 
 ## Coordinates summary
@@ -303,16 +301,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Documentación <a href="https://cran.r-project.org/web/packages/geoR/geoR.pdf#page=85">plotgeodata</a></li>
 </ul>
 <p>Gráfico del objeto geodata</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="geoestadística-univariada-con-geor.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquiferg, <span class="at">qt.col =</span> <span class="fu">c</span>(<span class="st">&quot;purple&quot;</span>,</span>
-<span id="cb242-2"><a href="geoestadística-univariada-con-geor.html#cb242-2" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;pink&quot;</span>,</span>
-<span id="cb242-3"><a href="geoestadística-univariada-con-geor.html#cb242-3" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;green&quot;</span>,</span>
-<span id="cb242-4"><a href="geoestadística-univariada-con-geor.html#cb242-4" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;yellow&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="geoestadística-univariada-con-geor.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquiferg, <span class="at">qt.col =</span> <span class="fu">c</span>(<span class="st">&quot;purple&quot;</span>,</span>
+<span id="cb198-2"><a href="geoestadística-univariada-con-geor.html#cb198-2" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;pink&quot;</span>,</span>
+<span id="cb198-3"><a href="geoestadística-univariada-con-geor.html#cb198-3" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;green&quot;</span>,</span>
+<span id="cb198-4"><a href="geoestadística-univariada-con-geor.html#cb198-4" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;yellow&quot;</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>Gráfico con el parametro 3d</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="geoestadística-univariada-con-geor.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquiferg, <span class="at">scatter3d =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="geoestadística-univariada-con-geor.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquiferg, <span class="at">scatter3d =</span> T)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <p>Gráfico removiendo la tendencia (trend )</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="geoestadística-univariada-con-geor.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquiferg, <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="geoestadística-univariada-con-geor.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquiferg, <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 </div>
 <div id="gráficos-descriptivos-interpolación" class="section level3 hasAnchor" number="3.2.3">
@@ -322,62 +320,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Documentación <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/persp">persp</a></li>
 <li>Documentación <a href="https://cran.r-project.org/web/packages/fields/fields.pdf#page=36">drape.plot</a></li>
 </ul>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="geoestadística-univariada-con-geor.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>),</span>
-<span id="cb245-2"><a href="geoestadística-univariada-con-geor.html#cb245-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb245-3"><a href="geoestadística-univariada-con-geor.html#cb245-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb245-4"><a href="geoestadística-univariada-con-geor.html#cb245-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Esta función agrupa los siguientes gráficos en</span></span>
-<span id="cb245-5"><a href="geoestadística-univariada-con-geor.html#cb245-5" aria-hidden="true" tabindex="-1"></a><span class="co"># una matrix 2x2</span></span>
-<span id="cb245-6"><a href="geoestadística-univariada-con-geor.html#cb245-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-7"><a href="geoestadística-univariada-con-geor.html#cb245-7" aria-hidden="true" tabindex="-1"></a>grillas <span class="ot">&lt;-</span> <span class="fu">interp</span>(aquifer<span class="sc">$</span>Este,</span>
-<span id="cb245-8"><a href="geoestadística-univariada-con-geor.html#cb245-8" aria-hidden="true" tabindex="-1"></a>                  aquifer<span class="sc">$</span>Norte,</span>
-<span id="cb245-9"><a href="geoestadística-univariada-con-geor.html#cb245-9" aria-hidden="true" tabindex="-1"></a>                  aquifer<span class="sc">$</span>Profundidad)</span>
-<span id="cb245-10"><a href="geoestadística-univariada-con-geor.html#cb245-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-11"><a href="geoestadística-univariada-con-geor.html#cb245-11" aria-hidden="true" tabindex="-1"></a><span class="fu">persp</span>(grillas<span class="sc">$</span>x,</span>
-<span id="cb245-12"><a href="geoestadística-univariada-con-geor.html#cb245-12" aria-hidden="true" tabindex="-1"></a>      grillas<span class="sc">$</span>y,</span>
-<span id="cb245-13"><a href="geoestadística-univariada-con-geor.html#cb245-13" aria-hidden="true" tabindex="-1"></a>      grillas<span class="sc">$</span>z,</span>
-<span id="cb245-14"><a href="geoestadística-univariada-con-geor.html#cb245-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&quot;Este&quot;</span>,</span>
-<span id="cb245-15"><a href="geoestadística-univariada-con-geor.html#cb245-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">&quot;Norte&quot;</span>,</span>
-<span id="cb245-16"><a href="geoestadística-univariada-con-geor.html#cb245-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">zlab =</span> <span class="st">&quot;Nivel freatico&quot;</span>,</span>
-<span id="cb245-17"><a href="geoestadística-univariada-con-geor.html#cb245-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">phi =</span> <span class="dv">30</span>,</span>
-<span id="cb245-18"><a href="geoestadística-univariada-con-geor.html#cb245-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">theta =</span> <span class="dv">20</span>,</span>
-<span id="cb245-19"><a href="geoestadística-univariada-con-geor.html#cb245-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
-<span id="cb245-20"><a href="geoestadística-univariada-con-geor.html#cb245-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">expand =</span> .<span class="dv">5</span>,</span>
-<span id="cb245-21"><a href="geoestadística-univariada-con-geor.html#cb245-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">ticktype =</span> <span class="st">&quot;detailed&quot;</span>)</span>
-<span id="cb245-22"><a href="geoestadística-univariada-con-geor.html#cb245-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-23"><a href="geoestadística-univariada-con-geor.html#cb245-23" aria-hidden="true" tabindex="-1"></a><span class="fu">drape.plot</span>(grillas<span class="sc">$</span>x,</span>
-<span id="cb245-24"><a href="geoestadística-univariada-con-geor.html#cb245-24" aria-hidden="true" tabindex="-1"></a>           grillas<span class="sc">$</span>y,</span>
-<span id="cb245-25"><a href="geoestadística-univariada-con-geor.html#cb245-25" aria-hidden="true" tabindex="-1"></a>           grillas<span class="sc">$</span>z,</span>
-<span id="cb245-26"><a href="geoestadística-univariada-con-geor.html#cb245-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">&quot;Este&quot;</span>,</span>
-<span id="cb245-27"><a href="geoestadística-univariada-con-geor.html#cb245-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab =</span> <span class="st">&quot;Norte&quot;</span>,</span>
-<span id="cb245-28"><a href="geoestadística-univariada-con-geor.html#cb245-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">zlab =</span> <span class="st">&quot;z&quot;</span>,</span>
-<span id="cb245-29"><a href="geoestadística-univariada-con-geor.html#cb245-29" aria-hidden="true" tabindex="-1"></a>           <span class="at">theta =</span> <span class="dv">45</span>,</span>
-<span id="cb245-30"><a href="geoestadística-univariada-con-geor.html#cb245-30" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="fu">topo.colors</span>(<span class="dv">64</span>),</span>
-<span id="cb245-31"><a href="geoestadística-univariada-con-geor.html#cb245-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> .<span class="dv">5</span>,</span>
-<span id="cb245-32"><a href="geoestadística-univariada-con-geor.html#cb245-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">ticktype =</span> <span class="st">&quot;detailed&quot;</span>)</span>
-<span id="cb245-33"><a href="geoestadística-univariada-con-geor.html#cb245-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-34"><a href="geoestadística-univariada-con-geor.html#cb245-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-35"><a href="geoestadística-univariada-con-geor.html#cb245-35" aria-hidden="true" tabindex="-1"></a><span class="fu">drape.plot</span>(grillas<span class="sc">$</span>x,</span>
-<span id="cb245-36"><a href="geoestadística-univariada-con-geor.html#cb245-36" aria-hidden="true" tabindex="-1"></a>           grillas<span class="sc">$</span>y,</span>
-<span id="cb245-37"><a href="geoestadística-univariada-con-geor.html#cb245-37" aria-hidden="true" tabindex="-1"></a>           grillas<span class="sc">$</span>z,</span>
-<span id="cb245-38"><a href="geoestadística-univariada-con-geor.html#cb245-38" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">&quot;Este&quot;</span>,</span>
-<span id="cb245-39"><a href="geoestadística-univariada-con-geor.html#cb245-39" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab =</span> <span class="st">&quot;Norte&quot;</span>,</span>
-<span id="cb245-40"><a href="geoestadística-univariada-con-geor.html#cb245-40" aria-hidden="true" tabindex="-1"></a>           <span class="at">zlab =</span> <span class="st">&quot;z&quot;</span>,</span>
-<span id="cb245-41"><a href="geoestadística-univariada-con-geor.html#cb245-41" aria-hidden="true" tabindex="-1"></a>           <span class="at">theta =</span> <span class="sc">-</span><span class="dv">10</span>,</span>
-<span id="cb245-42"><a href="geoestadística-univariada-con-geor.html#cb245-42" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="fu">topo.colors</span>(<span class="dv">64</span>),</span>
-<span id="cb245-43"><a href="geoestadística-univariada-con-geor.html#cb245-43" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> .<span class="dv">5</span>,</span>
-<span id="cb245-44"><a href="geoestadística-univariada-con-geor.html#cb245-44" aria-hidden="true" tabindex="-1"></a>           <span class="at">ticktype =</span> <span class="st">&quot;detailed&quot;</span>)</span>
-<span id="cb245-45"><a href="geoestadística-univariada-con-geor.html#cb245-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-46"><a href="geoestadística-univariada-con-geor.html#cb245-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-47"><a href="geoestadística-univariada-con-geor.html#cb245-47" aria-hidden="true" tabindex="-1"></a><span class="fu">drape.plot</span>(grillas<span class="sc">$</span>x,</span>
-<span id="cb245-48"><a href="geoestadística-univariada-con-geor.html#cb245-48" aria-hidden="true" tabindex="-1"></a>           grillas<span class="sc">$</span>y,</span>
-<span id="cb245-49"><a href="geoestadística-univariada-con-geor.html#cb245-49" aria-hidden="true" tabindex="-1"></a>           grillas<span class="sc">$</span>z,</span>
-<span id="cb245-50"><a href="geoestadística-univariada-con-geor.html#cb245-50" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">&quot;Este&quot;</span>,</span>
-<span id="cb245-51"><a href="geoestadística-univariada-con-geor.html#cb245-51" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab =</span> <span class="st">&quot;Norte&quot;</span>,</span>
-<span id="cb245-52"><a href="geoestadística-univariada-con-geor.html#cb245-52" aria-hidden="true" tabindex="-1"></a>           <span class="at">zlab =</span> <span class="st">&quot;z&quot;</span>,</span>
-<span id="cb245-53"><a href="geoestadística-univariada-con-geor.html#cb245-53" aria-hidden="true" tabindex="-1"></a>           <span class="at">theta =</span> <span class="dv">60</span>,</span>
-<span id="cb245-54"><a href="geoestadística-univariada-con-geor.html#cb245-54" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="fu">topo.colors</span>(<span class="dv">64</span>),</span>
-<span id="cb245-55"><a href="geoestadística-univariada-con-geor.html#cb245-55" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> .<span class="dv">5</span>,</span>
-<span id="cb245-56"><a href="geoestadística-univariada-con-geor.html#cb245-56" aria-hidden="true" tabindex="-1"></a>           <span class="at">ticktype =</span> <span class="st">&quot;detailed&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="geoestadística-univariada-con-geor.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb201-2"><a href="geoestadística-univariada-con-geor.html#cb201-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb201-3"><a href="geoestadística-univariada-con-geor.html#cb201-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb201-4"><a href="geoestadística-univariada-con-geor.html#cb201-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Esta función agrupa los siguientes gráficos en</span></span>
+<span id="cb201-5"><a href="geoestadística-univariada-con-geor.html#cb201-5" aria-hidden="true" tabindex="-1"></a><span class="co"># una matrix 2x2</span></span>
+<span id="cb201-6"><a href="geoestadística-univariada-con-geor.html#cb201-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-7"><a href="geoestadística-univariada-con-geor.html#cb201-7" aria-hidden="true" tabindex="-1"></a>grillas <span class="ot">&lt;-</span> <span class="fu">interp</span>(aquifer<span class="sc">$</span>Este,</span>
+<span id="cb201-8"><a href="geoestadística-univariada-con-geor.html#cb201-8" aria-hidden="true" tabindex="-1"></a>                  aquifer<span class="sc">$</span>Norte,</span>
+<span id="cb201-9"><a href="geoestadística-univariada-con-geor.html#cb201-9" aria-hidden="true" tabindex="-1"></a>                  aquifer<span class="sc">$</span>Profundidad)</span>
+<span id="cb201-10"><a href="geoestadística-univariada-con-geor.html#cb201-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-11"><a href="geoestadística-univariada-con-geor.html#cb201-11" aria-hidden="true" tabindex="-1"></a><span class="fu">persp</span>(grillas<span class="sc">$</span>x,</span>
+<span id="cb201-12"><a href="geoestadística-univariada-con-geor.html#cb201-12" aria-hidden="true" tabindex="-1"></a>      grillas<span class="sc">$</span>y,</span>
+<span id="cb201-13"><a href="geoestadística-univariada-con-geor.html#cb201-13" aria-hidden="true" tabindex="-1"></a>      grillas<span class="sc">$</span>z,</span>
+<span id="cb201-14"><a href="geoestadística-univariada-con-geor.html#cb201-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&quot;Este&quot;</span>,</span>
+<span id="cb201-15"><a href="geoestadística-univariada-con-geor.html#cb201-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">&quot;Norte&quot;</span>,</span>
+<span id="cb201-16"><a href="geoestadística-univariada-con-geor.html#cb201-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">zlab =</span> <span class="st">&quot;Nivel freatico&quot;</span>,</span>
+<span id="cb201-17"><a href="geoestadística-univariada-con-geor.html#cb201-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">phi =</span> <span class="dv">30</span>,</span>
+<span id="cb201-18"><a href="geoestadística-univariada-con-geor.html#cb201-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">theta =</span> <span class="dv">20</span>,</span>
+<span id="cb201-19"><a href="geoestadística-univariada-con-geor.html#cb201-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb201-20"><a href="geoestadística-univariada-con-geor.html#cb201-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">expand =</span> .<span class="dv">5</span>,</span>
+<span id="cb201-21"><a href="geoestadística-univariada-con-geor.html#cb201-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">ticktype =</span> <span class="st">&quot;detailed&quot;</span>)</span>
+<span id="cb201-22"><a href="geoestadística-univariada-con-geor.html#cb201-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-23"><a href="geoestadística-univariada-con-geor.html#cb201-23" aria-hidden="true" tabindex="-1"></a><span class="fu">drape.plot</span>(grillas<span class="sc">$</span>x,</span>
+<span id="cb201-24"><a href="geoestadística-univariada-con-geor.html#cb201-24" aria-hidden="true" tabindex="-1"></a>           grillas<span class="sc">$</span>y,</span>
+<span id="cb201-25"><a href="geoestadística-univariada-con-geor.html#cb201-25" aria-hidden="true" tabindex="-1"></a>           grillas<span class="sc">$</span>z,</span>
+<span id="cb201-26"><a href="geoestadística-univariada-con-geor.html#cb201-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">&quot;Este&quot;</span>,</span>
+<span id="cb201-27"><a href="geoestadística-univariada-con-geor.html#cb201-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab =</span> <span class="st">&quot;Norte&quot;</span>,</span>
+<span id="cb201-28"><a href="geoestadística-univariada-con-geor.html#cb201-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">zlab =</span> <span class="st">&quot;z&quot;</span>,</span>
+<span id="cb201-29"><a href="geoestadística-univariada-con-geor.html#cb201-29" aria-hidden="true" tabindex="-1"></a>           <span class="at">theta =</span> <span class="dv">45</span>,</span>
+<span id="cb201-30"><a href="geoestadística-univariada-con-geor.html#cb201-30" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="fu">topo.colors</span>(<span class="dv">64</span>),</span>
+<span id="cb201-31"><a href="geoestadística-univariada-con-geor.html#cb201-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> .<span class="dv">5</span>,</span>
+<span id="cb201-32"><a href="geoestadística-univariada-con-geor.html#cb201-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">ticktype =</span> <span class="st">&quot;detailed&quot;</span>)</span>
+<span id="cb201-33"><a href="geoestadística-univariada-con-geor.html#cb201-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-34"><a href="geoestadística-univariada-con-geor.html#cb201-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-35"><a href="geoestadística-univariada-con-geor.html#cb201-35" aria-hidden="true" tabindex="-1"></a><span class="fu">drape.plot</span>(grillas<span class="sc">$</span>x,</span>
+<span id="cb201-36"><a href="geoestadística-univariada-con-geor.html#cb201-36" aria-hidden="true" tabindex="-1"></a>           grillas<span class="sc">$</span>y,</span>
+<span id="cb201-37"><a href="geoestadística-univariada-con-geor.html#cb201-37" aria-hidden="true" tabindex="-1"></a>           grillas<span class="sc">$</span>z,</span>
+<span id="cb201-38"><a href="geoestadística-univariada-con-geor.html#cb201-38" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">&quot;Este&quot;</span>,</span>
+<span id="cb201-39"><a href="geoestadística-univariada-con-geor.html#cb201-39" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab =</span> <span class="st">&quot;Norte&quot;</span>,</span>
+<span id="cb201-40"><a href="geoestadística-univariada-con-geor.html#cb201-40" aria-hidden="true" tabindex="-1"></a>           <span class="at">zlab =</span> <span class="st">&quot;z&quot;</span>,</span>
+<span id="cb201-41"><a href="geoestadística-univariada-con-geor.html#cb201-41" aria-hidden="true" tabindex="-1"></a>           <span class="at">theta =</span> <span class="sc">-</span><span class="dv">10</span>,</span>
+<span id="cb201-42"><a href="geoestadística-univariada-con-geor.html#cb201-42" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="fu">topo.colors</span>(<span class="dv">64</span>),</span>
+<span id="cb201-43"><a href="geoestadística-univariada-con-geor.html#cb201-43" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> .<span class="dv">5</span>,</span>
+<span id="cb201-44"><a href="geoestadística-univariada-con-geor.html#cb201-44" aria-hidden="true" tabindex="-1"></a>           <span class="at">ticktype =</span> <span class="st">&quot;detailed&quot;</span>)</span>
+<span id="cb201-45"><a href="geoestadística-univariada-con-geor.html#cb201-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-46"><a href="geoestadística-univariada-con-geor.html#cb201-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-47"><a href="geoestadística-univariada-con-geor.html#cb201-47" aria-hidden="true" tabindex="-1"></a><span class="fu">drape.plot</span>(grillas<span class="sc">$</span>x,</span>
+<span id="cb201-48"><a href="geoestadística-univariada-con-geor.html#cb201-48" aria-hidden="true" tabindex="-1"></a>           grillas<span class="sc">$</span>y,</span>
+<span id="cb201-49"><a href="geoestadística-univariada-con-geor.html#cb201-49" aria-hidden="true" tabindex="-1"></a>           grillas<span class="sc">$</span>z,</span>
+<span id="cb201-50"><a href="geoestadística-univariada-con-geor.html#cb201-50" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">&quot;Este&quot;</span>,</span>
+<span id="cb201-51"><a href="geoestadística-univariada-con-geor.html#cb201-51" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab =</span> <span class="st">&quot;Norte&quot;</span>,</span>
+<span id="cb201-52"><a href="geoestadística-univariada-con-geor.html#cb201-52" aria-hidden="true" tabindex="-1"></a>           <span class="at">zlab =</span> <span class="st">&quot;z&quot;</span>,</span>
+<span id="cb201-53"><a href="geoestadística-univariada-con-geor.html#cb201-53" aria-hidden="true" tabindex="-1"></a>           <span class="at">theta =</span> <span class="dv">60</span>,</span>
+<span id="cb201-54"><a href="geoestadística-univariada-con-geor.html#cb201-54" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="fu">topo.colors</span>(<span class="dv">64</span>),</span>
+<span id="cb201-55"><a href="geoestadística-univariada-con-geor.html#cb201-55" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> .<span class="dv">5</span>,</span>
+<span id="cb201-56"><a href="geoestadística-univariada-con-geor.html#cb201-56" aria-hidden="true" tabindex="-1"></a>           <span class="at">ticktype =</span> <span class="st">&quot;detailed&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 </div>
 <div id="gráficos-de-contorno" class="section level3 hasAnchor" number="3.2.4">
@@ -386,68 +384,68 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Documentación <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/contour">contour</a></li>
 <li>Documentación <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/filled.contour">filled.contour</a></li>
 </ul>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="geoestadística-univariada-con-geor.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>),</span>
-<span id="cb246-2"><a href="geoestadística-univariada-con-geor.html#cb246-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb246-3"><a href="geoestadística-univariada-con-geor.html#cb246-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb246-4"><a href="geoestadística-univariada-con-geor.html#cb246-4" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(grillas, <span class="at">nlevels =</span> <span class="dv">10</span>, <span class="at">main =</span> <span class="st">&quot;Contorno&quot;</span>)</span>
-<span id="cb246-5"><a href="geoestadística-univariada-con-geor.html#cb246-5" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(grillas<span class="sc">$</span>z, <span class="at">main =</span>  <span class="st">&quot;Grilla&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="geoestadística-univariada-con-geor.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb202-2"><a href="geoestadística-univariada-con-geor.html#cb202-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb202-3"><a href="geoestadística-univariada-con-geor.html#cb202-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-4"><a href="geoestadística-univariada-con-geor.html#cb202-4" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(grillas, <span class="at">nlevels =</span> <span class="dv">10</span>, <span class="at">main =</span> <span class="st">&quot;Contorno&quot;</span>)</span>
+<span id="cb202-5"><a href="geoestadística-univariada-con-geor.html#cb202-5" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(grillas<span class="sc">$</span>z, <span class="at">main =</span>  <span class="st">&quot;Grilla&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="geoestadística-univariada-con-geor.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filled.contour</span>(grillas, <span class="at">levels =</span> <span class="fu">seq</span>(<span class="dv">1000</span>,</span>
-<span id="cb247-2"><a href="geoestadística-univariada-con-geor.html#cb247-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="dv">5000</span>,</span>
-<span id="cb247-3"><a href="geoestadística-univariada-con-geor.html#cb247-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">len =</span> <span class="dv">10</span>),</span>
-<span id="cb247-4"><a href="geoestadística-univariada-con-geor.html#cb247-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="fu">heat.colors</span>(<span class="dv">10</span>),</span>
-<span id="cb247-5"><a href="geoestadística-univariada-con-geor.html#cb247-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">main =</span> <span class="st">&quot;grilla niveles&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="geoestadística-univariada-con-geor.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filled.contour</span>(grillas, <span class="at">levels =</span> <span class="fu">seq</span>(<span class="dv">1000</span>,</span>
+<span id="cb203-2"><a href="geoestadística-univariada-con-geor.html#cb203-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="dv">5000</span>,</span>
+<span id="cb203-3"><a href="geoestadística-univariada-con-geor.html#cb203-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">len =</span> <span class="dv">10</span>),</span>
+<span id="cb203-4"><a href="geoestadística-univariada-con-geor.html#cb203-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="fu">heat.colors</span>(<span class="dv">10</span>),</span>
+<span id="cb203-5"><a href="geoestadística-univariada-con-geor.html#cb203-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">main =</span> <span class="st">&quot;grilla niveles&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
 </div>
 <div id="funciones-y-gráficas-a-partir-de-la-función-outer" class="section level3 hasAnchor" number="3.2.5">
 <h3><span class="header-section-number">3.2.5</span> Funciones y gráficas a partir de la función outer<a href="geoestadística-univariada-con-geor.html#funciones-y-gráficas-a-partir-de-la-función-outer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="geoestadística-univariada-con-geor.html#cb248-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> <span class="dv">50</span>)</span>
-<span id="cb248-2"><a href="geoestadística-univariada-con-geor.html#cb248-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> <span class="dv">50</span>)</span>
-<span id="cb248-3"><a href="geoestadística-univariada-con-geor.html#cb248-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb248-4"><a href="geoestadística-univariada-con-geor.html#cb248-4" aria-hidden="true" tabindex="-1"></a>ejemplo1CH  <span class="ot">&lt;-</span> <span class="cf">function</span>(h, u, sigma, a, b, c, d, delta) {</span>
-<span id="cb248-5"><a href="geoestadística-univariada-con-geor.html#cb248-5" aria-hidden="true" tabindex="-1"></a>    (sigma<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>((a<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>u<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>c)<span class="sc">^</span>(d<span class="sc">/</span><span class="dv">2</span>)))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>(b<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>h<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(a<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>u<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>c))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>delta<span class="sc">*</span>u<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb248-6"><a href="geoestadística-univariada-con-geor.html#cb248-6" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb248-7"><a href="geoestadística-univariada-con-geor.html#cb248-7" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> <span class="dv">20</span>)</span>
-<span id="cb248-8"><a href="geoestadística-univariada-con-geor.html#cb248-8" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">len =</span> <span class="dv">20</span>)</span>
-<span id="cb248-9"><a href="geoestadística-univariada-con-geor.html#cb248-9" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">outer</span>(h, u, ejemplo1CH, <span class="at">sigma=</span><span class="dv">3</span>, <span class="at">a=</span><span class="dv">1</span>, <span class="at">b=</span><span class="dv">3</span>, <span class="at">c=</span><span class="dv">1</span>, <span class="at">d=</span><span class="dv">2</span>, <span class="at">delta=</span><span class="dv">0</span>)</span>
-<span id="cb248-10"><a href="geoestadística-univariada-con-geor.html#cb248-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb248-11"><a href="geoestadística-univariada-con-geor.html#cb248-11" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>),</span>
-<span id="cb248-12"><a href="geoestadística-univariada-con-geor.html#cb248-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb248-13"><a href="geoestadística-univariada-con-geor.html#cb248-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb248-14"><a href="geoestadística-univariada-con-geor.html#cb248-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb248-15"><a href="geoestadística-univariada-con-geor.html#cb248-15" aria-hidden="true" tabindex="-1"></a><span class="fu">drape.plot</span>(h,</span>
-<span id="cb248-16"><a href="geoestadística-univariada-con-geor.html#cb248-16" aria-hidden="true" tabindex="-1"></a>           u,</span>
-<span id="cb248-17"><a href="geoestadística-univariada-con-geor.html#cb248-17" aria-hidden="true" tabindex="-1"></a>           f,</span>
-<span id="cb248-18"><a href="geoestadística-univariada-con-geor.html#cb248-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">main =</span> <span class="st">&quot;Cressie-Huang; 1 (25,1,0.6)&quot;</span>,</span>
-<span id="cb248-19"><a href="geoestadística-univariada-con-geor.html#cb248-19" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">&quot;h&quot;</span>,</span>
-<span id="cb248-20"><a href="geoestadística-univariada-con-geor.html#cb248-20" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab =</span> <span class="st">&quot;u&quot;</span>,</span>
-<span id="cb248-21"><a href="geoestadística-univariada-con-geor.html#cb248-21" aria-hidden="true" tabindex="-1"></a>           <span class="at">zlab =</span> <span class="st">&quot;Covarianza&quot;</span>,</span>
-<span id="cb248-22"><a href="geoestadística-univariada-con-geor.html#cb248-22" aria-hidden="true" tabindex="-1"></a>           <span class="at">ltheta =</span> <span class="dv">75</span>,</span>
-<span id="cb248-23"><a href="geoestadística-univariada-con-geor.html#cb248-23" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="fu">terrain.colors</span>(<span class="dv">64</span>))</span>
-<span id="cb248-24"><a href="geoestadística-univariada-con-geor.html#cb248-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb248-25"><a href="geoestadística-univariada-con-geor.html#cb248-25" aria-hidden="true" tabindex="-1"></a><span class="fu">drape.plot</span>(h,</span>
-<span id="cb248-26"><a href="geoestadística-univariada-con-geor.html#cb248-26" aria-hidden="true" tabindex="-1"></a>           u,</span>
-<span id="cb248-27"><a href="geoestadística-univariada-con-geor.html#cb248-27" aria-hidden="true" tabindex="-1"></a>           f,</span>
-<span id="cb248-28"><a href="geoestadística-univariada-con-geor.html#cb248-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">main =</span> <span class="st">&quot;Cressie-Huang; 1 (25,1,0.6)&quot;</span>,</span>
-<span id="cb248-29"><a href="geoestadística-univariada-con-geor.html#cb248-29" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">&quot;h&quot;</span>,</span>
-<span id="cb248-30"><a href="geoestadística-univariada-con-geor.html#cb248-30" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab =</span> <span class="st">&quot;u&quot;</span>,</span>
-<span id="cb248-31"><a href="geoestadística-univariada-con-geor.html#cb248-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">zlab =</span> <span class="st">&quot;Covarianza&quot;</span>,</span>
-<span id="cb248-32"><a href="geoestadística-univariada-con-geor.html#cb248-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">theta =</span> <span class="sc">-</span><span class="dv">150</span>,</span>
-<span id="cb248-33"><a href="geoestadística-univariada-con-geor.html#cb248-33" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="fu">terrain.colors</span>(<span class="dv">64</span>))</span>
-<span id="cb248-34"><a href="geoestadística-univariada-con-geor.html#cb248-34" aria-hidden="true" tabindex="-1"></a><span class="fu">persp</span>(h,</span>
-<span id="cb248-35"><a href="geoestadística-univariada-con-geor.html#cb248-35" aria-hidden="true" tabindex="-1"></a>      u,</span>
-<span id="cb248-36"><a href="geoestadística-univariada-con-geor.html#cb248-36" aria-hidden="true" tabindex="-1"></a>      f,</span>
-<span id="cb248-37"><a href="geoestadística-univariada-con-geor.html#cb248-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;Cressie-Huang; 1 (25,1,0.6)&quot;</span>,</span>
-<span id="cb248-38"><a href="geoestadística-univariada-con-geor.html#cb248-38" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&quot;h&quot;</span>,</span>
-<span id="cb248-39"><a href="geoestadística-univariada-con-geor.html#cb248-39" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">&quot;u&quot;</span>,</span>
-<span id="cb248-40"><a href="geoestadística-univariada-con-geor.html#cb248-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">zlab =</span> <span class="st">&quot;Covarianza&quot;</span>,</span>
-<span id="cb248-41"><a href="geoestadística-univariada-con-geor.html#cb248-41" aria-hidden="true" tabindex="-1"></a>      <span class="at">ltheta =</span> <span class="dv">75</span>)</span>
-<span id="cb248-42"><a href="geoestadística-univariada-con-geor.html#cb248-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb248-43"><a href="geoestadística-univariada-con-geor.html#cb248-43" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(h,</span>
-<span id="cb248-44"><a href="geoestadística-univariada-con-geor.html#cb248-44" aria-hidden="true" tabindex="-1"></a>        u,</span>
-<span id="cb248-45"><a href="geoestadística-univariada-con-geor.html#cb248-45" aria-hidden="true" tabindex="-1"></a>        f,</span>
-<span id="cb248-46"><a href="geoestadística-univariada-con-geor.html#cb248-46" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">topo.colors</span>(<span class="dv">10</span>),</span>
-<span id="cb248-47"><a href="geoestadística-univariada-con-geor.html#cb248-47" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.6</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="geoestadística-univariada-con-geor.html#cb204-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> <span class="dv">50</span>)</span>
+<span id="cb204-2"><a href="geoestadística-univariada-con-geor.html#cb204-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> <span class="dv">50</span>)</span>
+<span id="cb204-3"><a href="geoestadística-univariada-con-geor.html#cb204-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-4"><a href="geoestadística-univariada-con-geor.html#cb204-4" aria-hidden="true" tabindex="-1"></a>ejemplo1CH  <span class="ot">&lt;-</span> <span class="cf">function</span>(h, u, sigma, a, b, c, d, delta) {</span>
+<span id="cb204-5"><a href="geoestadística-univariada-con-geor.html#cb204-5" aria-hidden="true" tabindex="-1"></a>    (sigma<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>((a<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>u<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>c)<span class="sc">^</span>(d<span class="sc">/</span><span class="dv">2</span>)))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>(b<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>h<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(a<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>u<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>c))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>delta<span class="sc">*</span>u<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb204-6"><a href="geoestadística-univariada-con-geor.html#cb204-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb204-7"><a href="geoestadística-univariada-con-geor.html#cb204-7" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> <span class="dv">20</span>)</span>
+<span id="cb204-8"><a href="geoestadística-univariada-con-geor.html#cb204-8" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">len =</span> <span class="dv">20</span>)</span>
+<span id="cb204-9"><a href="geoestadística-univariada-con-geor.html#cb204-9" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">outer</span>(h, u, ejemplo1CH, <span class="at">sigma=</span><span class="dv">3</span>, <span class="at">a=</span><span class="dv">1</span>, <span class="at">b=</span><span class="dv">3</span>, <span class="at">c=</span><span class="dv">1</span>, <span class="at">d=</span><span class="dv">2</span>, <span class="at">delta=</span><span class="dv">0</span>)</span>
+<span id="cb204-10"><a href="geoestadística-univariada-con-geor.html#cb204-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-11"><a href="geoestadística-univariada-con-geor.html#cb204-11" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb204-12"><a href="geoestadística-univariada-con-geor.html#cb204-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb204-13"><a href="geoestadística-univariada-con-geor.html#cb204-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb204-14"><a href="geoestadística-univariada-con-geor.html#cb204-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-15"><a href="geoestadística-univariada-con-geor.html#cb204-15" aria-hidden="true" tabindex="-1"></a><span class="fu">drape.plot</span>(h,</span>
+<span id="cb204-16"><a href="geoestadística-univariada-con-geor.html#cb204-16" aria-hidden="true" tabindex="-1"></a>           u,</span>
+<span id="cb204-17"><a href="geoestadística-univariada-con-geor.html#cb204-17" aria-hidden="true" tabindex="-1"></a>           f,</span>
+<span id="cb204-18"><a href="geoestadística-univariada-con-geor.html#cb204-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">main =</span> <span class="st">&quot;Cressie-Huang; 1 (25,1,0.6)&quot;</span>,</span>
+<span id="cb204-19"><a href="geoestadística-univariada-con-geor.html#cb204-19" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">&quot;h&quot;</span>,</span>
+<span id="cb204-20"><a href="geoestadística-univariada-con-geor.html#cb204-20" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab =</span> <span class="st">&quot;u&quot;</span>,</span>
+<span id="cb204-21"><a href="geoestadística-univariada-con-geor.html#cb204-21" aria-hidden="true" tabindex="-1"></a>           <span class="at">zlab =</span> <span class="st">&quot;Covarianza&quot;</span>,</span>
+<span id="cb204-22"><a href="geoestadística-univariada-con-geor.html#cb204-22" aria-hidden="true" tabindex="-1"></a>           <span class="at">ltheta =</span> <span class="dv">75</span>,</span>
+<span id="cb204-23"><a href="geoestadística-univariada-con-geor.html#cb204-23" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="fu">terrain.colors</span>(<span class="dv">64</span>))</span>
+<span id="cb204-24"><a href="geoestadística-univariada-con-geor.html#cb204-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-25"><a href="geoestadística-univariada-con-geor.html#cb204-25" aria-hidden="true" tabindex="-1"></a><span class="fu">drape.plot</span>(h,</span>
+<span id="cb204-26"><a href="geoestadística-univariada-con-geor.html#cb204-26" aria-hidden="true" tabindex="-1"></a>           u,</span>
+<span id="cb204-27"><a href="geoestadística-univariada-con-geor.html#cb204-27" aria-hidden="true" tabindex="-1"></a>           f,</span>
+<span id="cb204-28"><a href="geoestadística-univariada-con-geor.html#cb204-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">main =</span> <span class="st">&quot;Cressie-Huang; 1 (25,1,0.6)&quot;</span>,</span>
+<span id="cb204-29"><a href="geoestadística-univariada-con-geor.html#cb204-29" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">&quot;h&quot;</span>,</span>
+<span id="cb204-30"><a href="geoestadística-univariada-con-geor.html#cb204-30" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab =</span> <span class="st">&quot;u&quot;</span>,</span>
+<span id="cb204-31"><a href="geoestadística-univariada-con-geor.html#cb204-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">zlab =</span> <span class="st">&quot;Covarianza&quot;</span>,</span>
+<span id="cb204-32"><a href="geoestadística-univariada-con-geor.html#cb204-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">theta =</span> <span class="sc">-</span><span class="dv">150</span>,</span>
+<span id="cb204-33"><a href="geoestadística-univariada-con-geor.html#cb204-33" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="fu">terrain.colors</span>(<span class="dv">64</span>))</span>
+<span id="cb204-34"><a href="geoestadística-univariada-con-geor.html#cb204-34" aria-hidden="true" tabindex="-1"></a><span class="fu">persp</span>(h,</span>
+<span id="cb204-35"><a href="geoestadística-univariada-con-geor.html#cb204-35" aria-hidden="true" tabindex="-1"></a>      u,</span>
+<span id="cb204-36"><a href="geoestadística-univariada-con-geor.html#cb204-36" aria-hidden="true" tabindex="-1"></a>      f,</span>
+<span id="cb204-37"><a href="geoestadística-univariada-con-geor.html#cb204-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;Cressie-Huang; 1 (25,1,0.6)&quot;</span>,</span>
+<span id="cb204-38"><a href="geoestadística-univariada-con-geor.html#cb204-38" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&quot;h&quot;</span>,</span>
+<span id="cb204-39"><a href="geoestadística-univariada-con-geor.html#cb204-39" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">&quot;u&quot;</span>,</span>
+<span id="cb204-40"><a href="geoestadística-univariada-con-geor.html#cb204-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">zlab =</span> <span class="st">&quot;Covarianza&quot;</span>,</span>
+<span id="cb204-41"><a href="geoestadística-univariada-con-geor.html#cb204-41" aria-hidden="true" tabindex="-1"></a>      <span class="at">ltheta =</span> <span class="dv">75</span>)</span>
+<span id="cb204-42"><a href="geoestadística-univariada-con-geor.html#cb204-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-43"><a href="geoestadística-univariada-con-geor.html#cb204-43" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(h,</span>
+<span id="cb204-44"><a href="geoestadística-univariada-con-geor.html#cb204-44" aria-hidden="true" tabindex="-1"></a>        u,</span>
+<span id="cb204-45"><a href="geoestadística-univariada-con-geor.html#cb204-45" aria-hidden="true" tabindex="-1"></a>        f,</span>
+<span id="cb204-46"><a href="geoestadística-univariada-con-geor.html#cb204-46" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">topo.colors</span>(<span class="dv">10</span>),</span>
+<span id="cb204-47"><a href="geoestadística-univariada-con-geor.html#cb204-47" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.6</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 </div>
 </div>
@@ -455,9 +453,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.3</span> Modelando la media con regresión polinomial<a href="geoestadística-univariada-con-geor.html#modelando-la-media-con-regresión-polinomial" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="primer-modelo" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Primer modelo<a href="geoestadística-univariada-con-geor.html#primer-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="geoestadística-univariada-con-geor.html#cb249-1" aria-hidden="true" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este <span class="sc">+</span> Norte, <span class="at">data =</span> aquifer)</span>
-<span id="cb249-2"><a href="geoestadística-univariada-con-geor.html#cb249-2" aria-hidden="true" tabindex="-1"></a>residuales1  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg1)</span>
-<span id="cb249-3"><a href="geoestadística-univariada-con-geor.html#cb249-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg1)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="geoestadística-univariada-con-geor.html#cb205-1" aria-hidden="true" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este <span class="sc">+</span> Norte, <span class="at">data =</span> aquifer)</span>
+<span id="cb205-2"><a href="geoestadística-univariada-con-geor.html#cb205-2" aria-hidden="true" tabindex="-1"></a>residuales1  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg1)</span>
+<span id="cb205-3"><a href="geoestadística-univariada-con-geor.html#cb205-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Profundidad ~ Este + Norte, data = aquifer)
@@ -477,7 +475,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 203.3 on 82 degrees of freedom
 ## Multiple R-squared:  0.8921, Adjusted R-squared:  0.8894 
 ## F-statistic: 338.9 on 2 and 82 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="geoestadística-univariada-con-geor.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg1)</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="geoestadística-univariada-con-geor.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg1)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: Profundidad
@@ -490,12 +488,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="segundo-modelo" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Segundo modelo<a href="geoestadística-univariada-con-geor.html#segundo-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="geoestadística-univariada-con-geor.html#cb253-1" aria-hidden="true" tabindex="-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este <span class="sc">+</span> Norte <span class="sc">+</span></span>
-<span id="cb253-2"><a href="geoestadística-univariada-con-geor.html#cb253-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">I</span>(Este<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(Norte<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb253-3"><a href="geoestadística-univariada-con-geor.html#cb253-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">I</span>(Este <span class="sc">*</span> Norte),</span>
-<span id="cb253-4"><a href="geoestadística-univariada-con-geor.html#cb253-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> aquifer)</span>
-<span id="cb253-5"><a href="geoestadística-univariada-con-geor.html#cb253-5" aria-hidden="true" tabindex="-1"></a>residuales2  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg2)</span>
-<span id="cb253-6"><a href="geoestadística-univariada-con-geor.html#cb253-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg2)</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="geoestadística-univariada-con-geor.html#cb209-1" aria-hidden="true" tabindex="-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este <span class="sc">+</span> Norte <span class="sc">+</span></span>
+<span id="cb209-2"><a href="geoestadística-univariada-con-geor.html#cb209-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">I</span>(Este<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(Norte<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb209-3"><a href="geoestadística-univariada-con-geor.html#cb209-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">I</span>(Este <span class="sc">*</span> Norte),</span>
+<span id="cb209-4"><a href="geoestadística-univariada-con-geor.html#cb209-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> aquifer)</span>
+<span id="cb209-5"><a href="geoestadística-univariada-con-geor.html#cb209-5" aria-hidden="true" tabindex="-1"></a>residuales2  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg2)</span>
+<span id="cb209-6"><a href="geoestadística-univariada-con-geor.html#cb209-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Profundidad ~ Este + Norte + I(Este^2) + I(Norte^2) + 
@@ -519,7 +517,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 185.9 on 79 degrees of freedom
 ## Multiple R-squared:  0.9131, Adjusted R-squared:  0.9076 
 ## F-statistic:   166 on 5 and 79 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="geoestadística-univariada-con-geor.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg2)</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="geoestadística-univariada-con-geor.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg2)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: Profundidad
@@ -535,10 +533,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="tercer-modelo" class="section level3 hasAnchor" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> Tercer modelo<a href="geoestadística-univariada-con-geor.html#tercer-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="geoestadística-univariada-con-geor.html#cb257-1" aria-hidden="true" tabindex="-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este <span class="sc">*</span> Norte,</span>
-<span id="cb257-2"><a href="geoestadística-univariada-con-geor.html#cb257-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> aquifer)</span>
-<span id="cb257-3"><a href="geoestadística-univariada-con-geor.html#cb257-3" aria-hidden="true" tabindex="-1"></a>residuales3  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg3)</span>
-<span id="cb257-4"><a href="geoestadística-univariada-con-geor.html#cb257-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg3)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="geoestadística-univariada-con-geor.html#cb213-1" aria-hidden="true" tabindex="-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este <span class="sc">*</span> Norte,</span>
+<span id="cb213-2"><a href="geoestadística-univariada-con-geor.html#cb213-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> aquifer)</span>
+<span id="cb213-3"><a href="geoestadística-univariada-con-geor.html#cb213-3" aria-hidden="true" tabindex="-1"></a>residuales3  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg3)</span>
+<span id="cb213-4"><a href="geoestadística-univariada-con-geor.html#cb213-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Profundidad ~ Este * Norte, data = aquifer)
@@ -559,7 +557,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 191.9 on 81 degrees of freedom
 ## Multiple R-squared:  0.905,  Adjusted R-squared:  0.9014 
 ## F-statistic: 257.1 on 3 and 81 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="geoestadística-univariada-con-geor.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg3)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="geoestadística-univariada-con-geor.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg3)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: Profundidad
@@ -577,90 +575,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Documentación <a href="https://cran.r-project.org/web/packages/geoR/geoR.pdf#page=133">variog</a></li>
 </ul>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="geoestadística-univariada-con-geor.html#cb261-1" aria-hidden="true" tabindex="-1"></a>vari2 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="geoestadística-univariada-con-geor.html#cb217-1" aria-hidden="true" tabindex="-1"></a>vari2 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>)</span></code></pre></div>
 <pre><code>## variog: computing omnidirectional variogram</code></pre>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="geoestadística-univariada-con-geor.html#cb263-1" aria-hidden="true" tabindex="-1"></a>vari2Cloud <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">op =</span> <span class="st">&quot;cloud&quot;</span>, <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="geoestadística-univariada-con-geor.html#cb219-1" aria-hidden="true" tabindex="-1"></a>vari2Cloud <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">op =</span> <span class="st">&quot;cloud&quot;</span>, <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>)</span></code></pre></div>
 <pre><code>## variog: computing omnidirectional variogram</code></pre>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="geoestadística-univariada-con-geor.html#cb265-1" aria-hidden="true" tabindex="-1"></a>vari2BinCloud <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,</span>
-<span id="cb265-2"><a href="geoestadística-univariada-con-geor.html#cb265-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">max.dist =</span> <span class="dv">200</span>,</span>
-<span id="cb265-3"><a href="geoestadística-univariada-con-geor.html#cb265-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">op =</span> <span class="st">&quot;cloud&quot;</span>,</span>
-<span id="cb265-4"><a href="geoestadística-univariada-con-geor.html#cb265-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">bin.cloud =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="geoestadística-univariada-con-geor.html#cb221-1" aria-hidden="true" tabindex="-1"></a>vari2BinCloud <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,</span>
+<span id="cb221-2"><a href="geoestadística-univariada-con-geor.html#cb221-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">max.dist =</span> <span class="dv">200</span>,</span>
+<span id="cb221-3"><a href="geoestadística-univariada-con-geor.html#cb221-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">op =</span> <span class="st">&quot;cloud&quot;</span>,</span>
+<span id="cb221-4"><a href="geoestadística-univariada-con-geor.html#cb221-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">bin.cloud =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## variog: computing omnidirectional variogram</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="geoestadística-univariada-con-geor.html#cb267-1" aria-hidden="true" tabindex="-1"></a>vari2Sm <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,</span>
-<span id="cb267-2"><a href="geoestadística-univariada-con-geor.html#cb267-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
-<span id="cb267-3"><a href="geoestadística-univariada-con-geor.html#cb267-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">op =</span> <span class="st">&quot;sm&quot;</span>,</span>
-<span id="cb267-4"><a href="geoestadística-univariada-con-geor.html#cb267-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">band=</span><span class="dv">11</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="geoestadística-univariada-con-geor.html#cb223-1" aria-hidden="true" tabindex="-1"></a>vari2Sm <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,</span>
+<span id="cb223-2"><a href="geoestadística-univariada-con-geor.html#cb223-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
+<span id="cb223-3"><a href="geoestadística-univariada-con-geor.html#cb223-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">op =</span> <span class="st">&quot;sm&quot;</span>,</span>
+<span id="cb223-4"><a href="geoestadística-univariada-con-geor.html#cb223-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">band=</span><span class="dv">11</span>)</span></code></pre></div>
 <pre><code>## variog: computing omnidirectional variogram</code></pre>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="geoestadística-univariada-con-geor.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb269-2"><a href="geoestadística-univariada-con-geor.html#cb269-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">plot</span>(vari2<span class="sc">$</span>u, vari2<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;binned variogram&quot;</span>) <span class="co"># jocastroc: vari2 solo no da el plot se dejo vari2$u,vari2$v</span></span>
-<span id="cb269-3"><a href="geoestadística-univariada-con-geor.html#cb269-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">plot</span>(vari2Cloud<span class="sc">$</span>u, vari2Cloud<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;variogram cloud&quot;</span>)</span>
-<span id="cb269-4"><a href="geoestadística-univariada-con-geor.html#cb269-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">plot</span>(vari2BinCloud<span class="sc">$</span>u, vari2BinCloud<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;clouds for binned variogram&quot;</span>)</span>
-<span id="cb269-5"><a href="geoestadística-univariada-con-geor.html#cb269-5" aria-hidden="true" tabindex="-1"></a>     <span class="fu">plot</span>(vari2Sm<span class="sc">$</span>u, vari2Sm<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;smoothed variogram&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="geoestadística-univariada-con-geor.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb225-2"><a href="geoestadística-univariada-con-geor.html#cb225-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">plot</span>(vari2<span class="sc">$</span>u, vari2<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;binned variogram&quot;</span>) <span class="co"># jocastroc: vari2 solo no da el plot se dejo vari2$u,vari2$v</span></span>
+<span id="cb225-3"><a href="geoestadística-univariada-con-geor.html#cb225-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">plot</span>(vari2Cloud<span class="sc">$</span>u, vari2Cloud<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;variogram cloud&quot;</span>)</span>
+<span id="cb225-4"><a href="geoestadística-univariada-con-geor.html#cb225-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">plot</span>(vari2BinCloud<span class="sc">$</span>u, vari2BinCloud<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;clouds for binned variogram&quot;</span>)</span>
+<span id="cb225-5"><a href="geoestadística-univariada-con-geor.html#cb225-5" aria-hidden="true" tabindex="-1"></a>     <span class="fu">plot</span>(vari2Sm<span class="sc">$</span>u, vari2Sm<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;smoothed variogram&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 <div id="explorando-estimación-clásica-removiendo-tendencia" class="section level3 hasAnchor" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Explorando estimación clásica, removiendo tendencia<a href="geoestadística-univariada-con-geor.html#explorando-estimación-clásica-removiendo-tendencia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="geoestadística-univariada-con-geor.html#cb270-1" aria-hidden="true" tabindex="-1"></a>vari1 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="geoestadística-univariada-con-geor.html#cb226-1" aria-hidden="true" tabindex="-1"></a>vari1 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg)</span></code></pre></div>
 <pre><code>## variog: computing omnidirectional variogram</code></pre>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="geoestadística-univariada-con-geor.html#cb272-1" aria-hidden="true" tabindex="-1"></a>vari2 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="geoestadística-univariada-con-geor.html#cb228-1" aria-hidden="true" tabindex="-1"></a>vari2 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>)</span></code></pre></div>
 <pre><code>## variog: computing omnidirectional variogram</code></pre>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="geoestadística-univariada-con-geor.html#cb274-1" aria-hidden="true" tabindex="-1"></a>vari3 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">trend =</span> <span class="st">&quot;2nd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="geoestadística-univariada-con-geor.html#cb230-1" aria-hidden="true" tabindex="-1"></a>vari3 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">trend =</span> <span class="st">&quot;2nd&quot;</span>)</span></code></pre></div>
 <pre><code>## variog: computing omnidirectional variogram</code></pre>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="geoestadística-univariada-con-geor.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari1<span class="sc">$</span>u,vari1<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;Sin remover tendencia&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="geoestadística-univariada-con-geor.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari1<span class="sc">$</span>u,vari1<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;Sin remover tendencia&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="geoestadística-univariada-con-geor.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari2<span class="sc">$</span>u,vari2<span class="sc">$</span>v, <span class="at">main  =</span> <span class="st">&quot;Trend 1 &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="geoestadística-univariada-con-geor.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari2<span class="sc">$</span>u,vari2<span class="sc">$</span>v, <span class="at">main  =</span> <span class="st">&quot;Trend 1 &quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-65-2.png" width="672" /></p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="geoestadística-univariada-con-geor.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari3<span class="sc">$</span>u,vari3<span class="sc">$</span>v, <span class="at">main  =</span> <span class="st">&quot;Trend 2 &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="geoestadística-univariada-con-geor.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari3<span class="sc">$</span>u,vari3<span class="sc">$</span>v, <span class="at">main  =</span> <span class="st">&quot;Trend 2 &quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-65-3.png" width="672" /></p>
 </div>
 <div id="explorando-estimación-resistente-a-datos-atípicos-y-removiendo-tendencia" class="section level3 hasAnchor" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Explorando estimación resistente a datos atípicos y removiendo tendencia<a href="geoestadística-univariada-con-geor.html#explorando-estimación-resistente-a-datos-atípicos-y-removiendo-tendencia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="geoestadística-univariada-con-geor.html#cb279-1" aria-hidden="true" tabindex="-1"></a>vari1 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">estimator.type =</span> <span class="st">&quot;modulus&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="geoestadística-univariada-con-geor.html#cb235-1" aria-hidden="true" tabindex="-1"></a>vari1 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">estimator.type =</span> <span class="st">&quot;modulus&quot;</span>)</span></code></pre></div>
 <pre><code>## variog: computing omnidirectional variogram</code></pre>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="geoestadística-univariada-con-geor.html#cb281-1" aria-hidden="true" tabindex="-1"></a>vari2 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>, <span class="at">estimator.type =</span> <span class="st">&quot;modulus&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="geoestadística-univariada-con-geor.html#cb237-1" aria-hidden="true" tabindex="-1"></a>vari2 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>, <span class="at">estimator.type =</span> <span class="st">&quot;modulus&quot;</span>)</span></code></pre></div>
 <pre><code>## variog: computing omnidirectional variogram</code></pre>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="geoestadística-univariada-con-geor.html#cb283-1" aria-hidden="true" tabindex="-1"></a>vari3 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">trend =</span> <span class="st">&quot;2nd&quot;</span>, <span class="at">estimator.type =</span> <span class="st">&quot;modulus&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="geoestadística-univariada-con-geor.html#cb239-1" aria-hidden="true" tabindex="-1"></a>vari3 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg, <span class="at">trend =</span> <span class="st">&quot;2nd&quot;</span>, <span class="at">estimator.type =</span> <span class="st">&quot;modulus&quot;</span>)</span></code></pre></div>
 <pre><code>## variog: computing omnidirectional variogram</code></pre>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="geoestadística-univariada-con-geor.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari1<span class="sc">$</span>u,vari1<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;Sin remover tendencia&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="geoestadística-univariada-con-geor.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari1<span class="sc">$</span>u,vari1<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;Sin remover tendencia&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="geoestadística-univariada-con-geor.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari2<span class="sc">$</span>u,vari2<span class="sc">$</span>v, <span class="at">main  =</span> <span class="st">&quot;Trend 1 &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="geoestadística-univariada-con-geor.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari2<span class="sc">$</span>u,vari2<span class="sc">$</span>v, <span class="at">main  =</span> <span class="st">&quot;Trend 1 &quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-67-2.png" width="672" /></p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="geoestadística-univariada-con-geor.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari3<span class="sc">$</span>u,vari3<span class="sc">$</span>v, <span class="at">main  =</span> <span class="st">&quot;Trend 2 &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="geoestadística-univariada-con-geor.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari3<span class="sc">$</span>u,vari3<span class="sc">$</span>v, <span class="at">main  =</span> <span class="st">&quot;Trend 2 &quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-67-3.png" width="672" /></p>
 </div>
 <div id="explorando-anisotropía" class="section level3 hasAnchor" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> Explorando anisotropía<a href="geoestadística-univariada-con-geor.html#explorando-anisotropía" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="geoestadística-univariada-con-geor.html#cb288-1" aria-hidden="true" tabindex="-1"></a>vari_0 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,</span>
-<span id="cb288-2"><a href="geoestadística-univariada-con-geor.html#cb288-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
-<span id="cb288-3"><a href="geoestadística-univariada-con-geor.html#cb288-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">max.dist =</span> <span class="dv">200</span>,</span>
-<span id="cb288-4"><a href="geoestadística-univariada-con-geor.html#cb288-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dir =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="geoestadística-univariada-con-geor.html#cb244-1" aria-hidden="true" tabindex="-1"></a>vari_0 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,</span>
+<span id="cb244-2"><a href="geoestadística-univariada-con-geor.html#cb244-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
+<span id="cb244-3"><a href="geoestadística-univariada-con-geor.html#cb244-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">max.dist =</span> <span class="dv">200</span>,</span>
+<span id="cb244-4"><a href="geoestadística-univariada-con-geor.html#cb244-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dir =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## variog: computing variogram for direction = 0 degrees (0 radians)
 ##         tolerance angle = 22.5 degrees (0.393 radians)</code></pre>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="geoestadística-univariada-con-geor.html#cb290-1" aria-hidden="true" tabindex="-1"></a>vari_45 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,</span>
-<span id="cb290-2"><a href="geoestadística-univariada-con-geor.html#cb290-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
-<span id="cb290-3"><a href="geoestadística-univariada-con-geor.html#cb290-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max.dist =</span> <span class="dv">200</span>,</span>
-<span id="cb290-4"><a href="geoestadística-univariada-con-geor.html#cb290-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">dir =</span> pi <span class="sc">/</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="geoestadística-univariada-con-geor.html#cb246-1" aria-hidden="true" tabindex="-1"></a>vari_45 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,</span>
+<span id="cb246-2"><a href="geoestadística-univariada-con-geor.html#cb246-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
+<span id="cb246-3"><a href="geoestadística-univariada-con-geor.html#cb246-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max.dist =</span> <span class="dv">200</span>,</span>
+<span id="cb246-4"><a href="geoestadística-univariada-con-geor.html#cb246-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">dir =</span> pi <span class="sc">/</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## variog: computing variogram for direction = 45 degrees (0.785 radians)
 ##         tolerance angle = 22.5 degrees (0.393 radians)</code></pre>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="geoestadística-univariada-con-geor.html#cb292-1" aria-hidden="true" tabindex="-1"></a>vari_90 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,</span>
-<span id="cb292-2"><a href="geoestadística-univariada-con-geor.html#cb292-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
-<span id="cb292-3"><a href="geoestadística-univariada-con-geor.html#cb292-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max.dist =</span> <span class="dv">200</span>,</span>
-<span id="cb292-4"><a href="geoestadística-univariada-con-geor.html#cb292-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">dir =</span> pi <span class="sc">/</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="geoestadística-univariada-con-geor.html#cb248-1" aria-hidden="true" tabindex="-1"></a>vari_90 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,</span>
+<span id="cb248-2"><a href="geoestadística-univariada-con-geor.html#cb248-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
+<span id="cb248-3"><a href="geoestadística-univariada-con-geor.html#cb248-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max.dist =</span> <span class="dv">200</span>,</span>
+<span id="cb248-4"><a href="geoestadística-univariada-con-geor.html#cb248-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">dir =</span> pi <span class="sc">/</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## variog: computing variogram for direction = 90 degrees (1.571 radians)
 ##         tolerance angle = 22.5 degrees (0.393 radians)</code></pre>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="geoestadística-univariada-con-geor.html#cb294-1" aria-hidden="true" tabindex="-1"></a>vari_135 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,</span>
-<span id="cb294-2"><a href="geoestadística-univariada-con-geor.html#cb294-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
-<span id="cb294-3"><a href="geoestadística-univariada-con-geor.html#cb294-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">max.dist =</span> <span class="dv">200</span>,</span>
-<span id="cb294-4"><a href="geoestadística-univariada-con-geor.html#cb294-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">dir =</span> <span class="dv">3</span> <span class="sc">*</span> pi <span class="sc">/</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="geoestadística-univariada-con-geor.html#cb250-1" aria-hidden="true" tabindex="-1"></a>vari_135 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,</span>
+<span id="cb250-2"><a href="geoestadística-univariada-con-geor.html#cb250-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
+<span id="cb250-3"><a href="geoestadística-univariada-con-geor.html#cb250-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">max.dist =</span> <span class="dv">200</span>,</span>
+<span id="cb250-4"><a href="geoestadística-univariada-con-geor.html#cb250-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">dir =</span> <span class="dv">3</span> <span class="sc">*</span> pi <span class="sc">/</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## variog: computing variogram for direction = 135 degrees (2.356 radians)
 ##         tolerance angle = 22.5 degrees (0.393 radians)</code></pre>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="geoestadística-univariada-con-geor.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>),</span>
-<span id="cb296-2"><a href="geoestadística-univariada-con-geor.html#cb296-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb296-3"><a href="geoestadística-univariada-con-geor.html#cb296-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb296-4"><a href="geoestadística-univariada-con-geor.html#cb296-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb296-5"><a href="geoestadística-univariada-con-geor.html#cb296-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari_0<span class="sc">$</span>u,vari_0<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;vari 0&quot;</span>)</span>
-<span id="cb296-6"><a href="geoestadística-univariada-con-geor.html#cb296-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari_45<span class="sc">$</span>u,vari_45<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;vari 45&quot;</span>)</span>
-<span id="cb296-7"><a href="geoestadística-univariada-con-geor.html#cb296-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari_90<span class="sc">$</span>u,vari_90<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;vari 90&quot;</span>)</span>
-<span id="cb296-8"><a href="geoestadística-univariada-con-geor.html#cb296-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari_135<span class="sc">$</span>u,vari_135<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;vari 195&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="geoestadística-univariada-con-geor.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb252-2"><a href="geoestadística-univariada-con-geor.html#cb252-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb252-3"><a href="geoestadística-univariada-con-geor.html#cb252-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb252-4"><a href="geoestadística-univariada-con-geor.html#cb252-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb252-5"><a href="geoestadística-univariada-con-geor.html#cb252-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari_0<span class="sc">$</span>u,vari_0<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;vari 0&quot;</span>)</span>
+<span id="cb252-6"><a href="geoestadística-univariada-con-geor.html#cb252-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari_45<span class="sc">$</span>u,vari_45<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;vari 45&quot;</span>)</span>
+<span id="cb252-7"><a href="geoestadística-univariada-con-geor.html#cb252-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari_90<span class="sc">$</span>u,vari_90<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;vari 90&quot;</span>)</span>
+<span id="cb252-8"><a href="geoestadística-univariada-con-geor.html#cb252-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vari_135<span class="sc">$</span>u,vari_135<span class="sc">$</span>v, <span class="at">main =</span> <span class="st">&quot;vari 195&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
 </div>
 </div>
@@ -671,47 +669,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Documentación <a href="https://cran.r-project.org/web/packages/geoR/geoR.pdf#page=129">variofit</a></li>
 <li>Documentación <a href="https://cran.r-project.org/web/packages/geoR/geoR.pdf#page=60">likfit</a></li>
 </ul>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="geoestadística-univariada-con-geor.html#cb297-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,<span class="at">trend=</span><span class="st">&quot;1st&quot;</span>,<span class="at">max.dist=</span><span class="dv">200</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="geoestadística-univariada-con-geor.html#cb253-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> <span class="fu">variog</span>(aquiferg,<span class="at">trend=</span><span class="st">&quot;1st&quot;</span>,<span class="at">max.dist=</span><span class="dv">200</span>)</span></code></pre></div>
 <pre><code>## variog: computing omnidirectional variogram</code></pre>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="geoestadística-univariada-con-geor.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ini1 &lt;- eyefit(var1)</span></span>
-<span id="cb299-2"><a href="geoestadística-univariada-con-geor.html#cb299-2" aria-hidden="true" tabindex="-1"></a><span class="co">#cov.model  sigmasq phi   tausq kappa kappa2   practicalRange</span></span>
-<span id="cb299-3"><a href="geoestadística-univariada-con-geor.html#cb299-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1      wave 30805.52  13 8984.94  &lt;NA&gt;   &lt;NA&gt; 38.8889336320589</span></span>
-<span id="cb299-4"><a href="geoestadística-univariada-con-geor.html#cb299-4" aria-hidden="true" tabindex="-1"></a>ini1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">30805.52</span>, <span class="dv">13</span>)</span>
-<span id="cb299-5"><a href="geoestadística-univariada-con-geor.html#cb299-5" aria-hidden="true" tabindex="-1"></a>fitvar1 <span class="ot">&lt;-</span> <span class="fu">variofit</span>(var1,</span>
-<span id="cb299-6"><a href="geoestadística-univariada-con-geor.html#cb299-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cov.model =</span> <span class="st">&quot;wave&quot;</span>,</span>
-<span id="cb299-7"><a href="geoestadística-univariada-con-geor.html#cb299-7" aria-hidden="true" tabindex="-1"></a>                    ini1,</span>
-<span id="cb299-8"><a href="geoestadística-univariada-con-geor.html#cb299-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fix.nugget =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb299-9"><a href="geoestadística-univariada-con-geor.html#cb299-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nugget =</span> <span class="fl">8984.94</span>,</span>
-<span id="cb299-10"><a href="geoestadística-univariada-con-geor.html#cb299-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wei =</span> <span class="st">&quot;equal&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="geoestadística-univariada-con-geor.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ini1 &lt;- eyefit(var1)</span></span>
+<span id="cb255-2"><a href="geoestadística-univariada-con-geor.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="co">#cov.model  sigmasq phi   tausq kappa kappa2   practicalRange</span></span>
+<span id="cb255-3"><a href="geoestadística-univariada-con-geor.html#cb255-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1      wave 30805.52  13 8984.94  &lt;NA&gt;   &lt;NA&gt; 38.8889336320589</span></span>
+<span id="cb255-4"><a href="geoestadística-univariada-con-geor.html#cb255-4" aria-hidden="true" tabindex="-1"></a>ini1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">30805.52</span>, <span class="dv">13</span>)</span>
+<span id="cb255-5"><a href="geoestadística-univariada-con-geor.html#cb255-5" aria-hidden="true" tabindex="-1"></a>fitvar1 <span class="ot">&lt;-</span> <span class="fu">variofit</span>(var1,</span>
+<span id="cb255-6"><a href="geoestadística-univariada-con-geor.html#cb255-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cov.model =</span> <span class="st">&quot;wave&quot;</span>,</span>
+<span id="cb255-7"><a href="geoestadística-univariada-con-geor.html#cb255-7" aria-hidden="true" tabindex="-1"></a>                    ini1,</span>
+<span id="cb255-8"><a href="geoestadística-univariada-con-geor.html#cb255-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fix.nugget =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb255-9"><a href="geoestadística-univariada-con-geor.html#cb255-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nugget =</span> <span class="fl">8984.94</span>,</span>
+<span id="cb255-10"><a href="geoestadística-univariada-con-geor.html#cb255-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wei =</span> <span class="st">&quot;equal&quot;</span>)</span></code></pre></div>
 <pre><code>## variofit: covariance model used is wave 
 ## variofit: weights used: equal 
 ## variofit: minimisation function used: optim</code></pre>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="geoestadística-univariada-con-geor.html#cb301-1" aria-hidden="true" tabindex="-1"></a>fitvar2 <span class="ot">&lt;-</span> <span class="fu">variofit</span>(var1,</span>
-<span id="cb301-2"><a href="geoestadística-univariada-con-geor.html#cb301-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cov.model =</span> <span class="st">&quot;wave&quot;</span>,</span>
-<span id="cb301-3"><a href="geoestadística-univariada-con-geor.html#cb301-3" aria-hidden="true" tabindex="-1"></a>                    ini1,</span>
-<span id="cb301-4"><a href="geoestadística-univariada-con-geor.html#cb301-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fix.nugget =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb301-5"><a href="geoestadística-univariada-con-geor.html#cb301-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nugget =</span> <span class="fl">8984.94</span>,</span>
-<span id="cb301-6"><a href="geoestadística-univariada-con-geor.html#cb301-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wei =</span> <span class="st">&quot;npairs&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="geoestadística-univariada-con-geor.html#cb257-1" aria-hidden="true" tabindex="-1"></a>fitvar2 <span class="ot">&lt;-</span> <span class="fu">variofit</span>(var1,</span>
+<span id="cb257-2"><a href="geoestadística-univariada-con-geor.html#cb257-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cov.model =</span> <span class="st">&quot;wave&quot;</span>,</span>
+<span id="cb257-3"><a href="geoestadística-univariada-con-geor.html#cb257-3" aria-hidden="true" tabindex="-1"></a>                    ini1,</span>
+<span id="cb257-4"><a href="geoestadística-univariada-con-geor.html#cb257-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fix.nugget =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb257-5"><a href="geoestadística-univariada-con-geor.html#cb257-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nugget =</span> <span class="fl">8984.94</span>,</span>
+<span id="cb257-6"><a href="geoestadística-univariada-con-geor.html#cb257-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wei =</span> <span class="st">&quot;npairs&quot;</span>)</span></code></pre></div>
 <pre><code>## variofit: covariance model used is wave 
 ## variofit: weights used: npairs 
 ## variofit: minimisation function used: optim</code></pre>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="geoestadística-univariada-con-geor.html#cb303-1" aria-hidden="true" tabindex="-1"></a>fitvar3 <span class="ot">&lt;-</span> <span class="fu">variofit</span>(var1,</span>
-<span id="cb303-2"><a href="geoestadística-univariada-con-geor.html#cb303-2" aria-hidden="true" tabindex="-1"></a>                    ini1,</span>
-<span id="cb303-3"><a href="geoestadística-univariada-con-geor.html#cb303-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fix.nugget =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb303-4"><a href="geoestadística-univariada-con-geor.html#cb303-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nugget =</span> <span class="fl">8984.94</span>,</span>
-<span id="cb303-5"><a href="geoestadística-univariada-con-geor.html#cb303-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wei =</span> <span class="st">&quot;cressie&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="geoestadística-univariada-con-geor.html#cb259-1" aria-hidden="true" tabindex="-1"></a>fitvar3 <span class="ot">&lt;-</span> <span class="fu">variofit</span>(var1,</span>
+<span id="cb259-2"><a href="geoestadística-univariada-con-geor.html#cb259-2" aria-hidden="true" tabindex="-1"></a>                    ini1,</span>
+<span id="cb259-3"><a href="geoestadística-univariada-con-geor.html#cb259-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fix.nugget =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb259-4"><a href="geoestadística-univariada-con-geor.html#cb259-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nugget =</span> <span class="fl">8984.94</span>,</span>
+<span id="cb259-5"><a href="geoestadística-univariada-con-geor.html#cb259-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wei =</span> <span class="st">&quot;cressie&quot;</span>)</span></code></pre></div>
 <pre><code>## variofit: covariance model used is matern 
 ## variofit: weights used: cressie 
 ## variofit: minimisation function used: optim</code></pre>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="geoestadística-univariada-con-geor.html#cb305-1" aria-hidden="true" tabindex="-1"></a>fitvar4 <span class="ot">&lt;-</span> <span class="fu">likfit</span>(aquiferg,</span>
-<span id="cb305-2"><a href="geoestadística-univariada-con-geor.html#cb305-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">coords =</span> aquiferg<span class="sc">$</span>coords,</span>
-<span id="cb305-3"><a href="geoestadística-univariada-con-geor.html#cb305-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> aquiferg<span class="sc">$</span>data,</span>
-<span id="cb305-4"><a href="geoestadística-univariada-con-geor.html#cb305-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
-<span id="cb305-5"><a href="geoestadística-univariada-con-geor.html#cb305-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ini.cov.pars =</span> ini1,</span>
-<span id="cb305-6"><a href="geoestadística-univariada-con-geor.html#cb305-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fix.nugget =</span> T,</span>
-<span id="cb305-7"><a href="geoestadística-univariada-con-geor.html#cb305-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nugget =</span> <span class="fl">8984.94</span>,</span>
-<span id="cb305-8"><a href="geoestadística-univariada-con-geor.html#cb305-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">cov.model =</span> <span class="st">&quot;wave&quot;</span>,</span>
-<span id="cb305-9"><a href="geoestadística-univariada-con-geor.html#cb305-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">lik.method =</span> <span class="st">&quot;ML&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="geoestadística-univariada-con-geor.html#cb261-1" aria-hidden="true" tabindex="-1"></a>fitvar4 <span class="ot">&lt;-</span> <span class="fu">likfit</span>(aquiferg,</span>
+<span id="cb261-2"><a href="geoestadística-univariada-con-geor.html#cb261-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">coords =</span> aquiferg<span class="sc">$</span>coords,</span>
+<span id="cb261-3"><a href="geoestadística-univariada-con-geor.html#cb261-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> aquiferg<span class="sc">$</span>data,</span>
+<span id="cb261-4"><a href="geoestadística-univariada-con-geor.html#cb261-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
+<span id="cb261-5"><a href="geoestadística-univariada-con-geor.html#cb261-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ini.cov.pars =</span> ini1,</span>
+<span id="cb261-6"><a href="geoestadística-univariada-con-geor.html#cb261-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fix.nugget =</span> T,</span>
+<span id="cb261-7"><a href="geoestadística-univariada-con-geor.html#cb261-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nugget =</span> <span class="fl">8984.94</span>,</span>
+<span id="cb261-8"><a href="geoestadística-univariada-con-geor.html#cb261-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">cov.model =</span> <span class="st">&quot;wave&quot;</span>,</span>
+<span id="cb261-9"><a href="geoestadística-univariada-con-geor.html#cb261-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">lik.method =</span> <span class="st">&quot;ML&quot;</span>)</span></code></pre></div>
 <pre><code>## kappa not used for the wave correlation function
 ## ---------------------------------------------------------------
 ## likfit: likelihood maximisation using the function optim.
@@ -723,15 +721,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## likfit: WARNING: This step can be time demanding!
 ## ---------------------------------------------------------------
 ## likfit: end of numerical maximisation.</code></pre>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="geoestadística-univariada-con-geor.html#cb307-1" aria-hidden="true" tabindex="-1"></a>fitvar5 <span class="ot">&lt;-</span> <span class="fu">likfit</span>(aquiferg,</span>
-<span id="cb307-2"><a href="geoestadística-univariada-con-geor.html#cb307-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">coords =</span> aquiferg<span class="sc">$</span>coords,</span>
-<span id="cb307-3"><a href="geoestadística-univariada-con-geor.html#cb307-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> aquiferg<span class="sc">$</span>data,</span>
-<span id="cb307-4"><a href="geoestadística-univariada-con-geor.html#cb307-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
-<span id="cb307-5"><a href="geoestadística-univariada-con-geor.html#cb307-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ini.cov.pars =</span> ini1,</span>
-<span id="cb307-6"><a href="geoestadística-univariada-con-geor.html#cb307-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fix.nugget =</span> T,</span>
-<span id="cb307-7"><a href="geoestadística-univariada-con-geor.html#cb307-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nugget =</span> <span class="fl">8984.94</span>,</span>
-<span id="cb307-8"><a href="geoestadística-univariada-con-geor.html#cb307-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">cov.model =</span> <span class="st">&quot;wave&quot;</span>,</span>
-<span id="cb307-9"><a href="geoestadística-univariada-con-geor.html#cb307-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">lik.method =</span> <span class="st">&quot;REML&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="geoestadística-univariada-con-geor.html#cb263-1" aria-hidden="true" tabindex="-1"></a>fitvar5 <span class="ot">&lt;-</span> <span class="fu">likfit</span>(aquiferg,</span>
+<span id="cb263-2"><a href="geoestadística-univariada-con-geor.html#cb263-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">coords =</span> aquiferg<span class="sc">$</span>coords,</span>
+<span id="cb263-3"><a href="geoestadística-univariada-con-geor.html#cb263-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> aquiferg<span class="sc">$</span>data,</span>
+<span id="cb263-4"><a href="geoestadística-univariada-con-geor.html#cb263-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trend =</span> <span class="st">&quot;1st&quot;</span>,</span>
+<span id="cb263-5"><a href="geoestadística-univariada-con-geor.html#cb263-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ini.cov.pars =</span> ini1,</span>
+<span id="cb263-6"><a href="geoestadística-univariada-con-geor.html#cb263-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fix.nugget =</span> T,</span>
+<span id="cb263-7"><a href="geoestadística-univariada-con-geor.html#cb263-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nugget =</span> <span class="fl">8984.94</span>,</span>
+<span id="cb263-8"><a href="geoestadística-univariada-con-geor.html#cb263-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">cov.model =</span> <span class="st">&quot;wave&quot;</span>,</span>
+<span id="cb263-9"><a href="geoestadística-univariada-con-geor.html#cb263-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">lik.method =</span> <span class="st">&quot;REML&quot;</span>)</span></code></pre></div>
 <pre><code>## kappa not used for the wave correlation function
 ## ---------------------------------------------------------------
 ## likfit: likelihood maximisation using the function optim.
@@ -743,30 +741,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## likfit: WARNING: This step can be time demanding!
 ## ---------------------------------------------------------------
 ## likfit: end of numerical maximisation.</code></pre>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="geoestadística-univariada-con-geor.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(var1<span class="sc">$</span>u,var1<span class="sc">$</span>v,</span>
-<span id="cb309-2"><a href="geoestadística-univariada-con-geor.html#cb309-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;h&quot;</span>,</span>
-<span id="cb309-3"><a href="geoestadística-univariada-con-geor.html#cb309-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;semivarianza&quot;</span>,</span>
-<span id="cb309-4"><a href="geoestadística-univariada-con-geor.html#cb309-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.lab =</span> <span class="fl">1.3</span>,</span>
-<span id="cb309-5"><a href="geoestadística-univariada-con-geor.html#cb309-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.axis =</span> <span class="fl">1.2</span>,</span>
-<span id="cb309-6"><a href="geoestadística-univariada-con-geor.html#cb309-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Estimación teórica del modelo de semivariograma&quot;</span>,</span>
-<span id="cb309-7"><a href="geoestadística-univariada-con-geor.html#cb309-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">col.main =</span> <span class="dv">4</span>, <span class="at">cex.main =</span><span class="fl">1.3</span>)</span>
-<span id="cb309-8"><a href="geoestadística-univariada-con-geor.html#cb309-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fitvar1, <span class="at">col =</span> <span class="dv">1</span>)</span>
-<span id="cb309-9"><a href="geoestadística-univariada-con-geor.html#cb309-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fitvar2, <span class="at">col =</span> <span class="dv">2</span>)</span>
-<span id="cb309-10"><a href="geoestadística-univariada-con-geor.html#cb309-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fitvar3, <span class="at">col =</span> <span class="dv">3</span>)</span>
-<span id="cb309-11"><a href="geoestadística-univariada-con-geor.html#cb309-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fitvar4, <span class="at">col =</span> <span class="dv">4</span>)</span>
-<span id="cb309-12"><a href="geoestadística-univariada-con-geor.html#cb309-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fitvar5, <span class="at">col =</span> <span class="dv">5</span>)</span>
-<span id="cb309-13"><a href="geoestadística-univariada-con-geor.html#cb309-13" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">130</span>, <span class="dv">18000</span>,</span>
-<span id="cb309-14"><a href="geoestadística-univariada-con-geor.html#cb309-14" aria-hidden="true" tabindex="-1"></a>       <span class="fu">c</span>(<span class="st">&quot;MCO&quot;</span>, <span class="st">&quot;MCPnpairs&quot;</span>, <span class="st">&quot;MCPcressie&quot;</span>, <span class="st">&quot;ML&quot;</span>, <span class="st">&quot;REML&quot;</span>),</span>
-<span id="cb309-15"><a href="geoestadística-univariada-con-geor.html#cb309-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>,</span>
-<span id="cb309-16"><a href="geoestadística-univariada-con-geor.html#cb309-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>,</span>
-<span id="cb309-17"><a href="geoestadística-univariada-con-geor.html#cb309-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>,</span>
-<span id="cb309-18"><a href="geoestadística-univariada-con-geor.html#cb309-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">box.col =</span> <span class="dv">9</span>,</span>
-<span id="cb309-19"><a href="geoestadística-univariada-con-geor.html#cb309-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">text.col =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="geoestadística-univariada-con-geor.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(var1<span class="sc">$</span>u,var1<span class="sc">$</span>v,</span>
+<span id="cb265-2"><a href="geoestadística-univariada-con-geor.html#cb265-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;h&quot;</span>,</span>
+<span id="cb265-3"><a href="geoestadística-univariada-con-geor.html#cb265-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;semivarianza&quot;</span>,</span>
+<span id="cb265-4"><a href="geoestadística-univariada-con-geor.html#cb265-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.lab =</span> <span class="fl">1.3</span>,</span>
+<span id="cb265-5"><a href="geoestadística-univariada-con-geor.html#cb265-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.axis =</span> <span class="fl">1.2</span>,</span>
+<span id="cb265-6"><a href="geoestadística-univariada-con-geor.html#cb265-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Estimación teórica del modelo de semivariograma&quot;</span>,</span>
+<span id="cb265-7"><a href="geoestadística-univariada-con-geor.html#cb265-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">col.main =</span> <span class="dv">4</span>, <span class="at">cex.main =</span><span class="fl">1.3</span>)</span>
+<span id="cb265-8"><a href="geoestadística-univariada-con-geor.html#cb265-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fitvar1, <span class="at">col =</span> <span class="dv">1</span>)</span>
+<span id="cb265-9"><a href="geoestadística-univariada-con-geor.html#cb265-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fitvar2, <span class="at">col =</span> <span class="dv">2</span>)</span>
+<span id="cb265-10"><a href="geoestadística-univariada-con-geor.html#cb265-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fitvar3, <span class="at">col =</span> <span class="dv">3</span>)</span>
+<span id="cb265-11"><a href="geoestadística-univariada-con-geor.html#cb265-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fitvar4, <span class="at">col =</span> <span class="dv">4</span>)</span>
+<span id="cb265-12"><a href="geoestadística-univariada-con-geor.html#cb265-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fitvar5, <span class="at">col =</span> <span class="dv">5</span>)</span>
+<span id="cb265-13"><a href="geoestadística-univariada-con-geor.html#cb265-13" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">130</span>, <span class="dv">18000</span>,</span>
+<span id="cb265-14"><a href="geoestadística-univariada-con-geor.html#cb265-14" aria-hidden="true" tabindex="-1"></a>       <span class="fu">c</span>(<span class="st">&quot;MCO&quot;</span>, <span class="st">&quot;MCPnpairs&quot;</span>, <span class="st">&quot;MCPcressie&quot;</span>, <span class="st">&quot;ML&quot;</span>, <span class="st">&quot;REML&quot;</span>),</span>
+<span id="cb265-15"><a href="geoestadística-univariada-con-geor.html#cb265-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb265-16"><a href="geoestadística-univariada-con-geor.html#cb265-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>,</span>
+<span id="cb265-17"><a href="geoestadística-univariada-con-geor.html#cb265-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>,</span>
+<span id="cb265-18"><a href="geoestadística-univariada-con-geor.html#cb265-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">box.col =</span> <span class="dv">9</span>,</span>
+<span id="cb265-19"><a href="geoestadística-univariada-con-geor.html#cb265-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">text.col =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 </div>
 <div id="resultados" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Resultados<a href="geoestadística-univariada-con-geor.html#resultados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="geoestadística-univariada-con-geor.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitvar1)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="geoestadística-univariada-con-geor.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitvar1)</span></code></pre></div>
 <pre><code>## $pmethod
 ## [1] &quot;OLS (ordinary least squares)&quot;
 ## 
@@ -811,7 +809,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;summary.variomodel&quot;</code></pre>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="geoestadística-univariada-con-geor.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitvar2)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="geoestadística-univariada-con-geor.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitvar2)</span></code></pre></div>
 <pre><code>## $pmethod
 ## [1] &quot;WLS (weighted least squares)&quot;
 ## 
@@ -820,7 +818,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## $spatial.component
 ##     sigmasq         phi 
-## 31311.81333    12.05997 
+## 31311.81332    12.05997 
 ## 
 ## $spatial.component.extra
 ## kappa 
@@ -845,7 +843,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## $estimated.pars
 ##     sigmasq         phi 
-## 31311.81333    12.05997 
+## 31311.81332    12.05997 
 ## 
 ## $weights
 ## [1] &quot;npairs&quot;
@@ -856,7 +854,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;summary.variomodel&quot;</code></pre>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="geoestadística-univariada-con-geor.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitvar3)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="geoestadística-univariada-con-geor.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitvar3)</span></code></pre></div>
 <pre><code>## $pmethod
 ## [1] &quot;WLS (weighted least squares)&quot;
 ## 
@@ -901,7 +899,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;summary.variomodel&quot;</code></pre>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="geoestadística-univariada-con-geor.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitvar4)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="geoestadística-univariada-con-geor.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitvar4)</span></code></pre></div>
 <pre><code>## Summary of the parameter estimation
 ## -----------------------------------
 ## Estimation method: maximum likelihood 
@@ -938,7 +936,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## likfit(geodata = aquiferg, coords = aquiferg$coords, data = aquiferg$data, 
 ##     trend = &quot;1st&quot;, ini.cov.pars = ini1, fix.nugget = T, nugget = 8984.94, 
 ##     cov.model = &quot;wave&quot;, lik.method = &quot;ML&quot;)</code></pre>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="geoestadística-univariada-con-geor.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitvar5)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="geoestadística-univariada-con-geor.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitvar5)</span></code></pre></div>
 <pre><code>## Summary of the parameter estimation
 ## -----------------------------------
 ## Estimation method: restricted maximum likelihood 
@@ -982,20 +980,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cargar-librerias" class="section level3 hasAnchor" number="3.7.1">
 <h3><span class="header-section-number">3.7.1</span> Cargar librerias<a href="geoestadística-univariada-con-geor.html#cargar-librerias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Lista de librerías con link a la documentación.</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="geoestadística-univariada-con-geor.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb320-2"><a href="geoestadística-univariada-con-geor.html#cb320-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gstat)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;gstat&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:sgeostat&#39;:
-## 
-##     fit.variogram, krige</code></pre>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="geoestadística-univariada-con-geor.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
-<span id="cb323-2"><a href="geoestadística-univariada-con-geor.html#cb323-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;mvtnorm&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:spam&#39;:
-## 
-##     rmvnorm, rmvt</code></pre>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="geoestadística-univariada-con-geor.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb276-2"><a href="geoestadística-univariada-con-geor.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gstat)</span>
+<span id="cb276-3"><a href="geoestadística-univariada-con-geor.html#cb276-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb276-4"><a href="geoestadística-univariada-con-geor.html#cb276-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span></code></pre></div>
 <ul>
 <li><a href="https://cran.r-project.org/web/packages/gstat/gstat.pdf">gstat</a></li>
 <li><a href="https://cran.r-project.org/web/packages/sp/sp.pdf">sp</a></li>
@@ -1003,12 +991,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="grilla-de-las-ubicaciones-espaciales." class="section level3 hasAnchor" number="3.7.2">
 <h3><span class="header-section-number">3.7.2</span> Grilla de las ubicaciones espaciales.<a href="geoestadística-univariada-con-geor.html#grilla-de-las-ubicaciones-espaciales." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="geoestadística-univariada-con-geor.html#cb326-1" aria-hidden="true" tabindex="-1"></a>n_x <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb326-2"><a href="geoestadística-univariada-con-geor.html#cb326-2" aria-hidden="true" tabindex="-1"></a>n_y <span class="ot">&lt;-</span> <span class="dv">6</span></span>
-<span id="cb326-3"><a href="geoestadística-univariada-con-geor.html#cb326-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> n_x)</span>
-<span id="cb326-4"><a href="geoestadística-univariada-con-geor.html#cb326-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> n_y)</span>
-<span id="cb326-5"><a href="geoestadística-univariada-con-geor.html#cb326-5" aria-hidden="true" tabindex="-1"></a>coordenadas <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">expand.grid</span>(x, y))</span>
-<span id="cb326-6"><a href="geoestadística-univariada-con-geor.html#cb326-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(coordenadas) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="geoestadística-univariada-con-geor.html#cb277-1" aria-hidden="true" tabindex="-1"></a>n_x <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb277-2"><a href="geoestadística-univariada-con-geor.html#cb277-2" aria-hidden="true" tabindex="-1"></a>n_y <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb277-3"><a href="geoestadística-univariada-con-geor.html#cb277-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> n_x)</span>
+<span id="cb277-4"><a href="geoestadística-univariada-con-geor.html#cb277-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">len =</span> n_y)</span>
+<span id="cb277-5"><a href="geoestadística-univariada-con-geor.html#cb277-5" aria-hidden="true" tabindex="-1"></a>coordenadas <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">expand.grid</span>(x, y))</span>
+<span id="cb277-6"><a href="geoestadística-univariada-con-geor.html#cb277-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(coordenadas) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>)</span></code></pre></div>
 <p>Encabezado coordenadas</p>
 <table>
 <thead>
@@ -1051,10 +1039,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="https://cran.r-project.org/web/packages/gstat/gstat.pdf#page=73">vgm</a></li>
 </ul>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="geoestadística-univariada-con-geor.html#cb327-1" aria-hidden="true" tabindex="-1"></a>vario <span class="ot">&lt;-</span> <span class="fu">vgm</span>(<span class="dv">10</span>, <span class="co"># Punto de silla</span></span>
-<span id="cb327-2"><a href="geoestadística-univariada-con-geor.html#cb327-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Exp&quot;</span>, <span class="co"># Modelo, ver documentación</span></span>
-<span id="cb327-3"><a href="geoestadística-univariada-con-geor.html#cb327-3" aria-hidden="true" tabindex="-1"></a>             <span class="fl">0.5</span>)  <span class="co"># Rango</span></span>
-<span id="cb327-4"><a href="geoestadística-univariada-con-geor.html#cb327-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(vario)</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="geoestadística-univariada-con-geor.html#cb278-1" aria-hidden="true" tabindex="-1"></a>vario <span class="ot">&lt;-</span> <span class="fu">vgm</span>(<span class="dv">10</span>, <span class="co"># Punto de silla</span></span>
+<span id="cb278-2"><a href="geoestadística-univariada-con-geor.html#cb278-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Exp&quot;</span>, <span class="co"># Modelo, ver documentación</span></span>
+<span id="cb278-3"><a href="geoestadística-univariada-con-geor.html#cb278-3" aria-hidden="true" tabindex="-1"></a>             <span class="fl">0.5</span>)  <span class="co"># Rango</span></span>
+<span id="cb278-4"><a href="geoestadística-univariada-con-geor.html#cb278-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(vario)</span></code></pre></div>
 <pre><code>##   model psill range
 ## 1   Exp    10   0.5</code></pre>
 </div>
@@ -1064,155 +1052,156 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://cran.r-project.org/web/packages/gstat/gstat.pdf#page=78">vgmArea</a></li>
 <li><a href="https://cran.r-project.org/web/packages/sp/sp.pdf#page=16">coordinates</a></li>
 </ul>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="geoestadística-univariada-con-geor.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(coordenadas) <span class="ot">&lt;-</span> <span class="er">~</span>X <span class="sc">+</span> Y</span>
-<span id="cb329-2"><a href="geoestadística-univariada-con-geor.html#cb329-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(coordenadas) <span class="co"># Cambio de objedto dataframe a sp</span></span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="geoestadística-univariada-con-geor.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(coordenadas) <span class="ot">&lt;-</span> <span class="er">~</span>X <span class="sc">+</span> Y</span>
+<span id="cb280-2"><a href="geoestadística-univariada-con-geor.html#cb280-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(coordenadas) <span class="co"># Cambio de objedto dataframe a sp</span></span></code></pre></div>
 <pre><code>## [1] &quot;SpatialPoints&quot;
 ## attr(,&quot;package&quot;)
 ## [1] &quot;sp&quot;</code></pre>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="geoestadística-univariada-con-geor.html#cb331-1" aria-hidden="true" tabindex="-1"></a>cov_mat <span class="ot">&lt;-</span> <span class="fu">vgmArea</span>(coordenadas, <span class="co"># Matriz de ubiaciones SP</span></span>
-<span id="cb331-2"><a href="geoestadística-univariada-con-geor.html#cb331-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">vgm =</span> vario) <span class="co"># VGM object</span></span>
-<span id="cb331-3"><a href="geoestadística-univariada-con-geor.html#cb331-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb331-4"><a href="geoestadística-univariada-con-geor.html#cb331-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(cov_mat))</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="geoestadística-univariada-con-geor.html#cb282-1" aria-hidden="true" tabindex="-1"></a>cov_mat <span class="ot">&lt;-</span> <span class="fu">vgmArea</span>(coordenadas, <span class="co"># Matriz de ubiaciones SP</span></span>
+<span id="cb282-2"><a href="geoestadística-univariada-con-geor.html#cb282-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">vgm =</span> vario) <span class="co"># VGM object</span></span>
+<span id="cb282-3"><a href="geoestadística-univariada-con-geor.html#cb282-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb282-4"><a href="geoestadística-univariada-con-geor.html#cb282-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(cov_mat))</span></code></pre></div>
 <pre><code>## [1] 24 24</code></pre>
 </div>
 <div id="simulación." class="section level3 hasAnchor" number="3.7.5">
 <h3><span class="header-section-number">3.7.5</span> Simulación.<a href="geoestadística-univariada-con-geor.html#simulación." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Simulación dada la media y la matriz de varianza</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="geoestadística-univariada-con-geor.html#cb333-1" aria-hidden="true" tabindex="-1"></a>mu  <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_x <span class="sc">*</span> n_y) <span class="co"># Media del proceso</span></span>
-<span id="cb333-2"><a href="geoestadística-univariada-con-geor.html#cb333-2" aria-hidden="true" tabindex="-1"></a>simu <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>,</span>
-<span id="cb333-3"><a href="geoestadística-univariada-con-geor.html#cb333-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">mean =</span> mu,</span>
-<span id="cb333-4"><a href="geoestadística-univariada-con-geor.html#cb333-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">sigma =</span> cov_mat)</span>
-<span id="cb333-5"><a href="geoestadística-univariada-con-geor.html#cb333-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(simu[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
-<pre><code>## [1] -1.6917695  2.3187923 -0.2661815 -2.4909205 -1.4116579</code></pre>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="geoestadística-univariada-con-geor.html#cb284-1" aria-hidden="true" tabindex="-1"></a>mu  <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_x <span class="sc">*</span> n_y) <span class="co"># Media del proceso</span></span>
+<span id="cb284-2"><a href="geoestadística-univariada-con-geor.html#cb284-2" aria-hidden="true" tabindex="-1"></a>simu <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>,</span>
+<span id="cb284-3"><a href="geoestadística-univariada-con-geor.html#cb284-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">mean =</span> mu,</span>
+<span id="cb284-4"><a href="geoestadística-univariada-con-geor.html#cb284-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">sigma =</span> cov_mat)</span>
+<span id="cb284-5"><a href="geoestadística-univariada-con-geor.html#cb284-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(simu[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
+<pre><code>## [1]  6.9849119  4.2522208 -0.1223729  1.0744386  2.7488001</code></pre>
 </div>
 <div id="pulimiento-de-medianas-1" class="section level3 hasAnchor" number="3.7.6">
 <h3><span class="header-section-number">3.7.6</span> Pulimiento de medianas<a href="geoestadística-univariada-con-geor.html#pulimiento-de-medianas-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Unir las coordenadas con la columna de simulación</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="geoestadística-univariada-con-geor.html#cb335-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(coordenadas<span class="sc">@</span>coords,</span>
-<span id="cb335-2"><a href="geoestadística-univariada-con-geor.html#cb335-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Simula =</span> <span class="fu">t</span>(simu)))</span>
-<span id="cb335-3"><a href="geoestadística-univariada-con-geor.html#cb335-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>, <span class="st">&quot;Var&quot;</span>)</span>
-<span id="cb335-4"><a href="geoestadística-univariada-con-geor.html#cb335-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(data))</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="geoestadística-univariada-con-geor.html#cb286-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(coordenadas<span class="sc">@</span>coords,</span>
+<span id="cb286-2"><a href="geoestadística-univariada-con-geor.html#cb286-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Simula =</span> <span class="fu">t</span>(simu)))</span>
+<span id="cb286-3"><a href="geoestadística-univariada-con-geor.html#cb286-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>, <span class="st">&quot;Var&quot;</span>)</span>
+<span id="cb286-4"><a href="geoestadística-univariada-con-geor.html#cb286-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(data))</span></code></pre></div>
 <pre><code>##           X   Y        Var
-## 1 0.0000000 0.0 -1.6917695
-## 2 0.3333333 0.0  2.3187923
-## 3 0.6666667 0.0 -0.2661815
-## 4 1.0000000 0.0 -2.4909205
-## 5 0.0000000 0.2 -1.4116579
-## 6 0.3333333 0.2  0.8264604</code></pre>
+## 1 0.0000000 0.0  6.9849119
+## 2 0.3333333 0.0  4.2522208
+## 3 0.6666667 0.0 -0.1223729
+## 4 1.0000000 0.0  1.0744386
+## 5 0.0000000 0.2  2.7488001
+## 6 0.3333333 0.2  0.6706192</code></pre>
 <p>Reshape para matriz, esto transforma la tabla de datos en matriz</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="geoestadística-univariada-con-geor.html#cb337-1" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">dcast</span>(data,</span>
-<span id="cb337-2"><a href="geoestadística-univariada-con-geor.html#cb337-2" aria-hidden="true" tabindex="-1"></a>                         X <span class="sc">~</span> Y,</span>
-<span id="cb337-3"><a href="geoestadística-univariada-con-geor.html#cb337-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">value.var =</span> <span class="st">&quot;Var&quot;</span>)</span>
-<span id="cb337-4"><a href="geoestadística-univariada-con-geor.html#cb337-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tabla) <span class="ot">&lt;-</span> tabla[, <span class="dv">1</span>]</span>
-<span id="cb337-5"><a href="geoestadística-univariada-con-geor.html#cb337-5" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> tabla[, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>)]</span>
-<span id="cb337-6"><a href="geoestadística-univariada-con-geor.html#cb337-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tabla)</span></code></pre></div>
-<pre><code>##                            0        0.2       0.4        0.6        0.8         1
-## 0                 -1.6917695 -1.4116579 -3.094371 -5.6501806 -0.7965656 -1.999786
-## 0.333333333333333  2.3187923  0.8264604  1.752031  0.6832913  1.9601689  2.909165
-## 0.666666666666667 -0.2661815 -0.3941048  1.970392  1.3728696  2.6450545  7.319216
-## 1                 -2.4909205 -0.8986623  1.758796  1.5248534  6.0101314  8.009519</code></pre>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="geoestadística-univariada-con-geor.html#cb288-1" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">dcast</span>(data,</span>
+<span id="cb288-2"><a href="geoestadística-univariada-con-geor.html#cb288-2" aria-hidden="true" tabindex="-1"></a>                         X <span class="sc">~</span> Y,</span>
+<span id="cb288-3"><a href="geoestadística-univariada-con-geor.html#cb288-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">value.var =</span> <span class="st">&quot;Var&quot;</span>)</span>
+<span id="cb288-4"><a href="geoestadística-univariada-con-geor.html#cb288-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tabla) <span class="ot">&lt;-</span> tabla[, <span class="dv">1</span>]</span>
+<span id="cb288-5"><a href="geoestadística-univariada-con-geor.html#cb288-5" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> tabla[, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>)]</span>
+<span id="cb288-6"><a href="geoestadística-univariada-con-geor.html#cb288-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tabla)</span></code></pre></div>
+<pre><code>##                            0        0.2        0.4       0.6        0.8          1
+## 0                  6.9849119  2.7488001  5.3191845  3.847564 -0.1070366 -1.0527613
+## 0.333333333333333  4.2522208  0.6706192  0.3234361 -1.102893 -1.5804597  0.9620464
+## 0.666666666666667 -0.1223729 -1.5210896 -0.6078059 -2.682613 -2.7470807  1.8978192
+## 1                  1.0744386 -0.8351375  0.7568543  2.847558 -1.7769896  1.3946143</code></pre>
 <p>Pulimiento de medianas de la tabla</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="geoestadística-univariada-con-geor.html#cb339-1" aria-hidden="true" tabindex="-1"></a>med <span class="ot">&lt;-</span> <span class="fu">medpolish</span>(tabla)</span></code></pre></div>
-<pre><code>## 1: 32.48408
-## 2: 32.042
-## Final: 32.042</code></pre>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="geoestadística-univariada-con-geor.html#cb341-1" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(med<span class="sc">$</span>residuals)</span>
-<span id="cb341-2"><a href="geoestadística-univariada-con-geor.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(med)</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="geoestadística-univariada-con-geor.html#cb290-1" aria-hidden="true" tabindex="-1"></a>med <span class="ot">&lt;-</span> <span class="fu">medpolish</span>(tabla)</span></code></pre></div>
+<pre><code>## 1: 26.53247
+## 2: 25.56309
+## 3: 25.3016
+## Final: 25.3016</code></pre>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="geoestadística-univariada-con-geor.html#cb292-1" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(med<span class="sc">$</span>residuals)</span>
+<span id="cb292-2"><a href="geoestadística-univariada-con-geor.html#cb292-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(med)</span></code></pre></div>
 <pre><code>## 
 ## Median Polish Results (Dataset: &quot;tabla&quot;)
 ## 
-## Overall: 1.290137
+## Overall: 0.1006269
 ## 
 ## Row Effects:
 ##                 0 0.333333333333333 0.666666666666667                 1 
-##        -4.1937452        -0.0594464         0.0594464         0.3647171 
+##        3.82387414       -0.01103186       -1.15634377        0.01103186 
 ## 
 ## Column Effects:
 ##          0        0.2        0.4        0.6        0.8          1 
-## -0.2638317 -1.0739593  0.3126407 -0.3387001  1.7012567  3.8240533 
+##  2.0115953 -0.7060845  0.5465533 -0.6347123 -1.7900061  1.0777035 
 ## 
 ## Residuals:
-##                         0      0.2      0.4      0.6      0.8       1
-## 0                  1.4757  2.56591 -0.50340 -2.40787  0.40579 -2.9202
-## 0.333333333333333  1.3519  0.66973  0.20870 -0.20870 -0.97178 -2.1456
-## 0.666666666666667 -1.3519 -0.66973  0.30817  0.36199 -0.40579  2.1456
-## 1                 -3.8819 -1.47956 -0.20870  0.20870  2.65402  2.5306</code></pre>
+##                         0      0.2       0.4      0.6       0.8        1
+## 0                  1.0488 -0.46962  0.848130  0.55778 -2.241532 -6.05497
+## 0.333333333333333  2.1510  1.28711 -0.312712 -0.55778  0.119951 -0.20525
+## 0.666666666666667 -1.0783  0.24071 -0.098642 -0.99218  0.098642  1.87583
+## 1                 -1.0488 -0.24071  0.098642  3.37061 -0.098642  0.20525</code></pre>
 <p>Reshape de los datos, con efecto de la fila y la columna</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="geoestadística-univariada-con-geor.html#cb343-1" aria-hidden="true" tabindex="-1"></a>tabla_residuales <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(med<span class="sc">$</span>residuals)</span>
-<span id="cb343-2"><a href="geoestadística-univariada-con-geor.html#cb343-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tabla_residuales) <span class="ot">&lt;-</span> med<span class="sc">$</span>col</span>
-<span id="cb343-3"><a href="geoestadística-univariada-con-geor.html#cb343-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tabla_residuales) <span class="ot">&lt;-</span> med<span class="sc">$</span>row</span>
-<span id="cb343-4"><a href="geoestadística-univariada-con-geor.html#cb343-4" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(<span class="fu">as.matrix</span>(tabla_residuales))</span>
-<span id="cb343-5"><a href="geoestadística-univariada-con-geor.html#cb343-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb343-6"><a href="geoestadística-univariada-con-geor.html#cb343-6" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(data,</span>
-<span id="cb343-7"><a href="geoestadística-univariada-con-geor.html#cb343-7" aria-hidden="true" tabindex="-1"></a>                  geo_data,</span>
-<span id="cb343-8"><a href="geoestadística-univariada-con-geor.html#cb343-8" aria-hidden="true" tabindex="-1"></a>                  med<span class="sc">$</span>overall)</span>
-<span id="cb343-9"><a href="geoestadística-univariada-con-geor.html#cb343-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(geo_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>,</span>
-<span id="cb343-10"><a href="geoestadística-univariada-con-geor.html#cb343-10" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Y&quot;</span>,</span>
-<span id="cb343-11"><a href="geoestadística-univariada-con-geor.html#cb343-11" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Var&quot;</span>,</span>
-<span id="cb343-12"><a href="geoestadística-univariada-con-geor.html#cb343-12" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto fila&quot;</span>,</span>
-<span id="cb343-13"><a href="geoestadística-univariada-con-geor.html#cb343-13" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto columa&quot;</span>,</span>
-<span id="cb343-14"><a href="geoestadística-univariada-con-geor.html#cb343-14" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Residual&quot;</span>,</span>
-<span id="cb343-15"><a href="geoestadística-univariada-con-geor.html#cb343-15" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto Global&quot;</span>)</span>
-<span id="cb343-16"><a href="geoestadística-univariada-con-geor.html#cb343-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geo_data)</span></code></pre></div>
-<pre><code>##            X   Y        Var Efecto fila Efecto columa   Residual Efecto Global
-## 1  0.0000000 0.0 -1.6917695  -4.1937452    -0.2638317  1.4756702      1.290137
-## 2  0.3333333 0.0  2.3187923  -0.0594464    -0.2638317  1.3519333      1.290137
-## 3  0.6666667 0.0 -0.2661815   0.0594464    -0.2638317 -1.3519333      1.290137
-## 4  1.0000000 0.0 -2.4909205   0.3647171    -0.2638317 -3.8819430      1.290137
-## 5  0.0000000 0.2 -1.4116579  -4.1937452    -1.0739593  2.5659094      1.290137
-## 6  0.3333333 0.2  0.8264604  -0.0594464    -1.0739593  0.6697290      1.290137
-## 7  0.6666667 0.2 -0.3941048   0.0594464    -1.0739593 -0.6697290      1.290137
-## 8  1.0000000 0.2 -0.8986623   0.3647171    -1.0739593 -1.4795572      1.290137
-## 9  0.0000000 0.4 -3.0943711  -4.1937452     0.3126407 -0.5034037      1.290137
-## 10 0.3333333 0.4  1.7520307  -0.0594464     0.3126407  0.2086993      1.290137
-## 11 0.6666667 0.4  1.9703920   0.0594464     0.3126407  0.3081678      1.290137
-## 12 1.0000000 0.4  1.7587956   0.3647171     0.3126407 -0.2086993      1.290137
-## 13 0.0000000 0.6 -5.6501806  -4.1937452    -0.3387001 -2.4078724      1.290137
-## 14 0.3333333 0.6  0.6832913  -0.0594464    -0.3387001 -0.2086993      1.290137
-## 15 0.6666667 0.6  1.3728696   0.0594464    -0.3387001  0.3619862      1.290137
-## 16 1.0000000 0.6  1.5248534   0.3647171    -0.3387001  0.2086993      1.290137
-## 17 0.0000000 0.8 -0.7965656  -4.1937452     1.7012567  0.4057858      1.290137
-## 18 0.3333333 0.8  1.9601689  -0.0594464     1.7012567 -0.9717786      1.290137
-## 19 0.6666667 0.8  2.6450545   0.0594464     1.7012567 -0.4057858      1.290137
-## 20 1.0000000 0.8  6.0101314   0.3647171     1.7012567  2.6540204      1.290137
-## 21 0.0000000 1.0 -1.9997864  -4.1937452     3.8240533 -2.9202317      1.290137
-## 22 0.3333333 1.0  2.9091645  -0.0594464     3.8240533 -2.1455795      1.290137
-## 23 0.6666667 1.0  7.3192164   0.0594464     3.8240533  2.1455795      1.290137
-## 24 1.0000000 1.0  8.0095186   0.3647171     3.8240533  2.5306111      1.290137</code></pre>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="geoestadística-univariada-con-geor.html#cb294-1" aria-hidden="true" tabindex="-1"></a>tabla_residuales <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(med<span class="sc">$</span>residuals)</span>
+<span id="cb294-2"><a href="geoestadística-univariada-con-geor.html#cb294-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tabla_residuales) <span class="ot">&lt;-</span> med<span class="sc">$</span>col</span>
+<span id="cb294-3"><a href="geoestadística-univariada-con-geor.html#cb294-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tabla_residuales) <span class="ot">&lt;-</span> med<span class="sc">$</span>row</span>
+<span id="cb294-4"><a href="geoestadística-univariada-con-geor.html#cb294-4" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(<span class="fu">as.matrix</span>(tabla_residuales))</span>
+<span id="cb294-5"><a href="geoestadística-univariada-con-geor.html#cb294-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb294-6"><a href="geoestadística-univariada-con-geor.html#cb294-6" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(data,</span>
+<span id="cb294-7"><a href="geoestadística-univariada-con-geor.html#cb294-7" aria-hidden="true" tabindex="-1"></a>                  geo_data,</span>
+<span id="cb294-8"><a href="geoestadística-univariada-con-geor.html#cb294-8" aria-hidden="true" tabindex="-1"></a>                  med<span class="sc">$</span>overall)</span>
+<span id="cb294-9"><a href="geoestadística-univariada-con-geor.html#cb294-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(geo_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>,</span>
+<span id="cb294-10"><a href="geoestadística-univariada-con-geor.html#cb294-10" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Y&quot;</span>,</span>
+<span id="cb294-11"><a href="geoestadística-univariada-con-geor.html#cb294-11" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Var&quot;</span>,</span>
+<span id="cb294-12"><a href="geoestadística-univariada-con-geor.html#cb294-12" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto fila&quot;</span>,</span>
+<span id="cb294-13"><a href="geoestadística-univariada-con-geor.html#cb294-13" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto columa&quot;</span>,</span>
+<span id="cb294-14"><a href="geoestadística-univariada-con-geor.html#cb294-14" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Residual&quot;</span>,</span>
+<span id="cb294-15"><a href="geoestadística-univariada-con-geor.html#cb294-15" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Efecto Global&quot;</span>)</span>
+<span id="cb294-16"><a href="geoestadística-univariada-con-geor.html#cb294-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geo_data)</span></code></pre></div>
+<pre><code>##            X   Y        Var Efecto fila Efecto columa    Residual Efecto Global
+## 1  0.0000000 0.0  6.9849119  3.82387414     2.0115953  1.04881550     0.1006269
+## 2  0.3333333 0.0  4.2522208 -0.01103186     2.0115953  2.15103040     0.1006269
+## 3  0.6666667 0.0 -0.1223729 -1.15634377     2.0115953 -1.07825134     0.1006269
+## 4  1.0000000 0.0  1.0744386  0.01103186     2.0115953 -1.04881550     0.1006269
+## 5  0.0000000 0.2  2.7488001  3.82387414    -0.7060845 -0.46961645     0.1006269
+## 6  0.3333333 0.2  0.6706192 -0.01103186    -0.7060845  1.28710870     0.1006269
+## 7  0.6666667 0.2 -1.5210896 -1.15634377    -0.7060845  0.24071175     0.1006269
+## 8  1.0000000 0.2 -0.8351375  0.01103186    -0.7060845 -0.24071175     0.1006269
+## 9  0.0000000 0.4  5.3191845  3.82387414     0.5465533  0.84813014     0.1006269
+## 10 0.3333333 0.4  0.3234361 -0.01103186     0.5465533 -0.31271225     0.1006269
+## 11 0.6666667 0.4 -0.6078059 -1.15634377     0.5465533 -0.09864226     0.1006269
+## 12 1.0000000 0.4  0.7568543  0.01103186     0.5465533  0.09864226     0.1006269
+## 13 0.0000000 0.6  3.8475642  3.82387414    -0.6347123  0.55777548     0.1006269
+## 14 0.3333333 0.6 -1.1028928 -0.01103186    -0.6347123 -0.55777548     0.1006269
+## 15 0.6666667 0.6 -2.6826131 -1.15634377    -0.6347123 -0.99218386     0.1006269
+## 16 1.0000000 0.6  2.8475577  0.01103186    -0.6347123  3.37061122     0.1006269
+## 17 0.0000000 0.8 -0.1070366  3.82387414    -1.7900061 -2.24153154     0.1006269
+## 18 0.3333333 0.8 -1.5804597 -0.01103186    -1.7900061  0.11995138     0.1006269
+## 19 0.6666667 0.8 -2.7470807 -1.15634377    -1.7900061  0.09864226     0.1006269
+## 20 1.0000000 0.8 -1.7769896  0.01103186    -1.7900061 -0.09864226     0.1006269
+## 21 0.0000000 1.0 -1.0527613  3.82387414     1.0777035 -6.05496578     0.1006269
+## 22 0.3333333 1.0  0.9620464 -0.01103186     1.0777035 -0.20525209     0.1006269
+## 23 0.6666667 1.0  1.8978192 -1.15634377     1.0777035  1.87583264     0.1006269
+## 24 1.0000000 1.0  1.3946143  0.01103186     1.0777035  0.20525209     0.1006269</code></pre>
 <p>Validación de la descomposición</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="geoestadística-univariada-con-geor.html#cb345-1" aria-hidden="true" tabindex="-1"></a>valida <span class="ot">&lt;-</span> <span class="fu">cbind</span>(geo_data<span class="sc">$</span>Var,</span>
-<span id="cb345-2"><a href="geoestadística-univariada-con-geor.html#cb345-2" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto fila&quot;</span>]] <span class="sc">+</span></span>
-<span id="cb345-3"><a href="geoestadística-univariada-con-geor.html#cb345-3" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto columa&quot;</span>]] <span class="sc">+</span></span>
-<span id="cb345-4"><a href="geoestadística-univariada-con-geor.html#cb345-4" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Residual&quot;</span>]] <span class="sc">+</span></span>
-<span id="cb345-5"><a href="geoestadística-univariada-con-geor.html#cb345-5" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto Global&quot;</span>]])</span>
-<span id="cb345-6"><a href="geoestadística-univariada-con-geor.html#cb345-6" aria-hidden="true" tabindex="-1"></a>valida <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(valida)</span>
-<span id="cb345-7"><a href="geoestadística-univariada-con-geor.html#cb345-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(valida) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;datos&quot;</span>, <span class="st">&quot;suma&quot;</span>)</span>
-<span id="cb345-8"><a href="geoestadística-univariada-con-geor.html#cb345-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(valida)</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="geoestadística-univariada-con-geor.html#cb296-1" aria-hidden="true" tabindex="-1"></a>valida <span class="ot">&lt;-</span> <span class="fu">cbind</span>(geo_data<span class="sc">$</span>Var,</span>
+<span id="cb296-2"><a href="geoestadística-univariada-con-geor.html#cb296-2" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto fila&quot;</span>]] <span class="sc">+</span></span>
+<span id="cb296-3"><a href="geoestadística-univariada-con-geor.html#cb296-3" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto columa&quot;</span>]] <span class="sc">+</span></span>
+<span id="cb296-4"><a href="geoestadística-univariada-con-geor.html#cb296-4" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Residual&quot;</span>]] <span class="sc">+</span></span>
+<span id="cb296-5"><a href="geoestadística-univariada-con-geor.html#cb296-5" aria-hidden="true" tabindex="-1"></a>                geo_data[[<span class="st">&quot;Efecto Global&quot;</span>]])</span>
+<span id="cb296-6"><a href="geoestadística-univariada-con-geor.html#cb296-6" aria-hidden="true" tabindex="-1"></a>valida <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(valida)</span>
+<span id="cb296-7"><a href="geoestadística-univariada-con-geor.html#cb296-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(valida) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;datos&quot;</span>, <span class="st">&quot;suma&quot;</span>)</span>
+<span id="cb296-8"><a href="geoestadística-univariada-con-geor.html#cb296-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(valida)</span></code></pre></div>
 <pre><code>##         datos       suma
-## 1  -1.6917695 -1.6917695
-## 2   2.3187923  2.3187923
-## 3  -0.2661815 -0.2661815
-## 4  -2.4909205 -2.4909205
-## 5  -1.4116579 -1.4116579
-## 6   0.8264604  0.8264604
-## 7  -0.3941048 -0.3941048
-## 8  -0.8986623 -0.8986623
-## 9  -3.0943711 -3.0943711
-## 10  1.7520307  1.7520307
-## 11  1.9703920  1.9703920
-## 12  1.7587956  1.7587956
-## 13 -5.6501806 -5.6501806
-## 14  0.6832913  0.6832913
-## 15  1.3728696  1.3728696
-## 16  1.5248534  1.5248534
-## 17 -0.7965656 -0.7965656
-## 18  1.9601689  1.9601689
-## 19  2.6450545  2.6450545
-## 20  6.0101314  6.0101314
-## 21 -1.9997864 -1.9997864
-## 22  2.9091645  2.9091645
-## 23  7.3192164  7.3192164
-## 24  8.0095186  8.0095186</code></pre>
+## 1   6.9849119  6.9849119
+## 2   4.2522208  4.2522208
+## 3  -0.1223729 -0.1223729
+## 4   1.0744386  1.0744386
+## 5   2.7488001  2.7488001
+## 6   0.6706192  0.6706192
+## 7  -1.5210896 -1.5210896
+## 8  -0.8351375 -0.8351375
+## 9   5.3191845  5.3191845
+## 10  0.3234361  0.3234361
+## 11 -0.6078059 -0.6078059
+## 12  0.7568543  0.7568543
+## 13  3.8475642  3.8475642
+## 14 -1.1028928 -1.1028928
+## 15 -2.6826131 -2.6826131
+## 16  2.8475577  2.8475577
+## 17 -0.1070366 -0.1070366
+## 18 -1.5804597 -1.5804597
+## 19 -2.7470807 -2.7470807
+## 20 -1.7769896 -1.7769896
+## 21 -1.0527613 -1.0527613
+## 22  0.9620464  0.9620464
+## 23  1.8978192  1.8978192
+## 24  1.3946143  1.3946143</code></pre>
 
 </div>
 </div>
@@ -1223,7 +1212,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="geoestadística-con-sgeostat.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="otros-tipos-de-kriging.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="kriging.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1277,6 +1266,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
